@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Compare Aircraft | Flight Senses</title>
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+html {
+    scroll-behavior: smooth;
+}
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #050b17;
+    color: #fff;
+    line-height: 1.6;
+}
+a {
+    color: inherit;
+    text-decoration: none;
+}
+/* NAVBAR */
+.navbar {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background: rgba(5, 11, 23, 0.94);
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+.nav-container {
+    max-width: 1200px;
+    margin: auto;
+    padding: 18px 25px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.logo {
+    font-size: 22px;
+    font-weight: 900;
+    letter-spacing: 2px;
+}
+.logo span {
+    color: #3da9ff;
+}
+.nav-links {
+    display: flex;
+    gap: 26px;
+    align-items: center;
+}
+.nav-links a {
+    color: #b9c7d9;
+    font-size: 14px;
+    font-weight: 700;
+    transition: 0.3s;
+}
+.nav-links a:hover,
+.nav-links .active {
+    color: #3da9ff;
+}
+/* HERO */
+.hero {
+    max-width: 1200px;
+    margin: auto;
+    padding: 90px 25px 55px;
+    text-align: center;
+}
+.badge {
+    display: inline-block;
+    padding: 8px 15px;
+    border: 1px solid rgba(61,169,255,0.35);
+    border-radius: 30px;
+    background: rgba(61,169,255,0.08);
+    color: #55b4ff;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 1px;
+    margin-bottom: 22px;
+}
+.hero h1 {
+    font-size: clamp(42px, 7vw, 76px);
+    line-height: 1;
+    margin-bottom: 20px;
+    letter-spacing: -2px;
+}
+.hero h1 span {
+    color: #3da9ff;
+}
+.hero p {
+    max-width: 720px;
+    margin: auto;
+    color: #94a5ba;
+    font-size: 17px;
+}
+/* AIRCRAFT CARDS */
+.compare-planes {
+    max-width: 1200px;
+    margin: 20px auto 70px;
+    padding: 0 25px;
+    display: grid;
+    grid-template-columns: 1fr 110px 1fr;
+    gap: 20px;
+    align-items: stretch;
+}
+.plane-card {
+    background: linear-gradient(145deg, #0c1728, #08111f);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.28);
+}
+.plane-card img {
+    width: 100%;
+    height: 260px;
+    object-fit: cover;
+    display: block;
+}
+.plane-content {
+    padding: 28px;
+}
+.plane-label {
+    color: #58b7ff;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+.plane-content h2 {
+    font-size: 32px;
+    margin: 7px 0 8px;
+}
+.plane-content p {
+    color: #8fa1b7;
+    font-size: 14px;
+}
+.plane-button {
+    display: inline-block;
+    margin-top: 22px;
+    padding: 12px 19px;
+    border-radius: 10px;
+    background: #1186d8;
+    font-size: 13px;
+    font-weight: 800;
+    transition: 0.3s;
+}
+.plane-button:hover {
+    background: #29a2f3;
+    transform: translateY(-2px);
+}
+/* VS */
+.vs {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.vs-circle {
+    width: 82px;
+    height: 82px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(145deg, #142a43, #07101d);
+    border: 2px solid rgba(61,169,255,0.45);
+    box-shadow: 0 0 35px rgba(31,146,226,0.15);
+    font-size: 25px;
+    font-weight: 900;
+    color: #fff;
+}
+/* SECTION */
+.section {
+    max-width: 1100px;
+    margin: 0 auto 80px;
+    padding: 0 25px;
+}
+.section-title {
+    text-align: center;
+    margin-bottom: 35px;
+}
+.section-title h2 {
+    font-size: 34px;
+    margin-bottom: 8px;
+}
+.section-title p {
+    color: #7f91a8;
+    font-size: 14px;
+}
+/* TABLE */
+.table-wrap {
+    overflow-x: auto;
+    border-radius: 20px;
+    border: 1px solid rgba(255,255,255,0.08);
+    background: #08111f;
+}
+table {
+    width: 100%;
+    min-width: 760px;
+    border-collapse: collapse;
+}
+thead {
+    background: #0d1b2d;
+}
+th,
+td {
+    padding: 18px 20px;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    text-align: center;
+}
+th {
+    font-size: 14px;
+    color: #fff;
+}
+td {
+    color: #a9b8ca;
+    font-size: 14px;
+}
+td:first-child {
+    text-align: left;
+    color: #6f849d;
+    font-weight: 700;
+}
+th:nth-child(2),
+td:nth-child(2) {
+    color: #54b5ff;
+}
+th:nth-child(3),
+td:nth-child(3) {
+    color: #dce9f6;
+}
+tr:last-child td {
+    border-bottom: none;
+}
+/* HIGHLIGHTS */
+.highlights {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 22px;
+}
+.highlight {
+    padding: 30px;
+    border-radius: 20px;
+    background: linear-gradient(145deg, #0c1728, #08111f);
+    border: 1px solid rgba(255,255,255,0.07);
+}
+.highlight-icon {
+    font-size: 30px;
+    margin-bottom: 15px;
+}
+.highlight h3 {
+    font-size: 21px;
+    margin-bottom: 10px;
+}
+.highlight p {
+    color: #8da0b7;
+    font-size: 14px;
+}
+.highlight strong {
+    color: #fff;
+}
+/* FACT BOX */
+.fact-box {
+    max-width: 1100px;
+    margin: 0 auto 80px;
+    padding: 0 25px;
+}
+.fact-inner {
+    padding: 35px;
+    border-radius: 24px;
+    background: linear-gradient(135deg, #0d2138, #08111f);
+    border: 1px solid rgba(61,169,255,0.18);
+    text-align: center;
+}
+.fact-inner h2 {
+    font-size: 28px;
+    margin-bottom: 12px;
+}
+.fact-inner p {
+    max-width: 780px;
+    margin: auto;
+    color: #91a4bb;
+    font-size: 15px;
+}
+/* FOOTER */
+footer {
+    border-top: 1px solid rgba(255,255,255,0.07);
+    padding: 35px 25px;
+    text-align: center;
+    color: #64758a;
+    font-size: 13px;
+}
+footer strong {
+    color: #9db1c7;
+}
+/* MOBILE */
+@media (max-width: 850px) {
+    .nav-container {
+        flex-direction: column;
+        gap: 15px;
+    }
+    .nav-links {
+        gap: 14px;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    .compare-planes {
+        grid-template-columns: 1fr;
+    }
+    .vs {
+        padding: 5px 0;
+    }
+    .vs-circle {
+        width: 65px;
+        height: 65px;
+        font-size: 20px;
+    }
+    .plane-card img {
+        height: 220px;
+    }
+    .highlights {
+        grid-template-columns: 1fr;
+    }
+}
+@media (max-width: 500px) {
+    .hero {
+        padding-top: 60px;
+    }
+    .hero h1 {
+        font-size: 44px;
+    }
+    .plane-content h2 {
+        font-size: 27px;
+    }
+    .plane-card img {
+        height: 190px;
+    }
+}
+</style>
+</head>
+<body>
+<!-- NAVBAR -->
+<nav class="navbar">
+    <div class="nav-container">
+        <a href="index.html" class="logo">
+            FLIGHT <span>SENSES</span>
+        </a>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="aircraft.html">Aircraft</a>
+            <a href="airlines.html">Airlines</a>
+            <a href="top10.html">Top 10</a>
+            <a href="compare.html" class="active">⚔️ Compare</a>
+        </div>
+    </div>
+</nav>
+<!-- HERO -->
+<header class="hero">
+    <div class="badge">⚔️ AIRCRAFT COMPARISON</div>
+    <h1>
+        777-9 <span>VS</span> A350-1000
+    </h1>
+    <p>
+        Two of the newest generation of long-haul wide-body aircraft,
+        compared side by side.
+    </p>
+</header>
+<!-- AIRCRAFT -->
+<section class="compare-planes">
+    <div class="plane-card">
+        <img src="777.jpg" alt="Boeing 777-9">
+        <div class="plane-content">
+            <div class="plane-label">Boeing</div>
+            <h2>777-9</h2>
+            <p>
+                The largest member of the 777X family,
+                powered by the GE9X.
+            </p>
+            <a href="boeing-777.html" class="plane-button">
+                View 777-9 →
+            </a>
+        </div>
+    </div>
+    <div class="vs">
+        <div class="vs-circle">VS</div>
+    </div>
+    <div class="plane-card">
+        <img src="a350.jpg" alt="Airbus A350-1000">
+        <div class="plane-content">
+            <div class="plane-label">Airbus</div>
+            <h2>A350-1000</h2>
+            <p>
+                The largest passenger member of the A350 family,
+                powered by the Trent XWB-97.
+            </p>
+            <a href="airbus-a350.html" class="plane-button">
+                View A350-1000 →
+            </a>
+        </div>
+    </div>
+</section>
+<!-- COMPARISON TABLE -->
+<section class="section">
+    <div class="section-title">
+        <h2>Technical Comparison</h2>
+        <p>Key specifications of the two aircraft</p>
+    </div>
+    <div class="table-wrap">
+        <table>
+            <thead>
+                <tr>
+                    <th>Specification</th>
+                    <th>Boeing 777-9</th>
+                    <th>Airbus A350-1000</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Manufacturer</td>
+                    <td>Boeing</td>
+                    <td>Airbus</td>
+                </tr>
+                <tr>
+                    <td>First Flight</td>
+                    <td>25 January 2020</td>
+                    <td>24 November 2016</td>
+                </tr>
+                <tr>
+                    <td>Length</td>
+                    <td>76.7 m</td>
+                    <td>73.78 m</td>
+                </tr>
+                <tr>
+                    <td>Wingspan</td>
+                    <td>71.8 m extended<br>64.8 m on ground</td>
+                    <td>64.75 m</td>
+                </tr>
+                <tr>
+                    <td>Height</td>
+                    <td>19.5 m</td>
+                    <td>≈17.0 m</td>
+                </tr>
+                <tr>
+                    <td>Cruise Speed</td>
+                    <td>Mach 0.84</td>
+                    <td>Mach 0.85</td>
+                </tr>
+                <tr>
+                    <td>Maximum Range</td>
+                    <td>14,820 km</td>
+                    <td>16,850 km</td>
+                </tr>
+                <tr>
+                    <td>Maximum Takeoff Weight</td>
+                    <td>351,530 kg</td>
+                    <td>322,000 kg</td>
+                </tr>
+                <tr>
+                    <td>Typical Seating</td>
+                    <td>375–450<br><small>two-class</small></td>
+                    <td>375–400<br><small>three-class</small></td>
+                </tr>
+                <tr>
+                    <td>Maximum Seating</td>
+                    <td>Not specified in current Boeing table</td>
+                    <td>480</td>
+                </tr>
+                <tr>
+                    <td>Engines</td>
+                    <td>2 × GE9X</td>
+                    <td>2 × Rolls-Royce Trent XWB-97</td>
+                </tr>
+                <tr>
+                    <td>Engine Thrust</td>
+                    <td>≈105,000 lbf each*</td>
+                    <td>97,000 lbf each</td>
+                </tr>
+                <tr>
+                    <td>Combined Thrust</td>
+                    <td>≈210,000 lbf*</td>
+                    <td>≈194,000 lbf</td>
+                </tr>
+                <tr>
+                    <td>Aircraft Type</td>
+                    <td>Wide-body twin-engine jet</td>
+                    <td>Wide-body twin-engine jet</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</section>
+<!-- HIGHLIGHTS -->
+<section class="section">
+    <div class="section-title">
+        <h2>Key Differences</h2>
+        <p>What makes these aircraft different?</p>
+    </div>
+    <div class="highlights">
+        <div class="highlight">
+            <div class="highlight-icon">📏</div>
+            <h3>Size</h3>
+            <p>
+                The <strong>777-9</strong> is longer at 76.7 metres,
+                while the A350-1000 measures about 73.8 metres.
+                The Boeing also has a much wider wingspan when its
+                folding wingtips are extended.
+            </p>
+        </div>
+        <div class="highlight">
+            <div class="highlight-icon">🔥</div>
+            <h3>Engine Power</h3>
+            <p>
+                The 777-9 uses two enormous
+                <strong>GE9X</strong> engines. Boeing lists
+                approximately 105,000 lbf of Boeing-equivalent thrust
+                per engine.
+            </p>
+        </div>
+        <div class="highlight">
+            <div class="highlight-icon">🌍</div>
+            <h3>Range</h3>
+            <p>
+                Boeing lists the 777-9 at up to
+                <strong>14,820 km</strong>, while Airbus lists the
+                A350-1000 at up to <strong>16,850 km</strong>.
+            </p>
+        </div>
+        <div class="highlight">
+            <div class="highlight-icon">🪽</div>
+            <h3>Wing Design</h3>
+            <p>
+                The 777-9 uses a carbon-fibre composite wing with
+                <strong>folding wingtips</strong>. The A350-1000 uses
+                a highly advanced composite wing designed for
+                long-range efficiency.
+            </p>
+        </div>
+    </div>
+</section>
+<!-- FACT BOX -->
+<section class="fact-box">
+    <div class="fact-inner">
+        <h2>✈️ Two Different Approaches</h2>
+        <p>
+            The Boeing 777-9 combines a very large airframe,
+            a huge GE9X engine and a folding composite wing.
+            The Airbus A350-1000 focuses on a lighter advanced-material
+            structure, long range and the Trent XWB-97.
+            Both represent the latest generation of large
+            twin-engine long-haul aircraft.
+        </p>
+    </div>
+</section>
+<!-- FOOTER -->
+<footer>
+    <strong>FLIGHT SENSES</strong><br>
+    The World of Aviation ✈️<br><br>
+    © 2026 Flight Senses. All rights reserved.
+</footer>
+</body>
+</html>
