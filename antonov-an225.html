@@ -2,136 +2,577 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Antonov An-225 - Flight Senses</title>
-
-    <style>
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background: #061a33;
-            color: white;
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Antonov An-225 Mriya - Flight Senses</title>
+<style>
+    * {
+        box-sizing: border-box;
+    }
+    html {
+        scroll-behavior: smooth;
+    }
+    body {
+        margin: 0;
+        font-family: Arial, Helvetica, sans-serif;
+        background: #020811;
+        color: white;
+    }
+    /* NAVBAR */
+    nav {
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 18px 7%;
+        background: rgba(2, 8, 17, 0.95);
+        backdrop-filter: blur(14px);
+        border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    .logo {
+        color: white;
+        text-decoration: none;
+        font-size: 24px;
+        font-weight: bold;
+        letter-spacing: 1px;
+    }
+    .logo span {
+        color: #1687ff;
+    }
+    nav a {
+        color: #c9d9ee;
+        text-decoration: none;
+        margin-left: 28px;
+        font-size: 15px;
+        transition: 0.3s;
+    }
+    nav a:hover {
+        color: #1687ff;
+    }
+    /* HERO */
+    .hero {
+        min-height: 570px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding: 90px 20px;
+        background:
+            linear-gradient(
+                rgba(2,8,17,0.42),
+                rgba(2,8,17,0.94)
+            ),
+            url("an225.jpg") center/cover no-repeat;
+    }
+    .hero-content {
+        max-width: 1000px;
+    }
+    .badge {
+        display: inline-block;
+        padding: 10px 20px;
+        border-radius: 30px;
+        background: rgba(22,135,255,0.14);
+        border: 1px solid rgba(22,135,255,0.45);
+        color: #70baff;
+        font-size: 14px;
+        font-weight: bold;
+        margin-bottom: 20px;
+    }
+    .hero h1 {
+        font-size: clamp(44px, 7vw, 82px);
+        margin: 0 0 15px;
+        letter-spacing: -3px;
+    }
+    .hero p {
+        font-size: 22px;
+        color: #bdd8f5;
+        margin: 0;
+    }
+    /* CONTAINER */
+    .container {
+        width: min(1150px, 90%);
+        margin: auto;
+    }
+    section {
+        padding: 75px 0;
+    }
+    /* IMAGE */
+    .aircraft-image {
+        width: 100%;
+        max-height: 600px;
+        object-fit: cover;
+        border-radius: 24px;
+        display: block;
+        box-shadow:
+            0 30px 70px rgba(0,0,0,0.55);
+    }
+    /* SECTION TITLE */
+    .section-title {
+        text-align: center;
+        margin-bottom: 45px;
+    }
+    .section-title h2 {
+        font-size: 38px;
+        margin: 0 0 10px;
+    }
+    .section-title p {
+        color: #8da7c4;
+        margin: 0;
+    }
+    /* SPECS */
+    .specs-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 18px;
+    }
+    .spec-card {
+        position: relative;
+        overflow: hidden;
+        background:
+            linear-gradient(145deg, #0a1e36, #061321);
+        border: 1px solid rgba(255,255,255,0.07);
+        border-radius: 17px;
+        padding: 25px;
+        transition: 0.3s;
+    }
+    .spec-card::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        height: 2px;
+        background: #1687ff;
+        transform: scaleX(0);
+        transform-origin: left;
+        transition: 0.3s;
+    }
+    .spec-card:hover {
+        transform: translateY(-6px);
+        border-color: rgba(22,135,255,0.45);
+        box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+    }
+    .spec-card:hover::after {
+        transform: scaleX(1);
+    }
+    .spec-card strong {
+        display: block;
+        color: #7895b4;
+        font-size: 13px;
+        text-transform: uppercase;
+        letter-spacing: 0.7px;
+        margin-bottom: 10px;
+    }
+    .spec-card span {
+        font-size: 19px;
+        font-weight: bold;
+        color: white;
+    }
+    /* GIANT HIGHLIGHT */
+    .giant-box {
+        padding: 45px;
+        border-radius: 25px;
+        background:
+            linear-gradient(135deg, #082c51, #06172b);
+        border: 1px solid rgba(22,135,255,0.28);
+        box-shadow: 0 20px 50px rgba(0,0,0,0.25);
+    }
+    .giant-box h2 {
+        margin-top: 0;
+        font-size: 35px;
+    }
+    .giant-box p {
+        color: #b6c9df;
+        line-height: 1.85;
+        font-size: 16px;
+    }
+    .giant-stats {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 18px;
+        margin-top: 30px;
+    }
+    .giant-stat {
+        padding: 25px;
+        border-radius: 16px;
+        background: rgba(0,0,0,0.20);
+        text-align: center;
+    }
+    .giant-stat strong {
+        display: block;
+        font-size: 31px;
+        color: #58adff;
+        margin-bottom: 8px;
+    }
+    .giant-stat span {
+        color: #9eb5cf;
+        font-size: 14px;
+    }
+    /* ABOUT */
+    .about {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 50px;
+        align-items: center;
+    }
+    .about h2 {
+        font-size: 36px;
+        margin-top: 0;
+    }
+    .about p {
+        color: #adbed2;
+        line-height: 1.85;
+        font-size: 16px;
+    }
+    /* ENGINES */
+    .engine-box {
+        padding: 40px;
+        border-radius: 24px;
+        background: #061525;
+        border: 1px solid rgba(255,255,255,0.07);
+    }
+    .engine-box h2 {
+        margin-top: 0;
+        font-size: 34px;
+    }
+    .engine-box > p {
+        color: #afc3da;
+        line-height: 1.8;
+    }
+    .engine-highlight {
+        margin-top: 30px;
+        padding: 30px;
+        border-radius: 17px;
+        background: #0a2038;
+        border: 1px solid rgba(22,135,255,0.18);
+    }
+    .engine-highlight h3 {
+        margin-top: 0;
+        color: #65b4ff;
+        font-size: 23px;
+    }
+    .engine-highlight p {
+        color: #a9bdd3;
+        line-height: 1.8;
+        margin-bottom: 0;
+    }
+    /* HISTORY */
+    .history {
+        padding: 40px;
+        border-radius: 24px;
+        background:
+            linear-gradient(145deg, #091a2e, #040c17);
+        border: 1px solid rgba(255,255,255,0.07);
+    }
+    .history h2 {
+        margin-top: 0;
+        font-size: 34px;
+    }
+    .history p {
+        color: #afc2d8;
+        line-height: 1.85;
+    }
+    /* STATUS */
+    .status {
+        margin-top: 25px;
+        padding: 22px;
+        border-radius: 15px;
+        text-align: center;
+        background: rgba(255, 176, 64, 0.08);
+        border: 1px solid rgba(255, 176, 64, 0.25);
+        color: #ffd17a;
+        font-weight: bold;
+    }
+    /* BACK BUTTON */
+    .back-area {
+        text-align: center;
+        padding: 20px 0 80px;
+    }
+    .back {
+        display: inline-block;
+        padding: 15px 27px;
+        background: #087df5;
+        color: white;
+        text-decoration: none;
+        border-radius: 10px;
+        font-weight: bold;
+        transition: 0.3s;
+    }
+    .back:hover {
+        background: #0064ca;
+        transform: translateY(-3px);
+    }
+    /* FOOTER */
+    footer {
+        text-align: center;
+        padding: 38px 20px;
+        background: #01050b;
+        border-top: 1px solid rgba(255,255,255,0.06);
+        color: #71849c;
+    }
+    footer strong {
+        color: #1687ff;
+    }
+    /* MOBILE */
+    @media (max-width: 800px) {
+        nav {
+            padding: 16px 5%;
         }
-
-        header {
-            text-align: center;
-            padding: 40px 20px;
-            background: #08264a;
+        nav a {
+            margin-left: 12px;
+            font-size: 13px;
         }
-
-        header h1 {
-            font-size: 42px;
-            margin-bottom: 10px;
+        .hero {
+            min-height: 460px;
         }
-
-        header p {
-            color: #9fc9ff;
-            font-size: 18px;
+        .specs-grid {
+            grid-template-columns: repeat(2, 1fr);
         }
-
-        .container {
-            max-width: 800px;
-            margin: 40px auto;
-            padding: 20px;
+        .giant-stats {
+            grid-template-columns: 1fr;
         }
-
-        .specs {
-            background: #0b2d52;
-            padding: 25px;
-            border-radius: 15px;
+        .about {
+            grid-template-columns: 1fr;
         }
-
-        .spec {
-            display: flex;
-            justify-content: space-between;
-            padding: 14px 0;
-            border-bottom: 1px solid #31577d;
+    }
+    @media (max-width: 520px) {
+        .logo {
+            font-size: 20px;
         }
-
-        .spec:last-child {
-            border-bottom: none;
+        nav a {
+            display: none;
         }
-
-        .back {
-            display: inline-block;
-            margin-top: 30px;
-            padding: 12px 20px;
-            background: #0077ff;
-            color: white;
-            text-decoration: none;
-            border-radius: 8px;
+        .hero h1 {
+            letter-spacing: -1px;
         }
-
-        .status {
-            margin-top: 20px;
-            padding: 15px;
-            background: #102f4f;
-            border-radius: 10px;
-            text-align: center;
-            color: #ffcc66;
+        .hero p {
+            font-size: 17px;
         }
-    </style>
+        .specs-grid {
+            grid-template-columns: 1fr;
+        }
+        .giant-box,
+        .engine-box,
+        .history {
+            padding: 27px;
+        }
+        section {
+            padding: 50px 0;
+        }
+    }
+</style>
 </head>
-
 <body>
-
-<header>
-    <h1>Antonov An-225 Mriya</h1>
-    <p>The legendary giant of aviation 🦅</p>
+<nav>
+<a href="index.html" class="logo">
+    ✈️ Flight <span>Senses</span>
+</a>
+<div>
+    <a href="index.html">Home</a>
+    <a href="aircraft.html">Aircraft</a>
+</div>
+</nav>
+<!-- HERO -->
+<header class="hero">
+<div class="hero-content">
+    <div class="badge">
+        🦅 The World's Legendary Giant
+    </div>
+    <h1>Antonov An-225</h1>
+    <p>
+        Mriya — The Dream that became an aviation legend
+    </p>
+</div>
 </header>
-
-<div class="container">
-
-    <div class="specs">
-
-        <div class="spec">
+<main class="container">
+<!-- IMAGE -->
+<section>
+    <img
+        src="an225.jpg"
+        alt="Antonov An-225 Mriya"
+        class="aircraft-image"
+    >
+</section>
+<!-- SPECS -->
+<section>
+    <div class="section-title">
+        <h2>Technical Specifications</h2>
+        <p>
+            The numbers behind one of aviation's greatest giants
+        </p>
+    </div>
+    <div class="specs-grid">
+        <div class="spec-card">
             <strong>Manufacturer</strong>
             <span>Antonov</span>
         </div>
-
-        <div class="spec">
+        <div class="spec-card">
             <strong>First Flight</strong>
-            <span>1988</span>
+            <span>21 December 1988</span>
         </div>
-
-        <div class="spec">
+        <div class="spec-card">
             <strong>Length</strong>
-            <span>84 m</span>
+            <span>84.0 m</span>
         </div>
-
-        <div class="spec">
+        <div class="spec-card">
             <strong>Wingspan</strong>
             <span>88.4 m</span>
         </div>
-
-        <div class="spec">
+        <div class="spec-card">
+            <strong>Height</strong>
+            <span>18.1 m</span>
+        </div>
+        <div class="spec-card">
+            <strong>Maximum Speed</strong>
+            <span>850 km/h</span>
+        </div>
+        <div class="spec-card">
             <strong>Range</strong>
             <span>≈ 15,400 km</span>
         </div>
-
-        <div class="spec">
-            <strong>Engines</strong>
-            <span>6 × Progress D-18T</span>
-        </div>
-
-        <div class="spec">
+        <div class="spec-card">
             <strong>Maximum Takeoff Weight</strong>
             <span>640 tonnes</span>
         </div>
-
-        <div class="spec">
-            <strong>Type</strong>
+        <div class="spec-card">
+            <strong>Payload</strong>
+            <span>Up to 250 tonnes</span>
+        </div>
+        <div class="spec-card">
+            <strong>Engines</strong>
+            <span>6 × Progress D-18T</span>
+        </div>
+        <div class="spec-card">
+            <strong>Engine Thrust</strong>
+            <span>≈ 51,600 lbf each</span>
+        </div>
+        <div class="spec-card">
+            <strong>Aircraft Type</strong>
             <span>Heavy strategic cargo aircraft</span>
         </div>
-
     </div>
-
-    <div class="status">
-        Historical aircraft — the sole completed An-225 was destroyed in 2022.
+</section>
+<!-- GIANT HIGHLIGHT -->
+<section>
+    <div class="giant-box">
+        <h2>🦾 The Heavyweight of the Skies</h2>
+        <p>
+            The Antonov An-225 Mriya was designed to transport extremely
+            heavy and oversized cargo. Its enormous dimensions, six-engine
+            configuration and 640-tonne maximum takeoff weight made it one
+            of the most extraordinary aircraft ever built.
+        </p>
+        <div class="giant-stats">
+            <div class="giant-stat">
+                <strong>640 t</strong>
+                <span>
+                    Maximum takeoff weight
+                </span>
+            </div>
+            <div class="giant-stat">
+                <strong>250 t</strong>
+                <span>
+                    Maximum payload
+                </span>
+            </div>
+            <div class="giant-stat">
+                <strong>6</strong>
+                <span>
+                    Progress D-18T engines
+                </span>
+            </div>
+        </div>
     </div>
-
-    <a href="aircraft.html" class="back">← Back to Aircraft</a>
-
+</section>
+<!-- ABOUT -->
+<section>
+    <div class="about">
+        <div>
+            <h2>About the An-225 Mriya</h2>
+            <p>
+                The An-225 was developed by Antonov in the Soviet Union
+                during the 1980s. Its original mission was to transport
+                the Buran space shuttle and components of the Energia
+                launch system.
+            </p>
+            <p>
+                The aircraft first flew on 21 December 1988 and became
+                famous for its extraordinary size and ability to carry
+                extremely heavy and oversized cargo.
+            </p>
+            <p>
+                The Ukrainian word "Mriya" means "Dream" — an appropriate
+                name for an aircraft that pushed the limits of what was
+                possible in heavy aviation.
+            </p>
+        </div>
+        <div>
+            <div class="history">
+                <h2>🌍 A Global Aviation Icon</h2>
+                <p>
+                    During its operational career, the An-225 transported
+                    unusual and exceptionally heavy cargo around the world,
+                    becoming a symbol of heavy-lift aviation.
+                </p>
+                <p>
+                    Only one An-225 was completed and operated. A second
+                    airframe was partially constructed but never completed.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- ENGINES -->
+<section>
+    <div class="engine-box">
+        <h2>⚙️ Six Engines. One Legend.</h2>
+        <p>
+            The An-225 is powered by six Progress D-18T high-bypass
+            turbofan engines. Three engines are mounted beneath each wing,
+            giving the aircraft the enormous thrust required for heavy
+            takeoffs.
+        </p>
+        <div class="engine-highlight">
+            <h3>🔥 Combined Engine Thrust</h3>
+            <p>
+                Each D-18T produces approximately 51,600 lbf of takeoff
+                thrust. Across all six engines, the combined takeoff thrust
+                is approximately <strong>309,600 lbf</strong>.
+            </p>
+        </div>
+    </div>
+</section>
+<!-- FINAL STATUS -->
+<section>
+    <div class="history">
+        <h2>🕊️ The End of an Era</h2>
+        <p>
+            The sole completed An-225 was destroyed during the fighting at
+            Hostomel Airport in Ukraine in February 2022. Its loss marked
+            the end of the aircraft's operational career.
+        </p>
+        <p>
+            Despite its destruction, Mriya remains one of the most
+            recognizable and remarkable aircraft in aviation history.
+        </p>
+        <div class="status">
+            Historical aircraft — the sole completed An-225 was destroyed in 2022.
+        </div>
+    </div>
+</section>
+<!-- BACK -->
+<div class="back-area">
+    <a href="aircraft.html" class="back">
+        ← Back to Aircraft Database
+    </a>
 </div>
-
+</main>
+<footer>
+<p>
+    © 2026 <strong>Flight Senses</strong>
+    — Aviation beyond imagination ✈️
+</p>
+</footer>
 </body>
 </html>

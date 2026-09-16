@@ -3,158 +3,388 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Boeing 747 | Flight Senses</title>
-
-    <style>
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background: #07111f;
-            color: white;
+<title>Boeing 747 | Flight Senses</title>
+<style>
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+    body {
+        font-family: Arial, sans-serif;
+        background: #050d18;
+        color: white;
+        line-height: 1.6;
+    }
+    /* HEADER */
+    header {
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        background: rgba(7, 17, 31, 0.95);
+        backdrop-filter: blur(10px);
+        border-bottom: 1px solid #173b5e;
+    }
+    .header-inner {
+        max-width: 1200px;
+        margin: auto;
+        padding: 18px 25px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+    .brand {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        text-decoration: none;
+        color: white;
+        font-size: 23px;
+        font-weight: bold;
+    }
+    .brand-icon {
+        width: 42px;
+        height: 42px;
+        border-radius: 12px;
+        background: linear-gradient(135deg, #1e90ff, #0055a5);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 22px;
+        box-shadow: 0 0 20px rgba(30, 144, 255, 0.25);
+    }
+    nav {
+        display: flex;
+        gap: 25px;
+    }
+    nav a {
+        color: #c9ddf2;
+        text-decoration: none;
+        font-size: 15px;
+        transition: 0.25s;
+    }
+    nav a:hover {
+        color: #4da6ff;
+    }
+    /* HERO */
+    .hero {
+        max-width: 1200px;
+        margin: auto;
+        padding: 65px 25px 35px;
+        text-align: center;
+    }
+    .hero h1 {
+        font-size: 54px;
+        margin-bottom: 10px;
+        letter-spacing: -1px;
+    }
+    .hero p {
+        color: #9ecbff;
+        font-size: 19px;
+    }
+    .subtitle {
+        margin-top: 8px;
+        color: #6f91b3;
+        font-size: 14px;
+    }
+    /* AIRCRAFT IMAGE */
+    .aircraft-image {
+        max-width: 1200px;
+        height: 470px;
+        margin: 35px auto 0;
+        padding: 0 25px;
+    }
+    .aircraft-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 22px;
+        border: 1px solid #1c4d78;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.45);
+    }
+    /* CONTENT */
+    .container {
+        max-width: 1200px;
+        margin: auto;
+        padding: 45px 25px 70px;
+    }
+    .section-title {
+        font-size: 30px;
+        margin-bottom: 25px;
+    }
+    .section-title span {
+        color: #4da6ff;
+    }
+    /* SPECS */
+    .specs {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 16px;
+    }
+    .spec {
+        background: linear-gradient(145deg, #0c2036, #081726);
+        border: 1px solid #173e61;
+        border-radius: 15px;
+        padding: 22px;
+        transition: 0.25s;
+    }
+    .spec:hover {
+        transform: translateY(-4px);
+        border-color: #258ee8;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+    }
+    .spec strong {
+        display: block;
+        color: #4da6ff;
+        font-size: 14px;
+        margin-bottom: 7px;
+    }
+    .spec p {
+        color: #f0f6ff;
+        font-size: 17px;
+        font-weight: bold;
+    }
+    /* ABOUT */
+    .about {
+        margin-top: 55px;
+        background: #0a1b2e;
+        border: 1px solid #173e61;
+        border-radius: 18px;
+        padding: 32px;
+    }
+    .about h2 {
+        color: #4da6ff;
+        margin-bottom: 15px;
+        font-size: 28px;
+    }
+    .about p {
+        color: #b7cce1;
+        font-size: 16px;
+        margin-bottom: 15px;
+    }
+    /* ENGINE */
+    .engine-box {
+        margin-top: 30px;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+    }
+    .engine-card {
+        background: #081726;
+        border: 1px solid #173e61;
+        border-radius: 15px;
+        padding: 25px;
+    }
+    .engine-card h3 {
+        color: #4da6ff;
+        margin-bottom: 10px;
+    }
+    .engine-card p {
+        color: #b7cce1;
+    }
+    /* BUTTON */
+    .back {
+        display: block;
+        width: fit-content;
+        margin: 50px auto 10px;
+        padding: 13px 28px;
+        background: linear-gradient(135deg, #1e90ff, #0066bd);
+        color: white;
+        text-decoration: none;
+        border-radius: 10px;
+        font-weight: bold;
+        transition: 0.25s;
+        box-shadow: 0 8px 25px rgba(30, 144, 255, 0.2);
+    }
+    .back:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 12px 30px rgba(30, 144, 255, 0.35);
+    }
+    /* FOOTER */
+    footer {
+        border-top: 1px solid #173b5e;
+        background: #050c16;
+        text-align: center;
+        padding: 30px 20px;
+        color: #6f91b3;
+        font-size: 14px;
+    }
+    /* MOBILE */
+    @media (max-width: 900px) {
+        nav {
+            gap: 14px;
         }
-
-        header {
-            background: #0b1d33;
-            padding: 25px;
-            text-align: center;
-            border-bottom: 2px solid #1e90ff;
+        .specs {
+            grid-template-columns: repeat(2, 1fr);
         }
-
-        header h1 {
-            margin: 0;
+        .aircraft-image {
+            height: 380px;
+        }
+        .engine-box {
+            grid-template-columns: 1fr;
+        }
+    }
+    @media (max-width: 600px) {
+        .header-inner {
+            flex-direction: column;
+            gap: 15px;
+        }
+        nav {
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .hero {
+            padding-top: 45px;
+        }
+        .hero h1 {
             font-size: 38px;
         }
-
-        .container {
-            max-width: 1000px;
-            margin: auto;
-            padding: 50px 20px;
+        .hero p {
+            font-size: 16px;
         }
-
-        .title {
-            text-align: center;
+        .aircraft-image {
+            height: 250px;
+            padding: 0 15px;
         }
-
-        .title h2 {
-            font-size: 42px;
-            margin-bottom: 10px;
-        }
-
-        .title p {
-            color: #9ecbff;
-            font-size: 18px;
-        }
-
-        .info {
-            background: #0d2036;
-            border: 1px solid #1c4d78;
+        .aircraft-image img {
             border-radius: 15px;
-            padding: 30px;
-            margin-top: 40px;
         }
-
-        .info h3 {
-            color: #4da6ff;
-            font-size: 26px;
+        .container {
+            padding-left: 15px;
+            padding-right: 15px;
         }
-
         .specs {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 15px;
-            margin-top: 20px;
+            grid-template-columns: 1fr;
         }
-
-        .spec {
-            background: #071827;
-            padding: 20px;
-            border-radius: 10px;
+        .about {
+            padding: 24px;
         }
-
-        .spec strong {
-            color: #4da6ff;
-        }
-
-        .back {
-            display: block;
-            width: fit-content;
-            margin: 40px auto;
-            padding: 12px 25px;
-            background: #1e90ff;
-            color: white;
-            text-decoration: none;
-            border-radius: 8px;
-        }
-    </style>
+    }
+</style>
 </head>
-
 <body>
-
 <header>
-    <h1>✈️ Flight Senses</h1>
-</header>
-
-<div class="container">
-
-    <div class="title">
-        <h2>Boeing 747</h2>
-        <p>The legendary Queen of the Skies 👑</p>
-    </div>
-
-    <div class="info">
-
-        <h3>Aircraft Specifications</h3>
-
-        <div class="specs">
-
-            <div class="spec">
-                <strong>Manufacturer</strong>
-                <p>Boeing</p>
-            </div>
-
-            <div class="spec">
-                <strong>First Flight</strong>
-                <p>1969</p>
-            </div>
-
-            <div class="spec">
-                <strong>Length</strong>
-                <p>76.25 m</p>
-            </div>
-
-            <div class="spec">
-                <strong>Wingspan</strong>
-                <p>68.45 m</p>
-            </div>
-
-            <div class="spec">
-                <strong>Range</strong>
-                <p>≈ 13,450 km</p>
-            </div>
-
-            <div class="spec">
-                <strong>Engines</strong>
-                <p>4 × Turbofan</p>
-            </div>
-
-            <div class="spec">
-                <strong>Typical Cruise Speed</strong>
-                <p>≈ Mach 0.85</p>
-            </div>
-
-            <div class="spec">
-                <strong>Type</strong>
-                <p>Wide-body jet airliner</p>
-            </div>
-
-        </div>
-
-    </div>
-
-    <a class="back" href="aircraft.html">← Back to Aircraft</a>
-
+    <div class="header-inner">
+    <a href="index.html" class="brand">
+        <div class="brand-icon">✈️</div>
+        <span>Flight Senses</span>
+    </a>
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="aircraft.html">Aircraft</a>
+        <a href="#">Airlines</a>
+        <a href="#">Top 10</a>
+        <a href="#">Videos</a>
+    </nav>
 </div>
-
+</header>
+<section class="hero">
+<h1>Boeing 747</h1>
+<p>The legendary Queen of the Skies 👑</p>
+<div class="subtitle">
+    One of the most iconic aircraft in aviation history
+</div>
+</section>
+<div class="aircraft-image">
+    <img src="747.jpg" alt="Boeing 747">
+</div>
+<main class="container">
+<h2 class="section-title">
+    Aircraft <span>Specifications</span>
+</h2>
+<div class="specs">
+    <div class="spec">
+        <strong>Manufacturer</strong>
+        <p>Boeing</p>
+    </div>
+    <div class="spec">
+        <strong>First Flight</strong>
+        <p>9 February 1969</p>
+    </div>
+    <div class="spec">
+        <strong>Length</strong>
+        <p>76.3 m</p>
+    </div>
+    <div class="spec">
+        <strong>Wingspan</strong>
+        <p>68.4 m</p>
+    </div>
+    <div class="spec">
+        <strong>Height</strong>
+        <p>19.4 m</p>
+    </div>
+    <div class="spec">
+        <strong>Cruise Speed</strong>
+        <p>Mach 0.855</p>
+    </div>
+    <div class="spec">
+        <strong>Range</strong>
+        <p>14,310 km</p>
+    </div>
+    <div class="spec">
+        <strong>Engines</strong>
+        <p>4 × GEnx-2B67</p>
+    </div>
+    <div class="spec">
+        <strong>Engine Thrust</strong>
+        <p>66,500 lbf each</p>
+    </div>
+    <div class="spec">
+        <strong>Typical Capacity</strong>
+        <p>410 passengers</p>
+    </div>
+    <div class="spec">
+        <strong>Aircraft Type</strong>
+        <p>Wide-body jet</p>
+    </div>
+    <div class="spec">
+        <strong>ICAO Design Code</strong>
+        <p>Code F</p>
+    </div>
+</div>
+<section class="about">
+    <h2>About the Boeing 747</h2>
+    <p>
+        The Boeing 747 is one of the most recognizable aircraft ever built.
+        Known around the world as the "Queen of the Skies", the 747 helped
+        transform long-haul air travel and became an icon of commercial aviation.
+    </p>
+    <p>
+        The first Boeing 747 completed its first flight on 9 February 1969.
+        It entered commercial service with Pan Am in January 1970.
+    </p>
+    <p>
+        Boeing produced 1,574 aircraft across the 747 family during its
+        production run. The final 747 left Boeing's Everett factory in
+        December 2022 and was delivered to Atlas Air in January 2023.
+    </p>
+</section>
+<section class="about">
+    <h2>747-8 Engines</h2>
+    <div class="engine-box">
+        <div class="engine-card">
+            <h3>General Electric GEnx-2B67</h3>
+            <p>
+                The Boeing 747-8 is powered by four General Electric
+                GEnx-2B67 high-bypass turbofan engines.
+            </p>
+        </div>
+        <div class="engine-card">
+            <h3>Total Engine Thrust</h3>
+            <p>
+                Each engine produces approximately 66,500 lbf of thrust,
+                giving the aircraft a combined rated thrust of about
+                266,000 lbf.
+            </p>
+        </div>
+    </div>
+</section>
+<a href="aircraft.html" class="back">
+    ← Back to Aircraft
+</a>
+</main>
+<footer>
+    © 2026 Flight Senses — Aviation Beyond the Horizon ✈️
+</footer>
 </body>
 </html>

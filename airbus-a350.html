@@ -2,123 +2,452 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Airbus A350 - Flight Senses</title>
-
-    <style>
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background: #061a33;
-            color: white;
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Airbus A350-1000 | Flight Senses</title>
+<style>
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+    body {
+        font-family: Arial, sans-serif;
+        background: #050d18;
+        color: white;
+        line-height: 1.6;
+    }
+    /* HEADER */
+    header {
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        background: rgba(7, 17, 31, 0.95);
+        backdrop-filter: blur(10px);
+        border-bottom: 1px solid #173b5e;
+    }
+    .header-inner {
+        max-width: 1200px;
+        margin: auto;
+        padding: 18px 25px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+    .brand {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        text-decoration: none;
+        color: white;
+        font-size: 23px;
+        font-weight: bold;
+    }
+    .brand-icon {
+        width: 42px;
+        height: 42px;
+        border-radius: 12px;
+        background: linear-gradient(135deg, #1e90ff, #0055a5);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 22px;
+        box-shadow: 0 0 20px rgba(30, 144, 255, 0.25);
+    }
+    nav {
+        display: flex;
+        gap: 25px;
+    }
+    nav a {
+        color: #c9ddf2;
+        text-decoration: none;
+        font-size: 15px;
+        transition: 0.25s;
+    }
+    nav a:hover {
+        color: #4da6ff;
+    }
+    /* HERO */
+    .hero {
+        max-width: 1200px;
+        margin: auto;
+        padding: 70px 25px 35px;
+        text-align: center;
+    }
+    .hero h1 {
+        font-size: 56px;
+        margin-bottom: 8px;
+        letter-spacing: -2px;
+    }
+    .hero h1 span {
+        color: #4da6ff;
+    }
+    .hero p {
+        color: #9ecbff;
+        font-size: 20px;
+    }
+    .subtitle {
+        margin-top: 10px;
+        color: #6f91b3;
+        font-size: 14px;
+    }
+    .badge {
+        display: inline-block;
+        margin-top: 20px;
+        padding: 7px 15px;
+        border-radius: 20px;
+        background: rgba(30, 144, 255, 0.12);
+        border: 1px solid #245b88;
+        color: #70b9ff;
+        font-size: 13px;
+        font-weight: bold;
+    }
+    /* IMAGE */
+    .aircraft-image {
+        max-width: 1200px;
+        height: 490px;
+        margin: 35px auto 0;
+        padding: 0 25px;
+    }
+    .aircraft-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 24px;
+        border: 1px solid #1c4d78;
+        box-shadow:
+            0 25px 70px rgba(0, 0, 0, 0.5),
+            0 0 35px rgba(30, 144, 255, 0.08);
+    }
+    /* CONTENT */
+    .container {
+        max-width: 1200px;
+        margin: auto;
+        padding: 50px 25px 75px;
+    }
+    .section-title {
+        font-size: 31px;
+        margin-bottom: 25px;
+    }
+    .section-title span {
+        color: #4da6ff;
+    }
+    /* SPECS */
+    .specs {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 16px;
+    }
+    .spec {
+        background: linear-gradient(145deg, #0c2036, #081726);
+        border: 1px solid #173e61;
+        border-radius: 16px;
+        padding: 23px;
+        transition: 0.25s;
+    }
+    .spec:hover {
+        transform: translateY(-5px);
+        border-color: #258ee8;
+        box-shadow: 0 12px 35px rgba(0, 0, 0, 0.3);
+    }
+    .spec strong {
+        display: block;
+        color: #4da6ff;
+        font-size: 14px;
+        margin-bottom: 7px;
+    }
+    .spec p {
+        color: #f0f6ff;
+        font-size: 17px;
+        font-weight: bold;
+    }
+    /* HIGHLIGHT */
+    .highlight {
+        margin-top: 45px;
+        padding: 30px;
+        background: linear-gradient(
+            135deg,
+            rgba(30, 144, 255, 0.13),
+            rgba(8, 23, 38, 0.95)
+        );
+        border: 1px solid #245b88;
+        border-radius: 18px;
+    }
+    .highlight h2 {
+        color: #4da6ff;
+        margin-bottom: 12px;
+        font-size: 27px;
+    }
+    .highlight p {
+        color: #b7cce1;
+        font-size: 16px;
+    }
+    /* ABOUT */
+    .about {
+        margin-top: 35px;
+        background: #0a1b2e;
+        border: 1px solid #173e61;
+        border-radius: 18px;
+        padding: 32px;
+    }
+    .about h2 {
+        color: #4da6ff;
+        margin-bottom: 15px;
+        font-size: 28px;
+    }
+    .about p {
+        color: #b7cce1;
+        font-size: 16px;
+        margin-bottom: 15px;
+    }
+    .about p:last-child {
+        margin-bottom: 0;
+    }
+    /* ENGINE */
+    .engine-box {
+        margin-top: 25px;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+    }
+    .engine-card {
+        background: #081726;
+        border: 1px solid #173e61;
+        border-radius: 15px;
+        padding: 25px;
+    }
+    .engine-card h3 {
+        color: #4da6ff;
+        margin-bottom: 10px;
+        font-size: 20px;
+    }
+    .engine-card p {
+        color: #b7cce1;
+    }
+    /* BUTTON */
+    .back {
+        display: block;
+        width: fit-content;
+        margin: 50px auto 10px;
+        padding: 14px 30px;
+        background: linear-gradient(135deg, #1e90ff, #0066bd);
+        color: white;
+        text-decoration: none;
+        border-radius: 10px;
+        font-weight: bold;
+        transition: 0.25s;
+        box-shadow: 0 8px 25px rgba(30, 144, 255, 0.2);
+    }
+    .back:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 12px 30px rgba(30, 144, 255, 0.35);
+    }
+    /* FOOTER */
+    footer {
+        border-top: 1px solid #173b5e;
+        background: #050c16;
+        text-align: center;
+        padding: 30px 20px;
+        color: #6f91b3;
+        font-size: 14px;
+    }
+    /* MOBILE */
+    @media (max-width: 900px) {
+        nav {
+            gap: 14px;
         }
-
-        header {
-            text-align: center;
-            padding: 40px 20px;
-            background: #08264a;
-        }
-
-        header h1 {
-            font-size: 42px;
-            margin-bottom: 10px;
-        }
-
-        header p {
-            color: #9fc9ff;
-            font-size: 18px;
-        }
-
-        .container {
-            max-width: 800px;
-            margin: 40px auto;
-            padding: 20px;
-        }
-
         .specs {
-            background: #0b2d52;
-            padding: 25px;
-            border-radius: 15px;
+            grid-template-columns: repeat(2, 1fr);
         }
-
-        .spec {
-            display: flex;
-            justify-content: space-between;
-            padding: 14px 0;
-            border-bottom: 1px solid #31577d;
+        .aircraft-image {
+            height: 400px;
         }
-
-        .spec:last-child {
-            border-bottom: none;
+        .engine-box {
+            grid-template-columns: 1fr;
         }
-
-        .back {
-            display: inline-block;
-            margin-top: 30px;
-            padding: 12px 20px;
-            background: #0077ff;
-            color: white;
-            text-decoration: none;
-            border-radius: 8px;
+    }
+    @media (max-width: 600px) {
+        .header-inner {
+            flex-direction: column;
+            gap: 15px;
         }
-    </style>
+        nav {
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .hero {
+            padding-top: 45px;
+        }
+        .hero h1 {
+            font-size: 39px;
+        }
+        .hero p {
+            font-size: 16px;
+        }
+        .aircraft-image {
+            height: 260px;
+            padding: 0 15px;
+        }
+        .aircraft-image img {
+            border-radius: 16px;
+        }
+        .container {
+            padding-left: 15px;
+            padding-right: 15px;
+        }
+        .specs {
+            grid-template-columns: 1fr;
+        }
+        .about,
+        .highlight {
+            padding: 24px;
+        }
+    }
+</style>
 </head>
-
 <body>
-
 <header>
-    <h1>Airbus A350</h1>
-    <p>A new generation long-range wide-body aircraft ✈️</p>
-</header>
-
-<div class="container">
-
-    <div class="specs">
-
-        <div class="spec">
-            <strong>Manufacturer</strong>
-            <span>Airbus</span>
-        </div>
-
-        <div class="spec">
-            <strong>First Flight</strong>
-            <span>2013</span>
-        </div>
-
-        <div class="spec">
-            <strong>Length</strong>
-            <span>66.8 m (A350-900)</span>
-        </div>
-
-        <div class="spec">
-            <strong>Wingspan</strong>
-            <span>64.75 m</span>
-        </div>
-
-        <div class="spec">
-            <strong>Range</strong>
-            <span>≈ 15,750 km</span>
-        </div>
-
-        <div class="spec">
-            <strong>Engines</strong>
-            <span>2 × Rolls-Royce Trent XWB</span>
-        </div>
-
-        <div class="spec">
-            <strong>Cruise Speed</strong>
-            <span>Mach 0.85</span>
-        </div>
-
-        <div class="spec">
-            <strong>Type</strong>
-            <span>Wide-body twin-engine jet</span>
-        </div>
-
-    </div>
-
-    <a href="aircraft.html" class="back">← Back to Aircraft</a>
-
+<div class="header-inner">
+    <a href="index.html" class="brand">
+        <div class="brand-icon">✈️</div>
+        <span>Flight Senses</span>
+    </a>
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="aircraft.html">Aircraft</a>
+        <a href="#">Airlines</a>
+        <a href="#">Top 10</a>
+        <a href="#">Videos</a>
+    </nav>
 </div>
-
+</header>
+<section class="hero">
+<h1>Airbus <span>A350-1000</span></h1>
+<p>The long-range giant of the A350 family</p>
+<div class="subtitle">
+    A next-generation wide-body aircraft built for long-haul efficiency
+</div>
+<div class="badge">
+    ✈️ Rolls-Royce Trent XWB-97 Powered
+</div>
+</section>
+<div class="aircraft-image">
+<img src="a350.jpg" alt="Airbus A350-1000">
+</div>
+<main class="container">
+<h2 class="section-title">
+    A350-1000 <span>Specifications</span>
+</h2>
+<div class="specs">
+    <div class="spec">
+        <strong>Manufacturer</strong>
+        <p>Airbus</p>
+    </div>
+    <div class="spec">
+        <strong>First Flight</strong>
+        <p>24 November 2016</p>
+    </div>
+    <div class="spec">
+        <strong>Length</strong>
+        <p>73.78 m</p>
+    </div>
+    <div class="spec">
+        <strong>Wingspan</strong>
+        <p>64.75 m</p>
+    </div>
+    <div class="spec">
+        <strong>Height</strong>
+        <p>17.08 m</p>
+    </div>
+    <div class="spec">
+        <strong>Cruise Speed</strong>
+        <p>Mach 0.85</p>
+    </div>
+    <div class="spec">
+        <strong>Maximum Range</strong>
+        <p>16,700 km</p>
+    </div>
+    <div class="spec">
+        <strong>Maximum Takeoff Weight</strong>
+        <p>322 tonnes</p>
+    </div>
+    <div class="spec">
+        <strong>Typical 3-Class Capacity</strong>
+        <p>350–410 passengers</p>
+    </div>
+    <div class="spec">
+        <strong>Maximum Seating</strong>
+        <p>480 passengers</p>
+    </div>
+    <div class="spec">
+        <strong>Engines</strong>
+        <p>2 × Trent XWB-97</p>
+    </div>
+    <div class="spec">
+        <strong>Aircraft Type</strong>
+        <p>Wide-body twin-engine jet</p>
+    </div>
+</div>
+<section class="highlight">
+    <h2>🔥 Rolls-Royce Trent XWB-97</h2>
+    <p>
+        The A350-1000 is powered exclusively by two Rolls-Royce
+        Trent XWB-97 engines. Each engine produces up to approximately
+        97,000 lbf of takeoff thrust, giving the aircraft a combined
+        thrust of roughly 194,000 lbf.
+    </p>
+</section>
+<section class="about">
+    <h2>About the Airbus A350-1000</h2>
+    <p>
+        The A350-1000 is the largest member of the Airbus A350 family.
+        With a fuselage nearly 74 metres long, it was designed to provide
+        additional passenger capacity while retaining the efficiency and
+        long-range capability of the A350 family.
+    </p>
+    <p>
+        The first A350-1000 completed its maiden flight on
+        24 November 2016 in Toulouse, France. The aircraft received
+        EASA and FAA type certification in 2017 and entered airline
+        service with Qatar Airways in 2018.
+    </p>
+    <p>
+        The aircraft uses an advanced airframe made with a high proportion
+        of composite and other advanced materials. More than 70% of the
+        airframe consists of advanced materials, including approximately
+        53% composites.
+    </p>
+    <p>
+        The A350-1000 combines a 64.75-metre wingspan with advanced
+        aerodynamics and a new-generation propulsion system to deliver
+        efficient long-haul performance.
+    </p>
+</section>
+<section class="about">
+    <h2>Trent XWB-97 Engine</h2>
+    <div class="engine-box">
+        <div class="engine-card">
+            <h3>Rolls-Royce Trent XWB-97</h3>
+            <p>
+                Developed specifically for the A350-1000, the Trent XWB-97
+                is the higher-thrust member of the Trent XWB family.
+                It produces up to 97,000 lbf of takeoff thrust.
+            </p>
+        </div>
+        <div class="engine-card">
+            <h3>Total Engine Thrust</h3>
+            <p>
+                With two Trent XWB-97 engines, the A350-1000 can produce
+                approximately 194,000 lbf of combined takeoff thrust.
+            </p>
+        </div>
+    </div>
+</section>
+<a href="aircraft.html" class="back">
+    ← Back to Aircraft
+</a>
+</main>
+<footer>
+    © 2026 Flight Senses — Aviation Beyond the Horizon ✈️
+</footer>
 </body>
 </html>
