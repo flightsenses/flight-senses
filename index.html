@@ -3,168 +3,548 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Flight Senses</title>
-
-    <style>
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background: #07111f;
-            color: white;
+<title>Flight Senses | Aviation</title>
+<style>
+    * {
+        box-sizing: border-box;
+    }
+    html {
+        scroll-behavior: smooth;
+    }
+    body {
+        margin: 0;
+        font-family: Arial, Helvetica, sans-serif;
+        background: #050b14;
+        color: white;
+    }
+    /* =========================
+       HEADER
+    ========================= */
+    header {
+        background:
+            radial-gradient(circle at top right, #12375d, transparent 45%),
+            linear-gradient(135deg, #07182b, #030a12);
+        padding: 24px 20px;
+        border-bottom: 1px solid #1e90ff;
+    }
+    .header-inner {
+        max-width: 1200px;
+        margin: auto;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 20px;
+    }
+    .brand {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+    }
+    .brand-icon {
+        width: 55px;
+        height: 55px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #1e90ff;
+        border-radius: 15px;
+        font-size: 30px;
+        box-shadow:
+            0 0 25px rgba(30, 144, 255, 0.35);
+    }
+    .brand h1 {
+        margin: 0;
+        font-size: 29px;
+        letter-spacing: 2px;
+    }
+    .brand p {
+        margin: 4px 0 0;
+        color: #75bfff;
+        font-size: 11px;
+        letter-spacing: 3px;
+    }
+    /* =========================
+       NAVBAR
+    ========================= */
+    nav {
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        background: rgba(3, 10, 18, 0.94);
+        backdrop-filter: blur(12px);
+        border-bottom: 1px solid #173552;
+    }
+    .nav-container {
+        max-width: 1200px;
+        margin: auto;
+        display: flex;
+        justify-content: center;
+        gap: 7px;
+        padding: 11px 20px;
+    }
+    nav a {
+        color: #dcecff;
+        text-decoration: none;
+        font-weight: bold;
+        font-size: 15px;
+        padding: 11px 17px;
+        border-radius: 9px;
+        transition: 0.25s;
+    }
+    nav a:hover {
+        color: #4da6ff;
+        background: #0d263f;
+        transform: translateY(-2px);
+    }
+    nav a.active {
+        background: #1e90ff;
+        color: white;
+        box-shadow:
+            0 5px 20px rgba(30, 144, 255, 0.25);
+    }
+    /* =========================
+       HERO
+    ========================= */
+    .hero {
+        min-height: 590px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        padding: 90px 20px;
+        position: relative;
+        overflow: hidden;
+        background:
+            linear-gradient(
+                rgba(3, 10, 18, 0.38),
+                rgba(3, 10, 18, 0.92)
+            ),
+            url("747.jpg");
+        background-size: cover;
+        background-position: center;
+    }
+    .hero-content {
+        max-width: 850px;
+        position: relative;
+        z-index: 2;
+    }
+    .hero-badge {
+        display: inline-block;
+        padding: 8px 15px;
+        border: 1px solid #318bd4;
+        border-radius: 30px;
+        background: rgba(8, 27, 47, 0.75);
+        color: #8dccff;
+        font-size: 13px;
+        font-weight: bold;
+        letter-spacing: 1px;
+        margin-bottom: 22px;
+    }
+    .hero h2 {
+        margin: 0;
+        font-size: 64px;
+        line-height: 1.05;
+        letter-spacing: -1px;
+        text-shadow:
+            0 5px 25px black;
+    }
+    .hero h2 span {
+        color: #4da6ff;
+    }
+    .hero p {
+        max-width: 700px;
+        margin: 25px auto 0;
+        color: #d7e9fb;
+        font-size: 20px;
+        line-height: 1.7;
+    }
+    .hero-buttons {
+        margin-top: 35px;
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+        flex-wrap: wrap;
+    }
+    .button {
+        display: inline-block;
+        padding: 15px 28px;
+        background: #1e90ff;
+        color: white;
+        text-decoration: none;
+        border-radius: 9px;
+        font-weight: bold;
+        transition: 0.3s;
+        box-shadow:
+            0 8px 25px rgba(30, 144, 255, 0.22);
+    }
+    .button:hover {
+        background: #1681e8;
+        transform: translateY(-3px);
+    }
+    .button.secondary {
+        background: rgba(7, 20, 34, 0.75);
+        border: 1px solid #477ca8;
+        box-shadow: none;
+    }
+    .button.secondary:hover {
+        background: #102d49;
+    }
+    /* =========================
+       SECTION
+    ========================= */
+    .section {
+        padding: 85px 20px;
+        text-align: center;
+    }
+    .section-title {
+        max-width: 700px;
+        margin: 0 auto 50px;
+    }
+    .section-title h2 {
+        margin: 0 0 12px;
+        font-size: 36px;
+    }
+    .section-title p {
+        margin: 0;
+        color: #8fa9c2;
+        font-size: 16px;
+    }
+    /* =========================
+       CARDS
+    ========================= */
+    .cards {
+        max-width: 1100px;
+        margin: auto;
+        display: grid;
+        grid-template-columns:
+            repeat(4, 1fr);
+        gap: 20px;
+    }
+    .card {
+        position: relative;
+        overflow: hidden;
+        min-height: 205px;
+        padding: 30px 24px;
+        text-align: left;
+        text-decoration: none;
+        color: white;
+        background:
+            linear-gradient(
+                145deg,
+                #0d2036,
+                #071421
+            );
+        border: 1px solid #1b4468;
+        border-radius: 16px;
+        transition: 0.3s;
+    }
+    .card::before {
+        content: "";
+        position: absolute;
+        width: 100px;
+        height: 100px;
+        right: -35px;
+        top: -35px;
+        background: #1e90ff;
+        opacity: 0.08;
+        border-radius: 50%;
+    }
+    .card:hover {
+        transform: translateY(-8px);
+        border-color: #1e90ff;
+        box-shadow:
+            0 15px 35px rgba(0, 0, 0, 0.35);
+    }
+    .card-icon {
+        font-size: 34px;
+        margin-bottom: 18px;
+    }
+    .card h3 {
+        margin: 0 0 10px;
+        color: #62b3ff;
+        font-size: 21px;
+    }
+    .card p {
+        margin: 0;
+        color: #a9bfd4;
+        line-height: 1.55;
+        font-size: 14px;
+    }
+    .card-arrow {
+        position: absolute;
+        right: 20px;
+        bottom: 18px;
+        color: #4da6ff;
+        font-size: 20px;
+    }
+    /* =========================
+       FEATURE STRIP
+    ========================= */
+    .feature-section {
+        padding: 20px 20px 85px;
+    }
+    .feature-box {
+        max-width: 1100px;
+        margin: auto;
+        padding: 35px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 30px;
+        background:
+            linear-gradient(
+                135deg,
+                #0b233b,
+                #071421
+            );
+        border: 1px solid #1c496e;
+        border-radius: 18px;
+    }
+    .feature-box h3 {
+        margin: 0 0 8px;
+        font-size: 24px;
+    }
+    .feature-box p {
+        margin: 0;
+        color: #9fb7cc;
+        line-height: 1.5;
+    }
+    /* =========================
+       FOOTER
+    ========================= */
+    footer {
+        background: #02070d;
+        border-top: 1px solid #163451;
+        text-align: center;
+        padding: 35px 20px;
+    }
+    footer strong {
+        color: #4da6ff;
+    }
+    footer p {
+        margin: 8px 0 0;
+        color: #70869b;
+        font-size: 13px;
+    }
+    /* =========================
+       MOBILE
+    ========================= */
+    @media (max-width: 850px) {
+        .cards {
+            grid-template-columns:
+                repeat(2, 1fr);
         }
-
-        header {
-            background: #0b1d33;
-            padding: 25px;
-            text-align: center;
-            border-bottom: 2px solid #1e90ff;
-        }
-
-        header h1 {
-            margin: 0;
-            font-size: 42px;
-        }
-
-        header p {
-            color: #9ecbff;
-            font-size: 18px;
-        }
-
-        nav {
-            background: #06101c;
-            padding: 15px;
-            text-align: center;
-        }
-
-        nav a {
-            color: white;
-            text-decoration: none;
-            margin: 0 15px;
-            font-weight: bold;
-        }
-
-        nav a:hover {
-            color: #1e90ff;
-        }
-
-        .hero {
-            text-align: center;
-            padding: 100px 20px;
-            background: linear-gradient(135deg, #07111f, #12345a);
-        }
-
         .hero h2 {
             font-size: 48px;
-            margin-bottom: 15px;
         }
-
-        .hero p {
-            font-size: 20px;
-            color: #c9dfff;
+        .feature-box {
+            flex-direction: column;
+            align-items: flex-start;
         }
-
-        .button {
-            display: inline-block;
-            margin-top: 25px;
-            padding: 14px 28px;
-            background: #1e90ff;
-            color: white;
-            text-decoration: none;
-            border-radius: 8px;
-            font-weight: bold;
-        }
-
-        .button:hover {
-            background: #006dcc;
-        }
-
-        .section {
-            padding: 50px 20px;
-            text-align: center;
-        }
-
-        .cards {
-            display: flex;
+    }
+    @media (max-width: 600px) {
+        .header-inner {
             justify-content: center;
-            gap: 20px;
-            flex-wrap: wrap;
         }
-
-        .card {
-            background: #0d2036;
-            padding: 25px;
-            width: 220px;
-            border-radius: 12px;
-            border: 1px solid #1c4d78;
+        .brand h1 {
+            font-size: 22px;
         }
-
-        .card h3 {
-            color: #4da6ff;
+        .brand p {
+            font-size: 8px;
+            letter-spacing: 2px;
         }
-
-        footer {
-            text-align: center;
-            padding: 25px;
-            background: #06101c;
-            color: #8da8c2;
+        .brand-icon {
+            width: 46px;
+            height: 46px;
+            font-size: 24px;
         }
-    </style>
+        .nav-container {
+            overflow-x: auto;
+            justify-content: flex-start;
+        }
+        nav a {
+            white-space: nowrap;
+            padding: 10px 13px;
+            font-size: 13px;
+        }
+        .hero {
+            min-height: 540px;
+        }
+        .hero h2 {
+            font-size: 39px;
+        }
+        .hero p {
+            font-size: 17px;
+        }
+        .cards {
+            grid-template-columns: 1fr;
+        }
+        .section {
+            padding: 65px 20px;
+        }
+        .section-title h2 {
+            font-size: 30px;
+        }
+    }
+</style>
 </head>
-
 <body>
-
+<!-- =========================
+     HEADER
+========================= -->
 <header>
-    <h1>✈️ Flight Senses</h1>
-    <p>My aviation world!</p>
-</header>
-
-<nav>
-    <a href="#">Home</a>
-    <a href="aircraft.html">Aircraft</a>
-    <a href="airlines.html">Airlines</a>
-    <a href="#">Top 10</a>
-    <a href="#">Videos</a>
-</nav>
-
-<section class="hero">
-    <h2>Welcome to Flight Senses</h2>
-    <p>Discover the world of aviation.</p>
-
-    <a href="#" class="button">Explore Aviation</a>
-</section>
-
-<section class="section">
-    <h2>✈️ Explore Flight Senses</h2>
-
-    <div class="cards">
-
-        <div class="card">
-            <h3>🛫 Aircraft</h3>
-            <p>Discover the world's most impressive aircraft.</p>
+<div class="header-inner">
+    <div class="brand">
+        <div class="brand-icon">
+            ✈
         </div>
-
-        <div class="card">
-            <h3>🌎 Airlines</h3>
-            <p>Explore airlines and their fleets.</p>
+        <div>
+            <h1>FLIGHT SENSES</h1>
+            <p>THE WORLD OF AVIATION</p>
         </div>
-
-        <div class="card">
-            <h3>🔥 Top 10</h3>
-            <p>Powerful, largest and most interesting aircraft rankings.</p>
-        </div>
-
-        <div class="card">
-            <h3>🎥 Videos</h3>
-            <p>Watch Flight Senses aviation content.</p>
-        </div>
-
     </div>
+</div>
+</header>
+<!-- =========================
+     NAVIGATION
+========================= -->
+<nav>
+<div class="nav-container">
+    <a href="index.html" class="active">
+        🏠 Home
+    </a>
+    <a href="aircraft.html">
+        ✈️ Aircraft
+    </a>
+    <a href="airlines.html">
+        🌎 Airlines
+    </a>
+    <a href="#">
+        🔥 Top 10
+    </a>
+    <a href="#">
+        🎥 Videos
+    </a>
+</div>
+</nav>
+<!-- =========================
+     HERO
+========================= -->
+<section class="hero">
+<div class="hero-content">
+    <div class="hero-badge">
+        ✈ AVIATION • AIRCRAFT • AIRLINES
+    </div>
+    <h2>
+        Discover the world of
+        <span>aviation.</span>
+    </h2>
+    <p>
+        Explore aircraft, airlines, aviation facts,
+        powerful engines and the fascinating world of flight.
+    </p>
+    <div class="hero-buttons">
+        <a href="aircraft.html" class="button">
+            Explore Aircraft ✈️
+        </a>
+        <a href="airlines.html" class="button secondary">
+            Explore Airlines 🌎
+        </a>
+    </div>
+</div>
 </section>
-
+<!-- =========================
+     EXPLORE
+========================= -->
+<section class="section">
+<div class="section-title">
+    <h2>✈️ Explore Flight Senses</h2>
+    <p>
+        Everything you need to discover the fascinating
+        world of aviation.
+    </p>
+</div>
+<div class="cards">
+    <a href="aircraft.html" class="card">
+        <div class="card-icon">
+            🛫
+        </div>
+        <h3>Aircraft</h3>
+        <p>
+            Discover passenger, cargo,
+            military and experimental aircraft.
+        </p>
+        <div class="card-arrow">
+            →
+        </div>
+    </a>
+    <a href="airlines.html" class="card">
+        <div class="card-icon">
+            🌎
+        </div>
+        <h3>Airlines</h3>
+        <p>
+            Explore airlines and discover
+            their fleets and aircraft.
+        </p>
+        <div class="card-arrow">
+            →
+        </div>
+    </a>
+    <a href="#" class="card">
+        <div class="card-icon">
+            🔥
+        </div>
+        <h3>Top 10</h3>
+        <p>
+            Discover interesting aviation
+            lists, facts and comparisons.
+        </p>
+        <div class="card-arrow">
+            →
+        </div>
+    </a>
+    <a href="#" class="card">
+        <div class="card-icon">
+            🎥
+        </div>
+        <h3>Videos</h3>
+        <p>
+            Watch aviation content and
+            Flight Senses videos.
+        </p>
+        <div class="card-arrow">
+            →
+        </div>
+    </a>
+</div>
+</section>
+<!-- =========================
+     FEATURE
+========================= -->
+<section class="feature-section">
+<div class="feature-box">
+    <div>
+        <h3>🌍 Your aviation journey starts here.</h3>
+        <p>
+            From iconic aircraft to the world's biggest airlines,
+            Flight Senses brings aviation closer to you.
+        </p>
+    </div>
+    <a href="aircraft.html" class="button">
+        Start Exploring →
+    </a>
+</div>
+</section>
+<!-- =========================
+     FOOTER
+========================= -->
 <footer>
+<strong>✈️ FLIGHT SENSES</strong>
+<p>
     © 2026 Flight Senses | Aviation • Aircraft • Airlines
+</p>
 </footer>
-
 </body>
 </html>
