@@ -1,158 +1,1530 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Airlines - Flight Senses</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <style>
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background: #061a33;
-            color: white;
-        }
+<title>Airlines | Flight Senses</title>
 
-        header {
-            text-align: center;
-            padding: 40px 20px;
-            background: #08264a;
-        }
+<style>
 
-        header h1 {
-            font-size: 42px;
-            margin-bottom: 10px;
-        }
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
 
-        header p {
-            color: #9fc9ff;
-            font-size: 18px;
-        }
+html{
+    scroll-behavior:smooth;
+}
 
-        .container {
-            max-width: 1100px;
-            margin: 40px auto;
-            padding: 20px;
-        }
+body{
+    font-family:Arial, Helvetica, sans-serif;
+    background:#050b14;
+    color:white;
+}
 
-        .airlines {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 25px;
-        }
+/* HEADER */
 
-        .airline {
-            background: #0b2d52;
-            padding: 20px;
-            border-radius: 15px;
-            text-align: center;
-            transition: transform 0.2s;
-        }
+header{
+    background:
+        radial-gradient(circle at top right,#12375d,transparent 45%),
+        linear-gradient(135deg,#07182b,#030a12);
+    padding:24px 20px;
+    border-bottom:1px solid #1e90ff;
+}
 
-        .airline:hover {
-            transform: translateY(-5px);
-        }
+.header-inner{
+    max-width:1200px;
+    margin:auto;
+    display:flex;
+    align-items:center;
+}
 
-        .airline h3 {
-            font-size: 22px;
-        }
+.brand{
+    display:flex;
+    align-items:center;
+    gap:15px;
+}
 
-        .airline p {
-            color: #b8d7f5;
-        }
+.brand-icon{
+    width:55px;
+    height:55px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:#1e90ff;
+    border-radius:15px;
+    font-size:30px;
+    box-shadow:0 0 25px rgba(30,144,255,.35);
+}
 
-        .back {
-            display: inline-block;
-            margin-top: 35px;
-            padding: 12px 20px;
-            background: #0077ff;
-            color: white;
-            text-decoration: none;
-            border-radius: 8px;
-        }
-    </style>
+.brand h1{
+    font-size:29px;
+    letter-spacing:2px;
+}
+
+.brand p{
+    margin-top:4px;
+    color:#75bfff;
+    font-size:11px;
+    letter-spacing:3px;
+}
+
+/* NAVBAR */
+
+nav{
+    position:sticky;
+    top:0;
+    z-index:100;
+    background:rgba(3,10,18,.94);
+    backdrop-filter:blur(12px);
+    border-bottom:1px solid #173552;
+}
+
+.nav-container{
+    max-width:1200px;
+    margin:auto;
+    display:flex;
+    justify-content:center;
+    gap:7px;
+    padding:11px 20px;
+}
+
+nav a{
+    color:#dcecff;
+    text-decoration:none;
+    font-weight:bold;
+    font-size:15px;
+    padding:11px 17px;
+    border-radius:9px;
+    transition:.25s;
+}
+
+nav a:hover{
+    color:#4da6ff;
+    background:#0d263f;
+    transform:translateY(-2px);
+}
+
+nav a.active{
+    background:#1e90ff;
+    color:white;
+    box-shadow:0 5px 20px rgba(30,144,255,.25);
+}
+
+/* HERO */
+
+.page-hero{
+    position:relative;
+    overflow:hidden;
+    padding:90px 20px 65px;
+    text-align:center;
+    background:
+        radial-gradient(circle at center,#12365a 0%,#071421 45%,#050b14 100%);
+}
+
+.page-hero::before{
+    content:"";
+    position:absolute;
+    width:500px;
+    height:500px;
+    border:1px solid rgba(30,144,255,.12);
+    border-radius:50%;
+    top:-250px;
+    left:50%;
+    transform:translateX(-50%);
+}
+
+.page-hero::after{
+    content:"";
+    position:absolute;
+    width:700px;
+    height:1px;
+    background:linear-gradient(
+        90deg,
+        transparent,
+        rgba(30,144,255,.25),
+        transparent
+    );
+    bottom:25px;
+    left:50%;
+    transform:translateX(-50%);
+}
+
+.badge{
+    position:relative;
+    z-index:2;
+    display:inline-block;
+    padding:8px 15px;
+    border:1px solid #318bd4;
+    border-radius:30px;
+    background:rgba(8,27,47,.75);
+    color:#8dccff;
+    font-size:12px;
+    font-weight:bold;
+    letter-spacing:1px;
+    margin-bottom:18px;
+}
+
+.page-hero h2{
+    position:relative;
+    z-index:2;
+    font-size:52px;
+    letter-spacing:-1px;
+}
+
+.page-hero h2 span{
+    color:#4da6ff;
+}
+
+.page-hero p{
+    position:relative;
+    z-index:2;
+    max-width:700px;
+    margin:18px auto 0;
+    color:#9fb7cc;
+    font-size:17px;
+    line-height:1.7;
+}
+
+/* STATS */
+
+.stats{
+    max-width:1000px;
+    margin:-25px auto 50px;
+    position:relative;
+    z-index:5;
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:1px;
+    background:#1b4468;
+    border:1px solid #1b4468;
+    border-radius:16px;
+    overflow:hidden;
+}
+
+.stat{
+    padding:25px 15px;
+    text-align:center;
+    background:#081421;
+}
+
+.stat strong{
+    display:block;
+    color:#4da6ff;
+    font-size:27px;
+    margin-bottom:6px;
+}
+
+.stat span{
+    color:#7f9bb2;
+    font-size:12px;
+    text-transform:uppercase;
+    letter-spacing:1px;
+}
+
+/* MAIN */
+
+.container{
+    max-width:1150px;
+    margin:auto;
+    padding:0 20px 90px;
+}
+
+.section-title{
+    text-align:center;
+    margin-bottom:30px;
+}
+
+.section-title h2{
+    font-size:34px;
+    margin-bottom:10px;
+}
+
+.section-title h2 span{
+    color:#4da6ff;
+}
+
+.section-title p{
+    color:#8199ae;
+    font-size:15px;
+}
+
+/* SEARCH */
+
+.search-area{
+    max-width:760px;
+    margin:0 auto 30px;
+}
+
+.search-box{
+    width:100%;
+    padding:17px 20px;
+    border-radius:12px;
+    border:1px solid #27567d;
+    outline:none;
+    background:#0a1929;
+    color:white;
+    font-size:16px;
+    transition:.25s;
+}
+
+.search-box::placeholder{
+    color:#718ba2;
+}
+
+.search-box:focus{
+    border-color:#1e90ff;
+    box-shadow:0 0 25px rgba(30,144,255,.14);
+}
+
+/* FILTERS */
+
+.filters{
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:10px;
+    margin-bottom:45px;
+}
+
+.filter{
+    padding:9px 18px;
+    border-radius:30px;
+    border:1px solid #254c6c;
+    background:#0a1929;
+    color:#a9bfd4;
+    cursor:pointer;
+    font-size:13px;
+    font-weight:bold;
+    transition:.25s;
+}
+
+.filter:hover,
+.filter.active{
+    background:#1e90ff;
+    color:white;
+    border-color:#1e90ff;
+}
+
+/* AIRLINES GRID */
+
+.airlines{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:25px;
+}
+
+.airline{
+    overflow:hidden;
+    background:
+        linear-gradient(145deg,#0d2036,#071421);
+    border:1px solid #1b4468;
+    border-radius:16px;
+    transition:.3s;
+    box-shadow:0 8px 25px rgba(0,0,0,.15);
+}
+
+.airline:hover{
+    transform:translateY(-8px);
+    border-color:#1e90ff;
+    box-shadow:0 18px 40px rgba(0,0,0,.35);
+}
+
+.airline-image-wrap{
+    position:relative;
+    height:190px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    overflow:hidden;
+    background:
+        radial-gradient(circle,#12375d,#071421 70%);
+}
+
+.airline-image{
+    width:82%;
+    height:150px;
+    object-fit:contain;
+    transition:.4s;
+}
+
+.airline:hover .airline-image{
+    transform:scale(1.06);
+}
+
+.airline-tag{
+    position:absolute;
+    top:13px;
+    left:13px;
+    padding:6px 10px;
+    border-radius:20px;
+    background:rgba(3,10,18,.82);
+    border:1px solid rgba(77,166,255,.5);
+    color:#9bd2ff;
+    font-size:10px;
+    font-weight:bold;
+}
+
+.airline-content{
+    padding:23px;
+    text-align:center;
+}
+
+.airline h3{
+    color:#62b3ff;
+    font-size:22px;
+    margin-bottom:10px;
+}
+
+.airline p{
+    color:#a9bfd4;
+    line-height:1.55;
+    min-height:48px;
+}
+
+.details-button{
+    display:inline-block;
+    margin-top:20px;
+    padding:10px 18px;
+    background:#1e90ff;
+    color:white;
+    text-decoration:none;
+    border-radius:8px;
+    font-weight:bold;
+    font-size:14px;
+    transition:.25s;
+}
+
+.details-button:hover{
+    background:#1681e8;
+    transform:translateX(3px);
+}
+
+/* FEATURED AIRLINE */
+
+.featured{
+    margin-top:80px;
+    padding:0;
+    overflow:hidden;
+    display:grid;
+    grid-template-columns:1.1fr 1fr;
+    background:
+        linear-gradient(135deg,#0b2948,#071421);
+    border:1px solid rgba(30,144,255,.35);
+    border-radius:22px;
+    box-shadow:0 20px 50px rgba(0,0,0,.3);
+}
+
+.featured-image{
+    min-height:350px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:
+        radial-gradient(circle at center,#17466e,#071421 75%);
+}
+
+.featured-image img{
+    width:80%;
+    max-height:230px;
+    object-fit:contain;
+    transition:.5s;
+}
+
+.featured:hover .featured-image img{
+    transform:scale(1.05);
+}
+
+.featured-content{
+    padding:45px;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+}
+
+.featured-label{
+    color:#4da6ff;
+    font-size:12px;
+    font-weight:bold;
+    letter-spacing:2px;
+    margin-bottom:12px;
+}
+
+.featured-content h2{
+    font-size:36px;
+    margin-bottom:15px;
+}
+
+.featured-content p{
+    color:#a9bfd4;
+    line-height:1.7;
+    margin-bottom:25px;
+}
+
+.featured-facts{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:10px;
+    margin-bottom:25px;
+}
+
+.fact{
+    padding:13px;
+    background:rgba(3,10,18,.45);
+    border:1px solid #204666;
+    border-radius:10px;
+}
+
+.fact small{
+    display:block;
+    color:#6f8ba3;
+    font-size:10px;
+    text-transform:uppercase;
+    margin-bottom:4px;
+}
+
+.fact strong{
+    color:#dcecff;
+    font-size:14px;
+}
+
+/* CATEGORIES */
+
+.categories{
+    margin-top:80px;
+}
+
+.category-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:18px;
+}
+
+.category{
+    position:relative;
+    overflow:hidden;
+    padding:28px 20px;
+    min-height:150px;
+    display:flex;
+    flex-direction:column;
+    justify-content:flex-end;
+    border-radius:16px;
+    border:1px solid #1b4468;
+    background:
+        linear-gradient(145deg,#0d2036,#071421);
+    transition:.3s;
+}
+
+.category:hover{
+    transform:translateY(-6px);
+    border-color:#1e90ff;
+    box-shadow:0 15px 35px rgba(0,0,0,.3);
+}
+
+.category-icon{
+    position:absolute;
+    top:18px;
+    right:20px;
+    font-size:32px;
+    opacity:.7;
+}
+
+.category h3{
+    color:#dcecff;
+    margin-bottom:6px;
+}
+
+.category p{
+    color:#708ba2;
+    font-size:13px;
+    line-height:1.45;
+}
+
+/* GLOBAL */
+
+.global-section{
+    margin-top:80px;
+    padding:45px 30px;
+    border-radius:20px;
+    text-align:center;
+    background:
+        linear-gradient(135deg,#081c31,#06111d);
+    border:1px solid #1b4468;
+}
+
+.global-section h2{
+    font-size:30px;
+    margin-bottom:12px;
+}
+
+.global-section h2 span{
+    color:#4da6ff;
+}
+
+.global-section > p{
+    max-width:650px;
+    margin:0 auto 30px;
+    color:#879eb3;
+    line-height:1.6;
+}
+
+.global-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:18px;
+}
+
+.global-card{
+    padding:25px 18px;
+    background:#0a1929;
+    border:1px solid #1d405d;
+    border-radius:14px;
+    transition:.3s;
+}
+
+.global-card:hover{
+    border-color:#1e90ff;
+    transform:translateY(-4px);
+}
+
+.global-card-icon{
+    font-size:32px;
+    margin-bottom:10px;
+}
+
+.global-card h3{
+    color:#62b3ff;
+    margin-bottom:7px;
+}
+
+.global-card p{
+    color:#748ca2;
+    font-size:13px;
+    line-height:1.5;
+}
+
+/* COMPARE */
+
+.compare-feature{
+    margin-top:80px;
+    padding:45px 30px;
+    border-radius:20px;
+    background:
+        linear-gradient(135deg,#0a2848,#071522);
+    border:1px solid rgba(30,144,255,.35);
+    text-align:center;
+    box-shadow:0 15px 40px rgba(0,0,0,.25);
+}
+
+.compare-icon{
+    font-size:35px;
+    margin-bottom:10px;
+}
+
+.compare-feature h2{
+    font-size:30px;
+    margin-bottom:10px;
+}
+
+.compare-feature p{
+    color:#a9bfd4;
+    margin:0 auto 22px;
+    max-width:650px;
+    line-height:1.6;
+}
+
+.compare-button{
+    display:inline-block;
+    padding:13px 25px;
+    background:#1e90ff;
+    color:white;
+    text-decoration:none;
+    border-radius:9px;
+    font-weight:bold;
+    transition:.25s;
+}
+
+.compare-button:hover{
+    background:#1681e8;
+    transform:translateY(-3px);
+    box-shadow:0 10px 25px rgba(30,144,255,.2);
+}
+
+/* BACK */
+
+.back{
+    display:block;
+    width:fit-content;
+    margin:55px auto 0;
+    padding:13px 25px;
+    background:#0d263f;
+    border:1px solid #315c7e;
+    color:#dcecff;
+    text-decoration:none;
+    border-radius:9px;
+    font-weight:bold;
+    transition:.25s;
+}
+
+.back:hover{
+    background:#1e90ff;
+    border-color:#1e90ff;
+}
+
+/* FOOTER */
+
+footer{
+    background:#02070d;
+    border-top:1px solid #163451;
+    text-align:center;
+    padding:35px 20px;
+}
+
+footer strong{
+    color:#4da6ff;
+}
+
+footer p{
+    margin-top:8px;
+    color:#70869b;
+    font-size:13px;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:950px){
+
+    .airlines{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .category-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .featured{
+        grid-template-columns:1fr;
+    }
+
+    .featured-image{
+        min-height:280px;
+    }
+
+}
+
+@media(max-width:650px){
+
+    .brand h1{
+        font-size:22px;
+    }
+
+    .brand p{
+        font-size:8px;
+        letter-spacing:2px;
+    }
+
+    .brand-icon{
+        width:46px;
+        height:46px;
+        font-size:24px;
+    }
+
+    .nav-container{
+        overflow-x:auto;
+        justify-content:flex-start;
+    }
+
+    nav a{
+        white-space:nowrap;
+        padding:10px 13px;
+        font-size:13px;
+    }
+
+    .page-hero{
+        padding:65px 20px 50px;
+    }
+
+    .page-hero h2{
+        font-size:39px;
+    }
+
+    .stats{
+        grid-template-columns:repeat(2,1fr);
+        margin:0 20px 50px;
+    }
+
+    .airlines{
+        grid-template-columns:1fr;
+    }
+
+    .category-grid{
+        grid-template-columns:1fr;
+    }
+
+    .global-grid{
+        grid-template-columns:1fr;
+    }
+
+    .featured-content{
+        padding:30px 22px;
+    }
+
+    .featured-content h2{
+        font-size:30px;
+    }
+
+}
+
+</style>
 </head>
 
 <body>
 
+
+<!-- HEADER -->
+
 <header>
-    <h1>Airlines</h1>
-    <p>Explore the world's major airlines 🌍✈️</p>
-</header>
 
-<div class="container">
+<div class="header-inner">
 
-    <div class="airlines">
+<div class="brand">
 
-        <div class="airline">
-            <img src="thy.webp" alt="Turkish Airlines"
-                 style="width:100%; height:140px; object-fit:contain; border-radius:10px;">
+<div class="brand-icon">
+✈️
+</div>
 
-            <h3>Turkish Airlines</h3>
-            <p>Türkiye's flag carrier.</p>
+<div>
 
-            <a href="turkish-airlines.html"
-               style="display:inline-block; margin-top:10px; padding:10px 18px; background:#0077ff; color:white; text-decoration:none; border-radius:8px;">
-               View Details
-            </a>
-        </div>
+<h1>FLIGHT SENSES</h1>
 
-        <div class="airline">
-            <img src="emirates.webp" alt="Emirates"
-                 style="width:100%; height:140px; object-fit:contain; border-radius:10px;">
-
-            <h3>Emirates</h3>
-            <p>One of the world's major international airlines.</p>
-
-            <a href="emirates.html"
-               style="display:inline-block; margin-top:10px; padding:10px 18px; background:#0077ff; color:white; text-decoration:none; border-radius:8px;">
-               View Details
-            </a>
-        </div>
-
-        <div class="airline">
-            <img src="qatar.webp" alt="Qatar Airways"
-                 style="width:100%; height:140px; object-fit:contain; border-radius:10px;">
-
-            <h3>Qatar Airways</h3>
-            <p>A major global airline based in Doha.</p>
-
-            <a href="qatar-airways.html"
-               style="display:inline-block; margin-top:10px; padding:10px 18px; background:#0077ff; color:white; text-decoration:none; border-radius:8px;">
-               View Details
-            </a>
-        </div>
-
-        <div class="airline">
-            <img src="lufthansa.webp" alt="Lufthansa"
-                 style="width:100%; height:140px; object-fit:contain; border-radius:10px;">
-
-            <h3>Lufthansa</h3>
-            <p>Germany's largest airline and flag carrier.</p>
-
-            <a href="lufthansa.html"
-               style="display:inline-block; margin-top:10px; padding:10px 18px; background:#0077ff; color:white; text-decoration:none; border-radius:8px;">
-               View Details
-            </a>
-        </div>
-
-        <div class="airline">
-            <img src="singapore.webp" alt="Singapore Airlines"
-                 style="width:100%; height:140px; object-fit:contain; border-radius:10px;">
-
-            <h3>Singapore Airlines</h3>
-            <p>Singapore's flag carrier and a major international airline.</p>
-
-            <a href="singapore-airlines.html"
-               style="display:inline-block; margin-top:10px; padding:10px 18px; background:#0077ff; color:white; text-decoration:none; border-radius:8px;">
-               View Details
-            </a>
-        </div>
-
-    </div>
-
-    <a href="index.html" class="back">← Back to Home</a>
+<p>
+THE WORLD OF AVIATION
+</p>
 
 </div>
+
+</div>
+
+</div>
+
+</header>
+
+
+<!-- NAVIGATION -->
+
+<nav>
+
+<div class="nav-container">
+
+<a href="index.html">
+🏠 Home
+</a>
+
+<a href="aircraft.html">
+✈️ Aircraft
+</a>
+
+<a href="airlines.html" class="active">
+🌎 Airlines
+</a>
+
+<a href="top10.html">
+🔥 Top 10
+</a>
+
+<a href="compare.html">
+⚔️ Compare
+</a>
+
+</div>
+
+</nav>
+
+
+<!-- HERO -->
+
+<section class="page-hero">
+
+<div class="badge">
+🌎 AIRLINE DATABASE
+</div>
+
+<h2>
+Explore <span>Airlines</span>
+</h2>
+
+<p>
+Discover major airlines from around the world,
+their fleets, networks, history and place in global aviation.
+</p>
+
+</section>
+
+
+<!-- STATS -->
+
+<div class="stats">
+
+<div class="stat">
+<strong>5+</strong>
+<span>Airlines</span>
+</div>
+
+<div class="stat">
+<strong>3</strong>
+<span>Continents</span>
+</div>
+
+<div class="stat">
+<strong>∞</strong>
+<span>Destinations</span>
+</div>
+
+<div class="stat">
+<strong>1</strong>
+<span>World</span>
+</div>
+
+</div>
+
+
+<!-- MAIN -->
+
+<main class="container">
+
+
+<!-- SEARCH -->
+
+<div class="search-area">
+
+<input
+type="text"
+id="search"
+class="search-box"
+placeholder="🔎 Search airlines..."
+>
+
+</div>
+
+
+<!-- FILTERS -->
+
+<div class="filters">
+
+<button class="filter active" data-filter="all">
+All
+</button>
+
+<button class="filter" data-filter="europe">
+Europe
+</button>
+
+<button class="filter" data-filter="middle-east">
+Middle East
+</button>
+
+<button class="filter" data-filter="asia">
+Asia
+</button>
+
+</div>
+
+
+<!-- TITLE -->
+
+<div class="section-title">
+
+<h2>
+Airline <span>Collection</span>
+</h2>
+
+<p>
+Explore some of the world's most recognizable airlines.
+</p>
+
+</div>
+
+
+<!-- AIRLINES -->
+
+<div class="airlines">
+
+
+<!-- TURKISH AIRLINES -->
+
+<div class="airline" data-region="europe">
+
+<div class="airline-image-wrap">
+
+<img
+src="thy.webp"
+alt="Turkish Airlines"
+class="airline-image"
+>
+
+<div class="airline-tag">
+EUROPE
+</div>
+
+</div>
+
+<div class="airline-content">
+
+<h3>
+Turkish Airlines
+</h3>
+
+<p>
+Türkiye's flag carrier and one of the world's most internationally connected airlines.
+</p>
+
+<a
+href="turkish-airlines.html"
+class="details-button"
+>
+View Details →
+</a>
+
+</div>
+
+</div>
+
+
+<!-- EMIRATES -->
+
+<div class="airline" data-region="middle-east">
+
+<div class="airline-image-wrap">
+
+<img
+src="emirates.webp"
+alt="Emirates"
+class="airline-image"
+>
+
+<div class="airline-tag">
+MIDDLE EAST
+</div>
+
+</div>
+
+<div class="airline-content">
+
+<h3>
+Emirates
+</h3>
+
+<p>
+A major international airline based in Dubai and known for its long-haul network.
+</p>
+
+<a
+href="emirates.html"
+class="details-button"
+>
+View Details →
+</a>
+
+</div>
+
+</div>
+
+
+<!-- QATAR AIRWAYS -->
+
+<div class="airline" data-region="middle-east">
+
+<div class="airline-image-wrap">
+
+<img
+src="qatar.webp"
+alt="Qatar Airways"
+class="airline-image"
+>
+
+<div class="airline-tag">
+MIDDLE EAST
+</div>
+
+</div>
+
+<div class="airline-content">
+
+<h3>
+Qatar Airways
+</h3>
+
+<p>
+A major global airline headquartered in Doha and serving destinations across the world.
+</p>
+
+<a
+href="qatar-airways.html"
+class="details-button"
+>
+View Details →
+</a>
+
+</div>
+
+</div>
+
+
+<!-- LUFTHANSA -->
+
+<div class="airline" data-region="europe">
+
+<div class="airline-image-wrap">
+
+<img
+src="lufthansa.webp"
+alt="Lufthansa"
+class="airline-image"
+>
+
+<div class="airline-tag">
+EUROPE
+</div>
+
+</div>
+
+<div class="airline-content">
+
+<h3>
+Lufthansa
+</h3>
+
+<p>
+Germany's flag carrier and one of Europe's major airline groups.
+</p>
+
+<a
+href="lufthansa.html"
+class="details-button"
+>
+View Details →
+</a>
+
+</div>
+
+</div>
+
+
+<!-- SINGAPORE AIRLINES -->
+
+<div class="airline" data-region="asia">
+
+<div class="airline-image-wrap">
+
+<img
+src="singapore.webp"
+alt="Singapore Airlines"
+class="airline-image"
+>
+
+<div class="airline-tag">
+ASIA
+</div>
+
+</div>
+
+<div class="airline-content">
+
+<h3>
+Singapore Airlines
+</h3>
+
+<p>
+Singapore's flag carrier and a major international airline with a global network.
+</p>
+
+<a
+href="singapore-airlines.html"
+class="details-button"
+>
+View Details →
+</a>
+
+</div>
+
+</div>
+
+
+</div>
+
+
+<!-- FEATURED AIRLINE -->
+
+<section class="featured">
+
+<div class="featured-image">
+
+<img
+src="thy.webp"
+alt="Turkish Airlines"
+>
+
+</div>
+
+<div class="featured-content">
+
+<div class="featured-label">
+FEATURED AIRLINE
+</div>
+
+<h2>
+Turkish Airlines
+</h2>
+
+<p>
+Explore the history, fleet, network and aviation story of Türkiye's flag carrier.
+</p>
+
+<div class="featured-facts">
+
+<div class="fact">
+<small>Country</small>
+<strong>Türkiye</strong>
+</div>
+
+<div class="fact">
+<small>Hub</small>
+<strong>Istanbul</strong>
+</div>
+
+<div class="fact">
+<small>Type</small>
+<strong>Flag Carrier</strong>
+</div>
+
+<div class="fact">
+<small>Focus</small>
+<strong>Global Network</strong>
+</div>
+
+</div>
+
+<a
+href="turkish-airlines.html"
+class="details-button"
+>
+Explore Turkish Airlines →
+</a>
+
+</div>
+
+</section>
+
+
+<!-- CATEGORIES -->
+
+<section class="categories">
+
+<div class="section-title">
+
+<h2>
+Explore by <span>Category</span>
+</h2>
+
+<p>
+Different airlines, different networks and different identities.
+</p>
+
+</div>
+
+<div class="category-grid">
+
+
+<div class="category">
+
+<div class="category-icon">
+🌍
+</div>
+
+<h3>
+Global Airlines
+</h3>
+
+<p>
+Airlines operating extensive international networks across multiple regions.
+</p>
+
+</div>
+
+
+<div class="category">
+
+<div class="category-icon">
+🏳️
+</div>
+
+<h3>
+Flag Carriers
+</h3>
+
+<p>
+National airlines representing their countries on the global stage.
+</p>
+
+</div>
+
+
+<div class="category">
+
+<div class="category-icon">
+🛫
+</div>
+
+<h3>
+Long-Haul
+</h3>
+
+<p>
+Airlines focused heavily on long-distance international operations.
+</p>
+
+</div>
+
+
+<div class="category">
+
+<div class="category-icon">
+🏙️
+</div>
+
+<h3>
+Major Hubs
+</h3>
+
+<p>
+Airlines built around some of the world's major aviation hubs.
+</p>
+
+</div>
+
+
+</div>
+
+</section>
+
+
+<!-- GLOBAL AVIATION -->
+
+<section class="global-section">
+
+<h2>
+Airlines Around the <span>World</span>
+</h2>
+
+<p>
+The airline industry connects cities, countries and continents through a huge global network of routes.
+</p>
+
+<div class="global-grid">
+
+<div class="global-card">
+
+<div class="global-card-icon">
+🇪🇺
+</div>
+
+<h3>
+Europe
+</h3>
+
+<p>
+Major European airlines connect the continent with destinations around the world.
+</p>
+
+</div>
+
+
+<div class="global-card">
+
+<div class="global-card-icon">
+🌙
+</div>
+
+<h3>
+Middle East
+</h3>
+
+<p>
+Major Gulf carriers operate important international networks between continents.
+</p>
+
+</div>
+
+
+<div class="global-card">
+
+<div class="global-card-icon">
+🌏
+</div>
+
+<h3>
+Asia
+</h3>
+
+<p>
+Asian airlines operate some of the world's busiest and longest international routes.
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- COMPARE -->
+
+<div class="compare-feature">
+
+<div class="compare-icon">
+⚔️
+</div>
+
+<h2>
+Compare Airlines
+</h2>
+
+<p>
+Explore airlines side-by-side and compare their fleets,
+networks, aircraft and other aviation data.
+</p>
+
+<a
+href="compare.html"
+class="compare-button"
+>
+Open Compare →
+</a>
+
+</div>
+
+
+<!-- BACK -->
+
+<a
+class="back"
+href="index.html"
+>
+← Back to Home
+</a>
+
+
+</main>
+
+
+<!-- FOOTER -->
+
+<footer>
+
+<strong>
+✈️ FLIGHT SENSES
+</strong>
+
+<p>
+©️ 2026 Flight Senses |
+Aviation • Aircraft • Airlines
+</p>
+
+</footer>
+
+
+<!-- SEARCH + FILTER SCRIPT -->
+
+<script>
+
+const search =
+document.getElementById("search");
+
+const airlines =
+document.querySelectorAll(".airline");
+
+const filters =
+document.querySelectorAll(".filter");
+
+let activeFilter = "all";
+
+
+function updateAirlines(){
+
+    const searchValue =
+        search.value
+        .toLowerCase()
+        .trim();
+
+    airlines.forEach(function(card){
+
+        const name =
+            card.querySelector("h3")
+            .textContent
+            .toLowerCase();
+
+        const region =
+            card.dataset.region;
+
+        const matchesSearch =
+            name.includes(searchValue);
+
+        const matchesFilter =
+            activeFilter === "all" ||
+            region === activeFilter;
+
+        if(
+            matchesSearch &&
+            matchesFilter
+        ){
+
+            card.style.display = "";
+
+        }else{
+
+            card.style.display = "none";
+
+        }
+
+    });
+
+}
+
+
+search.addEventListener(
+    "input",
+    updateAirlines
+);
+
+
+filters.forEach(function(button){
+
+    button.addEventListener(
+        "click",
+        function(){
+
+            filters.forEach(function(btn){
+
+                btn.classList.remove("active");
+
+            });
+
+            button.classList.add("active");
+
+            activeFilter =
+                button.dataset.filter;
+
+            updateAirlines();
+
+        }
+    );
+
+});
+
+</script>
+
 
 </body>
 </html>

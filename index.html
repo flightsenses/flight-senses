@@ -3,14 +3,19 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Flight Senses | Aviation</title>
+
 <style>
+
 *{
     box-sizing:border-box;
 }
+
 html{
     scroll-behavior:smooth;
 }
+
 body{
     margin:0;
     font-family:Arial,Helvetica,sans-serif;
@@ -18,9 +23,11 @@ body{
     color:white;
     overflow-x:hidden;
 }
+
 /* =========================
    HEADER
 ========================= */
+
 header{
     background:
         radial-gradient(circle at top right,#12375d,transparent 45%),
@@ -28,6 +35,7 @@ header{
     padding:24px 20px;
     border-bottom:1px solid #1e90ff;
 }
+
 .header-inner{
     max-width:1200px;
     margin:auto;
@@ -35,11 +43,13 @@ header{
     align-items:center;
     justify-content:space-between;
 }
+
 .brand{
     display:flex;
     align-items:center;
     gap:15px;
 }
+
 .brand-icon{
     width:55px;
     height:55px;
@@ -51,20 +61,24 @@ header{
     font-size:30px;
     box-shadow:0 0 25px rgba(30,144,255,.35);
 }
+
 .brand h1{
     margin:0;
     font-size:29px;
     letter-spacing:2px;
 }
+
 .brand p{
     margin:4px 0 0;
     color:#75bfff;
     font-size:11px;
     letter-spacing:3px;
 }
+
 /* =========================
    NAVBAR
 ========================= */
+
 nav{
     position:sticky;
     top:0;
@@ -73,6 +87,7 @@ nav{
     backdrop-filter:blur(12px);
     border-bottom:1px solid #173552;
 }
+
 .nav-container{
     max-width:1200px;
     margin:auto;
@@ -81,6 +96,7 @@ nav{
     gap:7px;
     padding:11px 20px;
 }
+
 nav a{
     color:#dcecff;
     text-decoration:none;
@@ -90,21 +106,25 @@ nav a{
     border-radius:9px;
     transition:.25s;
 }
+
 nav a:hover{
     color:#4da6ff;
     background:#0d263f;
     transform:translateY(-2px);
 }
+
 nav a.active{
     background:#1e90ff;
     color:white;
     box-shadow:0 5px 20px rgba(30,144,255,.25);
 }
+
 /* =========================
    HERO
 ========================= */
+
 .hero{
-    min-height:650px;
+    min-height:680px;
     display:flex;
     flex-direction:column;
     justify-content:center;
@@ -113,16 +133,18 @@ nav a.active{
     padding:100px 20px;
     position:relative;
     overflow:hidden;
+
     background:
         linear-gradient(
             rgba(3,10,18,.38),
             rgba(3,10,18,.94)
         ),
         url("747.jpg");
+
     background-size:cover;
     background-position:center;
 }
-/* glowing atmosphere */
+
 .hero::before{
     content:"";
     position:absolute;
@@ -136,6 +158,7 @@ nav a.active{
     left:-150px;
     animation:glowMove 8s ease-in-out infinite alternate;
 }
+
 .hero::after{
     content:"";
     position:absolute;
@@ -149,15 +172,31 @@ nav a.active{
     right:-150px;
     animation:glowMove2 10s ease-in-out infinite alternate;
 }
+
 @keyframes glowMove{
-    from{transform:translate(0,0);}
-    to{transform:translate(120px,80px);}
+    from{
+        transform:translate(0,0);
+    }
+
+    to{
+        transform:translate(120px,80px);
+    }
 }
+
 @keyframes glowMove2{
-    from{transform:translate(0,0);}
-    to{transform:translate(-100px,-70px);}
+    from{
+        transform:translate(0,0);
+    }
+
+    to{
+        transform:translate(-100px,-70px);
+    }
 }
-/* airplane */
+
+/* =========================
+   FLYING PLANE
+========================= */
+
 .flying-plane{
     position:absolute;
     top:18%;
@@ -167,22 +206,33 @@ nav a.active{
     animation:flyAcross 14s linear infinite;
     z-index:1;
 }
+
 @keyframes flyAcross{
+
     0%{
         transform:translateX(0) translateY(0) rotate(-5deg);
     }
+
     50%{
         transform:translateX(55vw) translateY(-25px) rotate(-3deg);
     }
+
     100%{
         transform:translateX(110vw) translateY(-50px) rotate(-5deg);
     }
+
 }
+
+/* =========================
+   HERO CONTENT
+========================= */
+
 .hero-content{
     max-width:850px;
     position:relative;
     z-index:2;
 }
+
 .hero-badge{
     display:inline-block;
     padding:9px 17px;
@@ -196,31 +246,39 @@ nav a.active{
     margin-bottom:22px;
     box-shadow:0 0 25px rgba(30,144,255,.08);
 }
+
 .hero h2{
     margin:0;
     font-size:68px;
     line-height:1.05;
     letter-spacing:-2px;
     text-shadow:0 5px 25px black;
+    animation:heroTitleIn 1s ease-out;
 }
+
 .hero h2 span{
     color:#4da6ff;
     text-shadow:0 0 30px rgba(77,166,255,.25);
 }
+
 .hero p{
     max-width:700px;
     margin:25px auto 0;
     color:#d7e9fb;
     font-size:20px;
     line-height:1.7;
+    animation:heroTextIn 1.2s ease-out;
 }
+
 .hero-buttons{
     margin-top:35px;
     display:flex;
     justify-content:center;
     gap:15px;
     flex-wrap:wrap;
+    animation:heroButtonsIn 1.4s ease-out;
 }
+
 .button{
     display:inline-block;
     padding:15px 28px;
@@ -232,28 +290,134 @@ nav a.active{
     transition:.3s;
     box-shadow:0 8px 25px rgba(30,144,255,.22);
 }
+
 .button:hover{
     background:#1681e8;
     transform:translateY(-4px);
     box-shadow:0 12px 30px rgba(30,144,255,.32);
 }
+
 .button.secondary{
     background:rgba(7,20,34,.75);
     border:1px solid #477ca8;
     box-shadow:none;
 }
+
 .button.secondary:hover{
     background:#102d49;
 }
+
+/* HERO INFO */
+
+.hero-info{
+    margin-top:32px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:14px;
+    flex-wrap:wrap;
+    color:#a9c4dc;
+    font-size:13px;
+    letter-spacing:.5px;
+}
+
+.hero-info span{
+    color:#4da6ff;
+    font-weight:bold;
+}
+
+.hero-info .dot{
+    color:#477ca8;
+}
+
+.hero-scroll{
+    position:absolute;
+    bottom:25px;
+    left:50%;
+    transform:translateX(-50%);
+    z-index:3;
+    color:#8fa9c2;
+    font-size:11px;
+    letter-spacing:2px;
+    text-transform:uppercase;
+    animation:scrollPulse 2s ease-in-out infinite;
+}
+
+.hero-scroll::after{
+    content:"↓";
+    display:block;
+    margin-top:7px;
+    font-size:18px;
+    color:#4da6ff;
+}
+
+@keyframes scrollPulse{
+
+    0%,100%{
+        opacity:.45;
+        transform:translateX(-50%) translateY(0);
+    }
+
+    50%{
+        opacity:1;
+        transform:translateX(-50%) translateY(5px);
+    }
+
+}
+
+@keyframes heroTitleIn{
+
+    from{
+        opacity:0;
+        transform:translateY(20px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+
+}
+
+@keyframes heroTextIn{
+
+    from{
+        opacity:0;
+        transform:translateY(15px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+
+}
+
+@keyframes heroButtonsIn{
+
+    from{
+        opacity:0;
+        transform:translateY(15px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+
+}
+
 /* =========================
    STATS
 ========================= */
+
 .stats-section{
     padding:0 20px;
     margin-top:-45px;
     position:relative;
     z-index:5;
 }
+
 .stats{
     max-width:1000px;
     margin:auto;
@@ -266,54 +430,66 @@ nav a.active{
     backdrop-filter:blur(12px);
     box-shadow:0 20px 50px rgba(0,0,0,.4);
 }
+
 .stat{
     padding:28px 15px;
     text-align:center;
     border-right:1px solid #183b59;
 }
+
 .stat:last-child{
     border-right:none;
 }
+
 .stat strong{
     display:block;
     font-size:30px;
     color:#4da6ff;
     margin-bottom:7px;
 }
+
 .stat span{
     color:#8fa9c2;
     font-size:13px;
 }
+
 /* =========================
-   SECTION
+   GENERAL SECTION
 ========================= */
+
 .section{
     padding:95px 20px;
     text-align:center;
 }
+
 .section-title{
     max-width:700px;
     margin:0 auto 50px;
 }
+
 .section-title h2{
     margin:0 0 12px;
     font-size:36px;
 }
+
 .section-title p{
     margin:0;
     color:#8fa9c2;
     font-size:16px;
 }
+
 /* =========================
-   CARDS
+   EXPLORE CARDS
 ========================= */
+
 .cards{
     max-width:1100px;
     margin:auto;
     display:grid;
-    grid-template-columns:repeat(4,1fr);
+    grid-template-columns:repeat(3,1fr);
     gap:20px;
 }
+
 .card{
     position:relative;
     overflow:hidden;
@@ -322,12 +498,15 @@ nav a.active{
     text-align:left;
     text-decoration:none;
     color:white;
+
     background:
         linear-gradient(145deg,#0d2036,#071421);
+
     border:1px solid #1b4468;
     border-radius:16px;
     transition:.35s;
 }
+
 .card::before{
     content:"";
     position:absolute;
@@ -340,32 +519,39 @@ nav a.active{
     border-radius:50%;
     transition:.4s;
 }
+
 .card:hover::before{
     transform:scale(1.5);
     opacity:.13;
 }
+
 .card:hover{
     transform:translateY(-9px);
     border-color:#1e90ff;
+
     box-shadow:
         0 15px 40px rgba(0,0,0,.4),
         0 0 25px rgba(30,144,255,.08);
 }
+
 .card-icon{
     font-size:34px;
     margin-bottom:18px;
 }
+
 .card h3{
     margin:0 0 10px;
     color:#62b3ff;
     font-size:21px;
 }
+
 .card p{
     margin:0;
     color:#a9bfd4;
     line-height:1.55;
     font-size:14px;
 }
+
 .card-arrow{
     position:absolute;
     right:20px;
@@ -374,26 +560,34 @@ nav a.active{
     font-size:20px;
     transition:.3s;
 }
+
 .card:hover .card-arrow{
     transform:translateX(5px);
 }
+
 /* =========================
    FEATURED AIRCRAFT
 ========================= */
+
 .featured{
     max-width:1100px;
     margin:auto;
     display:grid;
     grid-template-columns:1.2fr 1fr;
-    min-height:330px;
+    min-height:380px;
     overflow:hidden;
+
     border-radius:20px;
     border:1px solid #1b4b73;
+
     background:#081725;
+
     box-shadow:0 20px 50px rgba(0,0,0,.3);
 }
+
 .featured-image{
-    min-height:330px;
+    min-height:380px;
+
     background:
         linear-gradient(
             90deg,
@@ -401,19 +595,23 @@ nav a.active{
             rgba(8,23,37,.15)
         ),
         url("777.jpg");
+
     background-size:cover;
     background-position:center;
 }
+
 .featured-content{
     padding:45px;
     display:flex;
     flex-direction:column;
     justify-content:center;
     text-align:left;
+
     background:
         radial-gradient(circle at top right,#12375d,transparent 55%),
         #081725;
 }
+
 .featured-label{
     color:#4da6ff;
     font-size:12px;
@@ -421,371 +619,1080 @@ nav a.active{
     letter-spacing:2px;
     margin-bottom:12px;
 }
+
 .featured-content h3{
     margin:0 0 12px;
     font-size:32px;
 }
+
 .featured-content p{
     color:#9fb7cc;
     line-height:1.6;
     margin:0 0 25px;
 }
+
 .featured-content .button{
     align-self:flex-start;
 }
-/* =========================
-   FEATURE STRIP
-========================= */
-.feature-section{
-    padding:20px 20px 85px;
+
+/* FEATURE SPECS */
+
+.featured-specs{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:10px;
+    margin-bottom:25px;
 }
+
+.spec{
+    padding:12px;
+    background:rgba(7,20,34,.65);
+    border:1px solid #183b59;
+    border-radius:9px;
+}
+
+.spec span{
+    display:block;
+    color:#70869b;
+    font-size:10px;
+    text-transform:uppercase;
+    letter-spacing:1px;
+    margin-bottom:4px;
+}
+
+.spec strong{
+    color:#dcecff;
+    font-size:14px;
+}
+
+/* =========================
+   NUMBERS
+========================= */
+
+.numbers-section{
+    padding:30px 20px 95px;
+}
+
+.numbers{
+    max-width:1100px;
+    margin:auto;
+
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:15px;
+}
+
+.number-box{
+    padding:30px 20px;
+    text-align:center;
+
+    background:
+        linear-gradient(145deg,#0b2035,#071421);
+
+    border:1px solid #1b4468;
+    border-radius:16px;
+
+    transition:.3s;
+}
+
+.number-box:hover{
+    transform:translateY(-6px);
+    border-color:#1e90ff;
+}
+
+.number-box strong{
+    display:block;
+    color:#4da6ff;
+    font-size:30px;
+    margin-bottom:8px;
+}
+
+.number-box span{
+    color:#8fa9c2;
+    font-size:12px;
+    letter-spacing:.5px;
+}
+
+/* =========================
+   DID YOU KNOW
+========================= */
+
+.didyouknow{
+    max-width:1100px;
+    margin:auto;
+    padding:50px;
+
+    position:relative;
+    overflow:hidden;
+
+    text-align:left;
+
+    border:1px solid #1b4b73;
+    border-radius:20px;
+
+    background:
+        radial-gradient(circle at right,#12375d,transparent 50%),
+        linear-gradient(135deg,#0b2239,#06111e);
+
+    box-shadow:0 20px 50px rgba(0,0,0,.3);
+}
+
+.didyouknow::before{
+    content:"?";
+    position:absolute;
+    right:35px;
+    top:-35px;
+
+    font-size:190px;
+    font-weight:bold;
+
+    color:#1e90ff;
+    opacity:.06;
+}
+
+.did-label{
+    color:#4da6ff;
+    font-size:12px;
+    font-weight:bold;
+    letter-spacing:2px;
+    margin-bottom:12px;
+}
+
+.didyouknow h3{
+    margin:0 0 15px;
+    font-size:30px;
+}
+
+.didyouknow p{
+    max-width:750px;
+    margin:0;
+    color:#a9bfd4;
+    line-height:1.7;
+    font-size:16px;
+}
+
+/* =========================
+   QUICK COMPARISON
+========================= */
+
+.quick-compare{
+    max-width:1100px;
+    margin:auto;
+
+    display:grid;
+    grid-template-columns:1fr 120px 1fr;
+    align-items:center;
+    gap:20px;
+}
+
+.aircraft-mini{
+    padding:30px;
+    text-align:center;
+
+    background:
+        linear-gradient(145deg,#0d2036,#071421);
+
+    border:1px solid #1b4468;
+    border-radius:18px;
+
+    transition:.3s;
+}
+
+.aircraft-mini:hover{
+    transform:translateY(-7px);
+    border-color:#1e90ff;
+}
+
+.aircraft-mini .emoji{
+    font-size:40px;
+    margin-bottom:15px;
+}
+
+.aircraft-mini h3{
+    margin:0 0 8px;
+    font-size:23px;
+}
+
+.aircraft-mini p{
+    margin:0;
+    color:#8fa9c2;
+    font-size:13px;
+}
+
+.vs{
+    width:80px;
+    height:80px;
+
+    margin:auto;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border-radius:50%;
+
+    background:#1e90ff;
+
+    font-size:20px;
+    font-weight:bold;
+
+    box-shadow:0 0 30px rgba(30,144,255,.25);
+}
+
+/* =========================
+   FINAL CTA
+========================= */
+
+.feature-section{
+    padding:20px 20px 95px;
+}
+
 .feature-box{
     max-width:1100px;
     margin:auto;
-    padding:35px;
+
+    padding:45px;
+
     display:flex;
     align-items:center;
     justify-content:space-between;
+
     gap:30px;
+
     background:
         linear-gradient(135deg,#0b233b,#071421);
+
     border:1px solid #1c496e;
     border-radius:18px;
 }
+
 .feature-box h3{
     margin:0 0 8px;
     font-size:24px;
 }
+
 .feature-box p{
     margin:0;
     color:#9fb7cc;
     line-height:1.5;
 }
+
 /* =========================
    FOOTER
 ========================= */
+
 footer{
     background:#02070d;
     border-top:1px solid #163451;
     text-align:center;
     padding:35px 20px;
 }
+
 footer strong{
     color:#4da6ff;
 }
+
 footer p{
     margin:8px 0 0;
     color:#70869b;
     font-size:13px;
 }
+
 /* =========================
    MOBILE
 ========================= */
-@media(max-width:850px){
+
+@media(max-width:900px){
+
     .cards{
         grid-template-columns:repeat(2,1fr);
     }
+
     .hero h2{
-        font-size:48px;
+        font-size:52px;
     }
+
     .stats{
         grid-template-columns:repeat(2,1fr);
     }
+
     .stat:nth-child(2){
         border-right:none;
     }
+
     .stat:nth-child(-n+2){
         border-bottom:1px solid #183b59;
     }
+
     .featured{
         grid-template-columns:1fr;
     }
+
     .featured-image{
-        min-height:260px;
+        min-height:300px;
     }
+
+    .numbers{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .quick-compare{
+        grid-template-columns:1fr;
+    }
+
+    .vs{
+        width:65px;
+        height:65px;
+    }
+
     .feature-box{
         flex-direction:column;
         align-items:flex-start;
     }
 }
+
 @media(max-width:600px){
+
     .header-inner{
         justify-content:center;
     }
+
     .brand h1{
         font-size:22px;
     }
+
     .brand p{
         font-size:8px;
         letter-spacing:2px;
     }
+
     .brand-icon{
         width:46px;
         height:46px;
         font-size:24px;
     }
+
     .nav-container{
         overflow-x:auto;
         justify-content:flex-start;
     }
+
     nav a{
         white-space:nowrap;
         padding:10px 13px;
         font-size:13px;
     }
+
     .hero{
-        min-height:570px;
+        min-height:620px;
+        padding:80px 20px;
     }
+
     .hero h2{
         font-size:39px;
     }
+
     .hero p{
         font-size:17px;
     }
+
+    .hero-info{
+        gap:8px;
+        font-size:11px;
+    }
+
     .cards{
         grid-template-columns:1fr;
     }
+
     .stats-section{
         margin-top:-30px;
     }
+
     .stat strong{
         font-size:25px;
     }
+
     .section{
         padding:65px 20px;
     }
+
     .section-title h2{
         font-size:30px;
     }
+
     .featured-content{
         padding:30px;
     }
+
     .featured-content h3{
         font-size:27px;
     }
+
+    .featured-specs{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .numbers{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .number-box{
+        padding:25px 12px;
+    }
+
+    .number-box strong{
+        font-size:25px;
+    }
+
+    .didyouknow{
+        padding:30px;
+    }
+
+    .didyouknow h3{
+        font-size:25px;
+    }
+
+    .feature-box{
+        padding:30px;
+    }
+
     .flying-plane{
         font-size:25px;
     }
+
 }
+
 </style>
 </head>
+
 <body>
+
 <!-- =========================
      HEADER
 ========================= -->
+
 <header>
+
 <div class="header-inner">
+
 <div class="brand">
-    <div class="brand-icon">
-        ✈️
-    </div>
-    <div>
-        <h1>FLIGHT SENSES</h1>
-        <p>THE WORLD OF AVIATION</p>
-    </div>
+
+<div class="brand-icon">
+    ✈️
 </div>
+
+<div>
+
+<h1>FLIGHT SENSES</h1>
+
+<p>THE WORLD OF AVIATION</p>
+
 </div>
+
+</div>
+
+</div>
+
 </header>
+
+
 <!-- =========================
      NAVIGATION
 ========================= -->
+
 <nav>
+
 <div class="nav-container">
+
 <a href="index.html" class="active">
     🏠 Home
 </a>
+
 <a href="aircraft.html">
     ✈️ Aircraft
 </a>
+
 <a href="airlines.html">
     🌎 Airlines
 </a>
+
 <a href="top10.html">
     🔥 Top 10
 </a>
+
 <a href="compare.html">
     ⚔️ Compare
 </a>
+
 </div>
+
 </nav>
+
+
 <!-- =========================
      HERO
 ========================= -->
+
 <section class="hero">
+
 <div class="flying-plane">
     ✈
 </div>
+
 <div class="hero-content">
+
 <div class="hero-badge">
     ✈️ AVIATION • AIRCRAFT • AIRLINES
 </div>
+
 <h2>
     Discover the world of
     <span>aviation.</span>
 </h2>
+
 <p>
     Explore aircraft, airlines, aviation facts,
     powerful engines and the fascinating world of flight.
 </p>
+
 <div class="hero-buttons">
-    <a href="aircraft.html" class="button">
-        Explore Aircraft ✈️
-    </a>
-    <a href="top10.html" class="button secondary">
-        Discover Top 10 🔥
-    </a>
+
+<a href="aircraft.html" class="button">
+    Explore Aircraft ✈️
+</a>
+
+<a href="top10.html" class="button secondary">
+    Discover Top 10 🔥
+</a>
+
 </div>
+
+<div class="hero-info">
+
+<span>Aircraft</span>
+
+<div class="dot">•</div>
+
+<span>Airlines</span>
+
+<div class="dot">•</div>
+
+<span>Engines</span>
+
+<div class="dot">•</div>
+
+<span>Aviation Facts</span>
+
 </div>
+
+</div>
+
+<div class="hero-scroll">
+    Explore below
+</div>
+
 </section>
+
+
 <!-- =========================
      STATS
 ========================= -->
+
 <section class="stats-section">
+
 <div class="stats">
+
 <div class="stat">
     <strong>✈️</strong>
     <span>Aircraft</span>
 </div>
+
 <div class="stat">
     <strong>🌎</strong>
     <span>Airlines</span>
 </div>
+
 <div class="stat">
     <strong>🔥</strong>
     <span>Top 10 Lists</span>
 </div>
+
 <div class="stat">
     <strong>⚔️</strong>
     <span>Comparisons</span>
 </div>
+
 </div>
+
 </section>
+
+
 <!-- =========================
      EXPLORE
 ========================= -->
+
 <section class="section">
+
 <div class="section-title">
+
 <h2>✈️ Explore Flight Senses</h2>
+
 <p>
-    Everything you need to discover the fascinating
-    world of aviation.
+    Discover aircraft, airlines, engines,
+    rankings and the fascinating world of aviation.
 </p>
+
 </div>
+
+
 <div class="cards">
+
+
 <a href="aircraft.html" class="card">
-    <div class="card-icon">
-        🛫
-    </div>
-    <h3>Aircraft</h3>
-    <p>
-        Discover passenger, cargo,
-        military and experimental aircraft.
-    </p>
-    <div class="card-arrow">
-        →
-    </div>
-</a>
-<a href="airlines.html" class="card">
-    <div class="card-icon">
-        🌎
-    </div>
-    <h3>Airlines</h3>
-    <p>
-        Explore airlines and discover
-        their fleets and aircraft.
-    </p>
-    <div class="card-arrow">
-        →
-    </div>
-</a>
-<a href="top10.html" class="card">
-    <div class="card-icon">
-        🔥
-    </div>
-    <h3>Top 10</h3>
-    <p>
-        Discover interesting aviation
-        lists, facts and comparisons.
-    </p>
-    <div class="card-arrow">
-        →
-    </div>
-</a>
-<a href="compare.html" class="card">
-    <div class="card-icon">
-        ⚔️
-    </div>
-    <h3>Compare</h3>
-    <p>
-        Compare legendary aircraft
-        and discover their differences.
-    </p>
-    <div class="card-arrow">
-        →
-    </div>
-</a>
+
+<div class="card-icon">
+    🛫
 </div>
+
+<h3>Aircraft</h3>
+
+<p>
+    Discover passenger, cargo,
+    military and experimental aircraft.
+</p>
+
+<div class="card-arrow">
+    →
+</div>
+
+</a>
+
+
+<a href="airlines.html" class="card">
+
+<div class="card-icon">
+    🌎
+</div>
+
+<h3>Airlines</h3>
+
+<p>
+    Explore airlines and discover
+    their fleets and aircraft.
+</p>
+
+<div class="card-arrow">
+    →
+</div>
+
+</a>
+
+
+<a href="top10.html" class="card">
+
+<div class="card-icon">
+    🔥
+</div>
+
+<h3>Top 10</h3>
+
+<p>
+    Discover interesting aviation
+    lists, facts and comparisons.
+</p>
+
+<div class="card-arrow">
+    →
+</div>
+
+</a>
+
+
+<a href="compare.html" class="card">
+
+<div class="card-icon">
+    ⚔️
+</div>
+
+<h3>Compare</h3>
+
+<p>
+    Compare legendary aircraft
+    and discover their differences.
+</p>
+
+<div class="card-arrow">
+    →
+</div>
+
+</a>
+
+
+<div class="card">
+
+<div class="card-icon">
+    🚀
+</div>
+
+<h3>Engines</h3>
+
+<p>
+    Explore powerful aircraft engines
+    and discover their incredible performance.
+</p>
+
+<div class="card-arrow">
+    →
+</div>
+
+</div>
+
+
+<div class="card">
+
+<div class="card-icon">
+    💡
+</div>
+
+<h3>Aviation Facts</h3>
+
+<p>
+    Discover fascinating facts,
+    records and unusual aviation stories.
+</p>
+
+<div class="card-arrow">
+    →
+</div>
+
+</div>
+
+
+</div>
+
 </section>
+
+
 <!-- =========================
      FEATURED AIRCRAFT
 ========================= -->
+
 <section class="section">
+
 <div class="section-title">
+
 <h2>⭐ Featured Aircraft</h2>
+
 <p>
-    Discover one of the most iconic aircraft
-    in modern aviation.
+    Discover one of the most impressive
+    aircraft of modern aviation.
 </p>
+
 </div>
+
+
 <div class="featured">
+
 <div class="featured-image"></div>
+
+
 <div class="featured-content">
-    <div class="featured-label">
-        FLIGHT SENSES FEATURE
-    </div>
-    <h3>
-        Boeing 777-9
-    </h3>
-    <p>
-        The next generation of the legendary
-        Triple Seven, powered by the enormous
-        GE9X engines.
-    </p>
-    <a href="boeing-777.html" class="button">
-        Explore 777-9 →
-    </a>
+
+<div class="featured-label">
+    FLIGHT SENSES FEATURE
 </div>
+
+<h3>
+    Boeing 777-9
+</h3>
+
+<p>
+    The next generation of the legendary
+    Triple Seven, powered by the enormous
+    GE9X engines.
+</p>
+
+
+<div class="featured-specs">
+
+<div class="spec">
+
+<span>Length</span>
+
+<strong>76.7 m</strong>
+
 </div>
+
+
+<div class="spec">
+
+<span>Wingspan</span>
+
+<strong>71.8 m</strong>
+
+</div>
+
+
+<div class="spec">
+
+<span>Range</span>
+
+<strong>13,500 km</strong>
+
+</div>
+
+
+<div class="spec">
+
+<span>Engines</span>
+
+<strong>2 × GE9X</strong>
+
+</div>
+
+</div>
+
+
+<a href="boeing-777.html" class="button">
+    Explore 777-9 →
+</a>
+
+</div>
+
+</div>
+
 </section>
+
+
 <!-- =========================
-     FEATURE
+     AVIATION NUMBERS
 ========================= -->
-<section class="feature-section">
-<div class="feature-box">
-<div>
-    <h3>
-        🌍 Your aviation journey starts here.
-    </h3>
-    <p>
-        From iconic aircraft to the world's biggest airlines,
-        Flight Senses brings aviation closer to you.
-    </p>
+
+<section class="numbers-section">
+
+<div class="section-title">
+
+<h2>📊 Aviation by the Numbers</h2>
+
+<p>
+    Some impressive numbers from the world of aviation.
+</p>
+
 </div>
+
+
+<div class="numbers">
+
+
+<div class="number-box">
+
+<strong>76.7 m</strong>
+
+<span>
+    Boeing 777-9 Length
+</span>
+
+</div>
+
+
+<div class="number-box">
+
+<strong>71.8 m</strong>
+
+<span>
+    777-9 Wingspan
+</span>
+
+</div>
+
+
+<div class="number-box">
+
+<strong>13,500 km</strong>
+
+<span>
+    777-9 Range
+</span>
+
+</div>
+
+
+<div class="number-box">
+
+<strong>GE9X</strong>
+
+<span>
+    World's Largest Turbofan
+</span>
+
+</div>
+
+
+</div>
+
+</section>
+
+
+<!-- =========================
+     DID YOU KNOW
+========================= -->
+
+<section class="section">
+
+<div class="section-title">
+
+<h2>💡 Did You Know?</h2>
+
+<p>
+    Aviation is full of incredible facts.
+</p>
+
+</div>
+
+
+<div class="didyouknow">
+
+<div class="did-label">
+    AVIATION FACT
+</div>
+
+<h3>
+    The Boeing 777-9 is powered by the GE9X.
+</h3>
+
+<p>
+    The GE9X was developed specifically for the
+    Boeing 777X family and features an enormous
+    fan designed to improve efficiency while
+    delivering very high thrust.
+</p>
+
+</div>
+
+</section>
+
+
+<!-- =========================
+     QUICK COMPARISON
+========================= -->
+
+<section class="section">
+
+<div class="section-title">
+
+<h2>⚔️ Quick Comparison</h2>
+
+<p>
+    Two legendary wide-body aircraft.
+    Discover their differences.
+</p>
+
+</div>
+
+
+<div class="quick-compare">
+
+
+<div class="aircraft-mini">
+
+<div class="emoji">
+    ✈️
+</div>
+
+<h3>
+    Boeing 777-9
+</h3>
+
+<p>
+    Long-range • Twin-engine
+</p>
+
+</div>
+
+
+<div class="vs">
+    VS
+</div>
+
+
+<div class="aircraft-mini">
+
+<div class="emoji">
+    ✈️
+</div>
+
+<h3>
+    Airbus A350-1000
+</h3>
+
+<p>
+    Long-range • Twin-engine
+</p>
+
+</div>
+
+
+</div>
+
+
+<div style="margin-top:30px;">
+
+<a href="compare.html" class="button">
+    Compare Aircraft →
+</a>
+
+</div>
+
+</section>
+
+
+<!-- =========================
+     FINAL CTA
+========================= -->
+
+<section class="feature-section">
+
+<div class="feature-box">
+
+<div>
+
+<h3>
+    🌍 Your aviation journey starts here.
+</h3>
+
+<p>
+    From iconic aircraft to the world's biggest airlines,
+    Flight Senses brings aviation closer to you.
+</p>
+
+</div>
+
+
 <a href="aircraft.html" class="button">
     Start Exploring →
 </a>
+
 </div>
+
 </section>
+
+
 <!-- =========================
      FOOTER
 ========================= -->
+
 <footer>
+
 <strong>
     ✈️ FLIGHT SENSES
 </strong>
+
 <p>
     ©️ 2026 Flight Senses | Aviation • Aircraft • Airlines
 </p>
+
 </footer>
+
 </body>
 </html>
