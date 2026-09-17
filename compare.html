@@ -794,10 +794,11 @@ nav{
 }
 
 /* =========================================
-   PHOTO
+   PHOTO — MOBILE SAFE
    ========================================= */
 
 .photo{
+    width:100%;
     height:175px;
 
     overflow:hidden;
@@ -805,6 +806,65 @@ nav{
     background:#07101d;
 
     position:relative;
+
+    display:block;
+
+    isolation:isolate;
+}
+
+.photo img{
+    display:block;
+
+    width:100%;
+    height:100%;
+
+    min-width:100%;
+    max-width:none;
+
+    object-fit:cover;
+    object-position:center center;
+
+    background:#07101d;
+
+    transition:
+        transform .7s cubic-bezier(.2,.8,.2,1),
+        filter .5s;
+
+    -webkit-transform:translateZ(0);
+    transform:translateZ(0);
+
+    -webkit-backface-visibility:hidden;
+    backface-visibility:hidden;
+}
+
+.photo.image-error::after{
+    content:"IMAGE UNAVAILABLE";
+
+    position:absolute;
+
+    inset:0;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    color:#526981;
+
+    font-size:9px;
+
+    font-weight:800;
+
+    letter-spacing:2px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #07111f,
+            #050b17
+        );
+
+    z-index:20;
 }
 
 .photo::before{
@@ -899,6 +959,8 @@ nav{
     width:5px;
     height:5px;
 
+    flex-shrink:0;
+
     border-radius:50%;
 
     background:#3da9ff;
@@ -915,6 +977,8 @@ nav{
 
     inset:0;
 
+    z-index:3;
+
     background:
         linear-gradient(
             to bottom,
@@ -923,17 +987,6 @@ nav{
         );
 
     pointer-events:none;
-}
-
-.photo img{
-    width:100%;
-    height:100%;
-
-    object-fit:cover;
-
-    transition:
-        transform .7s cubic-bezier(.2,.8,.2,1),
-        filter .5s;
 }
 
 .aircraft-card:hover .photo img{
@@ -1036,6 +1089,8 @@ nav{
 .status-dot{
     width:5px;
     height:5px;
+
+    flex-shrink:0;
 
     border-radius:50%;
 
@@ -1205,6 +1260,8 @@ nav{
     width:5px;
     height:5px;
 
+    flex-shrink:0;
+
     border-radius:50%;
 
     background:#3da9ff;
@@ -1357,7 +1414,7 @@ nav{
 }
 
 /* =========================================
-   STAGE 4 — ANALYSIS SYSTEM
+   ANALYSIS SYSTEM
    ========================================= */
 
 .analysis-status{
@@ -1509,12 +1566,77 @@ nav{
     letter-spacing:1.2px;
 }
 
+/* =========================================
+   RESULT PHOTO — MOBILE SAFE
+   ========================================= */
+
 .result-photo{
+    width:100%;
     height:210px;
 
     overflow:hidden;
 
     position:relative;
+
+    display:block;
+
+    background:#07101d;
+
+    isolation:isolate;
+}
+
+.result-photo img{
+    display:block;
+
+    width:100%;
+    height:100%;
+
+    min-width:100%;
+    max-width:none;
+
+    object-fit:cover;
+    object-position:center center;
+
+    background:#07101d;
+
+    transition:
+        transform .7s ease;
+
+    -webkit-transform:translateZ(0);
+    transform:translateZ(0);
+
+    -webkit-backface-visibility:hidden;
+    backface-visibility:hidden;
+}
+
+.result-photo.image-error::after{
+    content:"IMAGE UNAVAILABLE";
+
+    position:absolute;
+
+    inset:0;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    color:#526981;
+
+    font-size:9px;
+
+    font-weight:800;
+
+    letter-spacing:2px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #07111f,
+            #050b17
+        );
+
+    z-index:20;
 }
 
 .result-photo::after{
@@ -1524,22 +1646,16 @@ nav{
 
     inset:0;
 
+    z-index:3;
+
     background:
         linear-gradient(
             to bottom,
             transparent 35%,
             rgba(4,10,20,.8)
         );
-}
 
-.result-photo img{
-    width:100%;
-    height:100%;
-
-    object-fit:cover;
-
-    transition:
-        transform .7s ease;
+    pointer-events:none;
 }
 
 .result-aircraft:hover .result-photo img{
@@ -2205,22 +2321,34 @@ footer{
 
     nav{
         padding:0 5%;
+
+        height:65px;
+    }
+
+    .logo{
+        font-size:17px;
+        letter-spacing:1.5px;
     }
 
     .nav-links{
-        gap:13px;
+        gap:11px;
     }
 
     .nav-links a{
-        font-size:11px;
+        font-size:10px;
     }
 
     .hero{
-        padding-top:50px;
+        padding:
+            50px 18px 40px;
     }
 
     .hero h1{
         font-size:36px;
+    }
+
+    .hero p{
+        font-size:13px;
     }
 
     .system-header{
@@ -2232,13 +2360,81 @@ footer{
     }
 
     .aircraft-grid{
+        width:92%;
+
         grid-template-columns:1fr;
+
+        gap:18px;
+    }
+
+    /*
+       MOBILE PHOTO FIX
+       Explicit dimensions prevent
+       image collapse on mobile browsers.
+    */
+
+    .photo{
+        width:100%;
+        height:220px;
+
+        min-height:220px;
+        max-height:220px;
+
+        display:block;
+    }
+
+    .photo img{
+        width:100%;
+        height:220px;
+
+        min-width:100%;
+        min-height:220px;
+
+        max-width:none;
+        max-height:none;
+
+        display:block;
+
+        object-fit:cover;
+        object-position:center center;
+    }
+
+    .result-photo{
+        width:100%;
+        height:230px;
+
+        min-height:230px;
+        max-height:230px;
+
+        display:block;
+    }
+
+    .result-photo img{
+        width:100%;
+        height:230px;
+
+        min-width:100%;
+        min-height:230px;
+
+        max-width:none;
+        max-height:none;
+
+        display:block;
+
+        object-fit:cover;
+        object-position:center center;
     }
 
     .compare-bar{
+        width:94%;
+
         flex-wrap:wrap;
 
         justify-content:center;
+
+        bottom:10px;
+
+        padding:13px;
     }
 
     .compare-bar > div{
@@ -2251,17 +2447,57 @@ footer{
         justify-content:center;
     }
 
+    .compare-button,
+    .reset-button{
+        padding:
+            11px 15px;
+
+        font-size:12px;
+    }
+
+    #result{
+        width:94%;
+
+        margin:
+            65px auto;
+    }
+
     .result-title h2{
         font-size:30px;
     }
 
+    .result-title span{
+        font-size:10px;
+    }
+
+    .result-system{
+        font-size:7px;
+
+        gap:6px;
+    }
+
+    .result-system-line{
+        width:25px;
+    }
+
     .vs-area{
         gap:15px;
+
+        flex-direction:column;
+    }
+
+    .result-aircraft{
+        width:100%;
+
+        min-width:0;
+        max-width:none;
     }
 
     .vs{
         width:60px;
         height:60px;
+
+        font-size:16px;
     }
 
     .vs::before{
@@ -2289,12 +2525,98 @@ footer{
         transform:translateY(-4px);
     }
 
+    .section-heading{
+        margin-top:42px;
+    }
+
     .section-heading::after{
         display:none;
     }
 
+    .section-heading h3{
+        font-size:22px;
+    }
+
     .photo-hud{
         font-size:7px;
+    }
+
+    .card-content{
+        padding:17px;
+    }
+
+    .card-content h3{
+        font-size:20px;
+    }
+
+    .stats-grid{
+        grid-template-columns:1fr;
+    }
+
+    .visual-stat{
+        padding:17px;
+    }
+
+    .bar-label{
+        font-size:11px;
+    }
+
+    .table-wrapper{
+        border-radius:15px;
+    }
+
+}
+
+/* =========================================
+   SMALL PHONES
+   ========================================= */
+
+@media(max-width:380px){
+
+    nav{
+        padding:0 4%;
+    }
+
+    .logo{
+        font-size:15px;
+    }
+
+    .nav-links{
+        gap:8px;
+    }
+
+    .nav-links a{
+        font-size:9px;
+    }
+
+    .hero h1{
+        font-size:32px;
+    }
+
+    .photo{
+        height:205px;
+        min-height:205px;
+        max-height:205px;
+    }
+
+    .photo img{
+        height:205px;
+        min-height:205px;
+    }
+
+    .result-photo{
+        height:215px;
+        min-height:215px;
+        max-height:215px;
+    }
+
+    .result-photo img{
+        height:215px;
+        min-height:215px;
+    }
+
+    .selection-count{
+        font-size:13px;
     }
 
 }
@@ -2960,6 +3282,35 @@ document.getElementById("analysisText");
 
 
 /* =========================================
+   IMAGE SAFETY
+   ========================================= */
+
+function protectImage(img){
+
+img.addEventListener(
+"error",
+()=>{
+
+const parent=
+img.parentElement;
+
+img.style.display="none";
+
+if(parent){
+
+parent.classList.add(
+"image-error"
+);
+
+}
+
+}
+);
+
+}
+
+
+/* =========================================
    RENDER AIRCRAFT
    ========================================= */
 
@@ -3018,7 +3369,9 @@ card.innerHTML=`
 
 <img
 src="${a.image}"
-alt="${a.name}">
+alt="${a.name}"
+loading="eager"
+decoding="async">
 
 <div class="photo-hud">
 
@@ -3085,6 +3438,11 @@ FIRST FLIGHT ${a.firstFlight}
 </div>
 
 `;
+
+const image=
+card.querySelector("img");
+
+protectImage(image);
 
 card.addEventListener(
 "click",
@@ -3156,6 +3514,7 @@ card.style.setProperty(
 card.style.setProperty(
 "--my",
 "50%"
+
 );
 
 });
@@ -3360,11 +3719,13 @@ analysisStatus.classList.add(
 );
 
 const messages=[
+
 "INITIALIZING ANALYSIS",
 "LOADING AIRFRAME DATA",
 "CALCULATING PERFORMANCE",
 "COMPARING PARAMETERS",
 "ANALYSIS COMPLETE"
+
 ];
 
 let index=0;
@@ -3450,7 +3811,9 @@ index+1
 
 <img
 src="${a.image}"
-alt="${a.name}">
+alt="${a.name}"
+loading="eager"
+decoding="async">
 
 </div>
 
@@ -3475,6 +3838,11 @@ DATA LINK ACTIVE
 </div>
 
 `;
+
+const image=
+card.querySelector("img");
+
+protectImage(image);
 
 vsArea.appendChild(card);
 
@@ -3670,9 +4038,11 @@ tableWrapper.classList.remove(
 
 setTimeout(
 ()=>{
+
 tableWrapper.classList.add(
 "visible"
 );
+
 },
 900
 );
@@ -3949,6 +4319,9 @@ const eased=
 const value=
 target*eased;
 
+const unit=
+element.dataset.unit || "";
+
 element.textContent=
 value.toLocaleString(
 "en-US",
@@ -3962,9 +4335,7 @@ decimals
 +
 " "
 +
-element.textContent
-.split(" ")
-.slice(-1)[0];
+unit;
 
 if(progress<1){
 
@@ -3973,15 +4344,6 @@ frame
 );
 
 }else{
-
-const unit=
-element.dataset.unit ||
-(
-element.textContent
-.match(/[a-zA-Z]+$/)
-||
-[""]
-)[0];
 
 element.textContent=
 target.toLocaleString(
@@ -4014,7 +4376,9 @@ frame
 }
 
 
-/* INITIAL RENDER */
+/* =========================================
+   INITIAL RENDER
+   ========================================= */
 
 render();
 

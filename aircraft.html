@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Aircraft | Flight Senses</title>
+<title>Aircraft Database | Flight Senses</title>
 
 <style>
 
@@ -20,25 +21,36 @@ html{
 
 body{
     font-family:Arial, Helvetica, sans-serif;
-    background:#050b14;
+    background:
+        radial-gradient(circle at 10% 10%,rgba(0,130,255,.10),transparent 30%),
+        radial-gradient(circle at 90% 40%,rgba(0,90,255,.08),transparent 30%),
+        #050b14;
     color:white;
+    overflow-x:hidden;
 }
 
-/* HEADER */
+a{
+    text-decoration:none;
+    color:inherit;
+}
+
+button,
+input{
+    font-family:inherit;
+}
+
+
+/* ================= HEADER ================= */
 
 header{
-    background:
-        radial-gradient(circle at top right,#12375d,transparent 45%),
-        linear-gradient(135deg,#07182b,#030a12);
-    padding:24px 20px;
-    border-bottom:1px solid #1e90ff;
+    padding:26px 7%;
+    background:rgba(3,10,20,.88);
+    border-bottom:1px solid rgba(255,255,255,.06);
 }
 
 .header-inner{
-    max-width:1200px;
+    max-width:1250px;
     margin:auto;
-    display:flex;
-    align-items:center;
 }
 
 .brand{
@@ -48,80 +60,76 @@ header{
 }
 
 .brand-icon{
-    width:55px;
-    height:55px;
+    width:52px;
+    height:52px;
+    border-radius:16px;
     display:flex;
     align-items:center;
     justify-content:center;
-    background:#1e90ff;
-    border-radius:15px;
-    font-size:30px;
-    box-shadow:0 0 25px rgba(30,144,255,.35);
+    font-size:25px;
+    background:linear-gradient(135deg,#087cff,#00b7ff);
+    box-shadow:0 0 30px rgba(0,140,255,.35);
 }
 
 .brand h1{
-    font-size:29px;
-    letter-spacing:2px;
+    font-size:22px;
+    letter-spacing:3px;
 }
 
 .brand p{
     margin-top:4px;
-    color:#75bfff;
-    font-size:11px;
+    color:#6caeff;
+    font-size:10px;
     letter-spacing:3px;
 }
 
-/* NAVBAR */
+
+/* ================= NAV ================= */
 
 nav{
     position:sticky;
     top:0;
-    z-index:100;
-    background:rgba(3,10,18,.94);
-    backdrop-filter:blur(12px);
-    border-bottom:1px solid #173552;
+    z-index:1000;
+    background:rgba(3,10,20,.78);
+    backdrop-filter:blur(18px);
+    border-bottom:1px solid rgba(255,255,255,.06);
 }
 
 .nav-container{
-    max-width:1200px;
+    max-width:1250px;
     margin:auto;
+    padding:13px 7%;
     display:flex;
     justify-content:center;
-    gap:7px;
-    padding:11px 20px;
+    gap:10px;
+    flex-wrap:wrap;
 }
 
-nav a{
-    color:#dcecff;
-    text-decoration:none;
-    font-weight:bold;
-    font-size:15px;
+.nav-container a{
     padding:11px 17px;
-    border-radius:9px;
+    border-radius:12px;
+    color:#9caec4;
+    font-size:14px;
     transition:.25s;
 }
 
-nav a:hover{
-    color:#4da6ff;
-    background:#0d263f;
-    transform:translateY(-2px);
-}
-
-nav a.active{
-    background:#1e90ff;
+.nav-container a:hover,
+.nav-container a.active{
     color:white;
-    box-shadow:0 5px 20px rgba(30,144,255,.25);
+    background:rgba(0,130,255,.14);
+    box-shadow:inset 0 0 0 1px rgba(0,150,255,.18);
 }
 
-/* HERO */
+
+/* ================= HERO ================= */
 
 .page-hero{
     position:relative;
-    overflow:hidden;
-    padding:90px 20px 65px;
+    max-width:1250px;
+    margin:auto;
+    padding:95px 7% 65px;
     text-align:center;
-    background:
-        radial-gradient(circle at center,#12365a 0%,#071421 45%,#050b14 100%);
+    overflow:hidden;
 }
 
 .page-hero::before{
@@ -129,536 +137,725 @@ nav a.active{
     position:absolute;
     width:500px;
     height:500px;
-    border:1px solid rgba(30,144,255,.12);
+    left:50%;
+    top:-300px;
+    transform:translateX(-50%);
+    background:rgba(0,130,255,.12);
+    filter:blur(100px);
     border-radius:50%;
-    top:-250px;
-    left:50%;
-    transform:translateX(-50%);
-}
-
-.page-hero::after{
-    content:"";
-    position:absolute;
-    width:700px;
-    height:1px;
-    background:linear-gradient(
-        90deg,
-        transparent,
-        rgba(30,144,255,.25),
-        transparent
-    );
-    bottom:25px;
-    left:50%;
-    transform:translateX(-50%);
 }
 
 .badge{
     position:relative;
-    z-index:2;
     display:inline-block;
-    padding:8px 15px;
-    border:1px solid #318bd4;
+    padding:9px 15px;
+    border:1px solid rgba(0,150,255,.3);
     border-radius:30px;
-    background:rgba(8,27,47,.75);
-    color:#8dccff;
-    font-size:12px;
+    color:#61b6ff;
+    background:rgba(0,130,255,.08);
+    font-size:11px;
     font-weight:bold;
-    letter-spacing:1px;
-    margin-bottom:18px;
+    letter-spacing:2px;
+    margin-bottom:22px;
 }
 
 .page-hero h2{
     position:relative;
-    z-index:2;
-    font-size:52px;
-    letter-spacing:-1px;
+    font-size:clamp(42px,7vw,76px);
+    line-height:1;
+    margin-bottom:22px;
+    letter-spacing:-3px;
 }
 
 .page-hero h2 span{
-    color:#4da6ff;
+    color:#1497ff;
+    text-shadow:0 0 35px rgba(0,145,255,.35);
 }
 
 .page-hero p{
     position:relative;
-    z-index:2;
-    max-width:700px;
-    margin:18px auto 0;
-    color:#9fb7cc;
-    font-size:17px;
-    line-height:1.7;
+    max-width:720px;
+    margin:auto;
+    color:#91a1b6;
+    line-height:1.8;
+    font-size:16px;
 }
 
-/* STATS */
+
+/* ================= STATS ================= */
 
 .stats{
-    max-width:1000px;
-    margin:-25px auto 50px;
-    position:relative;
-    z-index:5;
+    max-width:1050px;
+    margin:0 auto 65px;
+    padding:0 7%;
     display:grid;
     grid-template-columns:repeat(4,1fr);
-    gap:1px;
-    background:#1b4468;
-    border:1px solid #1b4468;
-    border-radius:16px;
-    overflow:hidden;
+    gap:14px;
 }
 
 .stat{
-    padding:25px 15px;
+    padding:24px 15px;
     text-align:center;
-    background:#081421;
+    border-radius:18px;
+    background:linear-gradient(145deg,rgba(255,255,255,.055),rgba(255,255,255,.018));
+    border:1px solid rgba(255,255,255,.07);
+    transition:.3s;
+}
+
+.stat:hover{
+    transform:translateY(-4px);
+    border-color:rgba(0,145,255,.3);
 }
 
 .stat strong{
     display:block;
-    color:#4da6ff;
-    font-size:27px;
+    font-size:29px;
+    color:#28a5ff;
     margin-bottom:6px;
 }
 
 .stat span{
-    color:#7f9bb2;
+    color:#8798ad;
     font-size:12px;
-    text-transform:uppercase;
     letter-spacing:1px;
 }
 
-/* MAIN */
 
-.container{
-    max-width:1150px;
+/* ================= DATABASE ================= */
+
+.database{
+    max-width:1250px;
     margin:auto;
-    padding:0 20px 90px;
+    padding:0 7% 90px;
 }
 
-.section-title{
-    text-align:center;
-    margin-bottom:30px;
+.section-heading{
+    margin-bottom:28px;
 }
 
-.section-title h2{
+.small-title{
+    color:#229cff;
+    font-size:11px;
+    letter-spacing:3px;
+    font-weight:bold;
+    margin-bottom:9px;
+}
+
+.section-heading h2{
     font-size:34px;
-    margin-bottom:10px;
 }
 
-.section-title h2 span{
-    color:#4da6ff;
+.section-heading p{
+    color:#7f91a7;
+    margin-top:9px;
 }
 
-.section-title p{
-    color:#8199ae;
-    font-size:15px;
+
+/* ================= CONTROL PANEL ================= */
+
+.control-panel{
+    padding:22px;
+    border-radius:22px;
+    background:linear-gradient(145deg,rgba(255,255,255,.055),rgba(255,255,255,.018));
+    border:1px solid rgba(255,255,255,.07);
+    margin-bottom:32px;
+    box-shadow:0 20px 60px rgba(0,0,0,.15);
 }
 
-/* SEARCH */
+.search-wrapper{
+    position:relative;
+    margin-bottom:20px;
+}
 
-.search-area{
-    max-width:760px;
-    margin:0 auto 35px;
+.search-icon{
+    position:absolute;
+    left:18px;
+    top:50%;
+    transform:translateY(-50%);
+    color:#4faeff;
+    font-size:19px;
 }
 
 .search-box{
     width:100%;
-    padding:17px 20px;
-    border-radius:12px;
-    border:1px solid #27567d;
+    padding:17px 20px 17px 50px;
+    border-radius:14px;
+    border:1px solid rgba(255,255,255,.08);
     outline:none;
-    background:#0a1929;
+    background:rgba(0,0,0,.25);
     color:white;
-    font-size:16px;
+    font-size:15px;
     transition:.25s;
 }
 
 .search-box::placeholder{
-    color:#718ba2;
+    color:#65778d;
 }
 
 .search-box:focus{
-    border-color:#1e90ff;
-    box-shadow:0 0 25px rgba(30,144,255,.14);
+    border-color:rgba(0,145,255,.55);
+    box-shadow:0 0 0 4px rgba(0,145,255,.07);
 }
 
-/* FILTERS */
+.filter-title{
+    color:#75879d;
+    font-size:11px;
+    letter-spacing:2px;
+    text-transform:uppercase;
+    margin:15px 0 10px;
+}
 
 .filters{
     display:flex;
-    justify-content:center;
+    gap:8px;
     flex-wrap:wrap;
-    gap:10px;
-    margin-bottom:45px;
 }
 
 .filter{
-    padding:9px 17px;
-    border-radius:30px;
-    border:1px solid #254c6c;
-    background:#0a1929;
-    color:#a9bfd4;
+    border:1px solid rgba(255,255,255,.07);
+    background:rgba(255,255,255,.025);
+    color:#8ea0b5;
+    padding:10px 15px;
+    border-radius:10px;
     cursor:pointer;
-    font-size:13px;
-    font-weight:bold;
     transition:.25s;
+    font-size:13px;
 }
 
-.filter:hover,
-.filter.active{
-    background:#1e90ff;
+.filter:hover{
     color:white;
-    border-color:#1e90ff;
+    border-color:rgba(0,145,255,.35);
 }
 
-/* AIRCRAFT GRID */
+.filter.active{
+    color:white;
+    background:linear-gradient(135deg,#087cff,#0061d5);
+    border-color:transparent;
+    box-shadow:0 8px 25px rgba(0,110,255,.2);
+}
+
+
+/* ================= RESULT ================= */
+
+.result-bar{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    margin:30px 0 18px;
+}
+
+.result-count{
+    color:#7f91a7;
+    font-size:13px;
+}
+
+.result-count strong{
+    color:white;
+}
+
+
+/* ================= GRID ================= */
 
 .aircraft-grid{
     display:grid;
     grid-template-columns:repeat(3,1fr);
-    gap:25px;
+    gap:22px;
 }
 
 .aircraft{
+    position:relative;
     overflow:hidden;
-    background:
-        linear-gradient(145deg,#0d2036,#071421);
-    border:1px solid #1b4468;
-    border-radius:16px;
-    transition:.3s;
-    box-shadow:0 8px 25px rgba(0,0,0,.15);
+    border-radius:23px;
+    background:linear-gradient(145deg,rgba(255,255,255,.065),rgba(255,255,255,.018));
+    border:1px solid rgba(255,255,255,.07);
+    transition:.35s;
+    animation:fadeUp .55s ease both;
 }
 
 .aircraft:hover{
-    transform:translateY(-8px);
-    border-color:#1e90ff;
-    box-shadow:0 18px 40px rgba(0,0,0,.35);
+    transform:translateY(-9px);
+    border-color:rgba(0,145,255,.4);
+    box-shadow:0 25px 60px rgba(0,80,180,.17);
 }
 
-.aircraft-image-wrap{
+
+/* ================= CARD IMAGE ================= */
+
+.card-image{
+    height:215px;
     position:relative;
     overflow:hidden;
+    background:#07101d;
 }
 
-.aircraft-image{
+.card-image::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:linear-gradient(to top,rgba(4,10,18,.9),transparent 55%);
+    pointer-events:none;
+}
+
+.card-image img{
     width:100%;
-    height:190px;
+    height:100%;
     object-fit:cover;
     display:block;
-    transition:.4s;
+    transition:.6s;
 }
 
-.aircraft:hover .aircraft-image{
-    transform:scale(1.05);
+.aircraft:hover .card-image img{
+    transform:scale(1.08);
 }
 
-.aircraft-tag{
+.card-number{
     position:absolute;
-    top:13px;
-    left:13px;
-    padding:6px 10px;
-    border-radius:20px;
-    background:rgba(3,10,18,.82);
-    border:1px solid rgba(77,166,255,.5);
-    color:#9bd2ff;
+    z-index:3;
+    top:14px;
+    left:14px;
+    width:35px;
+    height:35px;
+    border-radius:10px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:rgba(3,10,20,.7);
+    backdrop-filter:blur(8px);
+    border:1px solid rgba(255,255,255,.12);
+    color:#78bfff;
     font-size:11px;
     font-weight:bold;
 }
 
-.aircraft-content{
-    padding:23px;
+.card-tag{
+    position:absolute;
+    z-index:3;
+    top:14px;
+    right:14px;
+    padding:7px 10px;
+    border-radius:9px;
+    background:rgba(3,10,20,.72);
+    backdrop-filter:blur(8px);
+    border:1px solid rgba(255,255,255,.1);
+    color:#78bfff;
+    font-size:9px;
+    letter-spacing:1.3px;
+    font-weight:bold;
 }
 
-.aircraft h3{
-    margin-bottom:10px;
-    color:#62b3ff;
+
+/* ================= PLACEHOLDER ================= */
+
+.image-placeholder{
+    width:100%;
+    height:100%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-direction:column;
+    position:relative;
+    background:
+        linear-gradient(135deg,rgba(0,130,255,.09),rgba(0,0,0,.25)),
+        repeating-linear-gradient(
+            135deg,
+            transparent 0,
+            transparent 18px,
+            rgba(255,255,255,.025) 19px,
+            transparent 20px
+        );
+}
+
+.image-placeholder::before{
+    content:"✈";
+    font-size:58px;
+    color:rgba(50,165,255,.18);
+    transform:rotate(-8deg);
+}
+
+.image-placeholder span{
+    margin-top:10px;
+    color:#52667d;
+    font-size:9px;
+    letter-spacing:2px;
+    font-weight:bold;
+}
+
+
+/* ================= CARD CONTENT ================= */
+
+.card-content{
+    padding:22px;
+}
+
+.manufacturer{
+    color:#239eff;
+    font-size:10px;
+    letter-spacing:2px;
+    font-weight:bold;
+    margin-bottom:8px;
+}
+
+.card-content h3{
     font-size:22px;
+    margin-bottom:9px;
 }
 
-.aircraft p{
-    color:#a9bfd4;
-    line-height:1.55;
-    min-height:48px;
+.card-content p{
+    color:#7f91a7;
+    line-height:1.65;
+    font-size:13px;
+    min-height:64px;
+}
+
+.spec-row{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:8px;
+    margin:18px 0;
+}
+
+.mini-spec{
+    padding:10px;
+    border-radius:10px;
+    background:rgba(0,0,0,.2);
+    border:1px solid rgba(255,255,255,.045);
+}
+
+.mini-spec small{
+    display:block;
+    color:#607289;
+    font-size:9px;
+    text-transform:uppercase;
+    letter-spacing:1px;
+    margin-bottom:4px;
+}
+
+.mini-spec strong{
+    font-size:11px;
+    color:#dbe8f5;
 }
 
 .details-button{
-    display:inline-block;
-    margin-top:20px;
-    padding:10px 18px;
-    background:#1e90ff;
-    color:white;
-    text-decoration:none;
-    border-radius:8px;
+    display:block;
+    text-align:center;
+    padding:12px;
+    border-radius:11px;
+    background:rgba(0,130,255,.09);
+    border:1px solid rgba(0,145,255,.18);
+    color:#69baff;
+    font-size:12px;
     font-weight:bold;
-    font-size:14px;
     transition:.25s;
 }
 
 .details-button:hover{
-    background:#1681e8;
-    transform:translateX(3px);
+    background:#087cff;
+    color:white;
+    border-color:#087cff;
 }
 
-/* FEATURED AIRCRAFT */
+.coming-soon{
+    color:#52667d;
+    background:rgba(255,255,255,.025);
+    border-color:rgba(255,255,255,.06);
+    cursor:default;
+}
+
+.coming-soon:hover{
+    background:rgba(255,255,255,.025);
+    color:#52667d;
+    border-color:rgba(255,255,255,.06);
+}
+
+
+/* ================= NO RESULTS ================= */
+
+.no-results{
+    display:none;
+    padding:55px 20px;
+    text-align:center;
+    border-radius:20px;
+    border:1px dashed rgba(255,255,255,.1);
+    background:rgba(255,255,255,.02);
+}
+
+.no-results .icon{
+    font-size:35px;
+    margin-bottom:15px;
+}
+
+.no-results h3{
+    margin-bottom:8px;
+}
+
+.no-results p{
+    color:#75879c;
+    font-size:13px;
+}
+
+
+/* ================= FEATURED ================= */
 
 .featured{
-    margin-top:80px;
-    padding:0;
+    max-width:1250px;
+    margin:0 auto 90px;
+    padding:0 7%;
+}
+
+.featured-box{
+    min-height:450px;
+    position:relative;
     overflow:hidden;
     display:grid;
-    grid-template-columns:1.1fr 1fr;
-    background:
-        linear-gradient(135deg,#0b2948,#071421);
-    border:1px solid rgba(30,144,255,.35);
-    border-radius:22px;
-    box-shadow:0 20px 50px rgba(0,0,0,.3);
+    grid-template-columns:1.1fr .9fr;
+    border-radius:28px;
+    border:1px solid rgba(0,145,255,.18);
+    background:#07111e;
+    box-shadow:0 30px 90px rgba(0,0,0,.25);
 }
 
 .featured-image{
-    min-height:350px;
-    background-image:
-        linear-gradient(
-            90deg,
-            rgba(7,20,33,0),
-            rgba(7,20,33,.15)
-        ),
-        url("777.jpg");
-    background-size:cover;
-    background-position:center;
+    min-height:450px;
+    background:
+        linear-gradient(90deg,transparent 45%,#07111e 100%),
+        url("777.jpg") center/cover;
 }
 
 .featured-content{
-    padding:45px;
+    padding:60px 45px 60px 15px;
     display:flex;
     flex-direction:column;
     justify-content:center;
 }
 
 .featured-label{
-    color:#4da6ff;
-    font-size:12px;
+    color:#269fff;
+    font-size:10px;
+    letter-spacing:3px;
     font-weight:bold;
-    letter-spacing:2px;
-    margin-bottom:12px;
+    margin-bottom:14px;
 }
 
 .featured-content h2{
-    font-size:36px;
+    font-size:42px;
     margin-bottom:15px;
 }
 
 .featured-content p{
-    color:#a9bfd4;
-    line-height:1.7;
-    margin-bottom:25px;
+    color:#8496aa;
+    line-height:1.8;
+    font-size:14px;
 }
 
 .featured-specs{
     display:grid;
     grid-template-columns:repeat(2,1fr);
     gap:10px;
-    margin-bottom:25px;
+    margin:25px 0;
 }
 
 .spec{
     padding:13px;
-    background:rgba(3,10,18,.45);
-    border:1px solid #204666;
-    border-radius:10px;
+    border-radius:12px;
+    background:rgba(255,255,255,.035);
+    border:1px solid rgba(255,255,255,.05);
 }
 
 .spec small{
     display:block;
-    color:#6f8ba3;
-    font-size:10px;
-    text-transform:uppercase;
-    margin-bottom:4px;
+    color:#607289;
+    font-size:9px;
+    margin-bottom:5px;
 }
 
 .spec strong{
-    color:#dcecff;
-    font-size:14px;
+    font-size:13px;
 }
 
-/* CATEGORIES */
+.featured-button{
+    display:inline-block;
+    width:max-content;
+    padding:13px 20px;
+    border-radius:11px;
+    background:linear-gradient(135deg,#087cff,#0061d5);
+    font-size:12px;
+    font-weight:bold;
+    box-shadow:0 10px 30px rgba(0,110,255,.2);
+    transition:.25s;
+}
 
-.categories{
-    margin-top:80px;
+.featured-button:hover{
+    transform:translateY(-3px);
+}
+
+
+/* ================= CATEGORIES ================= */
+
+.category-section{
+    max-width:1250px;
+    margin:0 auto 90px;
+    padding:0 7%;
 }
 
 .category-grid{
     display:grid;
     grid-template-columns:repeat(4,1fr);
-    gap:18px;
+    gap:15px;
 }
 
 .category{
-    position:relative;
-    overflow:hidden;
-    padding:28px 20px;
-    min-height:145px;
-    display:flex;
-    flex-direction:column;
-    justify-content:flex-end;
-    border-radius:16px;
-    border:1px solid #1b4468;
-    background:
-        linear-gradient(145deg,#0d2036,#071421);
+    padding:25px 20px;
+    border-radius:18px;
+    background:linear-gradient(145deg,rgba(255,255,255,.045),rgba(255,255,255,.015));
+    border:1px solid rgba(255,255,255,.06);
     transition:.3s;
 }
 
 .category:hover{
-    transform:translateY(-6px);
-    border-color:#1e90ff;
-    box-shadow:0 15px 35px rgba(0,0,0,.3);
+    transform:translateY(-5px);
+    border-color:rgba(0,145,255,.3);
 }
 
 .category-icon{
-    position:absolute;
-    top:18px;
-    right:20px;
-    font-size:32px;
-    opacity:.7;
+    font-size:27px;
+    margin-bottom:15px;
 }
 
 .category h3{
-    color:#dcecff;
-    margin-bottom:5px;
+    font-size:17px;
+    margin-bottom:7px;
 }
 
 .category p{
-    color:#708ba2;
-    font-size:13px;
+    color:#73859b;
+    font-size:12px;
+    line-height:1.6;
 }
 
-/* MANUFACTURERS */
+
+/* ================= MANUFACTURERS ================= */
 
 .manufacturers{
-    margin-top:80px;
+    max-width:1250px;
+    margin:0 auto 90px;
+    padding:0 7%;
 }
 
 .manufacturer-grid{
     display:grid;
     grid-template-columns:repeat(3,1fr);
-    gap:20px;
+    gap:15px;
 }
 
-.manufacturer{
+.manufacturer-card{
+    padding:25px;
+    border-radius:18px;
     text-align:center;
-    padding:30px 20px;
-    background:#081421;
-    border:1px solid #1b4468;
-    border-radius:16px;
+    background:rgba(255,255,255,.025);
+    border:1px solid rgba(255,255,255,.06);
     transition:.3s;
 }
 
-.manufacturer:hover{
-    border-color:#1e90ff;
+.manufacturer-card:hover{
     transform:translateY(-5px);
+    border-color:rgba(0,145,255,.3);
 }
 
-.manufacturer-icon{
+.manufacturer-card strong{
+    display:block;
+    font-size:20px;
+    margin-bottom:7px;
+}
+
+.manufacturer-card span{
+    color:#718399;
+    font-size:12px;
+}
+
+
+/* ================= CTA ================= */
+
+.compare-feature{
+    max-width:950px;
+    margin:0 auto 100px;
+    padding:60px 30px;
+    text-align:center;
+    border-radius:28px;
+    background:
+        radial-gradient(circle at center,rgba(0,130,255,.13),transparent 65%),
+        rgba(255,255,255,.025);
+    border:1px solid rgba(0,145,255,.16);
+}
+
+.compare-icon{
+    font-size:38px;
+    margin-bottom:18px;
+}
+
+.compare-feature h2{
     font-size:35px;
     margin-bottom:12px;
 }
 
-.manufacturer h3{
-    color:#62b3ff;
-    margin-bottom:7px;
-}
-
-.manufacturer p{
-    color:#7f96aa;
-    font-size:13px;
-}
-
-/* COMPARE */
-
-.compare-feature{
-    margin-top:80px;
-    padding:45px 30px;
-    border-radius:20px;
-    background:
-        linear-gradient(135deg,#0a2848,#071522);
-    border:1px solid rgba(30,144,255,.35);
-    text-align:center;
-    box-shadow:0 15px 40px rgba(0,0,0,.25);
-}
-
-.compare-icon{
-    font-size:35px;
-    margin-bottom:10px;
-}
-
-.compare-feature h2{
-    font-size:30px;
-    margin-bottom:10px;
-}
-
 .compare-feature p{
-    color:#a9bfd4;
-    margin:0 auto 22px;
-    max-width:650px;
-    line-height:1.6;
+    max-width:620px;
+    margin:0 auto 25px;
+    color:#8192a7;
+    line-height:1.7;
+    font-size:14px;
 }
 
 .compare-button{
     display:inline-block;
-    padding:13px 25px;
-    background:#1e90ff;
-    color:white;
-    text-decoration:none;
-    border-radius:9px;
+    padding:14px 22px;
+    border-radius:12px;
+    background:linear-gradient(135deg,#087cff,#0061d5);
+    font-size:12px;
     font-weight:bold;
     transition:.25s;
 }
 
 .compare-button:hover{
-    background:#1681e8;
     transform:translateY(-3px);
-    box-shadow:0 10px 25px rgba(30,144,255,.2);
 }
 
-/* BACK */
 
-.back{
-    display:block;
-    width:fit-content;
-    margin:55px auto 0;
-    padding:13px 25px;
-    background:#0d263f;
-    border:1px solid #315c7e;
-    color:#dcecff;
-    text-decoration:none;
-    border-radius:9px;
-    font-weight:bold;
-    transition:.25s;
-}
-
-.back:hover{
-    background:#1e90ff;
-    border-color:#1e90ff;
-}
-
-/* FOOTER */
+/* ================= FOOTER ================= */
 
 footer{
-    background:#02070d;
-    border-top:1px solid #163451;
+    padding:35px 7%;
     text-align:center;
-    padding:35px 20px;
-}
-
-footer strong{
-    color:#4da6ff;
+    border-top:1px solid rgba(255,255,255,.06);
+    background:#030812;
 }
 
 footer p{
-    margin-top:8px;
-    color:#70869b;
-    font-size:13px;
+    color:#53667d;
+    font-size:11px;
+    letter-spacing:1px;
 }
 
-/* RESPONSIVE */
 
-@media(max-width:950px){
+/* ================= ANIMATION ================= */
+
+@keyframes fadeUp{
+
+    from{
+        opacity:0;
+        transform:translateY(18px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+
+}
+
+
+/* ================= RESPONSIVE ================= */
+
+@media(max-width:1000px){
 
     .aircraft-grid{
         grid-template-columns:repeat(2,1fr);
@@ -668,55 +865,65 @@ footer p{
         grid-template-columns:repeat(2,1fr);
     }
 
-    .featured{
+    .featured-box{
         grid-template-columns:1fr;
     }
 
     .featured-image{
-        min-height:280px;
+        min-height:300px;
+    }
+
+    .featured-content{
+        padding:35px;
     }
 
 }
 
-@media(max-width:650px){
+
+@media(max-width:700px){
+
+    header{
+        padding:20px 5%;
+    }
 
     .brand h1{
-        font-size:22px;
+        font-size:18px;
     }
 
     .brand p{
         font-size:8px;
-        letter-spacing:2px;
-    }
-
-    .brand-icon{
-        width:46px;
-        height:46px;
-        font-size:24px;
     }
 
     .nav-container{
-        overflow-x:auto;
-        justify-content:flex-start;
+        padding:10px 4%;
+        gap:4px;
     }
 
-    nav a{
-        white-space:nowrap;
-        padding:10px 13px;
-        font-size:13px;
+    .nav-container a{
+        padding:9px 10px;
+        font-size:11px;
     }
 
     .page-hero{
-        padding:65px 20px 50px;
+        padding:65px 6% 45px;
     }
 
     .page-hero h2{
-        font-size:39px;
+        letter-spacing:-2px;
     }
 
     .stats{
         grid-template-columns:repeat(2,1fr);
-        margin:0 20px 50px;
+        padding:0 5%;
+        margin-bottom:50px;
+    }
+
+    .database,
+    .featured,
+    .category-section,
+    .manufacturers{
+        padding-left:5%;
+        padding-right:5%;
     }
 
     .aircraft-grid{
@@ -724,19 +931,15 @@ footer p{
     }
 
     .category-grid{
-        grid-template-columns:1fr;
+        grid-template-columns:1fr 1fr;
     }
 
     .manufacturer-grid{
         grid-template-columns:1fr;
     }
 
-    .featured-content{
-        padding:30px 22px;
-    }
-
     .featured-content h2{
-        font-size:30px;
+        font-size:32px;
     }
 
     .featured-specs{
@@ -745,12 +948,28 @@ footer p{
 
 }
 
+
+@media(max-width:430px){
+
+    .category-grid{
+        grid-template-columns:1fr;
+    }
+
+    .featured-specs{
+        grid-template-columns:1fr;
+    }
+
+}
+
 </style>
+
 </head>
+
 
 <body>
 
-<!-- HEADER -->
+
+<!-- ================= HEADER ================= -->
 
 <header>
 
@@ -758,17 +977,13 @@ footer p{
 
 <div class="brand">
 
-<div class="brand-icon">
-✈️
-</div>
+<div class="brand-icon">✈️</div>
 
 <div>
 
 <h1>FLIGHT SENSES</h1>
 
-<p>
-THE WORLD OF AVIATION
-</p>
+<p>THE WORLD OF AVIATION</p>
 
 </div>
 
@@ -779,15 +994,13 @@ THE WORLD OF AVIATION
 </header>
 
 
-<!-- NAVIGATION -->
+<!-- ================= NAV ================= -->
 
 <nav>
 
 <div class="nav-container">
 
-<a href="index.html">
-🏠 Home
-</a>
+<a href="index.html">🏠 Home</a>
 
 <a href="aircraft.html" class="active">
 ✈️ Aircraft
@@ -810,12 +1023,12 @@ THE WORLD OF AVIATION
 </nav>
 
 
-<!-- HERO -->
+<!-- ================= HERO ================= -->
 
 <section class="page-hero">
 
 <div class="badge">
-✈️ AIRCRAFT DATABASE
+✈️ FLIGHT SENSES AIRCRAFT DATABASE
 </div>
 
 <h2>
@@ -823,62 +1036,113 @@ Explore <span>Aircraft</span>
 </h2>
 
 <p>
-Explore iconic passenger, cargo, military and
-special-purpose aircraft from different eras of aviation.
+Discover legendary airliners, enormous cargo aircraft,
+advanced wide-bodies and some of the most fascinating
+machines ever built.
 </p>
 
 </section>
 
 
-<!-- STATS -->
+<!-- ================= STATS ================= -->
 
 <div class="stats">
 
 <div class="stat">
+
+<strong>20</strong>
+
+<span>
+Aircraft
+</span>
+
+</div>
+
+
+<div class="stat">
+
 <strong>6+</strong>
-<span>Aircraft</span>
+
+<span>
+Manufacturers
+</span>
+
 </div>
 
-<div class="stat">
-<strong>3</strong>
-<span>Manufacturers</span>
-</div>
 
 <div class="stat">
+
 <strong>4</strong>
-<span>Categories</span>
+
+<span>
+Categories
+</span>
+
 </div>
+
 
 <div class="stat">
+
 <strong>∞</strong>
-<span>Stories</span>
-</div>
+
+<span>
+Stories
+</span>
 
 </div>
 
-
-<!-- MAIN -->
-
-<main class="container">
+</div>
 
 
-<!-- SEARCH -->
+<!-- ================= DATABASE ================= -->
 
-<div class="search-area">
+<section class="database">
+
+
+<div class="section-heading">
+
+<div class="small-title">
+AIRCRAFT DATABASE
+</div>
+
+<h2>
+Explore the Fleet
+</h2>
+
+<p>
+Search the collection or filter aircraft by manufacturer and role.
+</p>
+
+</div>
+
+
+<!-- CONTROL PANEL -->
+
+<div class="control-panel">
+
+
+<div class="search-wrapper">
+
+<div class="search-icon">
+⌕
+</div>
 
 <input
 type="text"
 id="search"
 class="search-box"
-placeholder="🔎 Search aircraft..."
+placeholder="Search aircraft, manufacturer or type..."
 >
 
 </div>
 
 
-<!-- FILTERS -->
+<div class="filter-title">
+Manufacturer
+</div>
 
-<div class="filters">
+
+<div class="filters manufacturer-filters">
 
 <button class="filter active" data-filter="all">
 All
@@ -896,56 +1160,110 @@ Airbus
 Antonov
 </button>
 
-</div>
-
-
-<!-- AIRCRAFT TITLE -->
-
-<div class="section-title">
-
-<h2>
-Aircraft <span>Collection</span>
-</h2>
-
-<p>
-Explore some of the most iconic aircraft in aviation history.
-</p>
+<button class="filter" data-filter="other">
+Other
+</button>
 
 </div>
 
 
-<!-- AIRCRAFT GRID -->
+<div class="filter-title">
+Aircraft Role
+</div>
+
+
+<div class="filters role-filters">
+
+<button class="filter active" data-role="all">
+All Roles
+</button>
+
+<button class="filter" data-role="passenger">
+Passenger
+</button>
+
+<button class="filter" data-role="cargo">
+Cargo
+</button>
+
+<button class="filter" data-role="special">
+Special
+</button>
+
+</div>
+
+</div>
+
+
+<div class="result-bar">
+
+<div class="result-count">
+
+Showing
+<strong id="resultCount">
+20
+</strong>
+aircraft
+
+</div>
+
+</div>
+
+
+<!-- ================= AIRCRAFT ================= -->
 
 <div class="aircraft-grid" id="aircraftGrid">
 
 
-<!-- BOEING 747 -->
+<!-- 01 -->
 
-<div class="aircraft" data-manufacturer="boeing">
-
-<div class="aircraft-image-wrap">
-
-<img
-src="747.jpg"
-alt="Boeing 747"
-class="aircraft-image"
+<div
+class="aircraft"
+data-manufacturer="boeing"
+data-role="passenger"
+data-search="boeing 747 747-8 queen skies passenger"
 >
 
-<div class="aircraft-tag">
+<div class="card-image">
+
+<img src="747.jpg" alt="Boeing 747-8">
+
+<div class="card-number">01</div>
+
+<div class="card-tag">
+PASSENGER
+</div>
+
+</div>
+
+
+<div class="card-content">
+
+<div class="manufacturer">
 BOEING
 </div>
 
-</div>
-
-<div class="aircraft-content">
-
 <h3>
-Boeing 747
+Boeing 747-8
 </h3>
 
 <p>
-The legendary Queen of the Skies and one of the most recognizable aircraft ever built.
+The final generation of the legendary Queen of the Skies.
 </p>
+
+<div class="spec-row">
+
+<div class="mini-spec">
+<small>Type</small>
+<strong>Wide-body</strong>
+</div>
+
+<div class="mini-spec">
+<small>Engines</small>
+<strong>4 Engines</strong>
+</div>
+
+</div>
 
 <a
 href="boeing-747.html"
@@ -959,33 +1277,55 @@ View Details →
 </div>
 
 
-<!-- AIRBUS A380 -->
+<!-- 02 -->
 
-<div class="aircraft" data-manufacturer="airbus">
-
-<div class="aircraft-image-wrap">
-
-<img
-src="a380.jpg"
-alt="Airbus A380"
-class="aircraft-image"
+<div
+class="aircraft"
+data-manufacturer="airbus"
+data-role="passenger"
+data-search="airbus a380 superjumbo passenger"
 >
 
-<div class="aircraft-tag">
+<div class="card-image">
+
+<img src="a380.jpg" alt="Airbus A380">
+
+<div class="card-number">02</div>
+
+<div class="card-tag">
+PASSENGER
+</div>
+
+</div>
+
+
+<div class="card-content">
+
+<div class="manufacturer">
 AIRBUS
 </div>
-
-</div>
-
-<div class="aircraft-content">
 
 <h3>
 Airbus A380
 </h3>
 
 <p>
-The famous double-deck wide-body aircraft and the largest passenger airliner ever produced.
+The world's largest production passenger airliner.
 </p>
+
+<div class="spec-row">
+
+<div class="mini-spec">
+<small>Type</small>
+<strong>Superjumbo</strong>
+</div>
+
+<div class="mini-spec">
+<small>Engines</small>
+<strong>4 Engines</strong>
+</div>
+
+</div>
 
 <a
 href="airbus-a380.html"
@@ -999,33 +1339,55 @@ View Details →
 </div>
 
 
-<!-- BOEING 777 -->
+<!-- 03 -->
 
-<div class="aircraft" data-manufacturer="boeing">
-
-<div class="aircraft-image-wrap">
-
-<img
-src="777.jpg"
-alt="Boeing 777"
-class="aircraft-image"
+<div
+class="aircraft"
+data-manufacturer="boeing"
+data-role="passenger"
+data-search="boeing 777 777-300er triple seven passenger"
 >
 
-<div class="aircraft-tag">
+<div class="card-image">
+
+<img src="777.jpg" alt="Boeing 777-300ER">
+
+<div class="card-number">03</div>
+
+<div class="card-tag">
+PASSENGER
+</div>
+
+</div>
+
+
+<div class="card-content">
+
+<div class="manufacturer">
 BOEING
 </div>
 
-</div>
-
-<div class="aircraft-content">
-
 <h3>
-Boeing 777
+Boeing 777-300ER
 </h3>
 
 <p>
-One of the most successful wide-body aircraft families in modern commercial aviation.
+One of the most successful long-haul wide-body aircraft.
 </p>
+
+<div class="spec-row">
+
+<div class="mini-spec">
+<small>Type</small>
+<strong>Wide-body</strong>
+</div>
+
+<div class="mini-spec">
+<small>Engines</small>
+<strong>2 Engines</strong>
+</div>
+
+</div>
 
 <a
 href="boeing-777.html"
@@ -1039,33 +1401,55 @@ View Details →
 </div>
 
 
-<!-- AIRBUS A350 -->
+<!-- 04 -->
 
-<div class="aircraft" data-manufacturer="airbus">
-
-<div class="aircraft-image-wrap">
-
-<img
-src="a350.jpg"
-alt="Airbus A350"
-class="aircraft-image"
+<div
+class="aircraft"
+data-manufacturer="airbus"
+data-role="passenger"
+data-search="airbus a350 a350-1000 passenger wide body"
 >
 
-<div class="aircraft-tag">
+<div class="card-image">
+
+<img src="a350.jpg" alt="Airbus A350">
+
+<div class="card-number">04</div>
+
+<div class="card-tag">
+PASSENGER
+</div>
+
+</div>
+
+
+<div class="card-content">
+
+<div class="manufacturer">
 AIRBUS
 </div>
 
-</div>
-
-<div class="aircraft-content">
-
 <h3>
-Airbus A350
+Airbus A350-1000
 </h3>
 
 <p>
-A modern long-range wide-body aircraft designed with advanced materials and technology.
+A modern composite wide-body designed for long-haul operations.
 </p>
+
+<div class="spec-row">
+
+<div class="mini-spec">
+<small>Type</small>
+<strong>Wide-body</strong>
+</div>
+
+<div class="mini-spec">
+<small>Engines</small>
+<strong>2 Engines</strong>
+</div>
+
+</div>
 
 <a
 href="airbus-a350.html"
@@ -1079,33 +1463,55 @@ View Details →
 </div>
 
 
-<!-- BOEING 787 -->
+<!-- 05 -->
 
-<div class="aircraft" data-manufacturer="boeing">
-
-<div class="aircraft-image-wrap">
-
-<img
-src="787.jpg"
-alt="Boeing 787 Dreamliner"
-class="aircraft-image"
+<div
+class="aircraft"
+data-manufacturer="boeing"
+data-role="passenger"
+data-search="boeing 787 dreamliner 787-9 passenger"
 >
 
-<div class="aircraft-tag">
+<div class="card-image">
+
+<img src="787.jpg" alt="Boeing 787 Dreamliner">
+
+<div class="card-number">05</div>
+
+<div class="card-tag">
+PASSENGER
+</div>
+
+</div>
+
+
+<div class="card-content">
+
+<div class="manufacturer">
 BOEING
 </div>
 
-</div>
-
-<div class="aircraft-content">
-
 <h3>
-Boeing 787 Dreamliner
+Boeing 787-9 Dreamliner
 </h3>
 
 <p>
-A modern long-range wide-body aircraft known for its composite construction and efficiency.
+A composite-rich long-range aircraft built around efficiency.
 </p>
+
+<div class="spec-row">
+
+<div class="mini-spec">
+<small>Type</small>
+<strong>Wide-body</strong>
+</div>
+
+<div class="mini-spec">
+<small>Engines</small>
+<strong>2 Engines</strong>
+</div>
+
+</div>
 
 <a
 href="boeing-787.html"
@@ -1119,33 +1525,55 @@ View Details →
 </div>
 
 
-<!-- ANTONOV AN-225 -->
+<!-- 06 -->
 
-<div class="aircraft" data-manufacturer="antonov">
-
-<div class="aircraft-image-wrap">
-
-<img
-src="an225.jpg"
-alt="Antonov An-225 Mriya"
-class="aircraft-image"
+<div
+class="aircraft"
+data-manufacturer="antonov"
+data-role="cargo"
+data-search="antonov an-225 mriya cargo largest aircraft"
 >
 
-<div class="aircraft-tag">
+<div class="card-image">
+
+<img src="an225.jpg" alt="Antonov An-225">
+
+<div class="card-number">06</div>
+
+<div class="card-tag">
+CARGO
+</div>
+
+</div>
+
+
+<div class="card-content">
+
+<div class="manufacturer">
 ANTONOV
 </div>
 
-</div>
-
-<div class="aircraft-content">
-
 <h3>
-Antonov An-225
+An-225 Mriya
 </h3>
 
 <p>
-The legendary six-engine heavy-lift aircraft created for transporting extremely large cargo.
+The legendary six-engine heavy transport aircraft.
 </p>
+
+<div class="spec-row">
+
+<div class="mini-spec">
+<small>Type</small>
+<strong>Heavy Cargo</strong>
+</div>
+
+<div class="mini-spec">
+<small>Engines</small>
+<strong>6 Engines</strong>
+</div>
+
+</div>
 
 <a
 href="antonov-an225.html"
@@ -1159,12 +1587,887 @@ View Details →
 </div>
 
 
+<!-- 07 -->
+
+<div
+class="aircraft"
+data-manufacturer="boeing"
+data-role="passenger"
+data-search="boeing 777-9 777x ge9x passenger"
+>
+
+<div class="card-image">
+
+<img src="777.jpg" alt="Boeing 777-9">
+
+<div class="card-number">07</div>
+
+<div class="card-tag">
+PASSENGER
+</div>
+
 </div>
 
 
-<!-- FEATURED AIRCRAFT -->
+<div class="card-content">
+
+<div class="manufacturer">
+BOEING
+</div>
+
+<h3>
+Boeing 777-9
+</h3>
+
+<p>
+The largest member of Boeing's next-generation 777X family.
+</p>
+
+<div class="spec-row">
+
+<div class="mini-spec">
+<small>Type</small>
+<strong>Wide-body</strong>
+</div>
+
+<div class="mini-spec">
+<small>Engine</small>
+<strong>GE9X</strong>
+</div>
+
+</div>
+
+<div class="details-button coming-soon">
+Details Coming Soon
+</div>
+
+</div>
+
+</div>
+
+
+<!-- 08 -->
+
+<div
+class="aircraft"
+data-manufacturer="boeing"
+data-role="passenger"
+data-search="boeing 737 max 8 narrow body passenger"
+>
+
+<div class="card-image">
+
+<div class="image-placeholder">
+<span>IMAGE COMING SOON</span>
+</div>
+
+<div class="card-number">08</div>
+
+<div class="card-tag">
+PASSENGER
+</div>
+
+</div>
+
+
+<div class="card-content">
+
+<div class="manufacturer">
+BOEING
+</div>
+
+<h3>
+Boeing 737 MAX 8
+</h3>
+
+<p>
+A modern member of the 737 family focused on efficiency.
+</p>
+
+<div class="spec-row">
+
+<div class="mini-spec">
+<small>Type</small>
+<strong>Narrow-body</strong>
+</div>
+
+<div class="mini-spec">
+<small>Engines</small>
+<strong>2 Engines</strong>
+</div>
+
+</div>
+
+<div class="details-button coming-soon">
+Details Coming Soon
+</div>
+
+</div>
+
+</div>
+
+
+<!-- 09 -->
+
+<div
+class="aircraft"
+data-manufacturer="boeing"
+data-role="passenger"
+data-search="boeing 757 757-200 narrow body passenger"
+>
+
+<div class="card-image">
+
+<div class="image-placeholder">
+<span>IMAGE COMING SOON</span>
+</div>
+
+<div class="card-number">09</div>
+
+<div class="card-tag">
+PASSENGER
+</div>
+
+</div>
+
+
+<div class="card-content">
+
+<div class="manufacturer">
+BOEING
+</div>
+
+<h3>
+Boeing 757-200
+</h3>
+
+<p>
+A distinctive narrow-body aircraft known for its strong performance.
+</p>
+
+<div class="spec-row">
+
+<div class="mini-spec">
+<small>Type</small>
+<strong>Narrow-body</strong>
+</div>
+
+<div class="mini-spec">
+<small>Engines</small>
+<strong>2 Engines</strong>
+</div>
+
+</div>
+
+<div class="details-button coming-soon">
+Details Coming Soon
+</div>
+
+</div>
+
+</div>
+
+
+<!-- 10 -->
+
+<div
+class="aircraft"
+data-manufacturer="boeing"
+data-role="passenger"
+data-search="boeing 767 767-300er wide body passenger"
+>
+
+<div class="card-image">
+
+<div class="image-placeholder">
+<span>IMAGE COMING SOON</span>
+</div>
+
+<div class="card-number">10</div>
+
+<div class="card-tag">
+PASSENGER
+</div>
+
+</div>
+
+
+<div class="card-content">
+
+<div class="manufacturer">
+BOEING
+</div>
+
+<h3>
+Boeing 767-300ER
+</h3>
+
+<p>
+A proven twin-engine wide-body with a long aviation history.
+</p>
+
+<div class="spec-row">
+
+<div class="mini-spec">
+<small>Type</small>
+<strong>Wide-body</strong>
+</div>
+
+<div class="mini-spec">
+<small>Engines</small>
+<strong>2 Engines</strong>
+</div>
+
+</div>
+
+<div class="details-button coming-soon">
+Details Coming Soon
+</div>
+
+</div>
+
+</div>
+
+
+<!-- 11 -->
+
+<div
+class="aircraft"
+data-manufacturer="airbus"
+data-role="passenger"
+data-search="airbus a330 a330-900neo neo wide body passenger"
+>
+
+<div class="card-image">
+
+<div class="image-placeholder">
+<span>IMAGE COMING SOON</span>
+</div>
+
+<div class="card-number">11</div>
+
+<div class="card-tag">
+PASSENGER
+</div>
+
+</div>
+
+
+<div class="card-content">
+
+<div class="manufacturer">
+AIRBUS
+</div>
+
+<h3>
+Airbus A330-900neo
+</h3>
+
+<p>
+A modernized version of Airbus's established A330 family.
+</p>
+
+<div class="spec-row">
+
+<div class="mini-spec">
+<small>Type</small>
+<strong>Wide-body</strong>
+</div>
+
+<div class="mini-spec">
+<small>Engines</small>
+<strong>2 Engines</strong>
+</div>
+
+</div>
+
+<div class="details-button coming-soon">
+Details Coming Soon
+</div>
+
+</div>
+
+</div>
+
+
+<!-- 12 -->
+
+<div
+class="aircraft"
+data-manufacturer="airbus"
+data-role="passenger"
+data-search="airbus a340 a340-600 quad engine passenger"
+>
+
+<div class="card-image">
+
+<div class="image-placeholder">
+<span>IMAGE COMING SOON</span>
+</div>
+
+<div class="card-number">12</div>
+
+<div class="card-tag">
+PASSENGER
+</div>
+
+</div>
+
+
+<div class="card-content">
+
+<div class="manufacturer">
+AIRBUS
+</div>
+
+<h3>
+Airbus A340-600
+</h3>
+
+<p>
+A stretched four-engine wide-body from the A340 family.
+</p>
+
+<div class="spec-row">
+
+<div class="mini-spec">
+<small>Type</small>
+<strong>Wide-body</strong>
+</div>
+
+<div class="mini-spec">
+<small>Engines</small>
+<strong>4 Engines</strong>
+</div>
+
+</div>
+
+<div class="details-button coming-soon">
+Details Coming Soon
+</div>
+
+</div>
+
+</div>
+
+
+<!-- 13 -->
+
+<div
+class="aircraft"
+data-manufacturer="airbus"
+data-role="passenger"
+data-search="airbus a320 neo narrow body passenger"
+>
+
+<div class="card-image">
+
+<div class="image-placeholder">
+<span>IMAGE COMING SOON</span>
+</div>
+
+<div class="card-number">13</div>
+
+<div class="card-tag">
+PASSENGER
+</div>
+
+</div>
+
+
+<div class="card-content">
+
+<div class="manufacturer">
+AIRBUS
+</div>
+
+<h3>
+Airbus A320neo
+</h3>
+
+<p>
+One of the world's most widely used modern narrow-body aircraft.
+</p>
+
+<div class="spec-row">
+
+<div class="mini-spec">
+<small>Type</small>
+<strong>Narrow-body</strong>
+</div>
+
+<div class="mini-spec">
+<small>Engines</small>
+<strong>2 Engines</strong>
+</div>
+
+</div>
+
+<div class="details-button coming-soon">
+Details Coming Soon
+</div>
+
+</div>
+
+</div>
+
+
+<!-- 14 -->
+
+<div
+class="aircraft"
+data-manufacturer="airbus"
+data-role="passenger"
+data-search="airbus a321 xlr extra long range passenger"
+>
+
+<div class="card-image">
+
+<div class="image-placeholder">
+<span>IMAGE COMING SOON</span>
+</div>
+
+<div class="card-number">14</div>
+
+<div class="card-tag">
+PASSENGER
+</div>
+
+</div>
+
+
+<div class="card-content">
+
+<div class="manufacturer">
+AIRBUS
+</div>
+
+<h3>
+Airbus A321XLR
+</h3>
+
+<p>
+A long-range narrow-body designed for more distant routes.
+</p>
+
+<div class="spec-row">
+
+<div class="mini-spec">
+<small>Type</small>
+<strong>Narrow-body</strong>
+</div>
+
+<div class="mini-spec">
+<small>Engines</small>
+<strong>2 Engines</strong>
+</div>
+
+</div>
+
+<div class="details-button coming-soon">
+Details Coming Soon
+</div>
+
+</div>
+
+</div>
+
+
+<!-- 15 -->
+
+<div
+class="aircraft"
+data-manufacturer="airbus"
+data-role="special"
+data-search="airbus beluga xl transport special"
+>
+
+<div class="card-image">
+
+<div class="image-placeholder">
+<span>IMAGE COMING SOON</span>
+</div>
+
+<div class="card-number">15</div>
+
+<div class="card-tag">
+SPECIAL
+</div>
+
+</div>
+
+
+<div class="card-content">
+
+<div class="manufacturer">
+AIRBUS
+</div>
+
+<h3>
+Airbus BelugaXL
+</h3>
+
+<p>
+A distinctive oversized transport aircraft built for Airbus logistics.
+</p>
+
+<div class="spec-row">
+
+<div class="mini-spec">
+<small>Role</small>
+<strong>Transport</strong>
+</div>
+
+<div class="mini-spec">
+<small>Engines</small>
+<strong>2 Engines</strong>
+</div>
+
+</div>
+
+<div class="details-button coming-soon">
+Details Coming Soon
+</div>
+
+</div>
+
+</div>
+
+
+<!-- 16 -->
+
+<div
+class="aircraft"
+data-manufacturer="antonov"
+data-role="cargo"
+data-search="antonov an-124 ruslan heavy cargo"
+>
+
+<div class="card-image">
+
+<div class="image-placeholder">
+<span>IMAGE COMING SOON</span>
+</div>
+
+<div class="card-number">16</div>
+
+<div class="card-tag">
+CARGO
+</div>
+
+</div>
+
+
+<div class="card-content">
+
+<div class="manufacturer">
+ANTONOV
+</div>
+
+<h3>
+Antonov An-124 Ruslan
+</h3>
+
+<p>
+A massive heavy-lift transport aircraft designed for outsized cargo.
+</p>
+
+<div class="spec-row">
+
+<div class="mini-spec">
+<small>Type</small>
+<strong>Heavy Cargo</strong>
+</div>
+
+<div class="mini-spec">
+<small>Engines</small>
+<strong>4 Engines</strong>
+</div>
+
+</div>
+
+<div class="details-button coming-soon">
+Details Coming Soon
+</div>
+
+</div>
+
+</div>
+
+
+<!-- 17 -->
+
+<div
+class="aircraft"
+data-manufacturer="antonov"
+data-role="cargo"
+data-search="antonov an-22 antei cargo turboprop"
+>
+
+<div class="card-image">
+
+<div class="image-placeholder">
+<span>IMAGE COMING SOON</span>
+</div>
+
+<div class="card-number">17</div>
+
+<div class="card-tag">
+CARGO
+</div>
+
+</div>
+
+
+<div class="card-content">
+
+<div class="manufacturer">
+ANTONOV
+</div>
+
+<h3>
+Antonov An-22 Antei
+</h3>
+
+<p>
+A historic heavy transport aircraft powered by four turboprop engines.
+</p>
+
+<div class="spec-row">
+
+<div class="mini-spec">
+<small>Type</small>
+<strong>Heavy Cargo</strong>
+</div>
+
+<div class="mini-spec">
+<small>Engines</small>
+<strong>4 Props</strong>
+</div>
+
+</div>
+
+<div class="details-button coming-soon">
+Details Coming Soon
+</div>
+
+</div>
+
+</div>
+
+
+<!-- 18 -->
+
+<div
+class="aircraft"
+data-manufacturer="other"
+data-role="cargo"
+data-search="lockheed c-5m galaxy super galaxy cargo military transport"
+>
+
+<div class="card-image">
+
+<div class="image-placeholder">
+<span>IMAGE COMING SOON</span>
+</div>
+
+<div class="card-number">18</div>
+
+<div class="card-tag">
+CARGO
+</div>
+
+</div>
+
+
+<div class="card-content">
+
+<div class="manufacturer">
+LOCKHEED MARTIN
+</div>
+
+<h3>
+C-5M Super Galaxy
+</h3>
+
+<p>
+A giant strategic airlifter designed to move enormous loads.
+</p>
+
+<div class="spec-row">
+
+<div class="mini-spec">
+<small>Type</small>
+<strong>Strategic Lift</strong>
+</div>
+
+<div class="mini-spec">
+<small>Engines</small>
+<strong>4 Engines</strong>
+</div>
+
+</div>
+
+<div class="details-button coming-soon">
+Details Coming Soon
+</div>
+
+</div>
+
+</div>
+
+
+<!-- 19 -->
+
+<div
+class="aircraft"
+data-manufacturer="other"
+data-role="cargo"
+data-search="ilyushin il-76 cargo transport aircraft"
+>
+
+<div class="card-image">
+
+<div class="image-placeholder">
+<span>IMAGE COMING SOON</span>
+</div>
+
+<div class="card-number">19</div>
+
+<div class="card-tag">
+CARGO
+</div>
+
+</div>
+
+
+<div class="card-content">
+
+<div class="manufacturer">
+ILYUSHIN
+</div>
+
+<h3>
+Ilyushin Il-76
+</h3>
+
+<p>
+A famous four-engine transport aircraft used for heavy cargo missions.
+</p>
+
+<div class="spec-row">
+
+<div class="mini-spec">
+<small>Type</small>
+<strong>Transport</strong>
+</div>
+
+<div class="mini-spec">
+<small>Engines</small>
+<strong>4 Engines</strong>
+</div>
+
+</div>
+
+<div class="details-button coming-soon">
+Details Coming Soon
+</div>
+
+</div>
+
+</div>
+
+
+<!-- 20 -->
+
+<div
+class="aircraft"
+data-manufacturer="other"
+data-role="special"
+data-search="concorde supersonic passenger aircraft british french"
+>
+
+<div class="card-image">
+
+<div class="image-placeholder">
+<span>IMAGE COMING SOON</span>
+</div>
+
+<div class="card-number">20</div>
+
+<div class="card-tag">
+SUPERSONIC
+</div>
+
+</div>
+
+
+<div class="card-content">
+
+<div class="manufacturer">
+AÉROSPATIALE / BAC
+</div>
+
+<h3>
+Concorde
+</h3>
+
+<p>
+The legendary supersonic passenger aircraft that transformed aviation history.
+</p>
+
+<div class="spec-row">
+
+<div class="mini-spec">
+<small>Type</small>
+<strong>Supersonic</strong>
+</div>
+
+<div class="mini-spec">
+<small>Engines</small>
+<strong>4 Engines</strong>
+</div>
+
+</div>
+
+<div class="details-button coming-soon">
+Details Coming Soon
+</div>
+
+</div>
+
+</div>
+
+
+</div>
+
+
+<!-- NO RESULTS -->
+
+<div class="no-results" id="noResults">
+
+<div class="icon">
+🔎
+</div>
+
+<h3>
+No aircraft found
+</h3>
+
+<p>
+Try another aircraft name, manufacturer or category.
+</p>
+
+</div>
+
+</section>
+
+
+<!-- ================= FEATURED ================= -->
 
 <section class="featured">
+
+<div class="featured-box">
 
 <div class="featured-image"></div>
 
@@ -1179,7 +2482,9 @@ Boeing 777-9
 </h2>
 
 <p>
-A new generation of the 777 family, combining a huge wide-body cabin with the powerful GE9X engines and advanced composite wings.
+The next generation of the legendary Triple Seven,
+combining an enormous wide-body cabin with the powerful
+GE9X engines and advanced composite wings.
 </p>
 
 <div class="featured-specs">
@@ -1208,31 +2513,38 @@ A new generation of the 777 family, combining a huge wide-body cabin with the po
 
 <a
 href="boeing-777.html"
-class="details-button"
+class="featured-button"
 >
 Explore 777 →
 </a>
 
 </div>
 
+</div>
+
 </section>
 
 
-<!-- CATEGORIES -->
+<!-- ================= CATEGORIES ================= -->
 
-<section class="categories">
+<section class="category-section">
 
-<div class="section-title">
+<div class="section-heading">
+
+<div class="small-title">
+AIRCRAFT ROLES
+</div>
 
 <h2>
-Explore by <span>Category</span>
+Explore by Category
 </h2>
 
 <p>
-Different aircraft, different missions.
+Different aircraft are built for very different missions.
 </p>
 
 </div>
+
 
 <div class="category-grid">
 
@@ -1247,7 +2559,7 @@ Passenger
 </h3>
 
 <p>
-Aircraft designed to carry passengers around the world.
+Aircraft designed to carry people across short and long distances.
 </p>
 
 </div>
@@ -1264,7 +2576,7 @@ Cargo
 </h3>
 
 <p>
-Aircraft built to transport heavy and oversized cargo.
+Heavy transport aircraft built to move large and specialized loads.
 </p>
 
 </div>
@@ -1281,7 +2593,7 @@ Supersonic
 </h3>
 
 <p>
-Aircraft designed to travel faster than the speed of sound.
+Aircraft capable of exceeding the speed of sound.
 </p>
 
 </div>
@@ -1298,7 +2610,7 @@ Special
 </h3>
 
 <p>
-Experimental, unique and record-breaking aircraft.
+Unique aircraft created for unusual or specialized missions.
 </p>
 
 </div>
@@ -1308,71 +2620,64 @@ Experimental, unique and record-breaking aircraft.
 </section>
 
 
-<!-- MANUFACTURERS -->
+<!-- ================= MANUFACTURERS ================= -->
 
 <section class="manufacturers">
 
-<div class="section-title">
+<div class="section-heading">
+
+<div class="small-title">
+MANUFACTURERS
+</div>
 
 <h2>
-Major <span>Manufacturers</span>
+The Names Behind Aviation
 </h2>
 
 <p>
-Some of the biggest names in aircraft development.
+Explore aircraft from some of the world's most recognizable manufacturers.
 </p>
 
 </div>
+
 
 <div class="manufacturer-grid">
 
-<div class="manufacturer">
+<div class="manufacturer-card">
 
-<div class="manufacturer-icon">
-✈️
-</div>
-
-<h3>
+<strong>
 Boeing
-</h3>
+</strong>
 
-<p>
-American aerospace manufacturer behind aircraft such as the 747, 777 and 787.
-</p>
+<span>
+American aerospace manufacturer
+</span>
 
 </div>
 
 
-<div class="manufacturer">
+<div class="manufacturer-card">
 
-<div class="manufacturer-icon">
-🛩️
-</div>
-
-<h3>
+<strong>
 Airbus
-</h3>
+</strong>
 
-<p>
-European aerospace manufacturer known for aircraft such as the A380 and A350.
-</p>
+<span>
+European aerospace manufacturer
+</span>
 
 </div>
 
 
-<div class="manufacturer">
+<div class="manufacturer-card">
 
-<div class="manufacturer-icon">
-🏗️
-</div>
-
-<h3>
+<strong>
 Antonov
-</h3>
+</strong>
 
-<p>
-Ukrainian aircraft manufacturer famous for heavy-lift aircraft including the An-225.
-</p>
+<span>
+Heavy transport aircraft heritage
+</span>
 
 </div>
 
@@ -1381,7 +2686,7 @@ Ukrainian aircraft manufacturer famous for heavy-lift aircraft including the An-
 </section>
 
 
-<!-- COMPARE -->
+<!-- ================= COMPARE ================= -->
 
 <div class="compare-feature">
 
@@ -1394,7 +2699,8 @@ Compare Aircraft
 </h2>
 
 <p>
-Put legendary aircraft head-to-head and explore their differences in size, range, capacity, performance and more.
+Put legendary aircraft head-to-head and explore their
+differences in size, range, capacity, performance and more.
 </p>
 
 <a
@@ -1407,73 +2713,94 @@ Open Aircraft Compare →
 </div>
 
 
-<!-- BACK -->
-
-<a
-class="back"
-href="index.html"
->
-← Back to Home
-</a>
-
-
-</main>
-
-
-<!-- FOOTER -->
+<!-- ================= FOOTER ================= -->
 
 <footer>
 
-<strong>
-✈️ FLIGHT SENSES
-</strong>
-
 <p>
-©️ 2026 Flight Senses |
-Aviation • Aircraft • Airlines
+© 2026 FLIGHT SENSES — THE WORLD OF AVIATION
 </p>
 
 </footer>
 
 
-<!-- SEARCH + FILTER SCRIPT -->
+<!-- ================= JAVASCRIPT ================= -->
 
 <script>
 
-const search = document.getElementById("search");
+const search =
+document.getElementById("search");
 
-const aircraft = document.querySelectorAll(".aircraft");
+const aircraft =
+document.querySelectorAll(".aircraft");
 
-const filters = document.querySelectorAll(".filter");
+const manufacturerFilters =
+document.querySelectorAll(
+".manufacturer-filters .filter"
+);
 
-let activeFilter = "all";
+const roleFilters =
+document.querySelectorAll(
+".role-filters .filter"
+);
+
+const resultCount =
+document.getElementById("resultCount");
+
+const noResults =
+document.getElementById("noResults");
+
+
+let activeManufacturer = "all";
+
+let activeRole = "all";
 
 
 function updateAircraft(){
 
     const searchValue =
-        search.value.toLowerCase().trim();
+        search.value
+        .toLowerCase()
+        .trim();
+
+    let visibleCount = 0;
+
 
     aircraft.forEach(function(card){
-
-        const name =
-            card.querySelector("h3")
-            .textContent
-            .toLowerCase();
 
         const manufacturer =
             card.dataset.manufacturer;
 
+        const role =
+            card.dataset.role;
+
+        const searchableText =
+            card.dataset.search.toLowerCase();
+
+
         const matchesSearch =
-            name.includes(searchValue);
+            searchableText.includes(searchValue);
 
-        const matchesFilter =
-            activeFilter === "all" ||
-            manufacturer === activeFilter;
 
-        if(matchesSearch && matchesFilter){
+        const matchesManufacturer =
+            activeManufacturer === "all" ||
+            manufacturer === activeManufacturer;
+
+
+        const matchesRole =
+            activeRole === "all" ||
+            role === activeRole;
+
+
+        if(
+            matchesSearch &&
+            matchesManufacturer &&
+            matchesRole
+        ){
 
             card.style.display = "";
+
+            visibleCount++;
 
         }else{
 
@@ -1483,8 +2810,27 @@ function updateAircraft(){
 
     });
 
+
+    resultCount.textContent =
+        visibleCount;
+
+
+    if(visibleCount === 0){
+
+        noResults.style.display =
+            "block";
+
+    }else{
+
+        noResults.style.display =
+            "none";
+
+    }
+
 }
 
+
+/* SEARCH */
 
 search.addEventListener(
     "input",
@@ -1492,29 +2838,75 @@ search.addEventListener(
 );
 
 
-filters.forEach(function(button){
+/* MANUFACTURER FILTER */
+
+manufacturerFilters.forEach(
+function(button){
 
     button.addEventListener(
-        "click",
-        function(){
+    "click",
+    function(){
 
-            filters.forEach(function(btn){
+        manufacturerFilters.forEach(
+        function(btn){
 
-                btn.classList.remove("active");
+            btn.classList.remove(
+                "active"
+            );
 
-            });
+        });
 
-            button.classList.add("active");
 
-            activeFilter =
-                button.dataset.filter;
+        button.classList.add(
+            "active"
+        );
 
-            updateAircraft();
 
-        }
-    );
+        activeManufacturer =
+            button.dataset.filter;
+
+
+        updateAircraft();
+
+    });
 
 });
+
+
+/* ROLE FILTER */
+
+roleFilters.forEach(
+function(button){
+
+    button.addEventListener(
+    "click",
+    function(){
+
+        roleFilters.forEach(
+        function(btn){
+
+            btn.classList.remove(
+                "active"
+            );
+
+        });
+
+
+        button.classList.add(
+            "active"
+        );
+
+
+        activeRole =
+            button.dataset.role;
+
+
+        updateAircraft();
+
+    });
+
+});
+
 
 </script>
 

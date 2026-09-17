@@ -30,10 +30,27 @@ body{
 
 header{
     background:
-        radial-gradient(circle at top right,#12375d,transparent 45%),
+        radial-gradient(circle at 85% 0%,#164a7a,transparent 38%),
+        radial-gradient(circle at 10% 100%,#0b2945,transparent 35%),
         linear-gradient(135deg,#07182b,#030a12);
+
     padding:24px 20px;
     border-bottom:1px solid #1e90ff;
+    position:relative;
+    overflow:hidden;
+}
+
+header::after{
+    content:"";
+    position:absolute;
+    width:300px;
+    height:300px;
+    right:-100px;
+    top:-220px;
+    background:#1e90ff;
+    opacity:.08;
+    filter:blur(80px);
+    border-radius:50%;
 }
 
 .header-inner{
@@ -42,6 +59,8 @@ header{
     display:flex;
     align-items:center;
     justify-content:space-between;
+    position:relative;
+    z-index:2;
 }
 
 .brand{
@@ -56,10 +75,28 @@ header{
     display:flex;
     align-items:center;
     justify-content:center;
-    background:#1e90ff;
+
+    background:
+        linear-gradient(145deg,#2da1ff,#116fc4);
+
     border-radius:15px;
     font-size:30px;
-    box-shadow:0 0 25px rgba(30,144,255,.35);
+
+    box-shadow:
+        0 0 25px rgba(30,144,255,.35),
+        inset 0 1px 1px rgba(255,255,255,.2);
+
+    animation:brandFloat 4s ease-in-out infinite;
+}
+
+@keyframes brandFloat{
+    0%,100%{
+        transform:translateY(0);
+    }
+
+    50%{
+        transform:translateY(-3px);
+    }
 }
 
 .brand h1{
@@ -83,17 +120,21 @@ nav{
     position:sticky;
     top:0;
     z-index:100;
-    background:rgba(3,10,18,.94);
-    backdrop-filter:blur(12px);
-    border-bottom:1px solid #173552;
+
+    background:rgba(3,10,18,.82);
+    backdrop-filter:blur(16px);
+
+    border-bottom:1px solid rgba(30,144,255,.18);
 }
 
 .nav-container{
     max-width:1200px;
     margin:auto;
+
     display:flex;
     justify-content:center;
     gap:7px;
+
     padding:11px 20px;
 }
 
@@ -102,8 +143,27 @@ nav a{
     text-decoration:none;
     font-weight:bold;
     font-size:15px;
+
     padding:11px 17px;
     border-radius:9px;
+
+    transition:.25s;
+
+    position:relative;
+}
+
+nav a::after{
+    content:"";
+    position:absolute;
+    left:50%;
+    bottom:4px;
+
+    width:0;
+    height:2px;
+
+    background:#4da6ff;
+
+    transform:translateX(-50%);
     transition:.25s;
 }
 
@@ -113,10 +173,19 @@ nav a:hover{
     transform:translateY(-2px);
 }
 
+nav a:hover::after{
+    width:35%;
+}
+
 nav a.active{
-    background:#1e90ff;
+    background:
+        linear-gradient(135deg,#2196f3,#1476c9);
+
     color:white;
-    box-shadow:0 5px 20px rgba(30,144,255,.25);
+
+    box-shadow:
+        0 5px 20px rgba(30,144,255,.25),
+        inset 0 1px 1px rgba(255,255,255,.15);
 }
 
 /* =========================
@@ -125,52 +194,74 @@ nav a.active{
 
 .hero{
     min-height:680px;
+
     display:flex;
     flex-direction:column;
     justify-content:center;
     align-items:center;
+
     text-align:center;
+
     padding:100px 20px;
+
     position:relative;
     overflow:hidden;
 
     background:
         linear-gradient(
-            rgba(3,10,18,.38),
-            rgba(3,10,18,.94)
+            180deg,
+            rgba(2,8,15,.22),
+            rgba(3,10,18,.58) 45%,
+            rgba(3,10,18,.96)
         ),
         url("747.jpg");
 
     background-size:cover;
     background-position:center;
+
+    isolation:isolate;
 }
 
 .hero::before{
     content:"";
     position:absolute;
-    width:600px;
-    height:600px;
+
+    width:700px;
+    height:700px;
+
     background:#1e90ff;
-    opacity:.08;
-    filter:blur(120px);
+    opacity:.09;
+
+    filter:blur(140px);
     border-radius:50%;
-    top:-250px;
-    left:-150px;
+
+    top:-320px;
+    left:-180px;
+
     animation:glowMove 8s ease-in-out infinite alternate;
+
+    z-index:-1;
 }
 
 .hero::after{
     content:"";
     position:absolute;
-    width:500px;
-    height:500px;
+
+    width:600px;
+    height:600px;
+
     background:#4da6ff;
-    opacity:.06;
-    filter:blur(120px);
+    opacity:.07;
+
+    filter:blur(140px);
     border-radius:50%;
-    bottom:-250px;
-    right:-150px;
+
+    bottom:-330px;
+    right:-180px;
+
     animation:glowMove2 10s ease-in-out infinite alternate;
+
+    z-index:-1;
 }
 
 @keyframes glowMove{
@@ -179,7 +270,7 @@ nav a.active{
     }
 
     to{
-        transform:translate(120px,80px);
+        transform:translate(140px,90px);
     }
 }
 
@@ -189,8 +280,29 @@ nav a.active{
     }
 
     to{
-        transform:translate(-100px,-70px);
+        transform:translate(-120px,-80px);
     }
+}
+
+/* Horizon light */
+
+.hero-horizon{
+    position:absolute;
+    left:0;
+    right:0;
+    bottom:19%;
+
+    height:1px;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(77,166,255,.45),
+            transparent
+        );
+
+    opacity:.6;
 }
 
 /* =========================
@@ -199,26 +311,42 @@ nav a.active{
 
 .flying-plane{
     position:absolute;
+
     top:18%;
     left:-100px;
+
     font-size:34px;
-    opacity:.45;
+    opacity:.48;
+
     animation:flyAcross 14s linear infinite;
+
     z-index:1;
+
+    filter:
+        drop-shadow(0 0 8px rgba(77,166,255,.5));
 }
 
 @keyframes flyAcross{
 
     0%{
-        transform:translateX(0) translateY(0) rotate(-5deg);
+        transform:
+            translateX(0)
+            translateY(0)
+            rotate(-5deg);
     }
 
     50%{
-        transform:translateX(55vw) translateY(-25px) rotate(-3deg);
+        transform:
+            translateX(55vw)
+            translateY(-25px)
+            rotate(-3deg);
     }
 
     100%{
-        transform:translateX(110vw) translateY(-50px) rotate(-5deg);
+        transform:
+            translateX(110vw)
+            translateY(-50px)
+            rotate(-5deg);
     }
 
 }
@@ -228,78 +356,170 @@ nav a.active{
 ========================= */
 
 .hero-content{
-    max-width:850px;
+    max-width:900px;
+
     position:relative;
     z-index:2;
+
+    animation:heroContentIn 1s ease-out;
+}
+
+@keyframes heroContentIn{
+    from{
+        opacity:0;
+        transform:translateY(25px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
 }
 
 .hero-badge{
-    display:inline-block;
+    display:inline-flex;
+    align-items:center;
+    gap:7px;
+
     padding:9px 17px;
-    border:1px solid #318bd4;
+
+    border:1px solid rgba(77,166,255,.55);
     border-radius:30px;
-    background:rgba(8,27,47,.78);
+
+    background:rgba(8,27,47,.72);
+
     color:#8dccff;
+
     font-size:13px;
     font-weight:bold;
     letter-spacing:1px;
+
     margin-bottom:22px;
-    box-shadow:0 0 25px rgba(30,144,255,.08);
+
+    box-shadow:
+        0 0 25px rgba(30,144,255,.08),
+        inset 0 1px 1px rgba(255,255,255,.05);
+
+    backdrop-filter:blur(8px);
 }
 
 .hero h2{
     margin:0;
+
     font-size:68px;
     line-height:1.05;
     letter-spacing:-2px;
-    text-shadow:0 5px 25px black;
+
+    text-shadow:
+        0 5px 25px black,
+        0 0 50px rgba(0,0,0,.35);
+
     animation:heroTitleIn 1s ease-out;
 }
 
 .hero h2 span{
     color:#4da6ff;
-    text-shadow:0 0 30px rgba(77,166,255,.25);
+
+    text-shadow:
+        0 0 30px rgba(77,166,255,.25);
 }
 
 .hero p{
     max-width:700px;
+
     margin:25px auto 0;
+
     color:#d7e9fb;
+
     font-size:20px;
     line-height:1.7;
+
+    text-shadow:0 2px 10px rgba(0,0,0,.5);
+
     animation:heroTextIn 1.2s ease-out;
 }
 
 .hero-buttons{
     margin-top:35px;
+
     display:flex;
     justify-content:center;
+
     gap:15px;
     flex-wrap:wrap;
+
     animation:heroButtonsIn 1.4s ease-out;
 }
 
 .button{
     display:inline-block;
+
     padding:15px 28px;
-    background:#1e90ff;
+
+    background:
+        linear-gradient(135deg,#2498f5,#116fc4);
+
     color:white;
     text-decoration:none;
+
     border-radius:9px;
+
     font-weight:bold;
+
     transition:.3s;
-    box-shadow:0 8px 25px rgba(30,144,255,.22);
+
+    box-shadow:
+        0 8px 25px rgba(30,144,255,.22),
+        inset 0 1px 1px rgba(255,255,255,.15);
+
+    position:relative;
+    overflow:hidden;
+}
+
+.button::before{
+    content:"";
+
+    position:absolute;
+
+    top:0;
+    left:-100%;
+
+    width:70%;
+    height:100%;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(255,255,255,.18),
+            transparent
+        );
+
+    transform:skewX(-20deg);
+
+    transition:.6s;
+}
+
+.button:hover::before{
+    left:130%;
 }
 
 .button:hover{
-    background:#1681e8;
+    background:
+        linear-gradient(135deg,#32a4ff,#1681e8);
+
     transform:translateY(-4px);
-    box-shadow:0 12px 30px rgba(30,144,255,.32);
+
+    box-shadow:
+        0 12px 30px rgba(30,144,255,.32),
+        0 0 20px rgba(30,144,255,.12);
 }
 
 .button.secondary{
-    background:rgba(7,20,34,.75);
+    background:rgba(7,20,34,.72);
+
     border:1px solid #477ca8;
+
     box-shadow:none;
 }
 
@@ -311,12 +531,16 @@ nav a.active{
 
 .hero-info{
     margin-top:32px;
+
     display:flex;
     justify-content:center;
     align-items:center;
+
     gap:14px;
     flex-wrap:wrap;
+
     color:#a9c4dc;
+
     font-size:13px;
     letter-spacing:.5px;
 }
@@ -332,22 +556,33 @@ nav a.active{
 
 .hero-scroll{
     position:absolute;
+
     bottom:25px;
     left:50%;
+
     transform:translateX(-50%);
+
     z-index:3;
+
     color:#8fa9c2;
+
     font-size:11px;
     letter-spacing:2px;
+
     text-transform:uppercase;
+
     animation:scrollPulse 2s ease-in-out infinite;
 }
 
 .hero-scroll::after{
     content:"↓";
+
     display:block;
+
     margin-top:7px;
+
     font-size:18px;
+
     color:#4da6ff;
 }
 
@@ -414,6 +649,7 @@ nav a.active{
 .stats-section{
     padding:0 20px;
     margin-top:-45px;
+
     position:relative;
     z-index:5;
 }
@@ -421,31 +657,56 @@ nav a.active{
 .stats{
     max-width:1000px;
     margin:auto;
+
     display:grid;
     grid-template-columns:repeat(4,1fr);
-    background:rgba(8,24,40,.94);
-    border:1px solid #1b4b73;
+
+    background:rgba(8,24,40,.78);
+
+    border:1px solid rgba(27,75,115,.9);
     border-radius:18px;
+
     overflow:hidden;
-    backdrop-filter:blur(12px);
-    box-shadow:0 20px 50px rgba(0,0,0,.4);
+
+    backdrop-filter:blur(15px);
+
+    box-shadow:
+        0 20px 50px rgba(0,0,0,.4),
+        0 0 35px rgba(30,144,255,.04);
 }
 
 .stat{
     padding:28px 15px;
+
     text-align:center;
+
     border-right:1px solid #183b59;
+
+    transition:.3s;
 }
 
 .stat:last-child{
     border-right:none;
 }
 
+.stat:hover{
+    background:rgba(18,55,93,.25);
+}
+
 .stat strong{
     display:block;
+
     font-size:30px;
+
     color:#4da6ff;
+
     margin-bottom:7px;
+
+    transition:.3s;
+}
+
+.stat:hover strong{
+    transform:scale(1.12);
 }
 
 .stat span{
@@ -464,18 +725,42 @@ nav a.active{
 
 .section-title{
     max-width:700px;
+
     margin:0 auto 50px;
+
+    position:relative;
+}
+
+.section-title::after{
+    content:"";
+
+    display:block;
+
+    width:45px;
+    height:2px;
+
+    background:#1e90ff;
+
+    margin:18px auto 0;
+
+    box-shadow:0 0 12px rgba(30,144,255,.45);
 }
 
 .section-title h2{
     margin:0 0 12px;
+
     font-size:36px;
+
+    letter-spacing:-.5px;
 }
 
 .section-title p{
     margin:0;
+
     color:#8fa9c2;
+
     font-size:16px;
+    line-height:1.6;
 }
 
 /* =========================
@@ -484,18 +769,27 @@ nav a.active{
 
 .cards{
     max-width:1100px;
+
     margin:auto;
+
     display:grid;
+
     grid-template-columns:repeat(3,1fr);
+
     gap:20px;
 }
 
 .card{
     position:relative;
+
     overflow:hidden;
+
     min-height:215px;
+
     padding:30px 24px;
+
     text-align:left;
+
     text-decoration:none;
     color:white;
 
@@ -504,29 +798,76 @@ nav a.active{
 
     border:1px solid #1b4468;
     border-radius:16px;
-    transition:.35s;
+
+    transition:
+        transform .35s,
+        border-color .35s,
+        box-shadow .35s;
+
+    isolation:isolate;
 }
 
 .card::before{
     content:"";
+
     position:absolute;
-    width:150px;
-    height:150px;
-    right:-60px;
-    top:-60px;
+
+    width:180px;
+    height:180px;
+
+    right:-80px;
+    top:-80px;
+
     background:#1e90ff;
+
     opacity:.08;
+
     border-radius:50%;
-    transition:.4s;
+
+    transition:.45s;
+
+    z-index:-1;
+}
+
+.card::after{
+    content:"";
+
+    position:absolute;
+
+    left:-120%;
+
+    top:0;
+
+    width:80%;
+    height:100%;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(77,166,255,.08),
+            transparent
+        );
+
+    transform:skewX(-20deg);
+
+    transition:.6s;
+
+    z-index:-1;
 }
 
 .card:hover::before{
-    transform:scale(1.5);
-    opacity:.13;
+    transform:scale(1.6);
+    opacity:.14;
+}
+
+.card:hover::after{
+    left:130%;
 }
 
 .card:hover{
     transform:translateY(-9px);
+
     border-color:#1e90ff;
 
     box-shadow:
@@ -537,133 +878,446 @@ nav a.active{
 .card-icon{
     font-size:34px;
     margin-bottom:18px;
+
+    transition:.3s;
+}
+
+.card:hover .card-icon{
+    transform:scale(1.08) translateY(-2px);
 }
 
 .card h3{
     margin:0 0 10px;
+
     color:#62b3ff;
+
     font-size:21px;
 }
 
 .card p{
     margin:0;
+
     color:#a9bfd4;
+
     line-height:1.55;
+
     font-size:14px;
 }
 
 .card-arrow{
     position:absolute;
+
     right:20px;
     bottom:18px;
+
     color:#4da6ff;
+
     font-size:20px;
+
     transition:.3s;
 }
 
 .card:hover .card-arrow{
-    transform:translateX(5px);
+    transform:translateX(7px);
 }
 
 /* =========================
-   FEATURED AIRCRAFT
+   FEATURED AIRCRAFT SHOWCASE
 ========================= */
 
-.featured{
+.aircraft-showcase{
+
     max-width:1100px;
+
+    min-height:430px;
+
     margin:auto;
+
     display:grid;
-    grid-template-columns:1.2fr 1fr;
-    min-height:380px;
+
+    grid-template-columns:1.15fr 1fr;
+
+    position:relative;
+
     overflow:hidden;
 
-    border-radius:20px;
+    border-radius:22px;
+
     border:1px solid #1b4b73;
 
     background:#081725;
 
-    box-shadow:0 20px 50px rgba(0,0,0,.3);
+    box-shadow:
+        0 25px 60px rgba(0,0,0,.4),
+        0 0 35px rgba(30,144,255,.05);
 }
 
-.featured-image{
-    min-height:380px;
+
+/* IMAGE */
+
+.showcase-image{
+
+    min-height:430px;
+
+    position:relative;
+
+    background-image:url("777.jpg");
+
+    background-size:cover;
+
+    background-position:center;
+
+    transition:
+        opacity .4s ease,
+        transform .7s ease;
+
+    overflow:hidden;
+}
+
+.showcase-image::after{
+
+    content:"";
+
+    position:absolute;
+
+    inset:0;
 
     background:
         linear-gradient(
             90deg,
-            transparent,
-            rgba(8,23,37,.15)
-        ),
-        url("777.jpg");
+            transparent 35%,
+            rgba(8,23,37,.05) 50%,
+            rgba(8,23,37,.72) 100%
+        );
 
-    background-size:cover;
-    background-position:center;
 }
 
-.featured-content{
+.showcase-image.changing{
+
+    opacity:.25;
+
+    transform:scale(1.035);
+}
+
+
+/* IMAGE LABEL */
+
+.showcase-image-label{
+
+    position:absolute;
+
+    left:22px;
+    bottom:22px;
+
+    z-index:3;
+
+    padding:8px 13px;
+
+    border-radius:20px;
+
+    background:rgba(3,10,18,.65);
+
+    border:1px solid rgba(77,166,255,.4);
+
+    color:#cde8ff;
+
+    font-size:11px;
+
+    font-weight:bold;
+
+    letter-spacing:1px;
+
+    backdrop-filter:blur(8px);
+}
+
+
+/* CONTENT */
+
+.showcase-content{
+
     padding:45px;
+
     display:flex;
+
     flex-direction:column;
+
     justify-content:center;
+
     text-align:left;
 
     background:
-        radial-gradient(circle at top right,#12375d,transparent 55%),
+        radial-gradient(
+            circle at top right,
+            #12375d,
+            transparent 55%
+        ),
         #081725;
+
+    position:relative;
+
+    z-index:2;
 }
 
-.featured-label{
+.showcase-label{
+
     color:#4da6ff;
+
     font-size:12px;
+
     font-weight:bold;
+
     letter-spacing:2px;
+
     margin-bottom:12px;
 }
 
-.featured-content h3{
+.showcase-content h3{
+
     margin:0 0 12px;
-    font-size:32px;
+
+    font-size:34px;
+
+    letter-spacing:-.5px;
+
+    transition:.3s;
 }
 
-.featured-content p{
+.showcase-content p{
+
     color:#9fb7cc;
+
     line-height:1.6;
+
     margin:0 0 25px;
+
+    max-width:450px;
 }
 
-.featured-content .button{
-    align-self:flex-start;
-}
 
-/* FEATURE SPECS */
+/* SPECS */
 
-.featured-specs{
+.showcase-specs{
+
     display:grid;
+
     grid-template-columns:repeat(2,1fr);
+
     gap:10px;
+
     margin-bottom:25px;
 }
 
-.spec{
+.showcase-spec{
+
     padding:12px;
+
     background:rgba(7,20,34,.65);
+
     border:1px solid #183b59;
+
     border-radius:9px;
+
+    transition:.25s;
 }
 
-.spec span{
+.showcase-spec:hover{
+
+    border-color:#2d78ad;
+
+    background:rgba(13,38,63,.75);
+
+}
+
+.showcase-spec span{
+
     display:block;
+
     color:#70869b;
+
     font-size:10px;
+
     text-transform:uppercase;
+
     letter-spacing:1px;
+
     margin-bottom:4px;
 }
 
-.spec strong{
+.showcase-spec strong{
+
     color:#dcecff;
+
     font-size:14px;
 }
+
+
+/* ARROWS */
+
+.showcase-arrow{
+
+    position:absolute;
+
+    top:50%;
+
+    transform:translateY(-50%);
+
+    width:46px;
+
+    height:46px;
+
+    z-index:10;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    border-radius:50%;
+
+    border:1px solid rgba(255,255,255,.2);
+
+    background:rgba(3,10,18,.68);
+
+    color:white;
+
+    font-size:31px;
+
+    line-height:1;
+
+    cursor:pointer;
+
+    backdrop-filter:blur(10px);
+
+    transition:.25s;
+
+    padding:0;
+}
+
+.showcase-arrow:hover{
+
+    background:#1e90ff;
+
+    border-color:#1e90ff;
+
+    box-shadow:
+        0 0 22px rgba(30,144,255,.4);
+
+    transform:
+        translateY(-50%)
+        scale(1.08);
+}
+
+.showcase-arrow.prev{
+
+    left:18px;
+}
+
+.showcase-arrow.next{
+
+    right:18px;
+}
+
+
+/* DOTS */
+
+.showcase-dots{
+
+    margin-top:20px;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    gap:9px;
+}
+
+.showcase-dot{
+
+    width:9px;
+
+    height:9px;
+
+    padding:0;
+
+    border:none;
+
+    border-radius:50%;
+
+    background:#31506b;
+
+    cursor:pointer;
+
+    transition:.3s;
+}
+
+.showcase-dot:hover{
+
+    background:#5b86a8;
+
+}
+
+.showcase-dot.active{
+
+    width:28px;
+
+    border-radius:10px;
+
+    background:#1e90ff;
+
+    box-shadow:
+        0 0 12px rgba(30,144,255,.4);
+}
+
+
+/* PROGRESS LINE */
+
+.showcase-progress{
+
+    position:absolute;
+
+    left:0;
+
+    bottom:0;
+
+    height:3px;
+
+    width:100%;
+
+    background:rgba(255,255,255,.05);
+
+    z-index:8;
+
+}
+
+.showcase-progress-bar{
+
+    height:100%;
+
+    width:0;
+
+    background:#1e90ff;
+
+    box-shadow:
+        0 0 12px rgba(30,144,255,.5);
+
+    animation:showcaseProgress 7s linear infinite;
+}
+
+@keyframes showcaseProgress{
+
+    from{
+        width:0;
+    }
+
+    to{
+        width:100%;
+    }
+
+}
+
 
 /* =========================
    NUMBERS
@@ -675,21 +1329,26 @@ nav a.active{
 
 .numbers{
     max-width:1100px;
+
     margin:auto;
 
     display:grid;
+
     grid-template-columns:repeat(4,1fr);
+
     gap:15px;
 }
 
 .number-box{
     padding:30px 20px;
+
     text-align:center;
 
     background:
         linear-gradient(145deg,#0b2035,#071421);
 
     border:1px solid #1b4468;
+
     border-radius:16px;
 
     transition:.3s;
@@ -697,19 +1356,28 @@ nav a.active{
 
 .number-box:hover{
     transform:translateY(-6px);
+
     border-color:#1e90ff;
+
+    box-shadow:
+        0 12px 30px rgba(0,0,0,.25);
 }
 
 .number-box strong{
     display:block;
+
     color:#4da6ff;
+
     font-size:30px;
+
     margin-bottom:8px;
 }
 
 .number-box span{
     color:#8fa9c2;
+
     font-size:12px;
+
     letter-spacing:.5px;
 }
 
@@ -719,7 +1387,9 @@ nav a.active{
 
 .didyouknow{
     max-width:1100px;
+
     margin:auto;
+
     padding:50px;
 
     position:relative;
@@ -734,40 +1404,53 @@ nav a.active{
         radial-gradient(circle at right,#12375d,transparent 50%),
         linear-gradient(135deg,#0b2239,#06111e);
 
-    box-shadow:0 20px 50px rgba(0,0,0,.3);
+    box-shadow:
+        0 20px 50px rgba(0,0,0,.3);
 }
 
 .didyouknow::before{
     content:"?";
+
     position:absolute;
+
     right:35px;
     top:-35px;
 
     font-size:190px;
+
     font-weight:bold;
 
     color:#1e90ff;
+
     opacity:.06;
 }
 
 .did-label{
     color:#4da6ff;
+
     font-size:12px;
     font-weight:bold;
+
     letter-spacing:2px;
+
     margin-bottom:12px;
 }
 
 .didyouknow h3{
     margin:0 0 15px;
+
     font-size:30px;
 }
 
 .didyouknow p{
     max-width:750px;
+
     margin:0;
+
     color:#a9bfd4;
+
     line-height:1.7;
+
     font-size:16px;
 }
 
@@ -777,22 +1460,28 @@ nav a.active{
 
 .quick-compare{
     max-width:1100px;
+
     margin:auto;
 
     display:grid;
+
     grid-template-columns:1fr 120px 1fr;
+
     align-items:center;
+
     gap:20px;
 }
 
 .aircraft-mini{
     padding:30px;
+
     text-align:center;
 
     background:
         linear-gradient(145deg,#0d2036,#071421);
 
     border:1px solid #1b4468;
+
     border-radius:18px;
 
     transition:.3s;
@@ -800,22 +1489,30 @@ nav a.active{
 
 .aircraft-mini:hover{
     transform:translateY(-7px);
+
     border-color:#1e90ff;
+
+    box-shadow:
+        0 15px 35px rgba(0,0,0,.3);
 }
 
 .aircraft-mini .emoji{
     font-size:40px;
+
     margin-bottom:15px;
 }
 
 .aircraft-mini h3{
     margin:0 0 8px;
+
     font-size:23px;
 }
 
 .aircraft-mini p{
     margin:0;
+
     color:#8fa9c2;
+
     font-size:13px;
 }
 
@@ -831,12 +1528,26 @@ nav a.active{
 
     border-radius:50%;
 
-    background:#1e90ff;
+    background:
+        linear-gradient(135deg,#2498f5,#116fc4);
 
     font-size:20px;
     font-weight:bold;
 
-    box-shadow:0 0 30px rgba(30,144,255,.25);
+    box-shadow:
+        0 0 30px rgba(30,144,255,.25);
+
+    animation:vsPulse 3s ease-in-out infinite;
+}
+
+@keyframes vsPulse{
+    0%,100%{
+        box-shadow:0 0 25px rgba(30,144,255,.2);
+    }
+
+    50%{
+        box-shadow:0 0 40px rgba(30,144,255,.4);
+    }
 }
 
 /* =========================
@@ -849,31 +1560,41 @@ nav a.active{
 
 .feature-box{
     max-width:1100px;
+
     margin:auto;
 
     padding:45px;
 
     display:flex;
+
     align-items:center;
     justify-content:space-between;
 
     gap:30px;
 
     background:
+        radial-gradient(circle at 90% 50%,#12375d,transparent 40%),
         linear-gradient(135deg,#0b233b,#071421);
 
     border:1px solid #1c496e;
+
     border-radius:18px;
+
+    box-shadow:
+        0 15px 40px rgba(0,0,0,.25);
 }
 
 .feature-box h3{
     margin:0 0 8px;
+
     font-size:24px;
 }
 
 .feature-box p{
     margin:0;
+
     color:#9fb7cc;
+
     line-height:1.5;
 }
 
@@ -883,8 +1604,11 @@ nav a.active{
 
 footer{
     background:#02070d;
+
     border-top:1px solid #163451;
+
     text-align:center;
+
     padding:35px 20px;
 }
 
@@ -894,7 +1618,9 @@ footer strong{
 
 footer p{
     margin:8px 0 0;
+
     color:#70869b;
+
     font-size:13px;
 }
 
@@ -924,12 +1650,16 @@ footer p{
         border-bottom:1px solid #183b59;
     }
 
-    .featured{
+    .aircraft-showcase{
         grid-template-columns:1fr;
     }
 
-    .featured-image{
-        min-height:300px;
+    .showcase-image{
+        min-height:320px;
+    }
+
+    .showcase-content{
+        min-height:360px;
     }
 
     .numbers{
@@ -949,6 +1679,7 @@ footer p{
         flex-direction:column;
         align-items:flex-start;
     }
+
 }
 
 @media(max-width:600px){
@@ -979,12 +1710,15 @@ footer p{
 
     nav a{
         white-space:nowrap;
+
         padding:10px 13px;
+
         font-size:13px;
     }
 
     .hero{
         min-height:620px;
+
         padding:80px 20px;
     }
 
@@ -998,6 +1732,7 @@ footer p{
 
     .hero-info{
         gap:8px;
+
         font-size:11px;
     }
 
@@ -1021,16 +1756,44 @@ footer p{
         font-size:30px;
     }
 
-    .featured-content{
-        padding:30px;
+    .aircraft-showcase{
+        border-radius:18px;
     }
 
-    .featured-content h3{
+    .showcase-image{
+        min-height:230px;
+    }
+
+    .showcase-content{
+        min-height:auto;
+
+        padding:28px;
+    }
+
+    .showcase-content h3{
         font-size:27px;
     }
 
-    .featured-specs{
+    .showcase-content p{
+        font-size:14px;
+    }
+
+    .showcase-specs{
         grid-template-columns:1fr 1fr;
+    }
+
+    .showcase-arrow{
+        width:40px;
+        height:40px;
+        font-size:27px;
+    }
+
+    .showcase-arrow.prev{
+        left:10px;
+    }
+
+    .showcase-arrow.next{
+        right:10px;
     }
 
     .numbers{
@@ -1135,6 +1898,8 @@ footer p{
 ========================= -->
 
 <section class="hero">
+
+<div class="hero-horizon"></div>
 
 <div class="flying-plane">
     ✈
@@ -1375,7 +2140,7 @@ footer p{
 
 
 <!-- =========================
-     FEATURED AIRCRAFT
+     FEATURED AIRCRAFT SHOWCASE
 ========================= -->
 
 <section class="section">
@@ -1385,80 +2150,150 @@ footer p{
 <h2>⭐ Featured Aircraft</h2>
 
 <p>
-    Discover one of the most impressive
-    aircraft of modern aviation.
+    Explore some of the most impressive
+    aircraft in aviation.
 </p>
 
 </div>
 
 
-<div class="featured">
-
-<div class="featured-image"></div>
+<div class="aircraft-showcase" id="aircraftShowcase">
 
 
-<div class="featured-content">
+<button
+    class="showcase-arrow prev"
+    onclick="changeAircraft(-1)"
+    aria-label="Previous aircraft">
+    ‹
+</button>
 
-<div class="featured-label">
+
+<div
+    class="showcase-image"
+    id="showcaseImage">
+
+    <div class="showcase-image-label" id="showcaseImageLabel">
+        FLIGHT SENSES FEATURE
+    </div>
+
+</div>
+
+
+<div class="showcase-content">
+
+<div class="showcase-label">
     FLIGHT SENSES FEATURE
 </div>
 
-<h3>
+<h3 id="aircraftName">
     Boeing 777-9
 </h3>
 
-<p>
+<p id="aircraftDescription">
     The next generation of the legendary
-    Triple Seven, powered by the enormous
+    Triple Seven, designed around the enormous
     GE9X engines.
 </p>
 
 
-<div class="featured-specs">
+<div class="showcase-specs">
 
-<div class="spec">
+
+<div class="showcase-spec">
 
 <span>Length</span>
 
-<strong>76.7 m</strong>
+<strong id="aircraftLength">
+    76.7 m
+</strong>
 
 </div>
 
 
-<div class="spec">
+<div class="showcase-spec">
 
 <span>Wingspan</span>
 
-<strong>71.8 m</strong>
+<strong id="aircraftWingspan">
+    71.8 m
+</strong>
 
 </div>
 
 
-<div class="spec">
+<div class="showcase-spec">
 
 <span>Range</span>
 
-<strong>13,500 km</strong>
+<strong id="aircraftRange">
+    13,500 km
+</strong>
 
 </div>
 
 
-<div class="spec">
+<div class="showcase-spec">
 
 <span>Engines</span>
 
-<strong>2 × GE9X</strong>
+<strong id="aircraftEngine">
+    2 × GE9X
+</strong>
 
 </div>
 
+
 </div>
 
 
-<a href="boeing-777.html" class="button">
+<a
+    href="boeing-777.html"
+    class="button"
+    id="aircraftLink">
+
     Explore 777-9 →
+
 </a>
 
 </div>
+
+
+<button
+    class="showcase-arrow next"
+    onclick="changeAircraft(1)"
+    aria-label="Next aircraft">
+
+    ›
+
+</button>
+
+
+<div class="showcase-progress">
+
+<div
+    class="showcase-progress-bar"
+    id="showcaseProgress">
+</div>
+
+</div>
+
+
+</div>
+
+
+<div class="showcase-dots" id="showcaseDots">
+
+<button
+    class="showcase-dot active"
+    onclick="selectAircraft(0)"
+    aria-label="Show Boeing 777-9">
+</button>
+
+<button
+    class="showcase-dot"
+    onclick="selectAircraft(1)"
+    aria-label="Show Boeing 747-8">
+</button>
 
 </div>
 
@@ -1693,6 +2528,277 @@ footer p{
 </p>
 
 </footer>
+
+
+<!-- =========================
+     AIRCRAFT SHOWCASE JAVASCRIPT
+========================= -->
+
+<script>
+
+const aircraftData = [
+
+    {
+        name: "Boeing 777-9",
+
+        image: "777.jpg",
+
+        label: "BOEING 777X",
+
+        description:
+            "The next generation of the legendary Triple Seven, designed around the enormous GE9X engines.",
+
+        length: "76.7 m",
+
+        wingspan: "71.8 m",
+
+        range: "13,500 km",
+
+        engine: "2 × GE9X",
+
+        button: "Explore 777-9 →",
+
+        link: "boeing-777.html"
+    },
+
+
+    {
+        name: "Boeing 747-8",
+
+        image: "747.jpg",
+
+        label: "THE QUEEN OF THE SKIES",
+
+        description:
+            "The final passenger generation of the iconic 747 family, combining enormous size with long-range capability.",
+
+        length: "76.4 m",
+
+        wingspan: "68.4 m",
+
+        range: "14,320 km",
+
+        engine: "4 × GEnx-2B",
+
+        button: "Explore Aircraft →",
+
+        link: "aircraft.html"
+    }
+
+];
+
+
+let currentAircraft = 0;
+
+let autoSlide;
+
+
+const showcaseImage =
+    document.getElementById("showcaseImage");
+
+const showcaseImageLabel =
+    document.getElementById("showcaseImageLabel");
+
+const aircraftName =
+    document.getElementById("aircraftName");
+
+const aircraftDescription =
+    document.getElementById("aircraftDescription");
+
+const aircraftLength =
+    document.getElementById("aircraftLength");
+
+const aircraftWingspan =
+    document.getElementById("aircraftWingspan");
+
+const aircraftRange =
+    document.getElementById("aircraftRange");
+
+const aircraftEngine =
+    document.getElementById("aircraftEngine");
+
+const aircraftLink =
+    document.getElementById("aircraftLink");
+
+const showcaseProgress =
+    document.getElementById("showcaseProgress");
+
+
+function updateAircraft(){
+
+    const aircraft =
+        aircraftData[currentAircraft];
+
+
+    showcaseImage.classList.add("changing");
+
+
+    showcaseProgress.style.animation = "none";
+
+    showcaseProgress.offsetHeight;
+
+
+    setTimeout(() => {
+
+        showcaseImage.style.backgroundImage =
+            `url("${aircraft.image}")`;
+
+        showcaseImageLabel.textContent =
+            aircraft.label;
+
+        aircraftName.textContent =
+            aircraft.name;
+
+        aircraftDescription.textContent =
+            aircraft.description;
+
+        aircraftLength.textContent =
+            aircraft.length;
+
+        aircraftWingspan.textContent =
+            aircraft.wingspan;
+
+        aircraftRange.textContent =
+            aircraft.range;
+
+        aircraftEngine.textContent =
+            aircraft.engine;
+
+        aircraftLink.textContent =
+            aircraft.button;
+
+        aircraftLink.href =
+            aircraft.link;
+
+
+        showcaseImage.classList.remove("changing");
+
+
+        showcaseProgress.style.animation =
+            "showcaseProgress 7s linear infinite";
+
+
+    },350);
+
+
+    document
+        .querySelectorAll(".showcase-dot")
+        .forEach((dot,index) => {
+
+            dot.classList.toggle(
+                "active",
+                index === currentAircraft
+            );
+
+        });
+
+}
+
+
+function changeAircraft(direction){
+
+    currentAircraft += direction;
+
+
+    if(currentAircraft < 0){
+
+        currentAircraft =
+            aircraftData.length - 1;
+
+    }
+
+
+    if(currentAircraft >= aircraftData.length){
+
+        currentAircraft = 0;
+
+    }
+
+
+    updateAircraft();
+
+    restartAutoSlide();
+
+}
+
+
+function selectAircraft(index){
+
+    currentAircraft = index;
+
+    updateAircraft();
+
+    restartAutoSlide();
+
+}
+
+
+function startAutoSlide(){
+
+    autoSlide =
+        setInterval(() => {
+
+            currentAircraft++;
+
+            if(
+                currentAircraft >=
+                aircraftData.length
+            ){
+
+                currentAircraft = 0;
+
+            }
+
+            updateAircraft();
+
+        },7000);
+
+}
+
+
+function restartAutoSlide(){
+
+    clearInterval(autoSlide);
+
+    startAutoSlide();
+
+}
+
+
+/* Pause while the mouse is over the showcase */
+
+const showcase =
+    document.getElementById("aircraftShowcase");
+
+
+showcase.addEventListener(
+    "mouseenter",
+    () => {
+
+        clearInterval(autoSlide);
+
+    }
+);
+
+
+showcase.addEventListener(
+    "mouseleave",
+    () => {
+
+        restartAutoSlide();
+
+    }
+);
+
+
+/* Start */
+
+updateAircraft();
+
+startAutoSlide();
+
+</script>
+
 
 </body>
 </html>
