@@ -1,121 +1,1602 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Qatar Airways - Flight Senses</title>
 
-    <style>
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background: #061a33;
-            color: white;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        header {
-            text-align: center;
-            padding: 40px 20px;
-            background: #08264a;
-        }
+<title>Qatar Airways - Flight Senses</title>
 
-        header h1 {
-            font-size: 42px;
-            margin-bottom: 10px;
-        }
+<style>
 
-        header p {
-            color: #9fc9ff;
-            font-size: 18px;
-        }
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
 
-        .container {
-            max-width: 800px;
-            margin: 40px auto;
-            padding: 20px;
-        }
+html{
+    scroll-behavior:smooth;
+}
 
-        .info {
-            background: #0b2d52;
-            padding: 25px;
-            border-radius: 15px;
-        }
+body{
+    font-family:Arial, Helvetica, sans-serif;
+    background:
+        radial-gradient(circle at 20% 0%, rgba(122,24,66,.15), transparent 35%),
+        radial-gradient(circle at 80% 20%, rgba(0,150,255,.07), transparent 30%),
+        #020914;
+    color:white;
+    min-height:100vh;
+}
 
-        .info-row {
-            display: flex;
-            justify-content: space-between;
-            padding: 14px 0;
-            border-bottom: 1px solid #31577d;
-        }
 
-        .info-row:last-child {
-            border-bottom: none;
-        }
+/* =========================
+   NAVBAR
+========================= */
 
-        .back {
-            display: inline-block;
-            margin-top: 30px;
-            padding: 12px 20px;
-            background: #0077ff;
-            color: white;
-            text-decoration: none;
-            border-radius: 8px;
-        }
-    </style>
+nav{
+    position:sticky;
+    top:0;
+    z-index:1000;
+
+    height:72px;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    padding:0 7%;
+
+    background:rgba(2,9,20,.88);
+    backdrop-filter:blur(16px);
+
+    border-bottom:1px solid rgba(180,80,125,.16);
+}
+
+.logo{
+    font-size:23px;
+    font-weight:800;
+    letter-spacing:1px;
+
+    color:white;
+    text-decoration:none;
+}
+
+.logo span{
+    color:#1597ff;
+}
+
+.nav-links{
+    display:flex;
+    gap:30px;
+    list-style:none;
+}
+
+.nav-links a{
+    color:#a9c4dc;
+    text-decoration:none;
+
+    font-size:14px;
+    font-weight:600;
+
+    transition:.25s;
+}
+
+.nav-links a:hover,
+.nav-links .active{
+    color:#d85b91;
+}
+
+
+/* =========================
+   HERO
+========================= */
+
+.hero{
+    position:relative;
+    overflow:hidden;
+
+    min-height:510px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    text-align:center;
+
+    padding:80px 20px;
+
+    background:
+        linear-gradient(
+            rgba(2,9,20,.55),
+            rgba(2,9,20,.93)
+        ),
+        url("qatar.webp") center/cover no-repeat;
+}
+
+.hero::before{
+    content:"";
+
+    position:absolute;
+    inset:0;
+
+    background:
+        radial-gradient(
+            circle at center,
+            rgba(125,25,68,.22),
+            transparent 48%
+        );
+}
+
+.hero-content{
+    position:relative;
+    z-index:2;
+
+    max-width:900px;
+}
+
+.airline-badge{
+    display:inline-block;
+
+    padding:9px 18px;
+
+    border:1px solid rgba(216,75,135,.40);
+
+    border-radius:30px;
+
+    background:rgba(125,25,68,.13);
+
+    color:#e478a5;
+
+    font-size:12px;
+    font-weight:700;
+
+    letter-spacing:2px;
+
+    margin-bottom:24px;
+}
+
+.hero h1{
+    font-size:clamp(52px,8vw,88px);
+
+    line-height:1;
+
+    margin-bottom:20px;
+
+    text-shadow:
+        0 0 35px rgba(180,35,95,.20);
+}
+
+.hero p{
+    color:#b7cee2;
+
+    font-size:20px;
+
+    max-width:700px;
+
+    margin:auto;
+
+    line-height:1.7;
+}
+
+.hero-button{
+    display:inline-block;
+
+    margin-top:30px;
+
+    padding:14px 25px;
+
+    border-radius:10px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #8c164b,
+            #5e1034
+        );
+
+    color:white;
+
+    text-decoration:none;
+
+    font-weight:700;
+
+    box-shadow:
+        0 0 25px rgba(145,20,75,.28);
+
+    transition:.3s;
+}
+
+.hero-button:hover{
+    transform:translateY(-3px);
+
+    box-shadow:
+        0 0 38px rgba(145,20,75,.45);
+}
+
+
+/* =========================
+   MAIN
+========================= */
+
+.container{
+    width:min(1150px,90%);
+
+    margin:auto;
+}
+
+
+/* =========================
+   STATS
+========================= */
+
+.stats{
+    display:grid;
+
+    grid-template-columns:
+        repeat(4,1fr);
+
+    gap:18px;
+
+    margin-top:-55px;
+
+    position:relative;
+
+    z-index:5;
+}
+
+.stat-card{
+    background:
+        linear-gradient(
+            145deg,
+            rgba(22,38,59,.96),
+            rgba(7,19,34,.96)
+        );
+
+    border:1px solid rgba(180,90,135,.16);
+
+    border-radius:18px;
+
+    padding:28px 20px;
+
+    text-align:center;
+
+    box-shadow:
+        0 15px 40px rgba(0,0,0,.30);
+}
+
+.stat-number{
+    font-size:30px;
+
+    font-weight:800;
+
+    color:#d65d91;
+
+    margin-bottom:8px;
+}
+
+.stat-label{
+    color:#8eaac3;
+
+    font-size:13px;
+}
+
+
+/* =========================
+   SECTION
+========================= */
+
+.section{
+    padding:90px 0 20px;
+}
+
+.section-title{
+    margin-bottom:35px;
+}
+
+.section-title .small{
+    color:#199cff;
+
+    font-size:12px;
+
+    font-weight:800;
+
+    letter-spacing:2px;
+
+    margin-bottom:10px;
+}
+
+.section-title h2{
+    font-size:36px;
+
+    margin-bottom:10px;
+}
+
+.section-title p{
+    color:#8faac2;
+
+    max-width:720px;
+
+    line-height:1.7;
+}
+
+
+/* =========================
+   ABOUT
+========================= */
+
+.about-grid{
+    display:grid;
+
+    grid-template-columns:
+        1.4fr .9fr;
+
+    gap:25px;
+}
+
+.card{
+    background:
+        linear-gradient(
+            145deg,
+            #10243a,
+            #071726
+        );
+
+    border:1px solid rgba(120,160,200,.14);
+
+    border-radius:20px;
+
+    padding:30px;
+
+    box-shadow:
+        0 15px 40px rgba(0,0,0,.22);
+}
+
+.card h3{
+    font-size:22px;
+
+    margin-bottom:18px;
+}
+
+.card p{
+    color:#9bb4ca;
+
+    line-height:1.8;
+}
+
+.info-list{
+    display:flex;
+
+    flex-direction:column;
+}
+
+.info-row{
+    display:flex;
+
+    justify-content:space-between;
+
+    gap:20px;
+
+    padding:17px 0;
+
+    border-bottom:
+        1px solid rgba(120,170,210,.13);
+}
+
+.info-row:last-child{
+    border-bottom:none;
+}
+
+.info-row strong{
+    color:#b9cee1;
+}
+
+.info-row span{
+    color:#d15b8e;
+
+    text-align:right;
+}
+
+
+/* =========================
+   FLEET
+========================= */
+
+.fleet-grid{
+    display:grid;
+
+    grid-template-columns:
+        repeat(3,1fr);
+
+    gap:20px;
+}
+
+.fleet-card{
+    padding:25px;
+
+    border-radius:18px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #10263d,
+            #071827
+        );
+
+    border:1px solid rgba(110,155,195,.14);
+
+    transition:.3s;
+}
+
+.fleet-card:hover{
+    transform:translateY(-5px);
+
+    border-color:
+        rgba(210,75,135,.38);
+
+    box-shadow:
+        0 15px 35px rgba(115,20,70,.16);
+}
+
+.fleet-icon{
+    font-size:28px;
+
+    margin-bottom:15px;
+}
+
+.fleet-card h3{
+    margin-bottom:8px;
+}
+
+.fleet-card p{
+    color:#8faac2;
+
+    font-size:14px;
+
+    line-height:1.65;
+}
+
+.fleet-count{
+    display:block;
+
+    margin-top:16px;
+
+    color:#d25c90;
+
+    font-size:14px;
+
+    font-weight:700;
+}
+
+
+/* =========================
+   NETWORK
+========================= */
+
+.network{
+    display:grid;
+
+    grid-template-columns:
+        repeat(3,1fr);
+
+    gap:20px;
+}
+
+.network-card{
+    text-align:center;
+
+    padding:35px 20px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #0d243a,
+            #071827
+        );
+
+    border:1px solid rgba(100,155,195,.14);
+
+    border-radius:18px;
+}
+
+.network-card .icon{
+    font-size:34px;
+
+    margin-bottom:15px;
+}
+
+.network-card h3{
+    margin-bottom:8px;
+}
+
+.network-card p{
+    color:#8ba7bf;
+
+    font-size:14px;
+
+    line-height:1.6;
+}
+
+
+/* =========================
+   QATAR EXPERIENCE
+========================= */
+
+.experience-grid{
+    display:grid;
+
+    grid-template-columns:
+        repeat(2,1fr);
+
+    gap:20px;
+}
+
+.experience-card{
+    position:relative;
+
+    overflow:hidden;
+
+    padding:30px;
+
+    border-radius:20px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(130,24,70,.18),
+            rgba(7,25,43,.90)
+        );
+
+    border:1px solid
+        rgba(190,65,120,.18);
+}
+
+.experience-card::after{
+    content:"";
+
+    position:absolute;
+
+    width:130px;
+    height:130px;
+
+    right:-40px;
+    bottom:-55px;
+
+    border-radius:50%;
+
+    background:
+        rgba(180,40,100,.10);
+}
+
+.experience-icon{
+    font-size:32px;
+
+    margin-bottom:16px;
+}
+
+.experience-card h3{
+    font-size:21px;
+
+    margin-bottom:10px;
+}
+
+.experience-card p{
+    position:relative;
+    z-index:2;
+
+    color:#96aec4;
+
+    line-height:1.7;
+
+    font-size:14px;
+}
+
+
+/* =========================
+   FACTS
+========================= */
+
+.facts{
+    display:grid;
+
+    grid-template-columns:
+        repeat(3,1fr);
+
+    gap:20px;
+}
+
+.fact{
+    padding:25px;
+
+    border-radius:18px;
+
+    background:#071a2b;
+
+    border:
+        1px solid
+        rgba(100,155,200,.13);
+}
+
+.fact-number{
+    font-size:30px;
+
+    font-weight:800;
+
+    color:#d55d91;
+
+    margin-bottom:8px;
+}
+
+.fact h3{
+    margin-bottom:8px;
+}
+
+.fact p{
+    color:#8da8bf;
+
+    font-size:14px;
+
+    line-height:1.6;
+}
+
+
+/* =========================
+   QUOTE
+========================= */
+
+.quote{
+    margin:90px 0;
+
+    padding:55px 30px;
+
+    text-align:center;
+
+    border-radius:25px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(130,20,70,.20),
+            rgba(0,30,55,.60)
+        );
+
+    border:
+        1px solid
+        rgba(190,60,120,.20);
+}
+
+.quote h2{
+    font-size:35px;
+
+    margin-bottom:15px;
+}
+
+.quote p{
+    color:#87b2d5;
+
+    font-size:18px;
+}
+
+
+/* =========================
+   FOOTER
+========================= */
+
+footer{
+    margin-top:40px;
+
+    padding:35px 20px;
+
+    text-align:center;
+
+    background:#010710;
+
+    border-top:
+        1px solid
+        rgba(100,160,210,.12);
+}
+
+footer p{
+    color:#607b95;
+
+    font-size:13px;
+}
+
+footer strong{
+    color:#159cff;
+}
+
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media(max-width:900px){
+
+    .nav-links{
+        gap:15px;
+    }
+
+    .stats{
+        grid-template-columns:
+            repeat(2,1fr);
+    }
+
+    .about-grid{
+        grid-template-columns:1fr;
+    }
+
+    .fleet-grid{
+        grid-template-columns:
+            repeat(2,1fr);
+    }
+
+    .network{
+        grid-template-columns:1fr;
+    }
+
+    .facts{
+        grid-template-columns:
+            repeat(2,1fr);
+    }
+}
+
+
+@media(max-width:600px){
+
+    nav{
+        padding:0 20px;
+    }
+
+    .nav-links{
+        display:none;
+    }
+
+    .hero{
+        min-height:450px;
+    }
+
+    .hero h1{
+        font-size:50px;
+    }
+
+    .hero p{
+        font-size:16px;
+    }
+
+    .stats{
+        grid-template-columns:
+            1fr 1fr;
+
+        margin-top:-35px;
+    }
+
+    .stat-card{
+        padding:20px 10px;
+    }
+
+    .stat-number{
+        font-size:25px;
+    }
+
+    .section{
+        padding-top:65px;
+    }
+
+    .section-title h2{
+        font-size:29px;
+    }
+
+    .fleet-grid{
+        grid-template-columns:1fr;
+    }
+
+    .facts{
+        grid-template-columns:1fr;
+    }
+
+    .experience-grid{
+        grid-template-columns:1fr;
+    }
+
+    .card{
+        padding:22px;
+    }
+}
+
+
+@media(prefers-reduced-motion:reduce){
+
+    html{
+        scroll-behavior:auto;
+    }
+
+    *{
+        transition:none!important;
+    }
+}
+
+</style>
+
 </head>
+
 
 <body>
 
-<header>
-    <h1>Qatar Airways</h1>
-    <p>Going Places Together ✈️🇶🇦</p>
+
+<!-- =========================
+     NAVBAR
+========================= -->
+
+<nav>
+
+    <a href="index.html" class="logo">
+        FLIGHT <span>SENSES</span>
+    </a>
+
+    <ul class="nav-links">
+
+        <li>
+            <a href="index.html">
+                Home
+            </a>
+        </li>
+
+        <li>
+            <a href="aircraft.html">
+                Aircraft
+            </a>
+        </li>
+
+        <li>
+            <a href="airlines.html" class="active">
+                Airlines
+            </a>
+        </li>
+
+        <li>
+            <a href="top10.html">
+                Top 10
+            </a>
+        </li>
+
+        <li>
+            <a href="compare.html">
+                Compare
+            </a>
+        </li>
+
+    </ul>
+
+</nav>
+
+
+<!-- =========================
+     HERO
+========================= -->
+
+<header class="hero">
+
+    <div class="hero-content">
+
+        <div class="airline-badge">
+            🇶🇦 STATE OF QATAR · GLOBAL AIRLINE
+        </div>
+
+        <h1>
+            Qatar Airways
+        </h1>
+
+        <p>
+            Going Places Together ✈️
+            <br>
+            Connecting Doha with destinations across the globe.
+        </p>
+
+        <a
+            href="airlines.html"
+            class="hero-button"
+        >
+            ← Back to Airlines
+        </a>
+
+    </div>
+
 </header>
 
-<div class="container">
 
-    <div class="info">
+<main class="container">
 
-        <div class="info-row">
-            <strong>Founded</strong>
-            <span>1993</span>
+
+<!-- =========================
+     STATS
+========================= -->
+
+<section class="stats">
+
+
+    <div class="stat-card">
+
+        <div class="stat-number">
+            1993
         </div>
 
-        <div class="info-row">
-            <strong>Headquarters</strong>
-            <span>Doha, Qatar</span>
-        </div>
-
-        <div class="info-row">
-            <strong>Airline Code</strong>
-            <span>QR</span>
-        </div>
-
-        <div class="info-row">
-            <strong>Hub</strong>
-            <span>Hamad International Airport</span>
-        </div>
-
-        <div class="info-row">
-            <strong>Alliance</strong>
-            <span>oneworld</span>
-        </div>
-
-        <div class="info-row">
-            <strong>Fleet</strong>
-            <span>Airbus & Boeing aircraft</span>
-        </div>
-
-        <div class="info-row">
-            <strong>Network</strong>
-            <span>Global</span>
+        <div class="stat-label">
+            Founded
         </div>
 
     </div>
 
-    <a href="airlines.html" class="back">
-        ← Back to Airlines
-    </a>
 
-</div>
+    <div class="stat-card">
+
+        <div class="stat-number">
+            QR
+        </div>
+
+        <div class="stat-label">
+            IATA Code
+        </div>
+
+    </div>
+
+
+    <div class="stat-card">
+
+        <div class="stat-number">
+            DOH
+        </div>
+
+        <div class="stat-label">
+            Main Hub
+        </div>
+
+    </div>
+
+
+    <div class="stat-card">
+
+        <div class="stat-number">
+            oneworld
+        </div>
+
+        <div class="stat-label">
+            Alliance
+        </div>
+
+    </div>
+
+
+</section>
+
+
+<!-- =========================
+     ABOUT
+========================= -->
+
+<section class="section">
+
+    <div class="section-title">
+
+        <div class="small">
+            AIRLINE PROFILE
+        </div>
+
+        <h2>
+            About Qatar Airways
+        </h2>
+
+        <p>
+            Qatar Airways is the flag carrier of Qatar,
+            operating an extensive international network
+            from its hub at Hamad International Airport.
+        </p>
+
+    </div>
+
+
+    <div class="about-grid">
+
+
+        <div class="card">
+
+            <h3>
+                Doha at the Center
+            </h3>
+
+            <p>
+                Qatar Airways connects passengers through
+                Doha, creating an important bridge between
+                Europe, Asia, Africa, the Americas and
+                Australasia.
+            </p>
+
+            <br>
+
+            <p>
+                The airline operates a large fleet of
+                Airbus and Boeing wide-body aircraft,
+                alongside narrow-body aircraft used on
+                selected regional routes.
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <h3>
+                Quick Facts
+            </h3>
+
+            <div class="info-list">
+
+
+                <div class="info-row">
+
+                    <strong>
+                        Founded
+                    </strong>
+
+                    <span>
+                        1993
+                    </span>
+
+                </div>
+
+
+                <div class="info-row">
+
+                    <strong>
+                        Headquarters
+                    </strong>
+
+                    <span>
+                        Doha, Qatar
+                    </span>
+
+                </div>
+
+
+                <div class="info-row">
+
+                    <strong>
+                        IATA
+                    </strong>
+
+                    <span>
+                        QR
+                    </span>
+
+                </div>
+
+
+                <div class="info-row">
+
+                    <strong>
+                        ICAO
+                    </strong>
+
+                    <span>
+                        QTR
+                    </span>
+
+                </div>
+
+
+                <div class="info-row">
+
+                    <strong>
+                        Main Hub
+                    </strong>
+
+                    <span>
+                        Doha (DOH)
+                    </span>
+
+                </div>
+
+
+                <div class="info-row">
+
+                    <strong>
+                        Alliance
+                    </strong>
+
+                    <span>
+                        oneworld
+                    </span>
+
+                </div>
+
+
+                <div class="info-row">
+
+                    <strong>
+                        Network
+                    </strong>
+
+                    <span>
+                        Global
+                    </span>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     FLEET
+========================= -->
+
+<section class="section">
+
+    <div class="section-title">
+
+        <div class="small">
+            AIRCRAFT FLEET
+        </div>
+
+        <h2>
+            Qatar Airways Fleet
+        </h2>
+
+        <p>
+            A diverse Airbus and Boeing fleet built around
+            long-haul, regional and high-capacity operations.
+        </p>
+
+    </div>
+
+
+    <div class="fleet-grid">
+
+
+        <div class="fleet-card">
+
+            <div class="fleet-icon">
+                🛫
+            </div>
+
+            <h3>
+                Airbus A350
+            </h3>
+
+            <p>
+                A key next-generation wide-body aircraft
+                used across Qatar Airways' long-haul network.
+            </p>
+
+            <span class="fleet-count">
+                A350-900 / A350-1000
+            </span>
+
+        </div>
+
+
+        <div class="fleet-card">
+
+            <div class="fleet-icon">
+                🌍
+            </div>
+
+            <h3>
+                Boeing 777
+            </h3>
+
+            <p>
+                One of the airline's major long-haul aircraft
+                families serving destinations worldwide.
+            </p>
+
+            <span class="fleet-count">
+                777 Family
+            </span>
+
+        </div>
+
+
+        <div class="fleet-card">
+
+            <div class="fleet-icon">
+                🚀
+            </div>
+
+            <h3>
+                Boeing 787 Dreamliner
+            </h3>
+
+            <p>
+                A modern wide-body aircraft used on a variety
+                of international routes.
+            </p>
+
+            <span class="fleet-count">
+                787-8 / 787-9
+            </span>
+
+        </div>
+
+
+        <div class="fleet-card">
+
+            <div class="fleet-icon">
+                ✈️
+            </div>
+
+            <h3>
+                Airbus A330
+            </h3>
+
+            <p>
+                Wide-body aircraft that has played an important
+                role in the airline's international operations.
+            </p>
+
+            <span class="fleet-count">
+                A330 Family
+            </span>
+
+        </div>
+
+
+        <div class="fleet-card">
+
+            <div class="fleet-icon">
+                ⚡
+            </div>
+
+            <h3>
+                Airbus A320 Family
+            </h3>
+
+            <p>
+                Narrow-body aircraft used primarily for
+                regional and shorter international routes.
+            </p>
+
+            <span class="fleet-count">
+                A320 Family
+            </span>
+
+        </div>
+
+
+        <div class="fleet-card">
+
+            <div class="fleet-icon">
+                🔥
+            </div>
+
+            <h3>
+                Boeing 737 MAX
+            </h3>
+
+            <p>
+                Next-generation narrow-body aircraft joining
+                the airline's expanding fleet.
+            </p>
+
+            <span class="fleet-count">
+                737 MAX
+            </span>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     NETWORK
+========================= -->
+
+<section class="section">
+
+    <div class="section-title">
+
+        <div class="small">
+            GLOBAL NETWORK
+        </div>
+
+        <h2>
+            Doha to the World
+        </h2>
+
+        <p>
+            Hamad International Airport forms the center of
+            Qatar Airways' international network.
+        </p>
+
+    </div>
+
+
+    <div class="network">
+
+
+        <div class="network-card">
+
+            <div class="icon">
+                🇪🇺
+            </div>
+
+            <h3>
+                Europe
+            </h3>
+
+            <p>
+                Extensive connections between Doha and
+                major European cities.
+            </p>
+
+        </div>
+
+
+        <div class="network-card">
+
+            <div class="icon">
+                🌏
+            </div>
+
+            <h3>
+                Asia
+            </h3>
+
+            <p>
+                Strong connectivity between Qatar and
+                destinations across Asia-Pacific.
+            </p>
+
+        </div>
+
+
+        <div class="network-card">
+
+            <div class="icon">
+                🌎
+            </div>
+
+            <h3>
+                Americas
+            </h3>
+
+            <p>
+                Long-haul services link Doha with
+                destinations across the Americas.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     QATAR EXPERIENCE
+========================= -->
+
+<section class="section">
+
+    <div class="section-title">
+
+        <div class="small">
+            SIGNATURE EXPERIENCE
+        </div>
+
+        <h2>
+            The Qatar Airways Experience
+        </h2>
+
+        <p>
+            Several features have become strongly associated
+            with the Qatar Airways brand.
+        </p>
+
+    </div>
+
+
+    <div class="experience-grid">
+
+
+        <div class="experience-card">
+
+            <div class="experience-icon">
+                🛏️
+            </div>
+
+            <h3>
+                Qsuite
+            </h3>
+
+            <p>
+                Qatar Airways' premium Business Class product
+                features private suites on selected aircraft,
+                with configurable seating and privacy features.
+            </p>
+
+        </div>
+
+
+        <div class="experience-card">
+
+            <div class="experience-icon">
+                🛫
+            </div>
+
+            <h3>
+                Qsuite on the A350
+            </h3>
+
+            <p>
+                Selected Airbus A350 aircraft are equipped
+                with the airline's distinctive Qsuite cabin.
+            </p>
+
+        </div>
+
+
+        <div class="experience-card">
+
+            <div class="experience-icon">
+                🏆
+            </div>
+
+            <h3>
+                Hamad International Airport
+            </h3>
+
+            <p>
+                Doha's Hamad International Airport serves as
+                the airline's main global connection hub.
+            </p>
+
+        </div>
+
+
+        <div class="experience-card">
+
+            <div class="experience-icon">
+                🌐
+            </div>
+
+            <h3>
+                Global Connectivity
+            </h3>
+
+            <p>
+                Doha's geographical position allows Qatar Airways
+                to connect major markets across multiple continents.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     FACTS
+========================= -->
+
+<section class="section">
+
+    <div class="section-title">
+
+        <div class="small">
+            DID YOU KNOW?
+        </div>
+
+        <h2>
+            Qatar Airways Highlights
+        </h2>
+
+    </div>
+
+
+    <div class="facts">
+
+
+        <div class="fact">
+
+            <div class="fact-number">
+                QR
+            </div>
+
+            <h3>
+                IATA Code
+            </h3>
+
+            <p>
+                Qatar Airways uses QR as its two-letter
+                IATA airline code.
+            </p>
+
+        </div>
+
+
+        <div class="fact">
+
+            <div class="fact-number">
+                DOH
+            </div>
+
+            <h3>
+                Main Hub
+            </h3>
+
+            <p>
+                Hamad International Airport is the airline's
+                primary hub in Doha.
+            </p>
+
+        </div>
+
+
+        <div class="fact">
+
+            <div class="fact-number">
+                A350
+            </div>
+
+            <h3>
+                Next Generation
+            </h3>
+
+            <p>
+                The Airbus A350 is an important part of
+                Qatar Airways' modern long-haul fleet.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     QUOTE
+========================= -->
+
+<section class="quote">
+
+    <h2>
+        Going Places Together
+    </h2>
+
+    <p>
+        Qatar Airways · QR · Doha · oneworld
+    </p>
+
+</section>
+
+
+</main>
+
+
+<!-- =========================
+     FOOTER
+========================= -->
+
+<footer>
+
+    <p>
+        © 2026 <strong>Flight Senses</strong>
+        · Aviation Database
+    </p>
+
+</footer>
+
 
 </body>
 </html>

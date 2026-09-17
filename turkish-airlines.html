@@ -1,121 +1,892 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Turkish Airlines - Flight Senses</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <style>
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background: #061a33;
-            color: white;
-        }
+<title>Turkish Airlines - Flight Senses</title>
 
-        header {
-            text-align: center;
-            padding: 40px 20px;
-            background: #08264a;
-        }
+<style>
 
-        header h1 {
-            font-size: 42px;
-            margin-bottom: 10px;
-        }
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
 
-        header p {
-            color: #9fc9ff;
-            font-size: 18px;
-        }
+html{
+    scroll-behavior:smooth;
+}
 
-        .container {
-            max-width: 800px;
-            margin: 40px auto;
-            padding: 20px;
-        }
+body{
+    font-family:Arial, Helvetica, sans-serif;
+    background:
+        radial-gradient(circle at 20% 0%, rgba(0,119,255,.12), transparent 35%),
+        radial-gradient(circle at 80% 20%, rgba(0,174,255,.08), transparent 30%),
+        #020b18;
+    color:white;
+    min-height:100vh;
+}
 
-        .info {
-            background: #0b2d52;
-            padding: 25px;
-            border-radius: 15px;
-        }
+/* =========================
+   NAVBAR
+========================= */
 
-        .info-row {
-            display: flex;
-            justify-content: space-between;
-            padding: 14px 0;
-            border-bottom: 1px solid #31577d;
-        }
+nav{
+    position:sticky;
+    top:0;
+    z-index:1000;
+    height:72px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 7%;
+    background:rgba(2,11,24,.88);
+    backdrop-filter:blur(16px);
+    border-bottom:1px solid rgba(90,170,255,.15);
+}
 
-        .info-row:last-child {
-            border-bottom: none;
-        }
+.logo{
+    font-size:23px;
+    font-weight:800;
+    letter-spacing:1px;
+    color:white;
+    text-decoration:none;
+}
 
-        .back {
-            display: inline-block;
-            margin-top: 30px;
-            padding: 12px 20px;
-            background: #0077ff;
-            color: white;
-            text-decoration: none;
-            border-radius: 8px;
-        }
-    </style>
+.logo span{
+    color:#1597ff;
+}
+
+.nav-links{
+    display:flex;
+    gap:30px;
+    list-style:none;
+}
+
+.nav-links a{
+    color:#a9c9e8;
+    text-decoration:none;
+    font-size:14px;
+    font-weight:600;
+    transition:.25s;
+}
+
+.nav-links a:hover,
+.nav-links .active{
+    color:#1da1ff;
+}
+
+/* =========================
+   HERO
+========================= */
+
+.hero{
+    position:relative;
+    overflow:hidden;
+    min-height:500px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding:80px 20px;
+    background:
+        linear-gradient(rgba(2,11,24,.62),rgba(2,11,24,.92)),
+        url("thy.webp") center/cover no-repeat;
+}
+
+.hero::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:
+        radial-gradient(circle at center,rgba(0,132,255,.20),transparent 45%);
+}
+
+.hero-content{
+    position:relative;
+    z-index:2;
+    max-width:900px;
+}
+
+.airline-badge{
+    display:inline-block;
+    padding:9px 18px;
+    border:1px solid rgba(45,164,255,.45);
+    border-radius:30px;
+    background:rgba(0,112,255,.10);
+    color:#54b5ff;
+    font-size:12px;
+    font-weight:700;
+    letter-spacing:2px;
+    margin-bottom:24px;
+}
+
+.hero h1{
+    font-size:clamp(48px,7vw,82px);
+    line-height:1;
+    margin-bottom:20px;
+    text-shadow:0 0 35px rgba(0,140,255,.3);
+}
+
+.hero p{
+    color:#b7d5f1;
+    font-size:20px;
+    max-width:650px;
+    margin:auto;
+    line-height:1.7;
+}
+
+.hero-button{
+    display:inline-block;
+    margin-top:30px;
+    padding:14px 25px;
+    border-radius:10px;
+    background:linear-gradient(135deg,#008cff,#005bd8);
+    color:white;
+    text-decoration:none;
+    font-weight:700;
+    box-shadow:0 0 25px rgba(0,126,255,.25);
+    transition:.3s;
+}
+
+.hero-button:hover{
+    transform:translateY(-3px);
+    box-shadow:0 0 35px rgba(0,126,255,.45);
+}
+
+/* =========================
+   MAIN
+========================= */
+
+.container{
+    width:min(1150px,90%);
+    margin:auto;
+}
+
+/* =========================
+   STATS
+========================= */
+
+.stats{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:18px;
+    margin-top:-55px;
+    position:relative;
+    z-index:5;
+}
+
+.stat-card{
+    background:linear-gradient(145deg,rgba(13,43,75,.95),rgba(5,24,46,.95));
+    border:1px solid rgba(88,169,235,.16);
+    border-radius:18px;
+    padding:28px 20px;
+    text-align:center;
+    box-shadow:0 15px 40px rgba(0,0,0,.3);
+}
+
+.stat-number{
+    font-size:30px;
+    font-weight:800;
+    color:#22a2ff;
+    margin-bottom:8px;
+}
+
+.stat-label{
+    color:#8eafcd;
+    font-size:13px;
+}
+
+/* =========================
+   SECTION
+========================= */
+
+.section{
+    padding:90px 0 20px;
+}
+
+.section-title{
+    margin-bottom:35px;
+}
+
+.section-title .small{
+    color:#199cff;
+    font-size:12px;
+    font-weight:800;
+    letter-spacing:2px;
+    margin-bottom:10px;
+}
+
+.section-title h2{
+    font-size:36px;
+    margin-bottom:10px;
+}
+
+.section-title p{
+    color:#8faec9;
+    max-width:650px;
+    line-height:1.7;
+}
+
+/* =========================
+   ABOUT GRID
+========================= */
+
+.about-grid{
+    display:grid;
+    grid-template-columns:1.4fr .9fr;
+    gap:25px;
+}
+
+.card{
+    background:linear-gradient(145deg,#092849,#061b33);
+    border:1px solid rgba(90,170,255,.15);
+    border-radius:20px;
+    padding:30px;
+    box-shadow:0 15px 40px rgba(0,0,0,.22);
+}
+
+.card h3{
+    font-size:22px;
+    margin-bottom:18px;
+}
+
+.card p{
+    color:#9dbbd5;
+    line-height:1.8;
+}
+
+.info-list{
+    display:flex;
+    flex-direction:column;
+}
+
+.info-row{
+    display:flex;
+    justify-content:space-between;
+    gap:20px;
+    padding:17px 0;
+    border-bottom:1px solid rgba(120,170,210,.13);
+}
+
+.info-row:last-child{
+    border-bottom:none;
+}
+
+.info-row strong{
+    color:#b8d2e9;
+}
+
+.info-row span{
+    color:#45adff;
+    text-align:right;
+}
+
+/* =========================
+   FLEET
+========================= */
+
+.fleet-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:20px;
+}
+
+.fleet-card{
+    padding:25px;
+    border-radius:18px;
+    background:linear-gradient(145deg,#0a2d50,#061b32);
+    border:1px solid rgba(78,164,235,.14);
+    transition:.3s;
+}
+
+.fleet-card:hover{
+    transform:translateY(-5px);
+    border-color:rgba(40,157,255,.4);
+    box-shadow:0 15px 35px rgba(0,100,200,.15);
+}
+
+.fleet-icon{
+    font-size:28px;
+    margin-bottom:15px;
+}
+
+.fleet-card h3{
+    margin-bottom:8px;
+}
+
+.fleet-card p{
+    color:#8eabc5;
+    font-size:14px;
+    line-height:1.6;
+}
+
+.fleet-count{
+    display:block;
+    margin-top:16px;
+    color:#22a2ff;
+    font-size:14px;
+    font-weight:700;
+}
+
+/* =========================
+   NETWORK
+========================= */
+
+.network{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:20px;
+}
+
+.network-card{
+    text-align:center;
+    padding:35px 20px;
+    background:#071f39;
+    border:1px solid rgba(90,170,255,.14);
+    border-radius:18px;
+}
+
+.network-card .icon{
+    font-size:34px;
+    margin-bottom:15px;
+}
+
+.network-card h3{
+    margin-bottom:8px;
+}
+
+.network-card p{
+    color:#8caac5;
+    font-size:14px;
+}
+
+/* =========================
+   QUOTE
+========================= */
+
+.quote{
+    margin:90px 0;
+    padding:55px 30px;
+    text-align:center;
+    border-radius:25px;
+    background:
+        linear-gradient(135deg,rgba(0,105,220,.18),rgba(0,30,65,.55));
+    border:1px solid rgba(55,161,255,.2);
+}
+
+.quote h2{
+    font-size:32px;
+    margin-bottom:15px;
+}
+
+.quote p{
+    color:#80b8e6;
+    font-size:18px;
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+footer{
+    margin-top:40px;
+    padding:35px 20px;
+    text-align:center;
+    background:#010813;
+    border-top:1px solid rgba(100,160,210,.12);
+}
+
+footer p{
+    color:#607f9c;
+    font-size:13px;
+}
+
+footer strong{
+    color:#159cff;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media(max-width:900px){
+
+    .nav-links{
+        gap:15px;
+    }
+
+    .stats{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .about-grid{
+        grid-template-columns:1fr;
+    }
+
+    .fleet-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .network{
+        grid-template-columns:1fr;
+    }
+}
+
+@media(max-width:600px){
+
+    nav{
+        padding:0 20px;
+    }
+
+    .nav-links{
+        display:none;
+    }
+
+    .hero{
+        min-height:450px;
+    }
+
+    .hero h1{
+        font-size:48px;
+    }
+
+    .hero p{
+        font-size:16px;
+    }
+
+    .stats{
+        grid-template-columns:1fr 1fr;
+        margin-top:-35px;
+    }
+
+    .stat-card{
+        padding:20px 10px;
+    }
+
+    .stat-number{
+        font-size:25px;
+    }
+
+    .section{
+        padding-top:65px;
+    }
+
+    .section-title h2{
+        font-size:29px;
+    }
+
+    .fleet-grid{
+        grid-template-columns:1fr;
+    }
+
+    .card{
+        padding:22px;
+    }
+}
+
+@media(prefers-reduced-motion:reduce){
+
+    html{
+        scroll-behavior:auto;
+    }
+
+    *{
+        transition:none!important;
+    }
+}
+
+</style>
 </head>
 
 <body>
 
-<header>
-    <h1>Turkish Airlines</h1>
-    <p>Widen your world ✈️🇹🇷</p>
+<!-- NAVBAR -->
+
+<nav>
+
+    <a href="index.html" class="logo">
+        FLIGHT <span>SENSES</span>
+    </a>
+
+    <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="aircraft.html">Aircraft</a></li>
+        <li><a href="airlines.html" class="active">Airlines</a></li>
+        <li><a href="top10.html">Top 10</a></li>
+        <li><a href="compare.html">Compare</a></li>
+    </ul>
+
+</nav>
+
+
+<!-- HERO -->
+
+<header class="hero">
+
+    <div class="hero-content">
+
+        <div class="airline-badge">
+            🇹🇷 FLAG CARRIER OF TÜRKİYE
+        </div>
+
+        <h1>Turkish Airlines</h1>
+
+        <p>
+            Widen your world ✈️
+            <br>
+            Explore one of the world's most extensive global airline networks.
+        </p>
+
+        <a href="airlines.html" class="hero-button">
+            ← Back to Airlines
+        </a>
+
+    </div>
+
 </header>
 
-<div class="container">
 
-    <div class="info">
+<main class="container">
 
-        <div class="info-row">
-            <strong>Founded</strong>
-            <span>1933</span>
+
+<!-- STATS -->
+
+<section class="stats">
+
+    <div class="stat-card">
+        <div class="stat-number">1933</div>
+        <div class="stat-label">Founded</div>
+    </div>
+
+    <div class="stat-card">
+        <div class="stat-number">TK</div>
+        <div class="stat-label">IATA Code</div>
+    </div>
+
+    <div class="stat-card">
+        <div class="stat-number">IST</div>
+        <div class="stat-label">Main Hub</div>
+    </div>
+
+    <div class="stat-card">
+        <div class="stat-number">Star</div>
+        <div class="stat-label">Alliance</div>
+    </div>
+
+</section>
+
+
+<!-- ABOUT -->
+
+<section class="section">
+
+    <div class="section-title">
+
+        <div class="small">AIRLINE PROFILE</div>
+
+        <h2>About Turkish Airlines</h2>
+
+        <p>
+            Turkish Airlines is the flag carrier of Türkiye, operating a
+            large international network from its main hub at Istanbul Airport.
+        </p>
+
+    </div>
+
+
+    <div class="about-grid">
+
+        <div class="card">
+
+            <h3>Global Aviation Presence</h3>
+
+            <p>
+                Turkish Airlines connects Türkiye with destinations across
+                Europe, Asia, Africa, North America and South America.
+                Its Istanbul hub provides a strategic connection point
+                between multiple regions of the world.
+            </p>
+
+            <br>
+
+            <p>
+                The airline operates both narrow-body and wide-body aircraft,
+                allowing it to serve short-haul regional routes as well as
+                long-haul international flights.
+            </p>
+
         </div>
 
-        <div class="info-row">
-            <strong>Headquarters</strong>
-            <span>Istanbul, Türkiye</span>
-        </div>
 
-        <div class="info-row">
-            <strong>Airline Code</strong>
-            <span>TK</span>
-        </div>
+        <div class="card">
 
-        <div class="info-row">
-            <strong>IATA Code</strong>
-            <span>TK</span>
-        </div>
+            <h3>Quick Facts</h3>
 
-        <div class="info-row">
-            <strong>Alliance</strong>
-            <span>Star Alliance</span>
-        </div>
+            <div class="info-list">
 
-        <div class="info-row">
-            <strong>Aircraft</strong>
-            <span>542</span>
-        </div>
+                <div class="info-row">
+                    <strong>Founded</strong>
+                    <span>1933</span>
+                </div>
 
-        <div class="info-row">
-            <strong>Network</strong>
-            <span>Global</span>
+                <div class="info-row">
+                    <strong>Headquarters</strong>
+                    <span>Istanbul</span>
+                </div>
+
+                <div class="info-row">
+                    <strong>IATA</strong>
+                    <span>TK</span>
+                </div>
+
+                <div class="info-row">
+                    <strong>ICAO</strong>
+                    <span>THY</span>
+                </div>
+
+                <div class="info-row">
+                    <strong>Alliance</strong>
+                    <span>Star Alliance</span>
+                </div>
+
+                <div class="info-row">
+                    <strong>Network</strong>
+                    <span>Global</span>
+                </div>
+
+            </div>
+
         </div>
 
     </div>
 
-    <a href="airlines.html" class="back">
-        ← Back to Airlines
-    </a>
+</section>
 
-</div>
+
+<!-- FLEET -->
+
+<section class="section">
+
+    <div class="section-title">
+
+        <div class="small">AIRCRAFT FLEET</div>
+
+        <h2>Turkish Airlines Fleet</h2>
+
+        <p>
+            A mixed fleet of narrow-body and wide-body aircraft designed
+            for regional, medium-haul and long-haul operations.
+        </p>
+
+    </div>
+
+
+    <div class="fleet-grid">
+
+        <div class="fleet-card">
+
+            <div class="fleet-icon">✈️</div>
+
+            <h3>Airbus A320 Family</h3>
+
+            <p>
+                Narrow-body aircraft used extensively across regional
+                and European routes.
+            </p>
+
+            <span class="fleet-count">
+                A319 / A320 / A321
+            </span>
+
+        </div>
+
+
+        <div class="fleet-card">
+
+            <div class="fleet-icon">🛫</div>
+
+            <h3>Boeing 737 Family</h3>
+
+            <p>
+                One of the airline's key narrow-body aircraft families
+                for short and medium-haul operations.
+            </p>
+
+            <span class="fleet-count">
+                737-800 / 737 MAX
+            </span>
+
+        </div>
+
+
+        <div class="fleet-card">
+
+            <div class="fleet-icon">🌍</div>
+
+            <h3>Airbus A330</h3>
+
+            <p>
+                Wide-body aircraft serving international and
+                long-haul routes.
+            </p>
+
+            <span class="fleet-count">
+                A330-200 / A330-300
+            </span>
+
+        </div>
+
+
+        <div class="fleet-card">
+
+            <div class="fleet-icon">🚀</div>
+
+            <h3>Airbus A350</h3>
+
+            <p>
+                Next-generation wide-body aircraft designed for
+                efficient long-haul operations.
+            </p>
+
+            <span class="fleet-count">
+                A350-900
+            </span>
+
+        </div>
+
+
+        <div class="fleet-card">
+
+            <div class="fleet-icon">🔥</div>
+
+            <h3>Boeing 777</h3>
+
+            <p>
+                Large wide-body aircraft used on some of the airline's
+                longest international routes.
+            </p>
+
+            <span class="fleet-count">
+                777-300ER
+            </span>
+
+        </div>
+
+
+        <div class="fleet-card">
+
+            <div class="fleet-icon">⚡</div>
+
+            <h3>Boeing 787 Dreamliner</h3>
+
+            <p>
+                Modern long-haul aircraft featuring advanced
+                aerodynamics and composite construction.
+            </p>
+
+            <span class="fleet-count">
+                787-9
+            </span>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- NETWORK -->
+
+<section class="section">
+
+    <div class="section-title">
+
+        <div class="small">GLOBAL NETWORK</div>
+
+        <h2>From Istanbul to the World</h2>
+
+        <p>
+            Istanbul acts as Turkish Airlines' central connection point
+            between several major aviation regions.
+        </p>
+
+    </div>
+
+
+    <div class="network">
+
+        <div class="network-card">
+
+            <div class="icon">🇪🇺</div>
+
+            <h3>Europe</h3>
+
+            <p>
+                Extensive connections across European cities.
+            </p>
+
+        </div>
+
+
+        <div class="network-card">
+
+            <div class="icon">🌏</div>
+
+            <h3>Asia</h3>
+
+            <p>
+                Major connections linking Türkiye with Asia-Pacific.
+            </p>
+
+        </div>
+
+
+        <div class="network-card">
+
+            <div class="icon">🌍</div>
+
+            <h3>Global</h3>
+
+            <p>
+                Long-haul services connecting Istanbul with
+                destinations worldwide.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- QUOTE -->
+
+<section class="quote">
+
+    <h2>Widen Your World</h2>
+
+    <p>
+        Turkish Airlines · TK · Istanbul · Star Alliance
+    </p>
+
+</section>
+
+
+</main>
+
+
+<!-- FOOTER -->
+
+<footer>
+
+    <p>
+        © 2026 <strong>Flight Senses</strong> · Aviation Database
+    </p>
+
+</footer>
+
 
 </body>
 </html>

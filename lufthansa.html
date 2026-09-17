@@ -1,249 +1,1720 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <title>Lufthansa - Flight Senses</title>
 
-    <style>
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background: #061a33;
-            color: white;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        header {
-            text-align: center;
-            padding: 50px 20px;
-            background: #08264a;
-        }
+<title>Lufthansa - Flight Senses</title>
 
-        header h1 {
-            font-size: 44px;
-            margin-bottom: 10px;
-        }
+<style>
 
-        header p {
-            color: #9fc9ff;
-            font-size: 19px;
-        }
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
 
-        .container {
-            max-width: 900px;
-            margin: 40px auto;
-            padding: 20px;
-        }
+html{
+    scroll-behavior:smooth;
+}
 
-        .hero {
-            background: #0b2d52;
-            padding: 30px;
-            border-radius: 18px;
-            text-align: center;
-            margin-bottom: 25px;
-        }
+body{
+    font-family:Arial, Helvetica, sans-serif;
 
-        .hero h2 {
-            font-size: 28px;
-        }
+    background:
+        radial-gradient(
+            circle at 20% 0%,
+            rgba(255,205,0,.09),
+            transparent 35%
+        ),
+        radial-gradient(
+            circle at 85% 20%,
+            rgba(0,75,145,.12),
+            transparent 35%
+        ),
+        #020b17;
 
-        .hero p {
-            color: #b8d7f5;
-            line-height: 1.7;
-        }
+    color:white;
+    min-height:100vh;
+}
 
-        .info {
-            background: #0b2d52;
-            padding: 25px;
-            border-radius: 18px;
-        }
 
-        .info-row {
-            display: flex;
-            justify-content: space-between;
-            gap: 20px;
-            padding: 15px 0;
-            border-bottom: 1px solid #31577d;
-        }
+/* =========================
+   NAVBAR
+========================= */
 
-        .info-row:last-child {
-            border-bottom: none;
-        }
+nav{
+    position:sticky;
+    top:0;
+    z-index:1000;
 
-        .info-row span {
-            color: #b8d7f5;
-            text-align: right;
-        }
+    height:72px;
 
-        .history {
-            margin-top: 25px;
-            background: #0b2d52;
-            padding: 30px;
-            border-radius: 18px;
-        }
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
 
-        .history h2 {
-            color: #ffffff;
-        }
+    padding:0 7%;
 
-        .history p {
-            color: #b8d7f5;
-            line-height: 1.8;
-        }
+    background:rgba(2,11,23,.90);
 
-        .fleet {
-            margin-top: 25px;
-            background: #0b2d52;
-            padding: 30px;
-            border-radius: 18px;
-        }
+    backdrop-filter:blur(16px);
 
-        .fleet-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            gap: 15px;
-            margin-top: 20px;
-        }
+    border-bottom:
+        1px solid
+        rgba(255,205,0,.12);
+}
 
-        .fleet-card {
-            background: #08264a;
-            padding: 18px;
-            border-radius: 12px;
-            text-align: center;
-        }
+.logo{
+    font-size:23px;
+    font-weight:800;
 
-        .fleet-card h3 {
-            margin-bottom: 8px;
-        }
+    letter-spacing:1px;
 
-        .fleet-card p {
-            color: #9fc9ff;
-        }
+    color:white;
 
-        .back {
-            display: inline-block;
-            margin-top: 30px;
-            padding: 12px 20px;
-            background: #0077ff;
-            color: white;
-            text-decoration: none;
-            border-radius: 8px;
-        }
-    </style>
+    text-decoration:none;
+}
+
+.logo span{
+    color:#1597ff;
+}
+
+.nav-links{
+    display:flex;
+
+    gap:30px;
+
+    list-style:none;
+}
+
+.nav-links a{
+    color:#a9c3db;
+
+    text-decoration:none;
+
+    font-size:14px;
+
+    font-weight:600;
+
+    transition:.25s;
+}
+
+.nav-links a:hover,
+.nav-links .active{
+    color:#ffd000;
+}
+
+
+/* =========================
+   HERO
+========================= */
+
+.hero{
+    position:relative;
+
+    overflow:hidden;
+
+    min-height:520px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    text-align:center;
+
+    padding:80px 20px;
+
+    background:
+        linear-gradient(
+            rgba(2,11,23,.55),
+            rgba(2,11,23,.94)
+        ),
+        url("lufthansa.webp")
+        center/cover no-repeat;
+}
+
+.hero::before{
+    content:"";
+
+    position:absolute;
+
+    inset:0;
+
+    background:
+        radial-gradient(
+            circle at center,
+            rgba(255,205,0,.13),
+            transparent 48%
+        );
+}
+
+.hero-content{
+    position:relative;
+
+    z-index:2;
+
+    max-width:950px;
+}
+
+.airline-badge{
+    display:inline-block;
+
+    padding:9px 18px;
+
+    border:
+        1px solid
+        rgba(255,208,0,.35);
+
+    border-radius:30px;
+
+    background:
+        rgba(255,205,0,.08);
+
+    color:#ffd84a;
+
+    font-size:12px;
+
+    font-weight:800;
+
+    letter-spacing:2px;
+
+    margin-bottom:25px;
+}
+
+.hero h1{
+    font-size:
+        clamp(55px,8vw,92px);
+
+    line-height:1;
+
+    margin-bottom:20px;
+
+    text-shadow:
+        0 0 35px
+        rgba(255,210,0,.16);
+}
+
+.hero p{
+    color:#b8cee3;
+
+    font-size:20px;
+
+    max-width:720px;
+
+    margin:auto;
+
+    line-height:1.7;
+}
+
+.hero-button{
+    display:inline-block;
+
+    margin-top:30px;
+
+    padding:14px 25px;
+
+    border-radius:10px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #ffd000,
+            #d7a900
+        );
+
+    color:#06111f;
+
+    text-decoration:none;
+
+    font-weight:800;
+
+    box-shadow:
+        0 0 25px
+        rgba(255,205,0,.22);
+
+    transition:.3s;
+}
+
+.hero-button:hover{
+    transform:translateY(-3px);
+
+    box-shadow:
+        0 0 38px
+        rgba(255,205,0,.40);
+}
+
+
+/* =========================
+   MAIN
+========================= */
+
+.container{
+    width:min(1150px,90%);
+
+    margin:auto;
+}
+
+
+/* =========================
+   STATS
+========================= */
+
+.stats{
+    display:grid;
+
+    grid-template-columns:
+        repeat(4,1fr);
+
+    gap:18px;
+
+    margin-top:-55px;
+
+    position:relative;
+
+    z-index:5;
+}
+
+.stat-card{
+    background:
+        linear-gradient(
+            145deg,
+            rgba(15,37,61,.97),
+            rgba(5,19,34,.97)
+        );
+
+    border:
+        1px solid
+        rgba(255,205,0,.13);
+
+    border-radius:18px;
+
+    padding:28px 20px;
+
+    text-align:center;
+
+    box-shadow:
+        0 15px 40px
+        rgba(0,0,0,.30);
+}
+
+.stat-number{
+    font-size:30px;
+
+    font-weight:800;
+
+    color:#ffd000;
+
+    margin-bottom:8px;
+}
+
+.stat-label{
+    color:#8faac3;
+
+    font-size:13px;
+}
+
+
+/* =========================
+   SECTIONS
+========================= */
+
+.section{
+    padding:90px 0 20px;
+}
+
+.section-title{
+    margin-bottom:35px;
+}
+
+.section-title .small{
+    color:#159cff;
+
+    font-size:12px;
+
+    font-weight:800;
+
+    letter-spacing:2px;
+
+    margin-bottom:10px;
+}
+
+.section-title h2{
+    font-size:36px;
+
+    margin-bottom:10px;
+}
+
+.section-title p{
+    color:#8faac4;
+
+    max-width:730px;
+
+    line-height:1.7;
+}
+
+
+/* =========================
+   ABOUT
+========================= */
+
+.about-grid{
+    display:grid;
+
+    grid-template-columns:
+        1.4fr .9fr;
+
+    gap:25px;
+}
+
+.card{
+    background:
+        linear-gradient(
+            145deg,
+            #0d2946,
+            #061a2e
+        );
+
+    border:
+        1px solid
+        rgba(110,160,205,.14);
+
+    border-radius:20px;
+
+    padding:30px;
+
+    box-shadow:
+        0 15px 40px
+        rgba(0,0,0,.22);
+}
+
+.card h3{
+    font-size:22px;
+
+    margin-bottom:18px;
+}
+
+.card p{
+    color:#9bb5cb;
+
+    line-height:1.8;
+}
+
+.info-list{
+    display:flex;
+
+    flex-direction:column;
+}
+
+.info-row{
+    display:flex;
+
+    justify-content:space-between;
+
+    gap:20px;
+
+    padding:16px 0;
+
+    border-bottom:
+        1px solid
+        rgba(120,170,210,.13);
+}
+
+.info-row:last-child{
+    border-bottom:none;
+}
+
+.info-row strong{
+    color:#b9cee0;
+}
+
+.info-row span{
+    color:#ffd000;
+
+    text-align:right;
+}
+
+
+/* =========================
+   TIMELINE
+========================= */
+
+.timeline{
+    position:relative;
+
+    padding-left:35px;
+}
+
+.timeline::before{
+    content:"";
+
+    position:absolute;
+
+    left:8px;
+
+    top:5px;
+
+    bottom:5px;
+
+    width:2px;
+
+    background:
+        linear-gradient(
+            to bottom,
+            #ffd000,
+            #167fd0
+        );
+}
+
+.timeline-item{
+    position:relative;
+
+    margin-bottom:30px;
+
+    padding:25px;
+
+    border-radius:18px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #0d2945,
+            #061a2d
+        );
+
+    border:
+        1px solid
+        rgba(100,160,205,.13);
+}
+
+.timeline-item:last-child{
+    margin-bottom:0;
+}
+
+.timeline-item::before{
+    content:"";
+
+    position:absolute;
+
+    left:-33px;
+
+    top:29px;
+
+    width:12px;
+    height:12px;
+
+    border-radius:50%;
+
+    background:#ffd000;
+
+    box-shadow:
+        0 0 15px
+        rgba(255,205,0,.5);
+}
+
+.timeline-year{
+    color:#ffd000;
+
+    font-size:13px;
+
+    font-weight:800;
+
+    letter-spacing:1px;
+
+    margin-bottom:8px;
+}
+
+.timeline-item h3{
+    margin-bottom:9px;
+}
+
+.timeline-item p{
+    color:#91abc1;
+
+    font-size:14px;
+
+    line-height:1.7;
+}
+
+
+/* =========================
+   FLEET
+========================= */
+
+.fleet-grid{
+    display:grid;
+
+    grid-template-columns:
+        repeat(3,1fr);
+
+    gap:20px;
+}
+
+.fleet-card{
+    position:relative;
+
+    overflow:hidden;
+
+    padding:27px;
+
+    border-radius:19px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #102b47,
+            #061a2d
+        );
+
+    border:
+        1px solid
+        rgba(105,160,205,.14);
+
+    transition:.3s;
+}
+
+.fleet-card:hover{
+    transform:translateY(-5px);
+
+    border-color:
+        rgba(255,205,0,.35);
+
+    box-shadow:
+        0 18px 38px
+        rgba(255,205,0,.08);
+}
+
+.fleet-card::after{
+    content:"";
+
+    position:absolute;
+
+    width:120px;
+    height:120px;
+
+    right:-50px;
+    bottom:-55px;
+
+    border-radius:50%;
+
+    background:
+        rgba(255,205,0,.06);
+}
+
+.fleet-icon{
+    font-size:30px;
+
+    margin-bottom:15px;
+}
+
+.fleet-card h3{
+    font-size:20px;
+
+    margin-bottom:9px;
+}
+
+.fleet-card p{
+    color:#8faac1;
+
+    font-size:14px;
+
+    line-height:1.65;
+}
+
+.fleet-tag{
+    display:inline-block;
+
+    margin-top:17px;
+
+    padding:7px 11px;
+
+    border-radius:8px;
+
+    background:
+        rgba(255,205,0,.09);
+
+    color:#ffd000;
+
+    font-size:12px;
+
+    font-weight:700;
+}
+
+
+/* =========================
+   HUBS
+========================= */
+
+.hub-grid{
+    display:grid;
+
+    grid-template-columns:
+        repeat(2,1fr);
+
+    gap:20px;
+}
+
+.hub-card{
+    padding:32px;
+
+    border-radius:20px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(0,74,140,.18),
+            rgba(7,26,44,.95)
+        );
+
+    border:
+        1px solid
+        rgba(55,140,215,.18);
+}
+
+.hub-code{
+    color:#ffd000;
+
+    font-size:30px;
+
+    font-weight:800;
+
+    margin-bottom:8px;
+}
+
+.hub-card h3{
+    margin-bottom:9px;
+}
+
+.hub-card p{
+    color:#8faac2;
+
+    font-size:14px;
+
+    line-height:1.7;
+}
+
+
+/* =========================
+   HIGHLIGHTS
+========================= */
+
+.highlights{
+    display:grid;
+
+    grid-template-columns:
+        repeat(3,1fr);
+
+    gap:20px;
+}
+
+.highlight{
+    padding:27px;
+
+    border-radius:18px;
+
+    background:#071b2e;
+
+    border:
+        1px solid
+        rgba(100,155,200,.13);
+}
+
+.highlight-icon{
+    font-size:30px;
+
+    margin-bottom:14px;
+}
+
+.highlight h3{
+    margin-bottom:9px;
+}
+
+.highlight p{
+    color:#8da7bd;
+
+    font-size:14px;
+
+    line-height:1.65;
+}
+
+
+/* =========================
+   QUOTE
+========================= */
+
+.quote{
+    margin:90px 0;
+
+    padding:60px 30px;
+
+    text-align:center;
+
+    border-radius:25px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255,205,0,.12),
+            rgba(0,35,68,.65)
+        );
+
+    border:
+        1px solid
+        rgba(255,205,0,.18);
+}
+
+.quote h2{
+    font-size:35px;
+
+    margin-bottom:15px;
+}
+
+.quote p{
+    color:#8fb4d3;
+
+    font-size:18px;
+}
+
+
+/* =========================
+   FOOTER
+========================= */
+
+footer{
+    margin-top:40px;
+
+    padding:35px 20px;
+
+    text-align:center;
+
+    background:#010710;
+
+    border-top:
+        1px solid
+        rgba(100,160,210,.12);
+}
+
+footer p{
+    color:#607c96;
+
+    font-size:13px;
+}
+
+footer strong{
+    color:#159cff;
+}
+
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media(max-width:900px){
+
+    .nav-links{
+        gap:15px;
+    }
+
+    .stats{
+        grid-template-columns:
+            repeat(2,1fr);
+    }
+
+    .about-grid{
+        grid-template-columns:1fr;
+    }
+
+    .fleet-grid{
+        grid-template-columns:
+            repeat(2,1fr);
+    }
+
+    .hub-grid{
+        grid-template-columns:1fr;
+    }
+
+    .highlights{
+        grid-template-columns:
+            repeat(2,1fr);
+    }
+}
+
+
+@media(max-width:600px){
+
+    nav{
+        padding:0 20px;
+    }
+
+    .nav-links{
+        display:none;
+    }
+
+    .hero{
+        min-height:450px;
+    }
+
+    .hero h1{
+        font-size:51px;
+    }
+
+    .hero p{
+        font-size:16px;
+    }
+
+    .stats{
+        grid-template-columns:
+            1fr 1fr;
+
+        margin-top:-35px;
+    }
+
+    .stat-card{
+        padding:20px 10px;
+    }
+
+    .stat-number{
+        font-size:25px;
+    }
+
+    .section{
+        padding-top:65px;
+    }
+
+    .section-title h2{
+        font-size:29px;
+    }
+
+    .fleet-grid{
+        grid-template-columns:1fr;
+    }
+
+    .highlights{
+        grid-template-columns:1fr;
+    }
+
+    .card{
+        padding:22px;
+    }
+
+    .timeline{
+        padding-left:28px;
+    }
+
+    .timeline-item::before{
+        left:-26px;
+    }
+}
+
+
+@media(prefers-reduced-motion:reduce){
+
+    html{
+        scroll-behavior:auto;
+    }
+
+    *{
+        transition:none!important;
+    }
+}
+
+</style>
+
 </head>
+
 
 <body>
 
-<header>
-    <h1>Lufthansa</h1>
-    <p>More than an airline — a century of aviation history 🇩🇪✈️</p>
-</header>
 
-<div class="container">
+<!-- =========================
+     NAVBAR
+========================= -->
 
-    <div class="hero">
-        <h2>100 Years of Lufthansa</h2>
+<nav>
 
-        <p>
-            Lufthansa traces its history back to 1926.
-            In 2026, the airline and its heritage are being celebrated
-            through a century of aviation history, innovation and change.
-        </p>
-    </div>
-
-    <div class="info">
-
-        <div class="info-row">
-            <strong>Founded</strong>
-            <span>1926</span>
-        </div>
-
-        <div class="info-row">
-            <strong>Modern Lufthansa Founded</strong>
-            <span>1953</span>
-        </div>
-
-        <div class="info-row">
-            <strong>Flight Operations Resumed</strong>
-            <span>1955</span>
-        </div>
-
-        <div class="info-row">
-            <strong>Headquarters</strong>
-            <span>Cologne, Germany</span>
-        </div>
-
-        <div class="info-row">
-            <strong>Airline Code</strong>
-            <span>LH</span>
-        </div>
-
-        <div class="info-row">
-            <strong>Main Hub</strong>
-            <span>Frankfurt Airport</span>
-        </div>
-
-        <div class="info-row">
-            <strong>Alliance</strong>
-            <span>Star Alliance</span>
-        </div>
-
-    </div>
-
-    <div class="history">
-        <h2>Aviation History</h2>
-
-        <p>
-            The first Lufthansa was founded in 1926 following the merger
-            of Junkers Luftverkehr and Deutscher Aero Lloyd.
-        </p>
-
-        <p>
-            After the Second World War, a new Lufthansa was established
-            in 1953. Flight operations restarted in 1955, beginning a
-            new chapter in German commercial aviation.
-        </p>
-
-        <p>
-            Lufthansa later became an important operator of iconic
-            aircraft including the Boeing 707, Boeing 747 and Airbus A380.
-        </p>
-    </div>
-
-    <div class="fleet">
-
-        <h2>Iconic Aircraft</h2>
-
-        <div class="fleet-grid">
-
-            <div class="fleet-card">
-                <h3>Boeing 747</h3>
-                <p>Queen of the Skies</p>
-            </div>
-
-            <div class="fleet-card">
-                <h3>Airbus A380</h3>
-                <p>Superjumbo</p>
-            </div>
-
-            <div class="fleet-card">
-                <h3>Airbus A350</h3>
-                <p>Next-generation wide-body</p>
-            </div>
-
-            <div class="fleet-card">
-                <h3>Boeing 787</h3>
-                <p>Dreamliner</p>
-            </div>
-
-        </div>
-
-    </div>
-
-    <a href="airlines.html" class="back">
-        ← Back to Airlines
+    <a href="index.html" class="logo">
+        FLIGHT <span>SENSES</span>
     </a>
 
-</div>
+    <ul class="nav-links">
+
+        <li>
+            <a href="index.html">
+                Home
+            </a>
+        </li>
+
+        <li>
+            <a href="aircraft.html">
+                Aircraft
+            </a>
+        </li>
+
+        <li>
+            <a href="airlines.html" class="active">
+                Airlines
+            </a>
+        </li>
+
+        <li>
+            <a href="top10.html">
+                Top 10
+            </a>
+        </li>
+
+        <li>
+            <a href="compare.html">
+                Compare
+            </a>
+        </li>
+
+    </ul>
+
+</nav>
+
+
+<!-- =========================
+     HERO
+========================= -->
+
+<header class="hero">
+
+    <div class="hero-content">
+
+        <div class="airline-badge">
+            🇩🇪 GERMANY · STAR ALLIANCE
+        </div>
+
+        <h1>
+            Lufthansa
+        </h1>
+
+        <p>
+            More than an airline — a century of aviation history.
+            <br>
+            German aviation heritage meets modern global connectivity.
+        </p>
+
+        <a
+            href="airlines.html"
+            class="hero-button"
+        >
+            ← Back to Airlines
+        </a>
+
+    </div>
+
+</header>
+
+
+<main class="container">
+
+
+<!-- =========================
+     STATS
+========================= -->
+
+<section class="stats">
+
+
+    <div class="stat-card">
+
+        <div class="stat-number">
+            1926
+        </div>
+
+        <div class="stat-label">
+            Heritage Founded
+        </div>
+
+    </div>
+
+
+    <div class="stat-card">
+
+        <div class="stat-number">
+            LH
+        </div>
+
+        <div class="stat-label">
+            IATA Code
+        </div>
+
+    </div>
+
+
+    <div class="stat-card">
+
+        <div class="stat-number">
+            FRA
+        </div>
+
+        <div class="stat-label">
+            Main Hub
+        </div>
+
+    </div>
+
+
+    <div class="stat-card">
+
+        <div class="stat-number">
+            100
+        </div>
+
+        <div class="stat-label">
+            Years of Heritage
+        </div>
+
+    </div>
+
+
+</section>
+
+
+<!-- =========================
+     ABOUT
+========================= -->
+
+<section class="section">
+
+    <div class="section-title">
+
+        <div class="small">
+            AIRLINE PROFILE
+        </div>
+
+        <h2>
+            About Lufthansa
+        </h2>
+
+        <p>
+            Lufthansa is one of Germany's best-known airlines,
+            with a history stretching back to the early days of
+            European commercial aviation.
+        </p>
+
+    </div>
+
+
+    <div class="about-grid">
+
+
+        <div class="card">
+
+            <h3>
+                A Century in the Sky
+            </h3>
+
+            <p>
+                Lufthansa traces its heritage to 1926, when
+                Deutscher Luft Hansa was created through the
+                merger of Junkers Luftverkehr and Deutscher
+                Aero Lloyd.
+            </p>
+
+            <br>
+
+            <p>
+                A new Lufthansa was established in 1953,
+                with flight operations resuming in 1955.
+                The airline subsequently became an important
+                European operator of aircraft ranging from
+                the Boeing 707 to the Boeing 747 and Airbus A380.
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <h3>
+                Quick Facts
+            </h3>
+
+            <div class="info-list">
+
+
+                <div class="info-row">
+
+                    <strong>
+                        Heritage
+                    </strong>
+
+                    <span>
+                        1926
+                    </span>
+
+                </div>
+
+
+                <div class="info-row">
+
+                    <strong>
+                        Modern Lufthansa
+                    </strong>
+
+                    <span>
+                        1953
+                    </span>
+
+                </div>
+
+
+                <div class="info-row">
+
+                    <strong>
+                        Operations Resumed
+                    </strong>
+
+                    <span>
+                        1955
+                    </span>
+
+                </div>
+
+
+                <div class="info-row">
+
+                    <strong>
+                        Headquarters
+                    </strong>
+
+                    <span>
+                        Cologne
+                    </span>
+
+                </div>
+
+
+                <div class="info-row">
+
+                    <strong>
+                        IATA
+                    </strong>
+
+                    <span>
+                        LH
+                    </span>
+
+                </div>
+
+
+                <div class="info-row">
+
+                    <strong>
+                        Main Hub
+                    </strong>
+
+                    <span>
+                        Frankfurt
+                    </span>
+
+                </div>
+
+
+                <div class="info-row">
+
+                    <strong>
+                        Alliance
+                    </strong>
+
+                    <span>
+                        Star Alliance
+                    </span>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     HISTORY
+========================= -->
+
+<section class="section">
+
+    <div class="section-title">
+
+        <div class="small">
+            AVIATION HISTORY
+        </div>
+
+        <h2>
+            Lufthansa Through the Years
+        </h2>
+
+        <p>
+            A timeline showing some of the most important moments
+            in Lufthansa's aviation history.
+        </p>
+
+    </div>
+
+
+    <div class="timeline">
+
+
+        <div class="timeline-item">
+
+            <div class="timeline-year">
+                1926
+            </div>
+
+            <h3>
+                Lufthansa Heritage Begins
+            </h3>
+
+            <p>
+                Deutscher Luft Hansa was established following
+                the merger of Junkers Luftverkehr and
+                Deutscher Aero Lloyd.
+            </p>
+
+        </div>
+
+
+        <div class="timeline-item">
+
+            <div class="timeline-year">
+                1953
+            </div>
+
+            <h3>
+                A New Lufthansa
+            </h3>
+
+            <p>
+                A new company named Deutsche Lufthansa AG
+                was established in preparation for the
+                return of German civil aviation.
+            </p>
+
+        </div>
+
+
+        <div class="timeline-item">
+
+            <div class="timeline-year">
+                1955
+            </div>
+
+            <h3>
+                Flight Operations Resume
+            </h3>
+
+            <p>
+                Lufthansa restarted scheduled flight operations,
+                opening a new chapter in German commercial aviation.
+            </p>
+
+        </div>
+
+
+        <div class="timeline-item">
+
+            <div class="timeline-year">
+                JET AGE
+            </div>
+
+            <h3>
+                Boeing 707 Era
+            </h3>
+
+            <p>
+                Lufthansa entered the jet age with aircraft
+                such as the Boeing 707, transforming its
+                international operations.
+            </p>
+
+        </div>
+
+
+        <div class="timeline-item">
+
+            <div class="timeline-year">
+                MODERN ERA
+            </div>
+
+            <h3>
+                Jumbo & Superjumbo
+            </h3>
+
+            <p>
+                Lufthansa became a major operator of iconic
+                wide-body aircraft including the Boeing 747
+                and Airbus A380.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     FLEET
+========================= -->
+
+<section class="section">
+
+    <div class="section-title">
+
+        <div class="small">
+            AIRCRAFT FLEET
+        </div>
+
+        <h2>
+            Lufthansa Fleet
+        </h2>
+
+        <p>
+            From classic European narrow-bodies to some of the
+            most recognizable wide-body aircraft in aviation.
+        </p>
+
+    </div>
+
+
+    <div class="fleet-grid">
+
+
+        <div class="fleet-card">
+
+            <div class="fleet-icon">
+                ✈️
+            </div>
+
+            <h3>
+                Airbus A320 Family
+            </h3>
+
+            <p>
+                A major part of Lufthansa's short- and
+                medium-haul European operations.
+            </p>
+
+            <span class="fleet-tag">
+                NARROW-BODY
+            </span>
+
+        </div>
+
+
+        <div class="fleet-card">
+
+            <div class="fleet-icon">
+                🛫
+            </div>
+
+            <h3>
+                Airbus A350
+            </h3>
+
+            <p>
+                A modern wide-body aircraft used on
+                long-haul international routes.
+            </p>
+
+            <span class="fleet-tag">
+                LONG-HAUL
+            </span>
+
+        </div>
+
+
+        <div class="fleet-card">
+
+            <div class="fleet-icon">
+                🔥
+            </div>
+
+            <h3>
+                Boeing 747-8
+            </h3>
+
+            <p>
+                The iconic four-engine jumbo jet remains
+                one of Lufthansa's signature aircraft.
+            </p>
+
+            <span class="fleet-tag">
+                QUEEN OF THE SKIES
+            </span>
+
+        </div>
+
+
+        <div class="fleet-card">
+
+            <div class="fleet-icon">
+                🌍
+            </div>
+
+            <h3>
+                Airbus A380
+            </h3>
+
+            <p>
+                Lufthansa's double-decker superjumbo,
+                operated on selected high-capacity routes.
+            </p>
+
+            <span class="fleet-tag">
+                SUPERJUMBO
+            </span>
+
+        </div>
+
+
+        <div class="fleet-card">
+
+            <div class="fleet-icon">
+                🚀
+            </div>
+
+            <h3>
+                Boeing 787-9
+            </h3>
+
+            <p>
+                A modern Dreamliner forming part of
+                Lufthansa's next-generation wide-body fleet.
+            </p>
+
+            <span class="fleet-tag">
+                DREAMLINER
+            </span>
+
+        </div>
+
+
+        <div class="fleet-card">
+
+            <div class="fleet-icon">
+                ⚡
+            </div>
+
+            <h3>
+                Boeing 777-9
+            </h3>
+
+            <p>
+                The next-generation flagship aircraft planned
+                for Lufthansa's future long-haul fleet.
+            </p>
+
+            <span class="fleet-tag">
+                NEXT GENERATION
+            </span>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     HUBS
+========================= -->
+
+<section class="section">
+
+    <div class="section-title">
+
+        <div class="small">
+            HUB NETWORK
+        </div>
+
+        <h2>
+            Lufthansa's Major Hubs
+        </h2>
+
+        <p>
+            Lufthansa's network is built around major German
+            aviation hubs connecting Europe with the world.
+        </p>
+
+    </div>
+
+
+    <div class="hub-grid">
+
+
+        <div class="hub-card">
+
+            <div class="hub-code">
+                FRA
+            </div>
+
+            <h3>
+                Frankfurt Airport
+            </h3>
+
+            <p>
+                Frankfurt is Lufthansa's largest and most
+                important hub, serving as a major international
+                connection point.
+            </p>
+
+        </div>
+
+
+        <div class="hub-card">
+
+            <div class="hub-code">
+                MUC
+            </div>
+
+            <h3>
+                Munich Airport
+            </h3>
+
+            <p>
+                Munich is another major Lufthansa hub,
+                providing extensive European and
+                long-haul connectivity.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     HIGHLIGHTS
+========================= -->
+
+<section class="section">
+
+    <div class="section-title">
+
+        <div class="small">
+            LUFTHANSA HIGHLIGHTS
+        </div>
+
+        <h2>
+            Icons of Lufthansa
+        </h2>
+
+        <p>
+            Aircraft and milestones that have become closely
+            associated with Lufthansa's aviation identity.
+        </p>
+
+    </div>
+
+
+    <div class="highlights">
+
+
+        <div class="highlight">
+
+            <div class="highlight-icon">
+                👑
+            </div>
+
+            <h3>
+                Boeing 747-8
+            </h3>
+
+            <p>
+                Lufthansa is one of the few passenger airlines
+                continuing to operate the Boeing 747-8.
+            </p>
+
+        </div>
+
+
+        <div class="highlight">
+
+            <div class="highlight-icon">
+                🏢
+            </div>
+
+            <h3>
+                Frankfurt Hub
+            </h3>
+
+            <p>
+                Frankfurt forms the heart of Lufthansa's
+                international network.
+            </p>
+
+        </div>
+
+
+        <div class="highlight">
+
+            <div class="highlight-icon">
+                💯
+            </div>
+
+            <h3>
+                100 Years
+            </h3>
+
+            <p>
+                2026 marks a century since the beginning
+                of Lufthansa's aviation heritage.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     QUOTE
+========================= -->
+
+<section class="quote">
+
+    <h2>
+        Lufthansa
+    </h2>
+
+    <p>
+        LH · Germany · Frankfurt · Munich · Star Alliance
+    </p>
+
+</section>
+
+
+</main>
+
+
+<!-- =========================
+     FOOTER
+========================= -->
+
+<footer>
+
+    <p>
+        © 2026 <strong>Flight Senses</strong>
+        · Aviation Database
+    </p>
+
+</footer>
+
 
 </body>
+
 </html>
