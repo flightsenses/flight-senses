@@ -1,0 +1,3988 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Flight Senses World | Global Aviation Explorer</title>
+
+<script src="https://cdn.jsdelivr.net/npm/globe.gl"></script>
+
+<style>
+
+/* =========================================================
+   RESET
+========================================================= */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:Arial,Helvetica,sans-serif;
+    background:
+        radial-gradient(
+            circle at 50% -10%,
+            rgba(0,180,255,.12),
+            transparent 38%
+        ),
+        #02070d;
+    color:#eafaff;
+    overflow-x:hidden;
+}
+
+button,
+input{
+    font-family:inherit;
+}
+
+
+/* =========================================================
+   BOOT SCREEN
+========================================================= */
+
+.boot-screen{
+    position:fixed;
+    inset:0;
+    z-index:99999;
+    background:#01060b;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    transition:
+        opacity .7s ease,
+        visibility .7s ease;
+}
+
+.boot-screen.hidden{
+    opacity:0;
+    visibility:hidden;
+}
+
+.boot-box{
+    width:min(620px,90%);
+    text-align:center;
+}
+
+.boot-logo{
+    font-size:clamp(32px,6vw,62px);
+    font-weight:900;
+    letter-spacing:5px;
+    color:#fff;
+    text-shadow:
+        0 0 12px #00d9ff,
+        0 0 35px rgba(0,217,255,.65);
+}
+
+.boot-logo span{
+    color:#00d9ff;
+}
+
+.boot-line{
+    height:1px;
+    margin:24px 0;
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            #00d9ff,
+            transparent
+        );
+}
+
+.boot-status{
+    min-height:18px;
+    color:#00d9ff;
+    font-family:monospace;
+    font-size:11px;
+    letter-spacing:2px;
+}
+
+.boot-progress{
+    width:100%;
+    height:3px;
+    margin-top:20px;
+    background:rgba(255,255,255,.07);
+    overflow:hidden;
+}
+
+.boot-progress-bar{
+    width:0;
+    height:100%;
+    background:#00d9ff;
+    box-shadow:0 0 15px #00d9ff;
+    transition:width .35s ease;
+}
+
+
+/* =========================================================
+   NAVBAR
+========================================================= */
+
+.navbar{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    z-index:1000;
+
+    background:rgba(2,8,14,.88);
+    border-bottom:1px solid rgba(0,210,255,.15);
+
+    backdrop-filter:blur(12px);
+    -webkit-backdrop-filter:blur(12px);
+}
+
+.nav-container{
+    max-width:1450px;
+    margin:auto;
+
+    padding:16px 28px;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:25px;
+}
+
+.logo{
+    color:#fff;
+    text-decoration:none;
+
+    font-size:21px;
+    font-weight:900;
+    letter-spacing:2px;
+
+    white-space:nowrap;
+}
+
+.logo span{
+    color:#00d9ff;
+    text-shadow:0 0 12px rgba(0,217,255,.8);
+}
+
+.nav-links{
+    display:flex;
+    align-items:center;
+    justify-content:flex-end;
+    flex-wrap:wrap;
+    gap:4px;
+}
+
+.nav-links a{
+    color:#8da8b4;
+    text-decoration:none;
+
+    font-size:11px;
+    padding:9px 11px;
+
+    border-radius:6px;
+
+    transition:.2s;
+}
+
+.nav-links a:hover,
+.nav-links a.active{
+    color:#00eaff;
+    background:rgba(0,210,255,.08);
+}
+
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.hero{
+    max-width:1400px;
+    margin:auto;
+
+    padding:
+        145px 30px
+        42px;
+
+    text-align:center;
+}
+
+.eyebrow{
+    color:#00d9ff;
+
+    font-family:monospace;
+    font-size:10px;
+    font-weight:bold;
+
+    letter-spacing:4px;
+
+    margin-bottom:15px;
+}
+
+.hero h1{
+    font-size:clamp(38px,6vw,74px);
+    line-height:.98;
+
+    font-weight:900;
+    letter-spacing:-2px;
+
+    text-shadow:
+        0 0 18px rgba(0,220,255,.25);
+}
+
+.hero h1 span{
+    color:#00d9ff;
+}
+
+.hero p{
+    max-width:750px;
+    margin:22px auto 0;
+
+    color:#7894a0;
+
+    font-size:14px;
+    line-height:1.8;
+}
+
+
+/* =========================================================
+   WORLD AREA
+========================================================= */
+
+.world-section{
+    max-width:1450px;
+    margin:auto;
+
+    padding:
+        0 22px
+        55px;
+}
+
+
+/* =========================================================
+   COMMAND HEADER
+========================================================= */
+
+.command-header{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    margin-bottom:12px;
+
+    padding:0 4px;
+}
+
+.command-title{
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+.command-status{
+    width:8px;
+    height:8px;
+
+    border-radius:50%;
+
+    background:#00eaff;
+
+    box-shadow:
+        0 0 7px #00eaff,
+        0 0 17px rgba(0,234,255,.7);
+}
+
+.command-title span{
+    color:#00d9ff;
+
+    font-family:monospace;
+    font-size:10px;
+    font-weight:bold;
+
+    letter-spacing:2px;
+}
+
+.command-meta{
+    color:#526e7a;
+
+    font-family:monospace;
+    font-size:9px;
+    letter-spacing:1px;
+}
+
+
+/* =========================================================
+   COMMAND CENTER
+========================================================= */
+
+.command-frame{
+    position:relative;
+
+    height:min(760px,78vh);
+    min-height:610px;
+
+    overflow:hidden;
+
+    background:
+        radial-gradient(
+            circle at 50% 48%,
+            rgba(0,120,200,.08),
+            transparent 52%
+        ),
+        #01080f;
+
+    border:
+        1px solid rgba(0,210,255,.22);
+
+    box-shadow:
+        0 0 50px rgba(0,130,220,.07),
+        inset 0 0 80px rgba(0,120,190,.035);
+}
+
+
+/* =========================================================
+   GLOBE
+========================================================= */
+
+#globe-container{
+    position:absolute;
+    inset:0;
+}
+
+#globe-container canvas{
+    outline:none;
+}
+
+
+/* =========================================================
+   SCAN EFFECTS
+========================================================= */
+
+.scanlines{
+    position:absolute;
+    inset:0;
+
+    z-index:20;
+
+    pointer-events:none;
+
+    opacity:.055;
+
+    background:
+        repeating-linear-gradient(
+            to bottom,
+            transparent 0,
+            transparent 5px,
+            rgba(0,220,255,.35) 6px
+        );
+}
+
+.scan-beam{
+    position:absolute;
+
+    top:-10px;
+    left:0;
+    right:0;
+
+    height:1px;
+
+    z-index:21;
+
+    pointer-events:none;
+
+    background:#00eaff;
+
+    box-shadow:
+        0 0 8px #00eaff,
+        0 0 25px rgba(0,234,255,.7);
+
+    opacity:.28;
+
+    animation:
+        scanBeam 8s linear infinite;
+}
+
+@keyframes scanBeam{
+
+    0%{
+        top:-10px;
+    }
+
+    100%{
+        top:100%;
+    }
+
+}
+
+
+/* =========================================================
+   CORNERS
+========================================================= */
+
+.corner{
+    position:absolute;
+
+    width:30px;
+    height:30px;
+
+    z-index:30;
+
+    pointer-events:none;
+}
+
+.corner.tl{
+    top:14px;
+    left:14px;
+
+    border-top:1px solid #00d9ff;
+    border-left:1px solid #00d9ff;
+}
+
+.corner.tr{
+    top:14px;
+    right:14px;
+
+    border-top:1px solid #00d9ff;
+    border-right:1px solid #00d9ff;
+}
+
+.corner.bl{
+    bottom:14px;
+    left:14px;
+
+    border-bottom:1px solid #00d9ff;
+    border-left:1px solid #00d9ff;
+}
+
+.corner.br{
+    bottom:14px;
+    right:14px;
+
+    border-bottom:1px solid #00d9ff;
+    border-right:1px solid #00d9ff;
+}
+
+
+/* =========================================================
+   HUD
+========================================================= */
+
+.hud{
+    position:absolute;
+
+    z-index:35;
+
+    pointer-events:none;
+
+    font-family:monospace;
+
+    font-size:9px;
+    line-height:1.9;
+
+    letter-spacing:1.2px;
+
+    color:#678590;
+}
+
+.hud strong{
+    color:#bdefff;
+}
+
+.hud-title{
+    color:#00eaff;
+
+    font-weight:bold;
+
+    margin-bottom:4px;
+}
+
+.hud-left{
+    top:25px;
+    left:30px;
+}
+
+.hud-right{
+    top:25px;
+    right:30px;
+
+    text-align:right;
+}
+
+.status-dot{
+    display:inline-block;
+
+    width:5px;
+    height:5px;
+
+    margin-right:5px;
+
+    border-radius:50%;
+
+    background:#00eaff;
+
+    box-shadow:0 0 8px #00eaff;
+}
+
+
+/* =========================================================
+   SEARCH
+========================================================= */
+
+.search-panel{
+    position:absolute;
+
+    top:105px;
+    left:30px;
+
+    width:330px;
+
+    z-index:45;
+}
+
+.search-label{
+    color:#597783;
+
+    font-family:monospace;
+    font-size:8px;
+
+    letter-spacing:2px;
+
+    margin-bottom:7px;
+}
+
+.search-box{
+    display:flex;
+
+    height:43px;
+
+    background:rgba(2,12,20,.92);
+
+    border:
+        1px solid rgba(0,215,255,.28);
+
+    box-shadow:
+        0 0 25px rgba(0,160,255,.06);
+
+    border-radius:7px;
+
+    overflow:hidden;
+}
+
+.search-box:focus-within{
+    border-color:rgba(0,230,255,.65);
+
+    box-shadow:
+        0 0 22px rgba(0,190,255,.12);
+}
+
+.search-box input{
+    width:100%;
+
+    border:0;
+    outline:0;
+
+    background:transparent;
+
+    color:#eafaff;
+
+    padding:0 13px;
+
+    font-size:11px;
+}
+
+.search-box input::placeholder{
+    color:#526d79;
+}
+
+.search-btn{
+    width:48px;
+
+    border:0;
+
+    background:
+        rgba(0,210,255,.08);
+
+    color:#00eaff;
+
+    cursor:pointer;
+
+    font-size:18px;
+
+    transition:.2s;
+}
+
+.search-btn:hover{
+    background:
+        rgba(0,210,255,.18);
+}
+
+
+/* =========================================================
+   AIRPORT PANEL
+========================================================= */
+
+.airport-panel{
+    position:absolute;
+
+    top:105px;
+    right:30px;
+
+    width:325px;
+
+    z-index:50;
+
+    padding:20px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(3,18,29,.98),
+            rgba(1,9,15,.98)
+        );
+
+    border:
+        1px solid rgba(0,215,255,.28);
+
+    box-shadow:
+        0 15px 45px rgba(0,0,0,.35),
+        0 0 30px rgba(0,160,255,.08);
+
+    display:none;
+}
+
+.airport-panel.show{
+    display:block;
+}
+
+.close-panel{
+    position:absolute;
+
+    top:9px;
+    right:11px;
+
+    border:0;
+
+    background:none;
+
+    color:#58737f;
+
+    cursor:pointer;
+
+    font-size:18px;
+}
+
+.close-panel:hover{
+    color:#00eaff;
+}
+
+.panel-kicker{
+    color:#00d9ff;
+
+    font-family:monospace;
+    font-size:8px;
+
+    letter-spacing:2px;
+
+    margin-bottom:5px;
+}
+
+.airport-code{
+    color:#00eaff;
+
+    font-family:monospace;
+
+    font-size:34px;
+    font-weight:bold;
+
+    letter-spacing:2px;
+
+    text-shadow:
+        0 0 12px rgba(0,220,255,.35);
+}
+
+.airport-name{
+    color:#fff;
+
+    font-size:17px;
+    font-weight:bold;
+
+    line-height:1.3;
+
+    margin-top:2px;
+
+    padding-right:25px;
+}
+
+.airport-location{
+    color:#718c98;
+
+    font-size:10px;
+
+    margin-top:5px;
+}
+
+.airport-description{
+    color:#8ba6b1;
+
+    font-size:10px;
+
+    line-height:1.65;
+
+    margin:
+        14px 0
+        15px;
+}
+
+.airport-grid{
+    display:grid;
+
+    grid-template-columns:
+        1fr 1fr;
+
+    gap:6px;
+}
+
+.data-cell{
+    padding:8px 9px;
+
+    background:
+        rgba(0,120,180,.055);
+
+    border:
+        1px solid rgba(0,180,255,.09);
+}
+
+.data-label{
+    color:#506d78;
+
+    font-family:monospace;
+
+    font-size:7px;
+
+    letter-spacing:1px;
+}
+
+.data-value{
+    color:#dffaff;
+
+    font-family:monospace;
+
+    font-size:10px;
+
+    margin-top:3px;
+}
+
+
+/* =========================================================
+   MAP CONTROLS
+========================================================= */
+
+.map-controls{
+    position:absolute;
+
+    left:30px;
+    bottom:27px;
+
+    z-index:45;
+
+    display:flex;
+    gap:6px;
+}
+
+.map-btn{
+    padding:9px 12px;
+
+    background:
+        rgba(2,12,20,.88);
+
+    border:
+        1px solid rgba(0,205,255,.2);
+
+    border-radius:5px;
+
+    color:#688691;
+
+    font-family:monospace;
+
+    font-size:8px;
+
+    letter-spacing:1px;
+
+    cursor:pointer;
+
+    transition:.2s;
+}
+
+.map-btn:hover,
+.map-btn.active{
+    color:#00eaff;
+
+    border-color:
+        rgba(0,220,255,.5);
+
+    background:
+        rgba(0,170,220,.09);
+}
+
+
+/* =========================================================
+   BOTTOM TELEMETRY
+========================================================= */
+
+.telemetry-bar{
+    position:absolute;
+
+    right:30px;
+    bottom:27px;
+
+    z-index:35;
+
+    display:flex;
+    gap:18px;
+
+    color:#55727e;
+
+    font-family:monospace;
+
+    font-size:8px;
+
+    letter-spacing:1px;
+}
+
+.telemetry-bar strong{
+    color:#9bddea;
+}
+
+
+/* =========================================================
+   AIRPORT SECTION
+========================================================= */
+
+.explorer-section{
+    max-width:1400px;
+    margin:auto;
+
+    padding:
+        5px 30px
+        65px;
+}
+
+.section-top{
+    display:flex;
+
+    align-items:flex-end;
+    justify-content:space-between;
+
+    gap:30px;
+
+    margin-bottom:22px;
+}
+
+.section-kicker{
+    color:#00d9ff;
+
+    font-family:monospace;
+
+    font-size:9px;
+
+    font-weight:bold;
+
+    letter-spacing:3px;
+}
+
+.section-title{
+    color:#f2fbff;
+
+    font-size:28px;
+    font-weight:900;
+
+    margin-top:6px;
+}
+
+.section-description{
+    max-width:560px;
+
+    color:#66818d;
+
+    font-size:11px;
+
+    line-height:1.7;
+
+    text-align:right;
+}
+
+
+/* =========================================================
+   FILTER BAR
+========================================================= */
+
+.filter-bar{
+    display:flex;
+
+    align-items:center;
+
+    gap:6px;
+
+    flex-wrap:wrap;
+
+    padding:10px;
+
+    margin-bottom:18px;
+
+    background:
+        rgba(2,12,19,.75);
+
+    border:
+        1px solid rgba(0,180,255,.1);
+}
+
+.filter-label{
+    color:#506b77;
+
+    font-family:monospace;
+
+    font-size:8px;
+
+    letter-spacing:1px;
+
+    margin-right:5px;
+}
+
+.filter{
+    padding:8px 11px;
+
+    border:
+        1px solid rgba(0,190,255,.13);
+
+    border-radius:4px;
+
+    background:#061018;
+
+    color:#698590;
+
+    font-family:monospace;
+
+    font-size:8px;
+
+    letter-spacing:1px;
+
+    cursor:pointer;
+
+    transition:.2s;
+}
+
+.filter:hover,
+.filter.active{
+    color:#00eaff;
+
+    border-color:
+        rgba(0,220,255,.45);
+
+    background:
+        rgba(0,180,230,.08);
+}
+
+
+/* =========================================================
+   AIRPORT CARDS
+========================================================= */
+
+.airport-grid-main{
+    display:grid;
+
+    grid-template-columns:
+        repeat(4,1fr);
+
+    gap:10px;
+}
+
+.airport-card{
+    position:relative;
+
+    min-height:150px;
+
+    padding:18px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(0,155,220,.055),
+            rgba(2,9,15,.95)
+        );
+
+    border:
+        1px solid rgba(0,180,255,.12);
+
+    cursor:pointer;
+
+    transition:
+        transform .22s ease,
+        border-color .22s ease,
+        box-shadow .22s ease;
+
+    overflow:hidden;
+}
+
+.airport-card:hover{
+    transform:translateY(-3px);
+
+    border-color:
+        rgba(0,220,255,.42);
+
+    box-shadow:
+        0 12px 28px rgba(0,140,255,.08);
+}
+
+.airport-card::before{
+    content:"";
+
+    position:absolute;
+
+    left:0;
+    top:0;
+
+    width:2px;
+    height:0;
+
+    background:#00d9ff;
+
+    box-shadow:
+        0 0 10px #00d9ff;
+
+    transition:.25s;
+}
+
+.airport-card:hover::before{
+    height:100%;
+}
+
+.card-top{
+    display:flex;
+
+    align-items:flex-start;
+    justify-content:space-between;
+}
+
+.card-code{
+    color:#00eaff;
+
+    font-family:monospace;
+
+    font-size:24px;
+
+    font-weight:bold;
+}
+
+.card-icao{
+    color:#45616d;
+
+    font-family:monospace;
+
+    font-size:8px;
+
+    letter-spacing:1px;
+
+    margin-top:3px;
+}
+
+.card-name{
+    color:#e9faff;
+
+    font-size:12px;
+    font-weight:bold;
+
+    line-height:1.35;
+
+    margin-top:11px;
+}
+
+.card-city{
+    color:#6d8894;
+
+    font-size:9px;
+
+    margin-top:5px;
+}
+
+.card-region{
+    color:#405c67;
+
+    font-family:monospace;
+
+    font-size:7px;
+
+    letter-spacing:1.5px;
+
+    margin-top:17px;
+}
+
+
+/* =========================================================
+   DATA OVERVIEW
+========================================================= */
+
+.data-section{
+    max-width:1400px;
+    margin:auto;
+
+    padding:
+        5px 30px
+        75px;
+}
+
+.data-grid{
+    display:grid;
+
+    grid-template-columns:
+        1.2fr .8fr;
+
+    gap:12px;
+}
+
+.data-panel{
+    padding:25px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(0,140,210,.055),
+            rgba(2,9,15,.94)
+        );
+
+    border:
+        1px solid rgba(0,180,255,.12);
+}
+
+.panel-heading{
+    display:flex;
+
+    align-items:center;
+
+    gap:9px;
+
+    color:#00eaff;
+
+    font-family:monospace;
+
+    font-size:9px;
+
+    letter-spacing:2px;
+}
+
+.panel-heading::before{
+    content:"";
+
+    width:5px;
+    height:5px;
+
+    background:#00eaff;
+
+    border-radius:50%;
+
+    box-shadow:0 0 8px #00eaff;
+}
+
+.data-panel h3{
+    color:#eefbff;
+
+    font-size:17px;
+
+    margin:
+        10px 0
+        6px;
+}
+
+.data-panel > p{
+    color:#68838e;
+
+    font-size:10px;
+
+    line-height:1.7;
+
+    max-width:650px;
+}
+
+
+/* =========================================================
+   STAT CARDS
+========================================================= */
+
+.big-stat-grid{
+    display:grid;
+
+    grid-template-columns:
+        repeat(3,1fr);
+
+    gap:7px;
+
+    margin-top:20px;
+}
+
+.big-stat{
+    padding:15px;
+
+    background:
+        rgba(0,110,170,.045);
+
+    border:
+        1px solid rgba(0,180,255,.08);
+}
+
+.big-stat-value{
+    color:#00eaff;
+
+    font-family:monospace;
+
+    font-size:23px;
+
+    font-weight:bold;
+}
+
+.big-stat-label{
+    color:#526f7b;
+
+    font-family:monospace;
+
+    font-size:7px;
+
+    letter-spacing:1px;
+
+    margin-top:4px;
+}
+
+
+/* =========================================================
+   CONNECTIONS
+========================================================= */
+
+.connection-list{
+    display:grid;
+
+    gap:6px;
+
+    margin-top:16px;
+}
+
+.connection{
+    display:grid;
+
+    grid-template-columns:
+        42px 25px 42px 1fr;
+
+    align-items:center;
+
+    gap:6px;
+
+    padding:9px 10px;
+
+    background:
+        rgba(0,100,150,.045);
+
+    border:
+        1px solid rgba(0,180,255,.07);
+}
+
+.connection-code{
+    color:#00d9ff;
+
+    font-family:monospace;
+
+    font-size:9px;
+
+    font-weight:bold;
+}
+
+.connection-arrow{
+    color:#405d68;
+
+    text-align:center;
+}
+
+.connection-name{
+    color:#647f8a;
+
+    font-size:8px;
+
+    text-align:right;
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+footer{
+    padding:38px 25px;
+
+    background:#01060b;
+
+    border-top:
+        1px solid rgba(0,190,255,.1);
+
+    text-align:center;
+}
+
+.footer-logo{
+    color:#fff;
+
+    font-size:18px;
+
+    font-weight:900;
+
+    letter-spacing:2px;
+}
+
+.footer-logo span{
+    color:#00d9ff;
+}
+
+footer p{
+    color:#45616d;
+
+    font-family:monospace;
+
+    font-size:8px;
+
+    letter-spacing:2px;
+
+    margin-top:9px;
+}
+
+.data-source{
+    color:#3d5964;
+
+    font-family:monospace;
+
+    font-size:8px;
+
+    line-height:1.7;
+
+    margin-top:13px;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media(max-width:1100px){
+
+    .airport-grid-main{
+        grid-template-columns:
+            repeat(3,1fr);
+    }
+
+    .data-grid{
+        grid-template-columns:1fr;
+    }
+
+}
+
+@media(max-width:850px){
+
+    .nav-container{
+        flex-direction:column;
+
+        padding:
+            13px 15px;
+    }
+
+    .hero{
+        padding-top:175px;
+    }
+
+    .command-frame{
+        min-height:650px;
+    }
+
+    .airport-grid-main{
+        grid-template-columns:
+            repeat(2,1fr);
+    }
+
+    .section-top{
+        align-items:flex-start;
+
+        flex-direction:column;
+    }
+
+    .section-description{
+        text-align:left;
+    }
+
+}
+
+@media(max-width:650px){
+
+    .hero{
+        padding-left:18px;
+        padding-right:18px;
+    }
+
+    .hero h1{
+        font-size:39px;
+    }
+
+    .world-section{
+        padding-left:12px;
+        padding-right:12px;
+    }
+
+    .command-header{
+        padding:0 4px;
+    }
+
+    .command-meta{
+        display:none;
+    }
+
+    .command-frame{
+        height:620px;
+        min-height:620px;
+    }
+
+    .hud-left,
+    .hud-right{
+        font-size:7px;
+    }
+
+    .hud-left{
+        left:18px;
+    }
+
+    .hud-right{
+        right:18px;
+    }
+
+    .search-panel{
+        left:18px;
+        right:18px;
+
+        width:auto;
+
+        top:90px;
+    }
+
+    .airport-panel{
+        left:15px;
+        right:15px;
+
+        width:auto;
+
+        top:auto;
+        bottom:60px;
+
+        padding:16px;
+    }
+
+    .map-controls{
+        left:18px;
+        bottom:18px;
+    }
+
+    .telemetry-bar{
+        display:none;
+    }
+
+    .explorer-section,
+    .data-section{
+        padding-left:18px;
+        padding-right:18px;
+    }
+
+    .airport-grid-main{
+        grid-template-columns:1fr;
+    }
+
+    .big-stat-grid{
+        grid-template-columns:
+            repeat(2,1fr);
+    }
+
+}
+
+@media(max-width:420px){
+
+    .nav-links a{
+        font-size:9px;
+
+        padding:
+            7px 7px;
+    }
+
+    .command-frame{
+        height:570px;
+        min-height:570px;
+    }
+
+    .hud-left,
+    .hud-right{
+        display:none;
+    }
+
+    .map-controls{
+        max-width:230px;
+        flex-wrap:wrap;
+    }
+
+    .airport-code{
+        font-size:29px;
+    }
+
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
+@media(prefers-reduced-motion:reduce){
+
+    *,
+    *::before,
+    *::after{
+        animation-duration:.01ms !important;
+        animation-iteration-count:1 !important;
+        scroll-behavior:auto !important;
+        transition-duration:.01ms !important;
+    }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+
+<!-- =======================================================
+     BOOT
+======================================================= -->
+
+<div class="boot-screen" id="bootScreen">
+
+    <div class="boot-box">
+
+        <div class="boot-logo">
+            FLIGHT <span>SENSES</span>
+        </div>
+
+        <div class="boot-line"></div>
+
+        <div
+            class="boot-status"
+            id="bootStatus"
+        >
+            INITIALIZING GLOBAL AVIATION DATABASE...
+        </div>
+
+        <div class="boot-progress">
+
+            <div
+                class="boot-progress-bar"
+                id="bootProgress"
+            ></div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =======================================================
+     NAVBAR
+======================================================= -->
+
+<nav class="navbar">
+
+    <div class="nav-container">
+
+        <a
+            href="index.html"
+            class="logo"
+        >
+            FLIGHT <span>SENSES</span>
+        </a>
+
+        <div class="nav-links">
+
+            <a href="index.html">
+                🏠 Home
+            </a>
+
+            <a href="aircraft.html">
+                ✈️ Aircraft
+            </a>
+
+            <a href="airlines.html">
+                🌎 Airlines
+            </a>
+
+            <a href="top10.html">
+                🏆 Top 10
+            </a>
+
+            <a href="compare.html">
+                ⚔️ Compare
+            </a>
+
+            <a href="flight-lab.html">
+                🧪 Flight Lab
+            </a>
+
+            <a
+                href="world.html"
+                class="active"
+            >
+                🌍 World
+            </a>
+
+        </div>
+
+    </div>
+
+</nav>
+
+
+<!-- =======================================================
+     HERO
+======================================================= -->
+
+<section class="hero">
+
+    <div class="eyebrow">
+        GLOBAL AVIATION EXPLORER
+    </div>
+
+    <h1>
+        FLIGHT <span>WORLD</span>
+    </h1>
+
+    <p>
+        Explore major aviation hubs around the world,
+        discover airport information and visualize
+        the geographic connections between global
+        aviation centers.
+    </p>
+
+</section>
+
+
+<!-- =======================================================
+     WORLD
+======================================================= -->
+
+<section class="world-section">
+
+    <div class="command-header">
+
+        <div class="command-title">
+
+            <div class="command-status"></div>
+
+            <span>
+                GLOBAL AVIATION COMMAND CENTER
+            </span>
+
+        </div>
+
+        <div class="command-meta">
+            WORLD DATABASE / 3D MODE
+        </div>
+
+    </div>
+
+
+    <div class="command-frame">
+
+        <div id="globe-container"></div>
+
+        <div class="scanlines"></div>
+
+        <div class="scan-beam"></div>
+
+        <div class="corner tl"></div>
+        <div class="corner tr"></div>
+        <div class="corner bl"></div>
+        <div class="corner br"></div>
+
+
+        <!-- LEFT HUD -->
+
+        <div class="hud hud-left">
+
+            <div class="hud-title">
+                GLOBAL NETWORK
+            </div>
+
+            <div>
+                <span class="status-dot"></span>
+                DATABASE ONLINE
+            </div>
+
+            <div>
+                AIRPORTS
+                <strong id="airportCountHud">
+                    00
+                </strong>
+            </div>
+
+            <div>
+                MODE
+                <strong>EXPLORER</strong>
+            </div>
+
+        </div>
+
+
+        <!-- RIGHT HUD -->
+
+        <div class="hud hud-right">
+
+            <div class="hud-title">
+                AVIATION DATA
+            </div>
+
+            <div>
+                <span class="status-dot"></span>
+                REFERENCE MODE
+            </div>
+
+            <div>
+                FLIGHT TRACKING
+                <strong>OFF</strong>
+            </div>
+
+            <div>
+                MAP
+                <strong>3D</strong>
+            </div>
+
+        </div>
+
+
+        <!-- SEARCH -->
+
+        <div class="search-panel">
+
+            <div class="search-label">
+                AIRPORT SEARCH
+            </div>
+
+            <div class="search-box">
+
+                <input
+                    id="airportSearch"
+                    type="text"
+                    autocomplete="off"
+                    placeholder="Airport, city, IATA or ICAO..."
+                >
+
+                <button
+                    class="search-btn"
+                    id="searchButton"
+                >
+                    ⌕
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- AIRPORT PROFILE -->
+
+        <div
+            class="airport-panel"
+            id="airportPanel"
+        >
+
+            <button
+                class="close-panel"
+                id="closePanel"
+            >
+                ×
+            </button>
+
+            <div class="panel-kicker">
+                AIRPORT PROFILE
+            </div>
+
+            <div
+                class="airport-code"
+                id="panelIata"
+            >
+                IST
+            </div>
+
+            <div
+                class="airport-name"
+                id="panelName"
+            >
+                Istanbul Airport
+            </div>
+
+            <div
+                class="airport-location"
+                id="panelLocation"
+            >
+                Istanbul · Türkiye
+            </div>
+
+            <div
+                class="airport-description"
+                id="panelDescription"
+            >
+                Major international aviation hub.
+            </div>
+
+
+            <div class="airport-grid">
+
+                <div class="data-cell">
+
+                    <div class="data-label">
+                        IATA
+                    </div>
+
+                    <div
+                        class="data-value"
+                        id="panelIata2"
+                    >
+                        IST
+                    </div>
+
+                </div>
+
+
+                <div class="data-cell">
+
+                    <div class="data-label">
+                        ICAO
+                    </div>
+
+                    <div
+                        class="data-value"
+                        id="panelIcao"
+                    >
+                        LTFM
+                    </div>
+
+                </div>
+
+
+                <div class="data-cell">
+
+                    <div class="data-label">
+                        REGION
+                    </div>
+
+                    <div
+                        class="data-value"
+                        id="panelRegion"
+                    >
+                        EUROPE
+                    </div>
+
+                </div>
+
+
+                <div class="data-cell">
+
+                    <div class="data-label">
+                        TYPE
+                    </div>
+
+                    <div
+                        class="data-value"
+                        id="panelType"
+                    >
+                        LARGE
+                    </div>
+
+                </div>
+
+
+                <div class="data-cell">
+
+                    <div class="data-label">
+                        ELEVATION
+                    </div>
+
+                    <div
+                        class="data-value"
+                        id="panelElevation"
+                    >
+                        325 FT
+                    </div>
+
+                </div>
+
+
+                <div class="data-cell">
+
+                    <div class="data-label">
+                        SERVICE
+                    </div>
+
+                    <div
+                        class="data-value"
+                        id="panelService"
+                    >
+                        SCHEDULED
+                    </div>
+
+                </div>
+
+
+                <div class="data-cell">
+
+                    <div class="data-label">
+                        LATITUDE
+                    </div>
+
+                    <div
+                        class="data-value"
+                        id="panelLat"
+                    >
+                        41.2753
+                    </div>
+
+                </div>
+
+
+                <div class="data-cell">
+
+                    <div class="data-label">
+                        LONGITUDE
+                    </div>
+
+                    <div
+                        class="data-value"
+                        id="panelLng"
+                    >
+                        28.7519
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- MAP CONTROLS -->
+
+        <div class="map-controls">
+
+            <button
+                class="map-btn active"
+                id="rotateBtn"
+            >
+                AUTO ROTATE
+            </button>
+
+            <button
+                class="map-btn"
+                id="resetBtn"
+            >
+                RESET VIEW
+            </button>
+
+            <button
+                class="map-btn"
+                id="clearBtn"
+            >
+                CLEAR
+            </button>
+
+        </div>
+
+
+        <!-- TELEMETRY -->
+
+        <div class="telemetry-bar">
+
+            <div>
+                LAT
+                <strong id="telemetryLat">
+                    --
+                </strong>
+            </div>
+
+            <div>
+                LON
+                <strong id="telemetryLng">
+                    --
+                </strong>
+            </div>
+
+            <div>
+                HDG
+                <strong id="telemetryHeading">
+                    --
+                </strong>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =======================================================
+     AIRPORT EXPLORER
+======================================================= -->
+
+<section class="explorer-section">
+
+    <div class="section-top">
+
+        <div>
+
+            <div class="section-kicker">
+                AIRPORT DATABASE
+            </div>
+
+            <div class="section-title">
+                Explore Global Hubs
+            </div>
+
+        </div>
+
+        <div class="section-description">
+            Browse selected major airports and click any
+            airport to focus the globe and open its profile.
+        </div>
+
+    </div>
+
+
+    <div class="filter-bar">
+
+        <div class="filter-label">
+            FILTER:
+        </div>
+
+        <button
+            class="filter active"
+            data-region="ALL"
+        >
+            ALL
+        </button>
+
+        <button
+            class="filter"
+            data-region="EUROPE"
+        >
+            EUROPE
+        </button>
+
+        <button
+            class="filter"
+            data-region="ASIA"
+        >
+            ASIA
+        </button>
+
+        <button
+            class="filter"
+            data-region="MIDDLE EAST"
+        >
+            MIDDLE EAST
+        </button>
+
+        <button
+            class="filter"
+            data-region="NORTH AMERICA"
+        >
+            NORTH AMERICA
+        </button>
+
+        <button
+            class="filter"
+            data-region="SOUTH AMERICA"
+        >
+            SOUTH AMERICA
+        </button>
+
+        <button
+            class="filter"
+            data-region="AFRICA"
+        >
+            AFRICA
+        </button>
+
+        <button
+            class="filter"
+            data-region="OCEANIA"
+        >
+            OCEANIA
+        </button>
+
+    </div>
+
+
+    <div
+        class="airport-grid-main"
+        id="airportCards"
+    ></div>
+
+</section>
+
+
+<!-- =======================================================
+     NETWORK OVERVIEW
+======================================================= -->
+
+<section class="data-section">
+
+    <div class="section-top">
+
+        <div>
+
+            <div class="section-kicker">
+                GLOBAL AVIATION
+            </div>
+
+            <div class="section-title">
+                Network Overview
+            </div>
+
+        </div>
+
+        <div class="section-description">
+            A curated reference view of selected international
+            aviation centers and geographic connections.
+        </div>
+
+    </div>
+
+
+    <div class="data-grid">
+
+
+        <div class="data-panel">
+
+            <div class="panel-heading">
+                DATABASE SNAPSHOT
+            </div>
+
+            <h3>
+                Global Airport Network
+            </h3>
+
+            <p>
+                Flight Senses World focuses on selected major
+                international airports so the experience remains
+                fast, clean and easy to explore.
+            </p>
+
+
+            <div class="big-stat-grid">
+
+                <div class="big-stat">
+
+                    <div
+                        class="big-stat-value"
+                        id="statAirports"
+                    >
+                        00
+                    </div>
+
+                    <div class="big-stat-label">
+                        FEATURED AIRPORTS
+                    </div>
+
+                </div>
+
+
+                <div class="big-stat">
+
+                    <div class="big-stat-value">
+                        7
+                    </div>
+
+                    <div class="big-stat-label">
+                        WORLD REGIONS
+                    </div>
+
+                </div>
+
+
+                <div class="big-stat">
+
+                    <div
+                        class="big-stat-value"
+                        id="statConnections"
+                    >
+                        00
+                    </div>
+
+                    <div class="big-stat-label">
+                        FEATURED LINKS
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="data-panel">
+
+            <div class="panel-heading">
+                FEATURED CONNECTIONS
+            </div>
+
+            <h3>
+                Global Aviation Links
+            </h3>
+
+            <p>
+                Geographic reference connections between
+                selected airports. These are not live flights.
+            </p>
+
+            <div
+                class="connection-list"
+                id="connectionList"
+            ></div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =======================================================
+     FOOTER
+======================================================= -->
+
+<footer>
+
+    <div class="footer-logo">
+        FLIGHT <span>SENSES</span>
+    </div>
+
+    <p>
+        WORLD · GLOBAL AVIATION EXPLORER
+    </p>
+
+    <div class="data-source">
+        AIRPORT REFERENCE DATA · 3D VISUALIZATION ·
+        FLIGHT SENSES CURATED DATABASE
+    </div>
+
+</footer>
+
+
+<script>
+
+/* =========================================================
+   AIRPORT DATABASE
+========================================================= */
+
+const airports = [
+
+    {
+        name:"Istanbul Airport",
+        city:"Istanbul",
+        country:"Türkiye",
+        iata:"IST",
+        icao:"LTFM",
+        region:"EUROPE",
+        lat:41.2753,
+        lng:28.7519,
+        elevation:325,
+        type:"LARGE",
+        service:"SCHEDULED",
+        description:
+            "Türkiye's principal international aviation hub and a major connection point between Europe, Asia and the Middle East."
+    },
+
+    {
+        name:"Ankara Esenboğa Airport",
+        city:"Ankara",
+        country:"Türkiye",
+        iata:"ESB",
+        icao:"LTAC",
+        region:"EUROPE",
+        lat:40.1281,
+        lng:32.9951,
+        elevation:3125,
+        type:"LARGE",
+        service:"SCHEDULED",
+        description:
+            "The primary airport serving Ankara and an important domestic and international gateway for Türkiye."
+    },
+
+    {
+        name:"London Heathrow Airport",
+        city:"London",
+        country:"United Kingdom",
+        iata:"LHR",
+        icao:"EGLL",
+        region:"EUROPE",
+        lat:51.4706,
+        lng:-0.4619,
+        elevation:83,
+        type:"LARGE",
+        service:"SCHEDULED",
+        description:
+            "One of Europe's principal international aviation gateways serving the London metropolitan area."
+    },
+
+    {
+        name:"Paris Charles de Gaulle Airport",
+        city:"Paris",
+        country:"France",
+        iata:"CDG",
+        icao:"LFPG",
+        region:"EUROPE",
+        lat:49.0097,
+        lng:2.5479,
+        elevation:392,
+        type:"LARGE",
+        service:"SCHEDULED",
+        description:
+            "France's major international aviation gateway and a major European connecting hub."
+    },
+
+    {
+        name:"Frankfurt Airport",
+        city:"Frankfurt",
+        country:"Germany",
+        iata:"FRA",
+        icao:"EDDF",
+        region:"EUROPE",
+        lat:50.0379,
+        lng:8.5622,
+        elevation:364,
+        type:"LARGE",
+        service:"SCHEDULED",
+        description:
+            "A major European aviation center serving Germany's Frankfurt metropolitan region."
+    },
+
+    {
+        name:"Amsterdam Schiphol Airport",
+        city:"Amsterdam",
+        country:"Netherlands",
+        iata:"AMS",
+        icao:"EHAM",
+        region:"EUROPE",
+        lat:52.3086,
+        lng:4.7639,
+        elevation:-11,
+        type:"LARGE",
+        service:"SCHEDULED",
+        description:
+            "The Netherlands' principal international airport and an important European hub."
+    },
+
+    {
+        name:"Madrid Barajas Airport",
+        city:"Madrid",
+        country:"Spain",
+        iata:"MAD",
+        icao:"LEMD",
+        region:"EUROPE",
+        lat:40.4983,
+        lng:-3.5676,
+        elevation:1998,
+        type:"LARGE",
+        service:"SCHEDULED",
+        description:
+            "Spain's major international gateway and an important connection point between Europe and Latin America."
+    },
+
+    {
+        name:"Dubai International Airport",
+        city:"Dubai",
+        country:"United Arab Emirates",
+        iata:"DXB",
+        icao:"OMDB",
+        region:"MIDDLE EAST",
+        lat:25.2532,
+        lng:55.3657,
+        elevation:62,
+        type:"LARGE",
+        service:"SCHEDULED",
+        description:
+            "A major global long-haul aviation hub positioned between Europe, Asia and Africa."
+    },
+
+    {
+        name:"Hamad International Airport",
+        city:"Doha",
+        country:"Qatar",
+        iata:"DOH",
+        icao:"OTHH",
+        region:"MIDDLE EAST",
+        lat:25.2731,
+        lng:51.6081,
+        elevation:13,
+        type:"LARGE",
+        service:"SCHEDULED",
+        description:
+            "Qatar's principal international gateway and an important Middle Eastern connecting hub."
+    },
+
+    {
+        name:"Abu Dhabi International Airport",
+        city:"Abu Dhabi",
+        country:"United Arab Emirates",
+        iata:"AUH",
+        icao:"OMAA",
+        region:"MIDDLE EAST",
+        lat:24.4330,
+        lng:54.6511,
+        elevation:88,
+        type:"LARGE",
+        service:"SCHEDULED",
+        description:
+            "The principal international airport serving Abu Dhabi and a major Gulf aviation center."
+    },
+
+    {
+        name:"King Abdulaziz International Airport",
+        city:"Jeddah",
+        country:"Saudi Arabia",
+        iata:"JED",
+        icao:"OEJN",
+        region:"MIDDLE EAST",
+        lat:21.6796,
+        lng:39.1565,
+        elevation:48,
+        type:"LARGE",
+        service:"SCHEDULED",
+        description:
+            "A major Saudi Arabian international gateway on the Red Sea coast."
+    },
+
+    {
+        name:"Indira Gandhi International Airport",
+        city:"Delhi",
+        country:"India",
+        iata:"DEL",
+        icao:"VIDP",
+        region:"ASIA",
+        lat:28.5562,
+        lng:77.1000,
+        elevation:777,
+        type:"LARGE",
+        service:"SCHEDULED",
+        description:
+            "A major South Asian aviation hub serving India's capital region."
+    },
+
+    {
+        name:"Chhatrapati Shivaji Maharaj International Airport",
+        city:"Mumbai",
+        country:"India",
+        iata:"BOM",
+        icao:"VABB",
+        region:"ASIA",
+        lat:19.0896,
+        lng:72.8656,
+        elevation:39,
+        type:"LARGE",
+        service:"SCHEDULED",
+        description:
+            "One of India's principal international aviation gateways serving Mumbai."
+    },
+
+    {
+        name:"Singapore Changi Airport",
+        city:"Singapore",
+        country:"Singapore",
+        iata:"SIN",
+        icao:"WSSS",
+        region:"ASIA",
+        lat:1.3644,
+        lng:103.9915,
+        elevation:22,
+        type:"LARGE",
+        service:"SCHEDULED",
+        description:
+            "A major Southeast Asian aviation gateway and international connecting center."
+    },
+
+    {
+        name:"Tokyo Haneda Airport",
+        city:"Tokyo",
+        country:"Japan",
+        iata:"HND",
+        icao:"RJTT",
+        region:"ASIA",
+        lat:35.5494,
+        lng:139.7798,
+        elevation:21,
+        type:"LARGE",
+        service:"SCHEDULED",
+        description:
+            "A principal airport serving the Tokyo metropolitan area and one of Japan's major aviation centers."
+    },
+
+    {
+        name:"Incheon International Airport",
+        city:"Seoul",
+        country:"South Korea",
+        iata:"ICN",
+        icao:"RKSI",
+        region:"ASIA",
+        lat:37.4602,
+        lng:126.4407,
+        elevation:23,
+        type:"LARGE",
+        service:"SCHEDULED",
+        description:
+            "South Korea's principal international gateway and a major East Asian aviation hub."
+    },
+
+    {
+        name:"Hong Kong International Airport",
+        city:"Hong Kong",
+        country:"Hong Kong",
+        iata:"HKG",
+        icao:"VHHH",
+        region:"ASIA",
+        lat:22.3080,
+        lng:113.9185,
+        elevation:28,
+        type:"LARGE",
+        service:"SCHEDULED",
+        description:
+            "A major international aviation gateway connecting Hong Kong with destinations worldwide."
+    },
+
+    {
+        name:"Suvarnabhumi Airport",
+        city:"Bangkok",
+        country:"Thailand",
+        iata:"BKK",
+        icao:"VTBS",
+        region:"ASIA",
+        lat:13.6900,
+        lng:100.7501,
+        elevation:5,
+        type:"LARGE",
+        service:"SCHEDULED",
+        description:
+            "Thailand's principal international gateway and a major Southeast Asian aviation hub."
+    },
+
+    {
+        name:"John F. Kennedy International Airport",
+        city:"New York",
+        country:"United States",
+        iata:"JFK",
+        icao:"KJFK",
+        region:"NORTH AMERICA",
+        lat:40.6413,
+        lng:-73.7781,
+        elevation:13,
+        type:"LARGE",
+        service:"SCHEDULED",
+        description:
+            "A major international gateway serving the New York metropolitan region."
+    },
+
+    {
+        name:"Los Angeles International Airport",
+        city:"Los Angeles",
+        country:"United States",
+        iata:"LAX",
+        icao:"KLAX",
+        region:"NORTH AMERICA",
+        lat:33.9416,
+        lng:-118.4085,
+        elevation:125,
+        type:"LARGE",
+        service:"SCHEDULED",
+        description:
+            "A major transcontinental and transpacific aviation gateway on the United States West Coast."
+    },
+
+    {
+        name:"Chicago O'Hare International Airport",
+        city:"Chicago",
+        country:"United States",
+        iata:"ORD",
+        icao:"KORD",
+        region:"NORTH AMERICA",
+        lat:41.9742,
+        lng:-87.9073,
+        elevation:672,
+        type:"LARGE",
+        service:"SCHEDULED",
+        description:
+            "A major North American aviation hub serving the Chicago metropolitan area."
+    },
+
+    {
+        name:"Hartsfield-Jackson Atlanta International Airport",
+        city:"Atlanta",
+        country:"United States",
+        iata:"ATL",
+        icao:"KATL",
+        region:"NORTH AMERICA",
+        lat:33.6407,
+        lng:-84.4277,
+        elevation:1026,
+        type:"LARGE",
+        service:"SCHEDULED",
+        description:
+            "A major United States aviation center serving the Atlanta metropolitan area."
+    },
+
+    {
+        name:"Toronto Pearson International Airport",
+        city:"Toronto",
+        country:"Canada",
+        iata:"YYZ",
+        icao:"CYYZ",
+        region:"NORTH AMERICA",
+        lat:43.6777,
+        lng:-79.6248,
+        elevation:569,
+        type:"LARGE",
+        service:"SCHEDULED",
+        description:
+            "Canada's principal international gateway serving the Toronto region."
+    },
+
+    {
+        name:"Mexico City International Airport",
+        city:"Mexico City",
+        country:"Mexico",
+        iata:"MEX",
+        icao:"MMMX",
+        region:"NORTH AMERICA",
+        lat:19.4363,
+        lng:-99.0721,
+        elevation:7316,
+        type:"LARGE",
+        service:"SCHEDULED",
+        description:
+            "A major Latin American aviation center serving Mexico's capital."
+    },
+
+    {
+        name:"São Paulo Guarulhos International Airport",
+        city:"São Paulo",
+        country:"Brazil",
+        iata:"GRU",
+        icao:"SBGR",
+        region:"SOUTH AMERICA",
+        lat:-23.4356,
+        lng:-46.4731,
+        elevation:2459,
+        type:"LARGE",
+        service:"SCHEDULED",
+        description:
+            "Brazil's major international gateway and an important South American aviation hub."
+    },
+
+    {
+        name:"Cape Town International Airport",
+        city:"Cape Town",
+        country:"South Africa",
+        iata:"CPT",
+        icao:"FACT",
+        region:"AFRICA",
+        lat:-33.9715,
+        lng:18.6021,
+        elevation:151,
+        type:"LARGE",
+        service:"SCHEDULED",
+        description:
+            "A major South African international airport serving Cape Town and the surrounding region."
+    },
+
+    {
+        name:"O. R. Tambo International Airport",
+        city:"Johannesburg",
+        country:"South Africa",
+        iata:"JNB",
+        icao:"FAOR",
+        region:"AFRICA",
+        lat:-26.1392,
+        lng:28.2460,
+        elevation:5558,
+        type:"LARGE",
+        service:"SCHEDULED",
+        description:
+            "A major Southern African aviation hub serving Johannesburg."
+    },
+
+    {
+        name:"Sydney Kingsford Smith Airport",
+        city:"Sydney",
+        country:"Australia",
+        iata:"SYD",
+        icao:"YSSY",
+        region:"OCEANIA",
+        lat:-33.9399,
+        lng:151.1753,
+        elevation:21,
+        type:"LARGE",
+        service:"SCHEDULED",
+        description:
+            "Australia's principal international aviation gateway serving Sydney."
+    }
+
+];
+
+
+/* =========================================================
+   FEATURED CONNECTIONS
+========================================================= */
+
+const connections = [
+
+    ["IST","LHR"],
+    ["LHR","JFK"],
+    ["JFK","LAX"],
+    ["DXB","SIN"],
+    ["DXB","LHR"],
+    ["DOH","LHR"],
+    ["IST","DXB"],
+    ["SIN","SYD"],
+    ["HND","SIN"],
+    ["ICN","LAX"],
+    ["GRU","JFK"],
+    ["JNB","DXB"]
+
+];
+
+
+/* =========================================================
+   DOM
+========================================================= */
+
+const globeContainer =
+    document.getElementById(
+        "globe-container"
+    );
+
+const airportCards =
+    document.getElementById(
+        "airportCards"
+    );
+
+const airportPanel =
+    document.getElementById(
+        "airportPanel"
+    );
+
+const airportSearch =
+    document.getElementById(
+        "airportSearch"
+    );
+
+const searchButton =
+    document.getElementById(
+        "searchButton"
+    );
+
+const closePanel =
+    document.getElementById(
+        "closePanel"
+    );
+
+const rotateBtn =
+    document.getElementById(
+        "rotateBtn"
+    );
+
+const resetBtn =
+    document.getElementById(
+        "resetBtn"
+    );
+
+const clearBtn =
+    document.getElementById(
+        "clearBtn"
+    );
+
+const connectionList =
+    document.getElementById(
+        "connectionList"
+    );
+
+
+/* =========================================================
+   GLOBE
+========================================================= */
+
+let globe = null;
+
+let globeControls = null;
+
+
+function createGlobe(){
+
+    globe =
+        Globe()(globeContainer)
+
+        .backgroundColor(
+            "rgba(0,0,0,0)"
+        )
+
+        .globeImageUrl(
+            "https://cdn.jsdelivr.net/npm/three-globe/example/img/earth-night.jpg"
+        )
+
+        .showAtmosphere(true)
+
+        .atmosphereColor(
+            "#00cfff"
+        )
+
+        .atmosphereAltitude(.10)
+
+        .showGraticules(false)
+
+        .pointsData(airports)
+
+        .pointLat("lat")
+
+        .pointLng("lng")
+
+        .pointColor(
+            () => "#00eaff"
+        )
+
+        .pointAltitude(.025)
+
+        .pointRadius(.28)
+
+        .pointResolution(6)
+
+        .pointsMerge(true)
+
+        .pointLabel(
+            airport => `
+
+                <div style="
+                    background:#020b12;
+                    border:1px solid rgba(0,220,255,.5);
+                    padding:8px 10px;
+                    color:#dffaff;
+                    font-family:Arial;
+                    font-size:11px;
+                    box-shadow:0 0 15px rgba(0,210,255,.15);
+                ">
+
+                    <strong style="color:#00eaff">
+                        ${airport.iata}
+                    </strong>
+
+                    · ${airport.name}
+
+                    <br>
+
+                    <span style="color:#7896a2">
+                        ${airport.city},
+                        ${airport.country}
+                    </span>
+
+                </div>
+
+            `
+        )
+
+        .onPointClick(
+            airport => {
+
+                showAirport(airport);
+
+            }
+        )
+
+        .arcsData(
+
+            connections.map(
+                pair => {
+
+                    const from =
+                        airports.find(
+                            airport =>
+                                airport.iata === pair[0]
+                        );
+
+                    const to =
+                        airports.find(
+                            airport =>
+                                airport.iata === pair[1]
+                        );
+
+                    return {
+
+                        startLat:
+                            from.lat,
+
+                        startLng:
+                            from.lng,
+
+                        endLat:
+                            to.lat,
+
+                        endLng:
+                            to.lng,
+
+                        from:
+                            from.iata,
+
+                        to:
+                            to.iata
+
+                    };
+
+                }
+            )
+
+        )
+
+        .arcStartLat("startLat")
+
+        .arcStartLng("startLng")
+
+        .arcEndLat("endLat")
+
+        .arcEndLng("endLng")
+
+        .arcColor(
+            () =>
+                "rgba(0,220,255,.38)"
+        )
+
+        .arcAltitudeAutoScale(
+            .22
+        )
+
+        .arcStroke(null)
+
+        .arcCurveResolution(24)
+
+        .arcDashLength(1)
+
+        .arcDashGap(0)
+
+        .arcLabel(
+            connection => `
+
+                <div style="
+                    background:#020b12;
+                    border:1px solid #00d9ff;
+                    padding:6px 9px;
+                    color:#00eaff;
+                    font-family:monospace;
+                    font-size:10px;
+                ">
+
+                    ${connection.from}
+                    →
+                    ${connection.to}
+
+                </div>
+
+            `
+        )
+
+        .ringsData(
+            airports.filter(
+                (airport,index) =>
+                    index % 3 === 0
+            )
+        )
+
+        .ringLat("lat")
+
+        .ringLng("lng")
+
+        .ringColor(
+            () => [
+                "rgba(0,235,255,.5)",
+                "rgba(0,235,255,0)"
+            ]
+        )
+
+        .ringMaxRadius(1.5)
+
+        .ringPropagationSpeed(.35)
+
+        .ringRepeatPeriod(3200);
+
+
+    /* CAMERA */
+
+    globe.pointOfView({
+
+        lat:25,
+        lng:20,
+        altitude:2.25
+
+    });
+
+
+    /* CONTROLS */
+
+    globeControls =
+        globe.controls();
+
+    globeControls.autoRotate =
+        true;
+
+    globeControls.autoRotateSpeed =
+        .16;
+
+    globeControls.enableDamping =
+        false;
+
+    globeControls.enablePan =
+        false;
+
+
+    /* PERFORMANCE */
+
+    try{
+
+        const renderer =
+            globe.renderer();
+
+        if(renderer){
+
+            renderer.setPixelRatio(
+
+                Math.min(
+                    window.devicePixelRatio || 1,
+                    1.25
+                )
+
+            );
+
+        }
+
+    }catch(error){
+
+        console.warn(
+            "Renderer optimization unavailable:",
+            error
+        );
+
+    }
+
+
+    return globe;
+
+}
+
+
+/* =========================================================
+   COUNTRY LAYER
+========================================================= */
+
+function loadCountries(){
+
+    fetch(
+        "https://cdn.jsdelivr.net/npm/visionscarto-world-atlas@1/world/110m.json"
+    )
+
+    .then(
+        response => {
+
+            if(!response.ok){
+
+                throw new Error(
+                    "Country database unavailable."
+                );
+
+            }
+
+            return response.json();
+
+        }
+    )
+
+    .then(
+        worldData => {
+
+            const script =
+                document.createElement(
+                    "script"
+                );
+
+            script.src =
+                "https://cdn.jsdelivr.net/npm/topojson-client@3/dist/topojson-client.min.js";
+
+            script.onload = () => {
+
+                if(
+                    typeof topojson ===
+                    "undefined"
+                ){
+
+                    return;
+
+                }
+
+                const countries =
+                    topojson.feature(
+                        worldData,
+                        worldData.objects.countries
+                    ).features;
+
+
+                globe
+
+                    .polygonsData(
+                        countries
+                    )
+
+                    .polygonGeoJsonGeometry(
+                        feature =>
+                            feature.geometry
+                    )
+
+                    .polygonCapColor(
+                        () =>
+                            "rgba(3,25,42,.22)"
+                    )
+
+                    .polygonSideColor(
+                        () =>
+                            "rgba(0,110,160,.035)"
+                    )
+
+                    .polygonStrokeColor(
+                        () =>
+                            "rgba(0,185,235,.18)"
+                    )
+
+                    .polygonAltitude(
+                        .002
+                    )
+
+                    .polygonLabel(
+                        () =>
+                            `
+                            <div style="
+                                background:#020b12;
+                                border:1px solid rgba(0,210,255,.3);
+                                color:#9feeff;
+                                padding:6px 8px;
+                                font-family:monospace;
+                                font-size:10px;
+                            ">
+                                GLOBAL REGION
+                            </div>
+                            `
+                    );
+
+            };
+
+            document.head.appendChild(
+                script
+            );
+
+        }
+    )
+
+    .catch(
+        error => {
+
+            console.warn(
+                "Country layer unavailable:",
+                error
+            );
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+   AIRPORT PROFILE
+========================================================= */
+
+function showAirport(airport){
+
+    document.getElementById(
+        "panelIata"
+    ).textContent =
+        airport.iata;
+
+    document.getElementById(
+        "panelIata2"
+    ).textContent =
+        airport.iata;
+
+    document.getElementById(
+        "panelIcao"
+    ).textContent =
+        airport.icao;
+
+    document.getElementById(
+        "panelName"
+    ).textContent =
+        airport.name;
+
+    document.getElementById(
+        "panelLocation"
+    ).textContent =
+        `${airport.city} · ${airport.country}`;
+
+    document.getElementById(
+        "panelDescription"
+    ).textContent =
+        airport.description;
+
+    document.getElementById(
+        "panelRegion"
+    ).textContent =
+        airport.region;
+
+    document.getElementById(
+        "panelType"
+    ).textContent =
+        airport.type;
+
+    document.getElementById(
+        "panelElevation"
+    ).textContent =
+        `${airport.elevation.toLocaleString()} FT`;
+
+    document.getElementById(
+        "panelService"
+    ).textContent =
+        airport.service;
+
+    document.getElementById(
+        "panelLat"
+    ).textContent =
+        airport.lat.toFixed(4);
+
+    document.getElementById(
+        "panelLng"
+    ).textContent =
+        airport.lng.toFixed(4);
+
+
+    airportPanel.classList.add(
+        "show"
+    );
+
+
+    if(globe){
+
+        globe.pointOfView({
+
+            lat:airport.lat,
+            lng:airport.lng,
+            altitude:1.45
+
+        },900);
+
+    }
+
+}
+
+
+/* =========================================================
+   HIDE PROFILE
+========================================================= */
+
+function hideAirport(){
+
+    airportPanel.classList.remove(
+        "show"
+    );
+
+}
+
+
+/* =========================================================
+   AIRPORT CARDS
+========================================================= */
+
+function renderAirportCards(
+    region = "ALL"
+){
+
+    airportCards.innerHTML = "";
+
+    const filtered =
+        region === "ALL"
+        ? airports
+        : airports.filter(
+            airport =>
+                airport.region === region
+        );
+
+
+    filtered.forEach(
+        airport => {
+
+            const card =
+                document.createElement(
+                    "div"
+                );
+
+            card.className =
+                "airport-card";
+
+
+            card.innerHTML = `
+
+                <div class="card-top">
+
+                    <div class="card-code">
+                        ${airport.iata}
+                    </div>
+
+                    <div class="card-icao">
+                        ${airport.icao}
+                    </div>
+
+                </div>
+
+                <div class="card-name">
+                    ${airport.name}
+                </div>
+
+                <div class="card-city">
+                    ${airport.city},
+                    ${airport.country}
+                </div>
+
+                <div class="card-region">
+                    ${airport.region}
+                </div>
+
+            `;
+
+
+            card.addEventListener(
+                "click",
+                () => {
+
+                    showAirport(
+                        airport
+                    );
+
+                    window.scrollTo({
+
+                        top:
+                            document
+                            .querySelector(
+                                ".command-frame"
+                            )
+                            .getBoundingClientRect()
+                            .top
+                            +
+                            window.scrollY
+                            -
+                            100,
+
+                        behavior:"smooth"
+
+                    });
+
+                }
+            );
+
+
+            airportCards.appendChild(
+                card
+            );
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+   SEARCH
+========================================================= */
+
+function searchAirport(){
+
+    const query =
+        airportSearch.value
+            .trim()
+            .toLowerCase();
+
+
+    if(!query){
+
+        return;
+
+    }
+
+
+    const result =
+        airports.find(
+            airport => {
+
+                const searchable = [
+
+                    airport.name,
+                    airport.city,
+                    airport.country,
+                    airport.iata,
+                    airport.icao,
+                    airport.region
+
+                ]
+                .join(" ")
+                .toLowerCase();
+
+
+                return searchable
+                    .includes(query);
+
+            }
+        );
+
+
+    if(result){
+
+        showAirport(result);
+
+        airportSearch.value = "";
+
+    }else{
+
+        airportSearch.value = "";
+
+        airportSearch.placeholder =
+            "No match — try IATA, ICAO or city";
+
+
+        setTimeout(
+            () => {
+
+                airportSearch.placeholder =
+                    "Airport, city, IATA or ICAO...";
+
+            },
+            2300
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   CONNECTION LIST
+========================================================= */
+
+function renderConnections(){
+
+    connectionList.innerHTML = "";
+
+
+    connections.forEach(
+        pair => {
+
+            const from =
+                airports.find(
+                    airport =>
+                        airport.iata === pair[0]
+                );
+
+            const to =
+                airports.find(
+                    airport =>
+                        airport.iata === pair[1]
+                );
+
+
+            if(!from || !to){
+
+                return;
+
+            }
+
+
+            const item =
+                document.createElement(
+                    "div"
+                );
+
+            item.className =
+                "connection";
+
+
+            item.innerHTML = `
+
+                <span class="connection-code">
+                    ${from.iata}
+                </span>
+
+                <span class="connection-arrow">
+                    →
+                </span>
+
+                <span class="connection-code">
+                    ${to.iata}
+                </span>
+
+                <span class="connection-name">
+                    ${from.city} · ${to.city}
+                </span>
+
+            `;
+
+
+            connectionList.appendChild(
+                item
+            );
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+   FILTERS
+========================================================= */
+
+document
+    .querySelectorAll(".filter")
+    .forEach(
+        button => {
+
+            button.addEventListener(
+                "click",
+                () => {
+
+                    document
+                        .querySelectorAll(
+                            ".filter"
+                        )
+                        .forEach(
+                            btn =>
+                                btn.classList
+                                .remove(
+                                    "active"
+                                )
+                        );
+
+
+                    button.classList.add(
+                        "active"
+                    );
+
+
+                    renderAirportCards(
+                        button.dataset.region
+                    );
+
+                }
+            );
+
+        }
+    );
+
+
+/* =========================================================
+   SEARCH EVENTS
+========================================================= */
+
+searchButton.addEventListener(
+    "click",
+    searchAirport
+);
+
+
+airportSearch.addEventListener(
+    "keydown",
+    event => {
+
+        if(event.key === "Enter"){
+
+            searchAirport();
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   PANEL EVENTS
+========================================================= */
+
+closePanel.addEventListener(
+    "click",
+    hideAirport
+);
+
+
+clearBtn.addEventListener(
+    "click",
+    hideAirport
+);
+
+
+/* =========================================================
+   MAP CONTROLS
+========================================================= */
+
+rotateBtn.addEventListener(
+    "click",
+    () => {
+
+        if(!globeControls){
+
+            return;
+
+        }
+
+
+        globeControls.autoRotate =
+            !globeControls.autoRotate;
+
+
+        rotateBtn.classList.toggle(
+            "active",
+            globeControls.autoRotate
+        );
+
+    }
+);
+
+
+resetBtn.addEventListener(
+    "click",
+    () => {
+
+        if(!globe){
+
+            return;
+
+        }
+
+
+        globe.pointOfView({
+
+            lat:25,
+            lng:20,
+            altitude:2.25
+
+        },850);
+
+    }
+);
+
+
+/* =========================================================
+   TELEMETRY
+========================================================= */
+
+function updateTelemetry(){
+
+    if(!globe){
+
+        return;
+
+    }
+
+
+    const pov =
+        globe.pointOfView();
+
+
+    document.getElementById(
+        "telemetryLat"
+    ).textContent =
+        Number(
+            pov.lat
+        ).toFixed(2);
+
+
+    document.getElementById(
+        "telemetryLng"
+    ).textContent =
+        Number(
+            pov.lng
+        ).toFixed(2);
+
+
+    const heading =
+        (
+            Number(pov.lng) +
+            360
+        ) % 360;
+
+
+    document.getElementById(
+        "telemetryHeading"
+    ).textContent =
+        `${heading.toFixed(0)}°`;
+
+}
+
+
+/* =========================================================
+   BOOT
+========================================================= */
+
+const bootScreen =
+    document.getElementById(
+        "bootScreen"
+    );
+
+const bootStatus =
+    document.getElementById(
+        "bootStatus"
+    );
+
+const bootProgress =
+    document.getElementById(
+        "bootProgress"
+    );
+
+
+const bootMessages = [
+
+    "INITIALIZING GLOBAL AVIATION DATABASE...",
+
+    "LOADING AIRPORT NETWORK...",
+
+    "CALIBRATING GEOGRAPHIC SYSTEM...",
+
+    "INITIALIZING 3D GLOBE...",
+
+    "LOADING GLOBAL CONNECTIONS...",
+
+    "GLOBAL AVIATION EXPLORER ONLINE"
+
+];
+
+
+let bootIndex = 0;
+
+
+function bootStep(){
+
+    if(
+        bootIndex >=
+        bootMessages.length
+    ){
+
+        bootProgress.style.width =
+            "100%";
+
+
+        setTimeout(
+            () => {
+
+                bootScreen.classList.add(
+                    "hidden"
+                );
+
+            },
+            450
+        );
+
+        return;
+
+    }
+
+
+    bootStatus.textContent =
+        bootMessages[
+            bootIndex
+        ];
+
+
+    bootProgress.style.width =
+        `${
+            Math.round(
+                (
+                    (bootIndex + 1) /
+                    bootMessages.length
+                ) * 100
+            )
+        }%`;
+
+
+    bootIndex++;
+
+
+    setTimeout(
+        bootStep,
+        380
+    );
+
+}
+
+
+/* =========================================================
+   INITIALIZATION
+========================================================= */
+
+function initialize(){
+
+    document.getElementById(
+        "airportCountHud"
+    ).textContent =
+        String(
+            airports.length
+        ).padStart(
+            2,
+            "0"
+        );
+
+
+    document.getElementById(
+        "statAirports"
+    ).textContent =
+        airports.length;
+
+
+    document.getElementById(
+        "statConnections"
+    ).textContent =
+        connections.length;
+
+
+    renderAirportCards();
+
+    renderConnections();
+
+    createGlobe();
+
+    loadCountries();
+
+    bootStep();
+
+}
+
+
+/* =========================================================
+   TELEMETRY UPDATE
+========================================================= */
+
+setInterval(
+    updateTelemetry,
+    700
+);
+
+
+/* =========================================================
+   VISIBILITY
+========================================================= */
+
+document.addEventListener(
+    "visibilitychange",
+    () => {
+
+        if(!globeControls){
+
+            return;
+
+        }
+
+
+        if(document.hidden){
+
+            globeControls.autoRotate =
+                false;
+
+        }else{
+
+            globeControls.autoRotate =
+                rotateBtn.classList.contains(
+                    "active"
+                );
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   RESIZE
+========================================================= */
+
+window.addEventListener(
+    "resize",
+    () => {
+
+        if(!globe){
+
+            return;
+
+        }
+
+
+        globe.width(
+            globeContainer.clientWidth
+        );
+
+
+        globe.height(
+            globeContainer.clientHeight
+        );
+
+    }
+);
+
+
+/* =========================================================
+   START
+========================================================= */
+
+initialize();
+
+
+/* =========================================================
+   BOOT FAILSAFE
+========================================================= */
+
+setTimeout(
+    () => {
+
+        if(
+            bootScreen &&
+            !bootScreen.classList.contains(
+                "hidden"
+            )
+        ){
+
+            bootProgress.style.width =
+                "100%";
+
+            bootScreen.classList.add(
+                "hidden"
+            );
+
+        }
+
+    },
+    7000
+);
+
+</script>
+
+</body>
+</html>

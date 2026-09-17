@@ -39,16 +39,8 @@ body{
     z-index:-1;
 
     background:
-        radial-gradient(
-            circle at 15% 20%,
-            rgba(61,169,255,.10),
-            transparent 28%
-        ),
-        radial-gradient(
-            circle at 85% 75%,
-            rgba(61,169,255,.07),
-            transparent 30%
-        ),
+        radial-gradient(circle at 15% 20%,rgba(61,169,255,.10),transparent 28%),
+        radial-gradient(circle at 85% 75%,rgba(61,169,255,.07),transparent 30%),
         #050b17;
 }
 
@@ -57,15 +49,8 @@ body{
     inset:-50%;
 
     background-image:
-        linear-gradient(
-            rgba(61,169,255,.035) 1px,
-            transparent 1px
-        ),
-        linear-gradient(
-            90deg,
-            rgba(61,169,255,.035) 1px,
-            transparent 1px
-        );
+        linear-gradient(rgba(61,169,255,.035) 1px,transparent 1px),
+        linear-gradient(90deg,rgba(61,169,255,.035) 1px,transparent 1px);
 
     background-size:55px 55px;
 
@@ -75,38 +60,24 @@ body{
         translateY(-80px);
 
     animation:gridMove 22s linear infinite;
-
     opacity:.45;
 }
 
 @keyframes gridMove{
-
     from{
-        transform:
-            perspective(700px)
-            rotateX(60deg)
-            translateY(-80px);
+        transform:perspective(700px) rotateX(60deg) translateY(-80px);
     }
-
     to{
-        transform:
-            perspective(700px)
-            rotateX(60deg)
-            translateY(80px);
+        transform:perspective(700px) rotateX(60deg) translateY(80px);
     }
-
 }
 
 .glow{
     position:absolute;
-
     width:420px;
     height:420px;
-
     border-radius:50%;
-
     background:rgba(61,169,255,.08);
-
     filter:blur(90px);
 
     animation:
@@ -125,121 +96,59 @@ body{
 .glow-2{
     right:-150px;
     bottom:-140px;
-
     animation-delay:-5s;
 }
 
 @keyframes glowFloat{
-
     from{
-        transform:
-            translate(0,0)
-            scale(1);
+        transform:translate(0,0) scale(1);
     }
-
     to{
-        transform:
-            translate(60px,40px)
-            scale(1.15);
+        transform:translate(60px,40px) scale(1.15);
     }
-
 }
 
 .particle{
     position:absolute;
-
     width:3px;
     height:3px;
-
     border-radius:50%;
-
     background:#3da9ff;
 
     box-shadow:
-        0 0 10px
-        rgba(61,169,255,.8);
+        0 0 10px rgba(61,169,255,.8);
 
     opacity:.45;
-
-    animation:
-        particleFloat
-        linear
-        infinite;
+    animation:particleFloat linear infinite;
 }
 
-.p1{
-    left:12%;
-    top:30%;
-    animation-duration:13s;
-}
-
-.p2{
-    left:28%;
-    top:70%;
-    animation-duration:17s;
-}
-
-.p3{
-    left:47%;
-    top:20%;
-    animation-duration:15s;
-}
-
-.p4{
-    left:66%;
-    top:65%;
-    animation-duration:19s;
-}
-
-.p5{
-    left:82%;
-    top:28%;
-    animation-duration:14s;
-}
-
-.p6{
-    left:91%;
-    top:80%;
-    animation-duration:18s;
-}
+.p1{left:12%;top:30%;animation-duration:13s;}
+.p2{left:28%;top:70%;animation-duration:17s;}
+.p3{left:47%;top:20%;animation-duration:15s;}
+.p4{left:66%;top:65%;animation-duration:19s;}
+.p5{left:82%;top:28%;animation-duration:14s;}
+.p6{left:91%;top:80%;animation-duration:18s;}
 
 @keyframes particleFloat{
-
     0%{
         transform:translateY(40px);
         opacity:0;
     }
-
-    20%{
-        opacity:.45;
-    }
-
+    20%{opacity:.45;}
     50%{
         transform:translateY(-80px);
         opacity:.6;
     }
-
-    80%{
-        opacity:.3;
-    }
-
+    80%{opacity:.3;}
     100%{
         transform:translateY(-150px);
         opacity:0;
     }
-
 }
 
 @keyframes pageEntrance{
-
-    from{
-        opacity:0;
-    }
-
-    to{
-        opacity:1;
-    }
-
+    from{opacity:0;}
+    to{opacity:1;}
 }
 
 /* =========================================
@@ -250,7 +159,6 @@ nav{
     position:sticky;
     top:0;
     z-index:1000;
-
     height:70px;
 
     display:flex;
@@ -260,7 +168,6 @@ nav{
     padding:0 7%;
 
     background:rgba(5,11,23,.94);
-
     backdrop-filter:blur(15px);
 
     border-bottom:
@@ -328,23 +235,17 @@ nav{
 .system-header{
     width:90%;
     max-width:1100px;
-
     margin:0 auto 12px;
 
     display:flex;
     align-items:center;
     justify-content:space-between;
-
     gap:20px;
 
     color:#526981;
-
     font-size:9px;
-
     font-weight:700;
-
     letter-spacing:2px;
-
     text-transform:uppercase;
 }
 
@@ -357,14 +258,11 @@ nav{
 .system-dot{
     width:6px;
     height:6px;
-
     border-radius:50%;
-
     background:#3da9ff;
 
     box-shadow:
-        0 0 10px
-        rgba(61,169,255,.9);
+        0 0 10px rgba(61,169,255,.9);
 
     animation:systemPulse 1.8s infinite;
 }
@@ -374,17 +272,14 @@ nav{
 }
 
 @keyframes systemPulse{
-
     0%,100%{
         opacity:.45;
         transform:scale(.8);
     }
-
     50%{
         opacity:1;
         transform:scale(1.15);
     }
-
 }
 
 /* =========================================
@@ -395,23 +290,17 @@ nav{
     width:90%;
     max-width:1100px;
     margin:auto;
-
     position:relative;
 }
 
 .controls::before{
     content:"CONTROL // AIRCRAFT DATABASE";
-
     display:block;
-
     margin-bottom:8px;
 
     color:#415770;
-
     font-size:9px;
-
     font-weight:700;
-
     letter-spacing:2px;
 }
 
@@ -421,33 +310,23 @@ nav{
 
 .search-box::after{
     content:"SEARCH";
-
     position:absolute;
-
     right:18px;
     top:50%;
-
     transform:translateY(-50%);
 
     color:#3d5872;
-
     font-size:9px;
-
     letter-spacing:1.5px;
-
     pointer-events:none;
 }
 
 .search-box input{
     width:100%;
-
     padding:17px 80px 17px 20px;
-
     border-radius:15px;
 
-    border:
-        1px solid
-        rgba(61,169,255,.18);
+    border:1px solid rgba(61,169,255,.18);
 
     outline:none;
 
@@ -459,22 +338,16 @@ nav{
         );
 
     color:white;
-
     font-size:15px;
-
     transition:.3s;
 }
 
 .search-box input:focus{
-    border-color:
-        rgba(61,169,255,.65);
+    border-color:rgba(61,169,255,.65);
 
     box-shadow:
-        0 0 25px
-        rgba(61,169,255,.10),
-
-        inset 0 0 20px
-        rgba(61,169,255,.025);
+        0 0 25px rgba(61,169,255,.10),
+        inset 0 0 20px rgba(61,169,255,.025);
 }
 
 .search-box input::placeholder{
@@ -485,27 +358,20 @@ nav{
     display:flex;
     justify-content:center;
     gap:10px;
-
     margin:22px 0 35px;
-
     flex-wrap:wrap;
 }
 
 .filter{
     padding:10px 20px;
-
     border-radius:30px;
 
-    border:
-        1px solid
-        rgba(61,169,255,.18);
+    border:1px solid rgba(61,169,255,.18);
 
     background:#091323;
-
     color:#8fa1b8;
 
     cursor:pointer;
-
     transition:.25s;
 }
 
@@ -515,8 +381,7 @@ nav{
     color:#03101e;
 
     box-shadow:
-        0 0 20px
-        rgba(61,169,255,.18);
+        0 0 20px rgba(61,169,255,.18);
 }
 
 /* =========================================
@@ -526,23 +391,18 @@ nav{
 .aircraft-grid{
     width:90%;
     max-width:1200px;
-
     margin:auto;
 
     display:grid;
 
     grid-template-columns:
-        repeat(
-            auto-fit,
-            minmax(250px,1fr)
-        );
+        repeat(auto-fit,minmax(250px,1fr));
 
     gap:20px;
 }
 
 .aircraft-card{
     position:relative;
-
     overflow:hidden;
 
     background:
@@ -552,12 +412,8 @@ nav{
             rgba(7,16,30,.96)
         );
 
-    border:
-        1px solid
-        rgba(61,169,255,.13);
-
+    border:1px solid rgba(61,169,255,.13);
     border-radius:20px;
-
     cursor:pointer;
 
     transition:
@@ -573,15 +429,10 @@ nav{
 
 .aircraft-card::before{
     content:"";
-
     position:absolute;
-
     inset:0;
-
     z-index:3;
-
     pointer-events:none;
-
     border-radius:20px;
 
     background:
@@ -593,37 +444,29 @@ nav{
         );
 
     opacity:0;
-
     transition:opacity .25s;
 }
 
 .aircraft-card::after{
     content:"";
-
     position:absolute;
-
     inset:0;
-
     z-index:4;
-
     pointer-events:none;
-
     border-radius:20px;
 
     background:
         linear-gradient(
             120deg,
             transparent 0%,
-            rgba(61,169,255,.0) 35%,
+            rgba(61,169,255,0) 35%,
             rgba(61,169,255,.22) 50%,
-            rgba(61,169,255,.0) 65%,
+            rgba(61,169,255,0) 65%,
             transparent 100%
         );
 
     background-size:250% 100%;
-
     opacity:0;
-
     transition:opacity .35s;
 }
 
@@ -632,15 +475,11 @@ nav{
         translateY(-8px)
         scale(1.012);
 
-    border-color:
-        rgba(61,169,255,.65);
+    border-color:rgba(61,169,255,.65);
 
     box-shadow:
-        0 18px 50px
-        rgba(0,120,255,.18),
-
-        0 0 0 1px
-        rgba(61,169,255,.08);
+        0 18px 50px rgba(0,120,255,.18),
+        0 0 0 1px rgba(61,169,255,.08);
 }
 
 .aircraft-card:hover::before{
@@ -649,36 +488,20 @@ nav{
 
 .aircraft-card:hover::after{
     opacity:1;
-
-    animation:
-        borderShine
-        1.5s
-        ease;
+    animation:borderShine 1.5s ease;
 }
 
 @keyframes borderShine{
-
-    from{
-        background-position:
-            120% 0;
-    }
-
-    to{
-        background-position:
-            -20% 0;
-    }
-
+    from{background-position:120% 0;}
+    to{background-position:-20% 0;}
 }
 
 .aircraft-card.selected{
     border-color:#3da9ff;
 
     box-shadow:
-        0 0 0 2px
-        rgba(61,169,255,.18),
-
-        0 15px 50px
-        rgba(61,169,255,.2);
+        0 0 0 2px rgba(61,169,255,.18),
+        0 15px 50px rgba(61,169,255,.2);
 }
 
 .aircraft-card.selected::after{
@@ -696,25 +519,12 @@ nav{
 
     background-size:100% 220%;
 
-    animation:
-        selectedScan
-        2.8s
-        linear
-        infinite;
+    animation:selectedScan 2.8s linear infinite;
 }
 
 @keyframes selectedScan{
-
-    0%{
-        background-position:
-            0 -120%;
-    }
-
-    100%{
-        background-position:
-            0 120%;
-    }
-
+    0%{background-position:0 -120%;}
+    100%{background-position:0 120%;}
 }
 
 /* =========================================
@@ -723,17 +533,11 @@ nav{
 
 .hud-corners{
     position:absolute;
-
     inset:0;
-
     z-index:8;
-
     pointer-events:none;
-
     opacity:.42;
-
-    transition:
-        opacity .3s;
+    transition:opacity .3s;
 }
 
 .aircraft-card:hover .hud-corners,
@@ -743,20 +547,15 @@ nav{
 
 .corner{
     position:absolute;
-
     width:19px;
     height:19px;
-
-    border-color:
-        rgba(61,169,255,.65);
-
+    border-color:rgba(61,169,255,.65);
     transition:.3s;
 }
 
 .corner.top-left{
     top:10px;
     left:10px;
-
     border-top:1px solid;
     border-left:1px solid;
 }
@@ -764,7 +563,6 @@ nav{
 .corner.top-right{
     top:10px;
     right:10px;
-
     border-top:1px solid;
     border-right:1px solid;
 }
@@ -772,7 +570,6 @@ nav{
 .corner.bottom-left{
     bottom:10px;
     left:10px;
-
     border-bottom:1px solid;
     border-left:1px solid;
 }
@@ -780,7 +577,6 @@ nav{
 .corner.bottom-right{
     bottom:10px;
     right:10px;
-
     border-bottom:1px solid;
     border-right:1px solid;
 }
@@ -789,41 +585,32 @@ nav{
     border-color:#3da9ff;
 
     box-shadow:
-        0 0 7px
-        rgba(61,169,255,.3);
+        0 0 7px rgba(61,169,255,.3);
 }
 
 /* =========================================
-   PHOTO — MOBILE SAFE
+   PHOTO
    ========================================= */
 
 .photo{
     width:100%;
     height:175px;
-
     overflow:hidden;
-
     background:#07101d;
-
     position:relative;
-
     display:block;
-
     isolation:isolate;
 }
 
 .photo img{
     display:block;
-
     width:100%;
     height:100%;
-
     min-width:100%;
     max-width:none;
 
     object-fit:cover;
     object-position:center center;
-
     background:#07101d;
 
     transition:
@@ -839,22 +626,16 @@ nav{
 
 .photo.image-error::after{
     content:"IMAGE UNAVAILABLE";
-
     position:absolute;
-
     inset:0;
 
     display:flex;
-
     align-items:center;
     justify-content:center;
 
     color:#526981;
-
     font-size:9px;
-
     font-weight:800;
-
     letter-spacing:2px;
 
     background:
@@ -869,13 +650,9 @@ nav{
 
 .photo::before{
     content:"";
-
     position:absolute;
-
     inset:0;
-
     z-index:2;
-
     pointer-events:none;
 
     background:
@@ -889,94 +666,59 @@ nav{
         );
 
     background-size:100% 220%;
-
     opacity:0;
 }
 
 .aircraft-card.selected .photo::before{
     opacity:1;
-
-    animation:
-        photoScan
-        3s
-        linear
-        infinite;
+    animation:photoScan 3s linear infinite;
 }
 
 @keyframes photoScan{
-
-    0%{
-        background-position:
-            0 -120%;
-    }
-
-    100%{
-        background-position:
-            0 120%;
-    }
-
+    0%{background-position:0 -120%;}
+    100%{background-position:0 120%;}
 }
 
 .photo-hud{
     position:absolute;
-
     top:12px;
     left:13px;
-
     z-index:5;
 
     display:flex;
-
     align-items:center;
-
     gap:8px;
 
     padding:5px 8px;
 
-    border:
-        1px solid
-        rgba(61,169,255,.25);
+    border:1px solid rgba(61,169,255,.25);
 
-    background:
-        rgba(3,10,20,.55);
-
+    background:rgba(3,10,20,.55);
     backdrop-filter:blur(8px);
 
     color:#7f9bb7;
-
     font-size:8px;
-
     font-weight:700;
-
     letter-spacing:1.2px;
-
     opacity:.85;
 }
 
 .photo-hud::before{
     content:"";
-
     width:5px;
     height:5px;
-
     flex-shrink:0;
-
     border-radius:50%;
-
     background:#3da9ff;
 
     box-shadow:
-        0 0 8px
-        rgba(61,169,255,.9);
+        0 0 8px rgba(61,169,255,.9);
 }
 
 .photo::after{
     content:"";
-
     position:absolute;
-
     inset:0;
-
     z-index:3;
 
     background:
@@ -990,59 +732,43 @@ nav{
 }
 
 .aircraft-card:hover .photo img{
-    transform:
-        scale(1.10);
-
-    filter:
-        brightness(1.08)
-        saturate(1.08);
+    transform:scale(1.10);
+    filter:brightness(1.08) saturate(1.08);
 }
 
 .selected .photo img{
-    filter:
-        brightness(.68)
-        saturate(1.12);
+    filter:brightness(.68) saturate(1.12);
 }
 
 .selected:hover .photo img{
-    filter:
-        brightness(.78)
-        saturate(1.12);
+    filter:brightness(.78) saturate(1.12);
 }
 
 .selected-label{
     position:absolute;
-
     top:12px;
     right:12px;
-
     z-index:9;
 
     padding:7px 11px;
-
     border-radius:20px;
 
     background:#3da9ff;
-
     color:#03101e;
 
     font-size:11px;
     font-weight:800;
 
     opacity:0;
-
     transform:translateY(-5px);
-
     transition:.25s;
 
     box-shadow:
-        0 0 18px
-        rgba(61,169,255,.3);
+        0 0 18px rgba(61,169,255,.3);
 }
 
 .selected .selected-label{
     opacity:1;
-
     transform:translateY(0);
 }
 
@@ -1052,60 +778,42 @@ nav{
 
 .hud-status{
     display:flex;
-
     align-items:center;
-
     justify-content:space-between;
-
     gap:8px;
 
     margin-bottom:13px;
-
     padding-bottom:10px;
 
     border-bottom:
-        1px solid
-        rgba(61,169,255,.08);
+        1px solid rgba(61,169,255,.08);
 
     color:#526b84;
-
     font-size:8px;
-
     font-weight:700;
-
     letter-spacing:1.3px;
-
     text-transform:uppercase;
 }
 
 .hud-status-left{
     display:flex;
-
     align-items:center;
-
     gap:6px;
 }
 
 .status-dot{
     width:5px;
     height:5px;
-
     flex-shrink:0;
-
     border-radius:50%;
-
     background:#3da9ff;
 
     box-shadow:
-        0 0 8px
-        rgba(61,169,255,.8);
+        0 0 8px rgba(61,169,255,.8);
 }
 
 .aircraft-card.selected .status-dot{
-    animation:
-        systemPulse
-        1s
-        infinite;
+    animation:systemPulse 1s infinite;
 }
 
 .status-text{
@@ -1122,27 +830,20 @@ nav{
 
 .card-content{
     position:relative;
-
     z-index:5;
-
     padding:18px;
 }
 
 .manufacturer{
     color:#3da9ff;
-
     font-size:11px;
-
     font-weight:700;
-
     letter-spacing:1.5px;
 }
 
 .card-content h3{
     margin-top:6px;
-
     font-size:21px;
-
     transition:.25s;
 }
 
@@ -1150,41 +851,30 @@ nav{
     color:#ffffff;
 
     text-shadow:
-        0 0 18px
-        rgba(61,169,255,.25);
+        0 0 18px rgba(61,169,255,.25);
 }
 
 .card-content p{
     color:#71849d;
-
     font-size:13px;
-
     margin-top:7px;
 }
 
 .card-meta{
     display:flex;
-
     align-items:center;
-
     justify-content:space-between;
-
     gap:10px;
 
     margin-top:15px;
-
     padding-top:12px;
 
     border-top:
-        1px solid
-        rgba(255,255,255,.06);
+        1px solid rgba(255,255,255,.06);
 
     font-size:10px;
-
     color:#5f738c;
-
     text-transform:uppercase;
-
     letter-spacing:1px;
 }
 
@@ -1202,83 +892,59 @@ nav{
 
 .compare-bar{
     position:sticky;
-
     bottom:15px;
-
     z-index:500;
 
     width:90%;
     max-width:1000px;
 
     margin:35px auto 20px;
-
     padding:14px 18px;
 
     border-radius:18px;
 
-    background:
-        rgba(10,20,37,.95);
-
+    background:rgba(10,20,37,.95);
     backdrop-filter:blur(18px);
 
     border:
-        1px solid
-        rgba(61,169,255,.2);
+        1px solid rgba(61,169,255,.2);
 
     display:flex;
-
     align-items:center;
-
     justify-content:space-between;
-
     gap:15px;
 
     box-shadow:
-        0 15px 40px
-        rgba(0,0,0,.25);
+        0 15px 40px rgba(0,0,0,.25);
 }
 
 .compare-system{
     display:flex;
-
     align-items:center;
-
     gap:8px;
 
     color:#4e6983;
-
     font-size:8px;
-
     font-weight:800;
-
     letter-spacing:1.5px;
-
     margin-bottom:4px;
 }
 
 .live-dot{
     width:5px;
     height:5px;
-
     flex-shrink:0;
-
     border-radius:50%;
-
     background:#3da9ff;
 
     box-shadow:
-        0 0 9px
-        rgba(61,169,255,.9);
+        0 0 9px rgba(61,169,255,.9);
 
-    animation:
-        systemPulse
-        1.5s
-        infinite;
+    animation:systemPulse 1.5s infinite;
 }
 
 .selection-count{
     color:#9eb0c6;
-
     font-size:14px;
 }
 
@@ -1289,21 +955,15 @@ nav{
 .compare-button,
 .reset-button{
     border:none;
-
     padding:12px 20px;
-
     border-radius:12px;
-
     font-weight:800;
-
     cursor:pointer;
-
     transition:.25s;
 }
 
 .compare-button{
     background:#3da9ff;
-
     color:#03101e;
 }
 
@@ -1311,25 +971,21 @@ nav{
     transform:translateY(-2px);
 
     box-shadow:
-        0 8px 25px
-        rgba(61,169,255,.3);
+        0 8px 25px rgba(61,169,255,.3);
 }
 
 .compare-button:disabled{
     opacity:.35;
-
     cursor:not-allowed;
 }
 
 .reset-button{
     background:#111e31;
-
     color:#9eb0c6;
 }
 
 .reset-button:hover{
     color:white;
-
     background:#17263b;
 }
 
@@ -1339,34 +995,26 @@ nav{
 
 #result{
     display:none;
-
     width:92%;
     max-width:1200px;
-
     margin:80px auto;
 }
 
 .result-title{
     text-align:center;
-
     margin-bottom:35px;
-
     position:relative;
 }
 
 .result-title span{
     color:#3da9ff;
-
     font-size:12px;
-
     letter-spacing:3px;
-
     font-weight:700;
 }
 
 .result-title h2{
     font-size:40px;
-
     margin-top:10px;
 }
 
@@ -1374,21 +1022,14 @@ nav{
     margin-top:12px;
 
     display:flex;
-
     justify-content:center;
-
     align-items:center;
-
     gap:10px;
 
     color:#536d87;
-
     font-size:8px;
-
     font-weight:700;
-
     letter-spacing:2px;
-
     text-transform:uppercase;
 }
 
@@ -1419,25 +1060,18 @@ nav{
 
 .analysis-status{
     display:flex;
-
     justify-content:center;
-
     align-items:center;
-
     gap:9px;
 
     margin-top:16px;
 
     color:#314b64;
-
     font-size:8px;
-
     font-weight:800;
-
     letter-spacing:2px;
 
     opacity:0;
-
     transform:translateY(8px);
 
     transition:
@@ -1447,26 +1081,19 @@ nav{
 
 .analysis-status.active{
     opacity:1;
-
     transform:translateY(0);
 }
 
 .analysis-status .analysis-dot{
     width:5px;
     height:5px;
-
     border-radius:50%;
-
     background:#3da9ff;
 
     box-shadow:
-        0 0 10px
-        rgba(61,169,255,.9);
+        0 0 10px rgba(61,169,255,.9);
 
-    animation:
-        systemPulse
-        1s
-        infinite;
+    animation:systemPulse 1s infinite;
 }
 
 .analysis-text{
@@ -1480,24 +1107,17 @@ nav{
 
 .vs-area{
     display:flex;
-
     align-items:center;
-
     justify-content:center;
-
     gap:22px;
-
     margin-bottom:45px;
-
     flex-wrap:wrap;
 }
 
 .result-aircraft{
     flex:1;
-
     min-width:260px;
     max-width:430px;
-
     overflow:hidden;
 
     background:
@@ -1508,44 +1128,35 @@ nav{
         );
 
     border:
-        1px solid
-        rgba(61,169,255,.15);
+        1px solid rgba(61,169,255,.15);
 
     border-radius:22px;
 
     animation:fadeUp .6s ease;
 
     box-shadow:
-        0 15px 45px
-        rgba(0,0,0,.18);
+        0 15px 45px rgba(0,0,0,.18);
 
     position:relative;
 }
 
 .result-aircraft::before{
     content:"";
-
     position:absolute;
-
     inset:9px;
 
     border:
-        1px solid
-        rgba(61,169,255,.08);
+        1px solid rgba(61,169,255,.08);
 
     border-radius:16px;
-
     pointer-events:none;
-
     z-index:4;
 }
 
 .result-hud{
     position:absolute;
-
     top:12px;
     left:14px;
-
     z-index:6;
 
     padding:5px 8px;
@@ -1554,49 +1165,37 @@ nav{
         rgba(3,10,20,.65);
 
     border:
-        1px solid
-        rgba(61,169,255,.2);
+        1px solid rgba(61,169,255,.2);
 
     color:#7e9bb6;
-
     font-size:8px;
-
     font-weight:700;
-
     letter-spacing:1.2px;
 }
 
 /* =========================================
-   RESULT PHOTO — MOBILE SAFE
+   RESULT PHOTO
    ========================================= */
 
 .result-photo{
     width:100%;
     height:210px;
-
     overflow:hidden;
-
     position:relative;
-
     display:block;
-
     background:#07101d;
-
     isolation:isolate;
 }
 
 .result-photo img{
     display:block;
-
     width:100%;
     height:100%;
-
     min-width:100%;
     max-width:none;
 
     object-fit:cover;
     object-position:center center;
-
     background:#07101d;
 
     transition:
@@ -1613,20 +1212,15 @@ nav{
     content:"IMAGE UNAVAILABLE";
 
     position:absolute;
-
     inset:0;
 
     display:flex;
-
     align-items:center;
     justify-content:center;
 
     color:#526981;
-
     font-size:9px;
-
     font-weight:800;
-
     letter-spacing:2px;
 
     background:
@@ -1641,11 +1235,8 @@ nav{
 
 .result-photo::after{
     content:"";
-
     position:absolute;
-
     inset:0;
-
     z-index:3;
 
     background:
@@ -1664,23 +1255,18 @@ nav{
 
 .result-info{
     padding:18px;
-
     position:relative;
-
     z-index:5;
 }
 
 .result-info small{
     color:#3da9ff;
-
     font-weight:700;
-
     letter-spacing:1px;
 }
 
 .result-info h3{
     font-size:25px;
-
     margin-top:6px;
 }
 
@@ -1688,59 +1274,42 @@ nav{
     margin-top:9px;
 
     color:#4f6881;
-
     font-size:8px;
-
     font-weight:700;
-
     letter-spacing:1.4px;
-
     text-transform:uppercase;
 }
 
 .vs{
     width:78px;
     height:78px;
-
     flex-shrink:0;
 
     display:flex;
-
     align-items:center;
     justify-content:center;
 
-    border:
-        2px solid
-        #3da9ff;
+    border:2px solid #3da9ff;
 
     color:#3da9ff;
-
     font-size:20px;
-
     font-weight:900;
 
     border-radius:50%;
 
     box-shadow:
-        0 0 25px
-        rgba(61,169,255,.25),
-
-        inset 0 0 20px
-        rgba(61,169,255,.08);
+        0 0 25px rgba(61,169,255,.25),
+        inset 0 0 20px rgba(61,169,255,.08);
 
     animation:pulse 2s infinite;
-
     position:relative;
 }
 
 .vs::before,
 .vs::after{
     content:"";
-
     position:absolute;
-
     background:#3da9ff;
-
     opacity:.45;
 }
 
@@ -1760,23 +1329,18 @@ nav{
 
 .section-heading{
     margin:55px 0 20px;
-
     position:relative;
 }
 
 .section-heading span{
     color:#3da9ff;
-
     font-size:11px;
-
     font-weight:800;
-
     letter-spacing:2px;
 }
 
 .section-heading h3{
     font-size:25px;
-
     margin-top:6px;
 }
 
@@ -1784,16 +1348,12 @@ nav{
     content:"SYSTEM // ACTIVE";
 
     position:absolute;
-
     right:0;
     bottom:3px;
 
     color:#344b63;
-
     font-size:8px;
-
     letter-spacing:1.5px;
-
     font-weight:700;
 }
 
@@ -1803,7 +1363,6 @@ nav{
 
 .visual-stat{
     margin-bottom:22px;
-
     padding:20px;
 
     background:
@@ -1814,25 +1373,20 @@ nav{
         );
 
     border:
-        1px solid
-        rgba(61,169,255,.12);
+        1px solid rgba(61,169,255,.12);
 
     border-radius:18px;
 
     transition:.3s;
-
     position:relative;
-
     overflow:hidden;
 
     opacity:0;
-
     transform:translateY(12px);
 }
 
 .visual-stat.visible{
     opacity:1;
-
     transform:translateY(0);
 
     transition:
@@ -1843,12 +1397,9 @@ nav{
 
 .visual-stat::before{
     content:"";
-
     position:absolute;
-
     top:0;
     left:0;
-
     width:35%;
     height:1px;
 
@@ -1866,33 +1417,24 @@ nav{
     content:"HUD";
 
     position:absolute;
-
     right:18px;
     top:18px;
 
     color:#263d55;
-
     font-size:8px;
-
     letter-spacing:1.5px;
-
     font-weight:800;
 }
 
 .visual-stat:hover{
-    border-color:
-        rgba(61,169,255,.3);
-
+    border-color:rgba(61,169,255,.3);
     transform:translateY(-2px);
 }
 
 .visual-stat-title{
     display:flex;
-
     justify-content:space-between;
-
     margin-bottom:14px;
-
     padding-right:40px;
 }
 
@@ -1902,15 +1444,12 @@ nav{
 
 .visual-stat-title span{
     color:#72859d;
-
     font-size:12px;
 }
 
 .bar-row{
     margin-top:13px;
-
     opacity:0;
-
     transform:translateX(-10px);
 
     transition:
@@ -1920,46 +1459,34 @@ nav{
 
 .bar-row.visible{
     opacity:1;
-
     transform:translateX(0);
 }
 
 .bar-label{
     display:flex;
-
     justify-content:space-between;
 
     font-size:12px;
-
     color:#aab8c9;
-
     margin-bottom:6px;
 }
 
 .bar-label .animated-value{
     color:#3da9ff;
-
-    font-variant-numeric:
-        tabular-nums;
+    font-variant-numeric:tabular-nums;
 }
 
 .bar{
     height:10px;
-
     background:#101d30;
-
     border-radius:20px;
-
     overflow:hidden;
-
     position:relative;
 }
 
 .bar::after{
     content:"";
-
     position:absolute;
-
     inset:0;
 
     background:
@@ -1975,9 +1502,7 @@ nav{
 
 .bar-fill{
     height:100%;
-
     width:0;
-
     border-radius:20px;
 
     background:
@@ -1988,17 +1513,14 @@ nav{
         );
 
     transition:
-        width 1.2s
-        cubic-bezier(.2,.8,.2,1);
+        width 1.2s cubic-bezier(.2,.8,.2,1);
 
     position:relative;
 }
 
 .bar-fill::after{
     content:"";
-
     position:absolute;
-
     top:0;
     right:0;
 
@@ -2008,8 +1530,7 @@ nav{
     background:white;
 
     box-shadow:
-        0 0 8px
-        rgba(61,169,255,.9);
+        0 0 8px rgba(61,169,255,.9);
 }
 
 /* =========================================
@@ -2020,17 +1541,13 @@ nav{
     display:grid;
 
     grid-template-columns:
-        repeat(
-            auto-fit,
-            minmax(210px,1fr)
-        );
+        repeat(auto-fit,minmax(210px,1fr));
 
     gap:15px;
 }
 
 .stat-card{
     padding:22px;
-
     border-radius:17px;
 
     background:
@@ -2041,17 +1558,13 @@ nav{
         );
 
     border:
-        1px solid
-        rgba(61,169,255,.12);
+        1px solid rgba(61,169,255,.12);
 
     transition:.3s;
-
     position:relative;
-
     overflow:hidden;
 
     opacity:0;
-
     transform:
         translateY(15px)
         scale(.98);
@@ -2074,16 +1587,12 @@ nav{
     content:"DATA";
 
     position:absolute;
-
     right:15px;
     top:13px;
 
     color:#263d55;
-
     font-size:7px;
-
     font-weight:800;
-
     letter-spacing:1.5px;
 }
 
@@ -2094,17 +1603,13 @@ nav{
         rgba(61,169,255,.3);
 
     box-shadow:
-        0 12px 35px
-        rgba(0,120,255,.08);
+        0 12px 35px rgba(0,120,255,.08);
 }
 
 .stat-title{
     color:#72859d;
-
     font-size:11px;
-
     text-transform:uppercase;
-
     letter-spacing:1px;
 }
 
@@ -2114,23 +1619,19 @@ nav{
 
 .stat-value{
     display:flex;
-
     justify-content:space-between;
-
     gap:10px;
 
     margin-top:8px;
 
     color:#d5dfeb;
-
     font-size:13px;
 }
 
 .stat-value strong{
     color:#3da9ff;
-
-    font-variant-numeric:
-        tabular-nums;
+    font-variant-numeric:tabular-nums;
+    text-align:right;
 }
 
 /* =========================================
@@ -2143,23 +1644,19 @@ nav{
     border-radius:20px;
 
     border:
-        1px solid
-        rgba(61,169,255,.12);
+        1px solid rgba(61,169,255,.12);
 
     box-shadow:
-        0 15px 40px
-        rgba(0,0,0,.15);
+        0 15px 40px rgba(0,0,0,.15);
 
     position:relative;
 
     opacity:0;
-
     transform:translateY(15px);
 }
 
 .table-wrapper.visible{
     opacity:1;
-
     transform:translateY(0);
 
     transition:
@@ -2171,62 +1668,48 @@ nav{
     content:"FLIGHT SENSES // TELEMETRY DATA";
 
     display:block;
-
     padding:11px 18px;
 
     background:#07111f;
 
     border-bottom:
-        1px solid
-        rgba(61,169,255,.1);
+        1px solid rgba(61,169,255,.1);
 
     color:#425c75;
-
     font-size:8px;
-
     font-weight:800;
-
     letter-spacing:1.8px;
 }
 
 table{
     width:100%;
-
     border-collapse:collapse;
-
     min-width:750px;
-
     background:#091424;
 }
 
 th,
 td{
     padding:17px 20px;
-
     text-align:left;
 
     border-bottom:
-        1px solid
-        rgba(255,255,255,.06);
+        1px solid rgba(255,255,255,.06);
 }
 
 th{
     color:#3da9ff;
-
     font-size:13px;
-
     background:#0c192b;
 }
 
 td{
     color:#bdc9d8;
-
     font-size:14px;
 }
 
 td:first-child{
     color:white;
-
     font-weight:700;
 }
 
@@ -2239,8 +1722,7 @@ tbody tr{
 }
 
 tbody tr:hover{
-    background:
-        rgba(61,169,255,.025);
+    background:rgba(61,169,255,.025);
 }
 
 /* =========================================
@@ -2249,29 +1731,21 @@ tbody tr:hover{
 
 footer{
     margin-top:80px;
-
     padding:30px 20px;
-
     text-align:center;
 
     border-top:
-        1px solid
-        rgba(61,169,255,.1);
+        1px solid rgba(61,169,255,.1);
 
     color:#53667e;
-
     font-size:13px;
 }
 
 .footer-hud{
     margin-bottom:8px;
-
     color:#2f465e;
-
     font-size:7px;
-
     letter-spacing:2px;
-
     font-weight:800;
 }
 
@@ -2280,37 +1754,25 @@ footer{
    ========================================= */
 
 @keyframes pulse{
-
     0%,100%{
         box-shadow:
-            0 0 20px
-            rgba(61,169,255,.2);
+            0 0 20px rgba(61,169,255,.2);
     }
-
     50%{
         box-shadow:
-            0 0 40px
-            rgba(61,169,255,.45);
+            0 0 40px rgba(61,169,255,.45);
     }
-
 }
 
 @keyframes fadeUp{
-
     from{
         opacity:0;
-
-        transform:
-            translateY(15px);
+        transform:translateY(15px);
     }
-
     to{
         opacity:1;
-
-        transform:
-            translateY(0);
+        transform:translateY(0);
     }
-
 }
 
 /* =========================================
@@ -2321,7 +1783,6 @@ footer{
 
     nav{
         padding:0 5%;
-
         height:65px;
     }
 
@@ -2339,8 +1800,7 @@ footer{
     }
 
     .hero{
-        padding:
-            50px 18px 40px;
+        padding:50px 18px 40px;
     }
 
     .hero h1{
@@ -2361,25 +1821,15 @@ footer{
 
     .aircraft-grid{
         width:92%;
-
         grid-template-columns:1fr;
-
         gap:18px;
     }
-
-    /*
-       MOBILE PHOTO FIX
-       Explicit dimensions prevent
-       image collapse on mobile browsers.
-    */
 
     .photo{
         width:100%;
         height:220px;
-
         min-height:220px;
         max-height:220px;
-
         display:block;
     }
 
@@ -2427,19 +1877,14 @@ footer{
 
     .compare-bar{
         width:94%;
-
         flex-wrap:wrap;
-
         justify-content:center;
-
         bottom:10px;
-
         padding:13px;
     }
 
     .compare-bar > div{
         width:100%;
-
         text-align:center;
     }
 
@@ -2449,17 +1894,13 @@ footer{
 
     .compare-button,
     .reset-button{
-        padding:
-            11px 15px;
-
+        padding:11px 15px;
         font-size:12px;
     }
 
     #result{
         width:94%;
-
-        margin:
-            65px auto;
+        margin:65px auto;
     }
 
     .result-title h2{
@@ -2472,7 +1913,6 @@ footer{
 
     .result-system{
         font-size:7px;
-
         gap:6px;
     }
 
@@ -2482,13 +1922,11 @@ footer{
 
     .vs-area{
         gap:15px;
-
         flex-direction:column;
     }
 
     .result-aircraft{
         width:100%;
-
         min-width:0;
         max-width:none;
     }
@@ -2496,7 +1934,6 @@ footer{
     .vs{
         width:60px;
         height:60px;
-
         font-size:16px;
     }
 
@@ -2687,6 +2124,14 @@ Top 10
 Compare
 </a>
 
+<a href="flight-lab.html">
+🧪 Flight Lab
+</a>
+
+<a href="world.html">
+🌍 World
+</a>
+
 </div>
 
 </nav>
@@ -2757,6 +2202,22 @@ AIRBUS
 
 <button class="filter" data-filter="Boeing">
 BOEING
+</button>
+
+<button class="filter" data-filter="Embraer">
+EMBRAER
+</button>
+
+<button class="filter" data-filter="ATR">
+ATR
+</button>
+
+<button class="filter" data-filter="McDonnell Douglas">
+McDONNELL DOUGLAS
+</button>
+
+<button class="filter" data-filter="Bombardier">
+BOMBARDIER
 </button>
 
 </div>
@@ -2927,7 +2388,15 @@ FLIGHT SENSES // SYSTEM TERMINAL // 2026
 
 <script>
 
+/* =========================================
+   FLIGHT SENSES // AIRCRAFT DATABASE
+   ========================================= */
+
 const aircraft = [
+
+/* =========================================
+   AIRBUS
+   ========================================= */
 
 {
 name:"A220-300",
@@ -2948,8 +2417,7 @@ mtowValue:67585,
 seating:"130–160",
 maxSeats:"160",
 engines:"2 × PW1500G",
-thrust:"23,300 lbf each",
-thrustValue:23300
+engineOutput:"23,300 lbf each"
 },
 
 {
@@ -2971,8 +2439,7 @@ mtowValue:79000,
 seating:"150–180",
 maxSeats:"194",
 engines:"2 × LEAP-1A / PW1100G",
-thrust:"Up to 32,000 lbf each",
-thrustValue:32000
+engineOutput:"Up to 32,000 lbf each"
 },
 
 {
@@ -2994,8 +2461,7 @@ mtowValue:97000,
 seating:"180–220",
 maxSeats:"244",
 engines:"2 × LEAP-1A / PW1100G",
-thrust:"Up to 35,000 lbf each",
-thrustValue:35000
+engineOutput:"Up to 35,000 lbf each"
 },
 
 {
@@ -3017,8 +2483,7 @@ mtowValue:251000,
 seating:"260–300",
 maxSeats:"465",
 engines:"2 × Rolls-Royce Trent 7000",
-thrust:"72,834 lbf each",
-thrustValue:72834
+engineOutput:"72,834 lbf each"
 },
 
 {
@@ -3040,8 +2505,7 @@ mtowValue:283000,
 seating:"332–352",
 maxSeats:"440",
 engines:"2 × Rolls-Royce Trent XWB-84",
-thrust:"84,000 lbf each",
-thrustValue:84000
+engineOutput:"84,000 lbf each"
 },
 
 {
@@ -3063,8 +2527,7 @@ mtowValue:324000,
 seating:"375–400",
 maxSeats:"480",
 engines:"2 × Rolls-Royce Trent XWB-97",
-thrust:"97,000 lbf each",
-thrustValue:97000
+engineOutput:"97,000 lbf each"
 },
 
 {
@@ -3086,9 +2549,12 @@ mtowValue:575000,
 seating:"545",
 maxSeats:"853",
 engines:"4 × Trent 900 / GP7200",
-thrust:"Up to 81,500 lbf each",
-thrustValue:81500
+engineOutput:"Up to 81,500 lbf each"
 },
+
+/* =========================================
+   BOEING
+   ========================================= */
 
 {
 name:"737-800",
@@ -3109,8 +2575,7 @@ mtowValue:79010,
 seating:"162–189",
 maxSeats:"189",
 engines:"2 × CFM56-7B",
-thrust:"26,300 lbf each",
-thrustValue:26300
+engineOutput:"26,300 lbf each"
 },
 
 {
@@ -3132,8 +2597,7 @@ mtowValue:82191,
 seating:"162–200",
 maxSeats:"210",
 engines:"2 × CFM LEAP-1B",
-thrust:"Up to 29,317 lbf each",
-thrustValue:29317
+engineOutput:"Up to 29,317 lbf each"
 },
 
 {
@@ -3155,8 +2619,7 @@ mtowValue:88314,
 seating:"188–204",
 maxSeats:"230",
 engines:"2 × CFM LEAP-1B",
-thrust:"Up to 29,317 lbf each",
-thrustValue:29317
+engineOutput:"Up to 29,317 lbf each"
 },
 
 {
@@ -3178,8 +2641,7 @@ mtowValue:351534,
 seating:"396–426",
 maxSeats:"550",
 engines:"2 × GE90-115B",
-thrust:"115,540 lbf each",
-thrustValue:115540
+engineOutput:"115,540 lbf each"
 },
 
 {
@@ -3201,8 +2663,7 @@ mtowValue:351534,
 seating:"426 typical 2-class",
 maxSeats:"426",
 engines:"2 × GE9X",
-thrust:"~105,000 lbf each",
-thrustValue:105000
+engineOutput:"~105,000 lbf each"
 },
 
 {
@@ -3224,8 +2685,7 @@ mtowValue:254011,
 seating:"296",
 maxSeats:"426",
 engines:"2 × GEnx-1B / Trent 1000",
-thrust:"Up to 76,100 lbf each",
-thrustValue:76100
+engineOutput:"Up to 76,100 lbf each"
 },
 
 {
@@ -3247,11 +2707,339 @@ mtowValue:254011,
 seating:"336",
 maxSeats:"336",
 engines:"2 × GEnx-1B / Trent 1000",
-thrust:"Up to 76,100 lbf each",
-thrustValue:76100
+engineOutput:"Up to 76,100 lbf each"
+},
+
+/* =========================================
+   EMBRAER
+   ========================================= */
+
+{
+name:"E175",
+manufacturer:"Embraer",
+image:"e175.jpg",
+type:"Regional Jet",
+firstFlight:"2000",
+length:"31.68 m",
+lengthValue:31.68,
+wingspan:"26.00 m",
+wingspanValue:26,
+height:"9.86 m",
+speed:"Mach 0.82",
+range:"4,074 km",
+rangeValue:4074,
+mtow:"40,370 kg",
+mtowValue:40370,
+seating:"76–88",
+maxSeats:"88",
+engines:"2 × GE CF34-8E",
+engineOutput:"14,200 lbf each"
+},
+
+{
+name:"E190",
+manufacturer:"Embraer",
+image:"e190.jpg",
+type:"Regional Jet",
+firstFlight:"2004",
+length:"36.24 m",
+lengthValue:36.24,
+wingspan:"28.72 m",
+wingspanValue:28.72,
+height:"10.57 m",
+speed:"Mach 0.82",
+range:"4,537 km",
+rangeValue:4537,
+mtow:"51,800 kg",
+mtowValue:51800,
+seating:"98–114",
+maxSeats:"114",
+engines:"2 × GE CF34-10E",
+engineOutput:"20,000 lbf each"
+},
+
+{
+name:"E195",
+manufacturer:"Embraer",
+image:"e195.jpg",
+type:"Regional Jet",
+firstFlight:"2004",
+length:"38.65 m",
+lengthValue:38.65,
+wingspan:"28.72 m",
+wingspanValue:28.72,
+height:"10.55 m",
+speed:"Mach 0.82",
+range:"4,260 km",
+rangeValue:4260,
+mtow:"52,290 kg",
+mtowValue:52290,
+seating:"108–124",
+maxSeats:"124",
+engines:"2 × GE CF34-10E",
+engineOutput:"20,000 lbf each"
+},
+
+{
+name:"E175-E2",
+manufacturer:"Embraer",
+image:"e175-e2.jpg",
+type:"E-Jet E2",
+firstFlight:"2019",
+length:"32.30 m",
+lengthValue:32.30,
+wingspan:"31.00 m",
+wingspanValue:31,
+height:"9.90 m",
+speed:"Mach 0.82",
+range:"3,704 km",
+rangeValue:3704,
+mtow:"44,600 kg",
+mtowValue:44600,
+seating:"80–90",
+maxSeats:"90",
+engines:"2 × Pratt & Whitney PW1715G",
+engineOutput:"~17,000 lbf each"
+},
+
+{
+name:"E190-E2",
+manufacturer:"Embraer",
+image:"e190-e2.jpg",
+type:"E-Jet E2",
+firstFlight:"2016",
+length:"36.35 m",
+lengthValue:36.35,
+wingspan:"33.72 m",
+wingspanValue:33.72,
+height:"10.70 m",
+speed:"Mach 0.82",
+range:"5,280 km",
+rangeValue:5280,
+mtow:"56,400 kg",
+mtowValue:56400,
+seating:"97–114",
+maxSeats:"114",
+engines:"2 × Pratt & Whitney PW1921G",
+engineOutput:"~21,000 lbf each"
+},
+
+{
+name:"E195-E2",
+manufacturer:"Embraer",
+image:"e195-e2.jpg",
+type:"E-Jet E2",
+firstFlight:"2017",
+length:"41.60 m",
+lengthValue:41.60,
+wingspan:"35.10 m",
+wingspanValue:35.10,
+height:"10.90 m",
+speed:"Mach 0.82",
+range:"5,556 km",
+rangeValue:5556,
+mtow:"62,500 kg",
+mtowValue:62500,
+seating:"120–146",
+maxSeats:"146",
+engines:"2 × Pratt & Whitney PW1921G",
+engineOutput:"~24,000 lbf each"
+},
+
+/* =========================================
+   ATR
+   ========================================= */
+
+{
+name:"ATR 42-600",
+manufacturer:"ATR",
+image:"atr42-600.jpg",
+type:"Turboprop",
+firstFlight:"2010",
+length:"22.67 m",
+lengthValue:22.67,
+wingspan:"24.57 m",
+wingspanValue:24.57,
+height:"7.59 m",
+speed:"289 kt",
+range:"1,345 km",
+rangeValue:1345,
+mtow:"18,600 kg",
+mtowValue:18600,
+seating:"30–48",
+maxSeats:"48",
+engines:"2 × Pratt & Whitney PW127XT-M",
+engineOutput:"2,400 SHP each"
+},
+
+{
+name:"ATR 72-600",
+manufacturer:"ATR",
+image:"atr72-600.jpg",
+type:"Turboprop",
+firstFlight:"2010",
+length:"27.17 m",
+lengthValue:27.17,
+wingspan:"27.05 m",
+wingspanValue:27.05,
+height:"7.65 m",
+speed:"~300 kt",
+range:"1,370 km",
+rangeValue:1370,
+mtow:"23,000 kg",
+mtowValue:23000,
+seating:"72–78",
+maxSeats:"78",
+engines:"2 × Pratt & Whitney PW127XT-M",
+engineOutput:"2,750 SHP each"
+},
+
+/* =========================================
+   MCDONNELL DOUGLAS
+   ========================================= */
+
+{
+name:"MD-80",
+manufacturer:"McDonnell Douglas",
+image:"md-80.jpg",
+type:"Narrow-body",
+firstFlight:"1979",
+length:"45.01 m",
+lengthValue:45.01,
+wingspan:"32.87 m",
+wingspanValue:32.87,
+height:"9.27 m",
+speed:"Mach 0.76",
+range:"2,575 km",
+rangeValue:2575,
+mtow:"63,503 kg",
+mtowValue:63503,
+seating:"155",
+maxSeats:"172",
+engines:"2 × Pratt & Whitney JT8D-209",
+engineOutput:"18,500 lbf each"
+},
+
+{
+name:"MD-90",
+manufacturer:"McDonnell Douglas",
+image:"md-90.jpg",
+type:"Narrow-body",
+firstFlight:"1993",
+length:"46.51 m",
+lengthValue:46.51,
+wingspan:"32.87 m",
+wingspanValue:32.87,
+height:"9.42 m",
+speed:"Mach 0.76",
+range:"3,862 km",
+rangeValue:3862,
+mtow:"70,760 kg",
+mtowValue:70760,
+seating:"153",
+maxSeats:"172",
+engines:"2 × IAE V2500",
+engineOutput:"25,000 lbf each"
+},
+
+{
+name:"MD-11",
+manufacturer:"McDonnell Douglas",
+image:"md-11.jpg",
+type:"Wide-body Trijet",
+firstFlight:"1990",
+length:"61.24 m",
+lengthValue:61.24,
+wingspan:"51.77 m",
+wingspanValue:51.77,
+height:"17.65 m",
+speed:"Mach 0.83",
+range:"10,000 km",
+rangeValue:10000,
+mtow:"273,294 kg",
+mtowValue:273294,
+seating:"293–405",
+maxSeats:"410",
+engines:"3 × GE CF6 / PW4460 / PW4462",
+engineOutput:"~60,000–62,000 lbf each"
+},
+
+/* =========================================
+   BOMBARDIER
+   ========================================= */
+
+{
+name:"CRJ700",
+manufacturer:"Bombardier",
+image:"crj700.jpg",
+type:"Regional Jet",
+firstFlight:"1999",
+length:"32.51 m",
+lengthValue:32.51,
+wingspan:"23.24 m",
+wingspanValue:23.24,
+height:"7.57 m",
+speed:"Mach 0.825",
+range:"3,121 km",
+rangeValue:3121,
+mtow:"34,019 kg",
+mtowValue:34019,
+seating:"66–78",
+maxSeats:"78",
+engines:"2 × GE CF34-8C5B1",
+engineOutput:"13,790 lbf each"
+},
+
+{
+name:"CRJ900",
+manufacturer:"Bombardier",
+image:"crj900.jpg",
+type:"Regional Jet",
+firstFlight:"2001",
+length:"36.40 m",
+lengthValue:36.40,
+wingspan:"24.85 m",
+wingspanValue:24.85,
+height:"7.51 m",
+speed:"Mach 0.82",
+range:"3,184 km",
+rangeValue:3184,
+mtow:"38,330 kg",
+mtowValue:38330,
+seating:"76–90",
+maxSeats:"90",
+engines:"2 × GE CF34-8C5",
+engineOutput:"14,510 lbf each"
+},
+
+{
+name:"CRJ1000",
+manufacturer:"Bombardier",
+image:"crj1000.jpg",
+type:"Regional Jet",
+firstFlight:"2008",
+length:"39.13 m",
+lengthValue:39.13,
+wingspan:"26.18 m",
+wingspanValue:26.18,
+height:"7.50 m",
+speed:"Mach 0.82",
+range:"3,004 km",
+rangeValue:3004,
+mtow:"41,640 kg",
+mtowValue:41640,
+seating:"97–104",
+maxSeats:"104",
+engines:"2 × GE CF34-8C5A1",
+engineOutput:"14,510 lbf each"
 }
 
 ];
+
+
+/* =========================================
+   SYSTEM STATE
+   ========================================= */
 
 let selected=[];
 let currentFilter="ALL";
@@ -3297,11 +3085,7 @@ img.parentElement;
 img.style.display="none";
 
 if(parent){
-
-parent.classList.add(
-"image-error"
-);
-
+parent.classList.add("image-error");
 }
 
 }
@@ -3317,7 +3101,7 @@ parent.classList.add(
 function render(){
 
 const query=
-search.value.toLowerCase();
+search.value.toLowerCase().trim();
 
 grid.innerHTML="";
 
@@ -3514,7 +3298,6 @@ card.style.setProperty(
 card.style.setProperty(
 "--my",
 "50%"
-
 );
 
 });
@@ -3576,8 +3359,8 @@ button.addEventListener(
 
 document
 .querySelectorAll(".filter")
-.forEach(b=>
-b.classList.remove("active")
+.forEach(
+b=>b.classList.remove("active")
 );
 
 button.classList.add("active");
@@ -3875,7 +3658,9 @@ selectedAircraft
 );
 
 
-/* QUICK DATA */
+/* =========================================
+   QUICK DATA
+   ========================================= */
 
 const statsGrid=
 document.getElementById(
@@ -3886,15 +3671,15 @@ statsGrid.innerHTML="";
 
 const stats=[
 
-["MAXIMUM RANGE","range"],
-["MTOW","mtow"],
-["ENGINE THRUST","thrust"],
-["MAX SEATING","maxSeats"]
+["MAXIMUM RANGE","range","numeric"],
+["MTOW","mtow","numeric"],
+["ENGINE OUTPUT","engineOutput","text"],
+["MAX SEATING","maxSeats","numeric"]
 
 ];
 
 stats.forEach(
-([title,key],cardIndex)=>{
+([title,key,type],cardIndex)=>{
 
 const stat=
 document.createElement("div");
@@ -3915,7 +3700,36 @@ ${title}
 <div class="stat-values">
 
 ${selectedAircraft.map(
-a=>`
+a=>{
+
+if(type==="text"){
+
+return `
+
+<div class="stat-value">
+
+<span>
+${a.name}
+</span>
+
+<strong>
+${a[key]}
+</strong>
+
+</div>
+
+`;
+
+}
+
+const numericValue=
+key==="range"
+?a.rangeValue
+:key==="mtow"
+?a.mtowValue
+:a.maxSeats;
+
+return `
 
 <div class="stat-value">
 
@@ -3925,15 +3739,7 @@ ${a.name}
 
 <strong
 class="quick-value"
-data-value="${
-key==="range"
-?a.rangeValue
-:key==="mtow"
-?a.mtowValue
-:key==="thrust"
-?a.thrustValue
-:a.maxSeats
-}">
+data-value="${numericValue}">
 
 0
 
@@ -3941,7 +3747,10 @@ key==="range"
 
 </div>
 
-`).join("")}
+`;
+
+}
+).join("")}
 
 </div>
 
@@ -3952,7 +3761,9 @@ statsGrid.appendChild(stat);
 });
 
 
-/* TABLE */
+/* =========================================
+   TABLE
+   ========================================= */
 
 const tableHead=
 document.getElementById(
@@ -3990,7 +3801,7 @@ const rows=[
 ["Typical Seating","seating"],
 ["Maximum Seating","maxSeats"],
 ["Engines","engines"],
-["Engine Thrust","thrust"]
+["Engine Output","engineOutput"]
 
 ];
 
@@ -4134,16 +3945,26 @@ title:"Maximum Takeoff Weight",
 unit:"kg",
 key:"mtowValue",
 decimals:0
-},
-
-{
-title:"Engine Thrust — per engine",
-unit:"lbf",
-key:"thrustValue",
-decimals:0
 }
 
 ];
+
+/*
+IMPORTANT:
+
+Engine output is deliberately NOT placed
+inside the same visual bar system.
+
+Jet engines are normally compared by thrust
+in lbf, while ATR turboprops are specified
+by shaft horsepower (SHP).
+
+Putting lbf and SHP into one numerical bar
+would create a technically misleading chart.
+
+Engine output is therefore displayed in
+Quick Data and Detailed Specifications.
+*/
 
 categories.forEach(
 (category,categoryIndex)=>{
@@ -4200,7 +4021,8 @@ ${a.name}
 <span
 class="animated-value"
 data-target="${a[category.key]}"
-data-decimals="${category.decimals}">
+data-decimals="${category.decimals}"
+data-unit="${category.unit}">
 
 0 ${category.unit}
 
@@ -4297,6 +4119,9 @@ duration=900
 const startTime=
 performance.now();
 
+const unit=
+element.dataset.unit || "";
+
 function frame(
 currentTime
 ){
@@ -4318,9 +4143,6 @@ const eased=
 
 const value=
 target*eased;
-
-const unit=
-element.dataset.unit || "";
 
 element.textContent=
 value.toLocaleString(
@@ -4363,11 +4185,6 @@ unit;
 }
 
 }
-
-element.dataset.unit=
-element.textContent
-.split(" ")
-.slice(-1)[0];
 
 requestAnimationFrame(
 frame

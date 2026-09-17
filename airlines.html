@@ -24,7 +24,7 @@ body{
     color:white;
 }
 
-/* HEADER */
+/* ================= HEADER ================= */
 
 header{
     background:
@@ -71,7 +71,7 @@ header{
     letter-spacing:3px;
 }
 
-/* NAVBAR */
+/* ================= NAV ================= */
 
 nav{
     position:sticky;
@@ -113,12 +113,12 @@ nav a.active{
     box-shadow:0 5px 20px rgba(30,144,255,.25);
 }
 
-/* HERO */
+/* ================= HERO ================= */
 
 .page-hero{
     position:relative;
     overflow:hidden;
-    padding:90px 20px 65px;
+    padding:90px 20px 70px;
     text-align:center;
     background:
         radial-gradient(circle at center,#12365a 0%,#071421 45%,#050b14 100%);
@@ -139,7 +139,7 @@ nav a.active{
 .page-hero::after{
     content:"";
     position:absolute;
-    width:700px;
+    width:900px;
     height:1px;
     background:linear-gradient(
         90deg,
@@ -181,18 +181,18 @@ nav a.active{
 .page-hero p{
     position:relative;
     z-index:2;
-    max-width:700px;
+    max-width:720px;
     margin:18px auto 0;
     color:#9fb7cc;
     font-size:17px;
     line-height:1.7;
 }
 
-/* STATS */
+/* ================= STATS ================= */
 
 .stats{
     max-width:1000px;
-    margin:-25px auto 50px;
+    margin:-25px auto 55px;
     position:relative;
     z-index:5;
     display:grid;
@@ -224,7 +224,7 @@ nav a.active{
     letter-spacing:1px;
 }
 
-/* MAIN */
+/* ================= MAIN ================= */
 
 .container{
     max-width:1150px;
@@ -251,11 +251,12 @@ nav a.active{
     font-size:15px;
 }
 
-/* SEARCH */
+/* ================= SEARCH ================= */
 
 .search-area{
     max-width:760px;
-    margin:0 auto 30px;
+    margin:0 auto 25px;
+    position:relative;
 }
 
 .search-box{
@@ -279,24 +280,24 @@ nav a.active{
     box-shadow:0 0 25px rgba(30,144,255,.14);
 }
 
-/* FILTERS */
+/* ================= FILTERS ================= */
 
 .filters{
     display:flex;
     justify-content:center;
     flex-wrap:wrap;
-    gap:10px;
-    margin-bottom:45px;
+    gap:9px;
+    margin-bottom:22px;
 }
 
 .filter{
-    padding:9px 18px;
+    padding:9px 17px;
     border-radius:30px;
     border:1px solid #254c6c;
     background:#0a1929;
     color:#a9bfd4;
     cursor:pointer;
-    font-size:13px;
+    font-size:12px;
     font-weight:bold;
     transition:.25s;
 }
@@ -308,7 +309,16 @@ nav a.active{
     border-color:#1e90ff;
 }
 
-/* AIRLINES GRID */
+/* RESULT COUNT */
+
+.result-info{
+    text-align:center;
+    color:#647f96;
+    font-size:12px;
+    margin-bottom:35px;
+}
+
+/* ================= AIRLINE GRID ================= */
 
 .airlines{
     display:grid;
@@ -322,14 +332,36 @@ nav a.active{
         linear-gradient(145deg,#0d2036,#071421);
     border:1px solid #1b4468;
     border-radius:16px;
-    transition:.3s;
+    transition:.35s;
     box-shadow:0 8px 25px rgba(0,0,0,.15);
+    position:relative;
+}
+
+.airline::before{
+    content:"";
+    position:absolute;
+    top:0;
+    left:0;
+    right:0;
+    height:2px;
+    background:linear-gradient(
+        90deg,
+        transparent,
+        #1e90ff,
+        transparent
+    );
+    opacity:0;
+    transition:.3s;
 }
 
 .airline:hover{
     transform:translateY(-8px);
     border-color:#1e90ff;
-    box-shadow:0 18px 40px rgba(0,0,0,.35);
+    box-shadow:0 18px 45px rgba(0,0,0,.4);
+}
+
+.airline:hover::before{
+    opacity:1;
 }
 
 .airline-image-wrap{
@@ -351,7 +383,7 @@ nav a.active{
 }
 
 .airline:hover .airline-image{
-    transform:scale(1.06);
+    transform:scale(1.07);
 }
 
 .airline-tag{
@@ -375,13 +407,47 @@ nav a.active{
 .airline h3{
     color:#62b3ff;
     font-size:22px;
-    margin-bottom:10px;
+    margin-bottom:8px;
+}
+
+.airline-country{
+    color:#718ba2;
+    font-size:12px;
+    margin-bottom:12px;
 }
 
 .airline p{
     color:#a9bfd4;
     line-height:1.55;
     min-height:48px;
+    font-size:14px;
+}
+
+.airline-data{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:8px;
+    margin-top:17px;
+}
+
+.airline-data div{
+    padding:10px 7px;
+    background:rgba(3,10,18,.38);
+    border:1px solid #183b59;
+    border-radius:8px;
+}
+
+.airline-data small{
+    display:block;
+    color:#607c94;
+    font-size:9px;
+    text-transform:uppercase;
+    margin-bottom:4px;
+}
+
+.airline-data strong{
+    color:#dcecff;
+    font-size:12px;
 }
 
 .details-button{
@@ -402,7 +468,33 @@ nav a.active{
     transform:translateX(3px);
 }
 
-/* FEATURED AIRLINE */
+/* NO RESULTS */
+
+.no-results{
+    display:none;
+    text-align:center;
+    padding:55px 20px;
+    margin-top:20px;
+    background:#081421;
+    border:1px solid #1b4468;
+    border-radius:16px;
+}
+
+.no-results-icon{
+    font-size:42px;
+    margin-bottom:12px;
+}
+
+.no-results h3{
+    font-size:22px;
+    margin-bottom:8px;
+}
+
+.no-results p{
+    color:#718ba2;
+}
+
+/* ================= FEATURED ================= */
 
 .featured{
     margin-top:80px;
@@ -418,23 +510,24 @@ nav a.active{
 }
 
 .featured-image{
-    min-height:350px;
+    min-height:370px;
     display:flex;
     align-items:center;
     justify-content:center;
     background:
         radial-gradient(circle at center,#17466e,#071421 75%);
+    overflow:hidden;
 }
 
 .featured-image img{
     width:80%;
-    max-height:230px;
+    max-height:240px;
     object-fit:contain;
     transition:.5s;
 }
 
 .featured:hover .featured-image img{
-    transform:scale(1.05);
+    transform:scale(1.06);
 }
 
 .featured-content{
@@ -490,7 +583,7 @@ nav a.active{
     font-size:14px;
 }
 
-/* CATEGORIES */
+/* ================= CATEGORIES ================= */
 
 .categories{
     margin-top:80px;
@@ -506,7 +599,7 @@ nav a.active{
     position:relative;
     overflow:hidden;
     padding:28px 20px;
-    min-height:150px;
+    min-height:165px;
     display:flex;
     flex-direction:column;
     justify-content:flex-end;
@@ -542,7 +635,7 @@ nav a.active{
     line-height:1.45;
 }
 
-/* GLOBAL */
+/* ================= GLOBAL ================= */
 
 .global-section{
     margin-top:80px;
@@ -605,7 +698,7 @@ nav a.active{
     line-height:1.5;
 }
 
-/* COMPARE */
+/* ================= COMPARE ================= */
 
 .compare-feature{
     margin-top:80px;
@@ -652,7 +745,7 @@ nav a.active{
     box-shadow:0 10px 25px rgba(30,144,255,.2);
 }
 
-/* BACK */
+/* ================= BACK ================= */
 
 .back{
     display:block;
@@ -673,7 +766,7 @@ nav a.active{
     border-color:#1e90ff;
 }
 
-/* FOOTER */
+/* ================= FOOTER ================= */
 
 footer{
     background:#02070d;
@@ -692,7 +785,7 @@ footer p{
     font-size:13px;
 }
 
-/* RESPONSIVE */
+/* ================= RESPONSIVE ================= */
 
 @media(max-width:950px){
 
@@ -750,6 +843,10 @@ footer p{
         font-size:39px;
     }
 
+    .page-hero p{
+        font-size:15px;
+    }
+
     .stats{
         grid-template-columns:repeat(2,1fr);
         margin:0 20px 50px;
@@ -777,13 +874,26 @@ footer p{
 
 }
 
+/* ================= REDUCED MOTION ================= */
+
+@media(prefers-reduced-motion:reduce){
+
+    *,
+    *::before,
+    *::after{
+        scroll-behavior:auto !important;
+        transition:none !important;
+        animation:none !important;
+    }
+
+}
+
 </style>
 </head>
 
 <body>
 
-
-<!-- HEADER -->
+<!-- ================= HEADER ================= -->
 
 <header>
 
@@ -812,7 +922,7 @@ THE WORLD OF AVIATION
 </header>
 
 
-<!-- NAVIGATION -->
+<!-- ================= NAVIGATION ================= -->
 
 <nav>
 
@@ -838,17 +948,25 @@ THE WORLD OF AVIATION
 ⚔️ Compare
 </a>
 
+<a href="flight-lab.html">
+🧪 Flight Lab
+</a>
+
+<a href="world.html">
+🌍 World
+</a>
+
 </div>
 
 </nav>
 
 
-<!-- HERO -->
+<!-- ================= HERO ================= -->
 
 <section class="page-hero">
 
 <div class="badge">
-🌎 AIRLINE DATABASE
+🌎 GLOBAL AIRLINE DATABASE
 </div>
 
 <h2>
@@ -857,24 +975,29 @@ Explore <span>Airlines</span>
 
 <p>
 Discover major airlines from around the world,
-their fleets, networks, history and place in global aviation.
+their fleets, hubs, networks, history and role in global aviation.
 </p>
 
 </section>
 
 
-<!-- STATS -->
+<!-- ================= STATS ================= -->
 
 <div class="stats">
 
 <div class="stat">
-<strong>5+</strong>
+<strong id="airlineCount">12</strong>
 <span>Airlines</span>
 </div>
 
 <div class="stat">
-<strong>3</strong>
-<span>Continents</span>
+<strong>6</strong>
+<span>Regions</span>
+</div>
+
+<div class="stat">
+<strong>100+</strong>
+<span>Countries</span>
 </div>
 
 <div class="stat">
@@ -882,15 +1005,10 @@ their fleets, networks, history and place in global aviation.
 <span>Destinations</span>
 </div>
 
-<div class="stat">
-<strong>1</strong>
-<span>World</span>
-</div>
-
 </div>
 
 
-<!-- MAIN -->
+<!-- ================= MAIN ================= -->
 
 <main class="container">
 
@@ -903,7 +1021,7 @@ their fleets, networks, history and place in global aviation.
 type="text"
 id="search"
 class="search-box"
-placeholder="🔎 Search airlines..."
+placeholder="🔎 Search airlines, countries or hubs..."
 >
 
 </div>
@@ -914,21 +1032,37 @@ placeholder="🔎 Search airlines..."
 <div class="filters">
 
 <button class="filter active" data-filter="all">
-All
+ALL
 </button>
 
 <button class="filter" data-filter="europe">
-Europe
+EUROPE
 </button>
 
 <button class="filter" data-filter="middle-east">
-Middle East
+MIDDLE EAST
 </button>
 
 <button class="filter" data-filter="asia">
-Asia
+ASIA
 </button>
 
+<button class="filter" data-filter="north-america">
+NORTH AMERICA
+</button>
+
+<button class="filter" data-filter="south-america">
+SOUTH AMERICA
+</button>
+
+<button class="filter" data-filter="africa">
+AFRICA
+</button>
+
+</div>
+
+<div class="result-info">
+Showing <strong id="resultCount">12</strong> airlines
 </div>
 
 
@@ -947,14 +1081,16 @@ Explore some of the world's most recognizable airlines.
 </div>
 
 
-<!-- AIRLINES -->
+<!-- ================= AIRLINES ================= -->
 
 <div class="airlines">
 
 
 <!-- TURKISH AIRLINES -->
 
-<div class="airline" data-region="europe">
+<div class="airline"
+data-region="europe"
+data-search="turkish airlines turkey istanbul europe">
 
 <div class="airline-image-wrap">
 
@@ -972,13 +1108,39 @@ EUROPE
 
 <div class="airline-content">
 
-<h3>
-Turkish Airlines
-</h3>
+<h3>Turkish Airlines</h3>
+
+<div class="airline-country">
+🇹🇷 Türkiye
+</div>
 
 <p>
-Türkiye's flag carrier and one of the world's most internationally connected airlines.
+Türkiye's flag carrier with a major global network centered around Istanbul.
 </p>
+
+<div class="airline-data">
+
+<div>
+<small>Hub</small>
+<strong>Istanbul</strong>
+</div>
+
+<div>
+<small>Type</small>
+<strong>Flag Carrier</strong>
+</div>
+
+<div>
+<small>Network</small>
+<strong>Global</strong>
+</div>
+
+<div>
+<small>Region</small>
+<strong>Europe</strong>
+</div>
+
+</div>
 
 <a
 href="turkish-airlines.html"
@@ -994,7 +1156,9 @@ View Details →
 
 <!-- EMIRATES -->
 
-<div class="airline" data-region="middle-east">
+<div class="airline"
+data-region="middle-east"
+data-search="emirates uae dubai middle east">
 
 <div class="airline-image-wrap">
 
@@ -1012,13 +1176,39 @@ MIDDLE EAST
 
 <div class="airline-content">
 
-<h3>
-Emirates
-</h3>
+<h3>Emirates</h3>
+
+<div class="airline-country">
+🇦🇪 United Arab Emirates
+</div>
 
 <p>
-A major international airline based in Dubai and known for its long-haul network.
+A major Dubai-based international airline known for its long-haul network.
 </p>
+
+<div class="airline-data">
+
+<div>
+<small>Hub</small>
+<strong>Dubai</strong>
+</div>
+
+<div>
+<small>Type</small>
+<strong>Global</strong>
+</div>
+
+<div>
+<small>Network</small>
+<strong>Long-Haul</strong>
+</div>
+
+<div>
+<small>Region</small>
+<strong>Middle East</strong>
+</div>
+
+</div>
 
 <a
 href="emirates.html"
@@ -1032,9 +1222,11 @@ View Details →
 </div>
 
 
-<!-- QATAR AIRWAYS -->
+<!-- QATAR -->
 
-<div class="airline" data-region="middle-east">
+<div class="airline"
+data-region="middle-east"
+data-search="qatar airways qatar doha middle east">
 
 <div class="airline-image-wrap">
 
@@ -1052,13 +1244,39 @@ MIDDLE EAST
 
 <div class="airline-content">
 
-<h3>
-Qatar Airways
-</h3>
+<h3>Qatar Airways</h3>
+
+<div class="airline-country">
+🇶🇦 Qatar
+</div>
 
 <p>
-A major global airline headquartered in Doha and serving destinations across the world.
+A major global airline headquartered in Doha and operating an extensive international network.
 </p>
+
+<div class="airline-data">
+
+<div>
+<small>Hub</small>
+<strong>Doha</strong>
+</div>
+
+<div>
+<small>Type</small>
+<strong>Global</strong>
+</div>
+
+<div>
+<small>Network</small>
+<strong>Long-Haul</strong>
+</div>
+
+<div>
+<small>Region</small>
+<strong>Middle East</strong>
+</div>
+
+</div>
 
 <a
 href="qatar-airways.html"
@@ -1074,7 +1292,9 @@ View Details →
 
 <!-- LUFTHANSA -->
 
-<div class="airline" data-region="europe">
+<div class="airline"
+data-region="europe"
+data-search="lufthansa germany frankfurt munich europe">
 
 <div class="airline-image-wrap">
 
@@ -1092,13 +1312,39 @@ EUROPE
 
 <div class="airline-content">
 
-<h3>
-Lufthansa
-</h3>
+<h3>Lufthansa</h3>
+
+<div class="airline-country">
+🇩🇪 Germany
+</div>
 
 <p>
 Germany's flag carrier and one of Europe's major airline groups.
 </p>
+
+<div class="airline-data">
+
+<div>
+<small>Hub</small>
+<strong>Frankfurt</strong>
+</div>
+
+<div>
+<small>Type</small>
+<strong>Flag Carrier</strong>
+</div>
+
+<div>
+<small>Network</small>
+<strong>Global</strong>
+</div>
+
+<div>
+<small>Region</small>
+<strong>Europe</strong>
+</div>
+
+</div>
 
 <a
 href="lufthansa.html"
@@ -1114,7 +1360,9 @@ View Details →
 
 <!-- SINGAPORE AIRLINES -->
 
-<div class="airline" data-region="asia">
+<div class="airline"
+data-region="asia"
+data-search="singapore airlines singapore asia">
 
 <div class="airline-image-wrap">
 
@@ -1132,13 +1380,39 @@ ASIA
 
 <div class="airline-content">
 
-<h3>
-Singapore Airlines
-</h3>
+<h3>Singapore Airlines</h3>
+
+<div class="airline-country">
+🇸🇬 Singapore
+</div>
 
 <p>
 Singapore's flag carrier and a major international airline with a global network.
 </p>
+
+<div class="airline-data">
+
+<div>
+<small>Hub</small>
+<strong>Singapore</strong>
+</div>
+
+<div>
+<small>Type</small>
+<strong>Flag Carrier</strong>
+</div>
+
+<div>
+<small>Network</small>
+<strong>Global</strong>
+</div>
+
+<div>
+<small>Region</small>
+<strong>Asia</strong>
+</div>
+
+</div>
 
 <a
 href="singapore-airlines.html"
@@ -1152,10 +1426,436 @@ View Details →
 </div>
 
 
+<!-- BRITISH AIRWAYS -->
+
+<div class="airline"
+data-region="europe"
+data-search="british airways united kingdom uk london europe">
+
+<div class="airline-image-wrap">
+
+<div class="airline-image"
+style="font-size:70px;text-align:center;">
+🇬🇧
+</div>
+
+<div class="airline-tag">
+EUROPE
+</div>
+
+</div>
+
+<div class="airline-content">
+
+<h3>British Airways</h3>
+
+<div class="airline-country">
+🇬🇧 United Kingdom
+</div>
+
+<p>
+The UK's flag carrier with a major international network centered around London.
+</p>
+
+<div class="airline-data">
+
+<div>
+<small>Hub</small>
+<strong>London</strong>
+</div>
+
+<div>
+<small>Type</small>
+<strong>Flag Carrier</strong>
+</div>
+
+<div>
+<small>Network</small>
+<strong>Global</strong>
+</div>
+
+<div>
+<small>Region</small>
+<strong>Europe</strong>
+</div>
+
+</div>
+
+<a
+href="#"
+class="details-button"
+onclick="return false;"
+>
+Profile Soon →
+</a>
+
+</div>
+
 </div>
 
 
-<!-- FEATURED AIRLINE -->
+<!-- AIR FRANCE -->
+
+<div class="airline"
+data-region="europe"
+data-search="air france france paris europe">
+
+<div class="airline-image-wrap">
+
+<div class="airline-image"
+style="font-size:70px;text-align:center;">
+🇫🇷
+</div>
+
+<div class="airline-tag">
+EUROPE
+</div>
+
+</div>
+
+<div class="airline-content">
+
+<h3>Air France</h3>
+
+<div class="airline-country">
+🇫🇷 France
+</div>
+
+<p>
+France's flag carrier and a major European international airline.
+</p>
+
+<div class="airline-data">
+
+<div>
+<small>Hub</small>
+<strong>Paris</strong>
+</div>
+
+<div>
+<small>Type</small>
+<strong>Flag Carrier</strong>
+</div>
+
+<div>
+<small>Network</small>
+<strong>Global</strong>
+</div>
+
+<div>
+<small>Region</small>
+<strong>Europe</strong>
+</div>
+
+</div>
+
+<a
+href="#"
+class="details-button"
+onclick="return false;"
+>
+Profile Soon →
+</a>
+
+</div>
+
+</div>
+
+
+<!-- ETIHAD -->
+
+<div class="airline"
+data-region="middle-east"
+data-search="etihad uae abu dhabi middle east">
+
+<div class="airline-image-wrap">
+
+<div class="airline-image"
+style="font-size:70px;text-align:center;">
+🇦🇪
+</div>
+
+<div class="airline-tag">
+MIDDLE EAST
+</div>
+
+</div>
+
+<div class="airline-content">
+
+<h3>Etihad Airways</h3>
+
+<div class="airline-country">
+🇦🇪 United Arab Emirates
+</div>
+
+<p>
+The national airline of the UAE, based in Abu Dhabi.
+</p>
+
+<div class="airline-data">
+
+<div>
+<small>Hub</small>
+<strong>Abu Dhabi</strong>
+</div>
+
+<div>
+<small>Type</small>
+<strong>National</strong>
+</div>
+
+<div>
+<small>Network</small>
+<strong>Global</strong>
+</div>
+
+<div>
+<small>Region</small>
+<strong>Middle East</strong>
+</div>
+
+</div>
+
+<a
+href="#"
+class="details-button"
+onclick="return false;"
+>
+Profile Soon →
+</a>
+
+</div>
+
+</div>
+
+
+<!-- ANA -->
+
+<div class="airline"
+data-region="asia"
+data-search="ana all nippon japan tokyo asia">
+
+<div class="airline-image-wrap">
+
+<div class="airline-image"
+style="font-size:70px;text-align:center;">
+🇯🇵
+</div>
+
+<div class="airline-tag">
+ASIA
+</div>
+
+</div>
+
+<div class="airline-content">
+
+<h3>ANA</h3>
+
+<div class="airline-country">
+🇯🇵 Japan
+</div>
+
+<p>
+Japan's largest airline group and a major carrier in the Asia-Pacific region.
+</p>
+
+<div class="airline-data">
+
+<div>
+<small>Hub</small>
+<strong>Tokyo</strong>
+</div>
+
+<div>
+<small>Type</small>
+<strong>Major</strong>
+</div>
+
+<div>
+<small>Network</small>
+<strong>Global</strong>
+</div>
+
+<div>
+<small>Region</small>
+<strong>Asia</strong>
+</div>
+
+</div>
+
+<a
+href="#"
+class="details-button"
+onclick="return false;"
+>
+Profile Soon →
+</a>
+
+</div>
+
+</div>
+
+
+<!-- DELTA -->
+
+<div class="airline"
+data-region="north-america"
+data-search="delta air lines usa atlanta america north america">
+
+<div class="airline-image-wrap">
+
+<div class="airline-image"
+style="font-size:70px;text-align:center;">
+🇺🇸
+</div>
+
+<div class="airline-tag">
+NORTH AMERICA
+</div>
+
+</div>
+
+<div class="airline-content">
+
+<h3>Delta Air Lines</h3>
+
+<div class="airline-country">
+🇺🇸 United States
+</div>
+
+<p>
+One of the major U.S. airlines with an extensive domestic and international network.
+</p>
+
+<div class="airline-data">
+
+<div>
+<small>Hub</small>
+<strong>Atlanta</strong>
+</div>
+
+<div>
+<small>Type</small>
+<strong>Major</strong>
+</div>
+
+<div>
+<small>Network</small>
+<strong>Global</strong>
+</div>
+
+<div>
+<small>Region</small>
+<strong>North America</strong>
+</div>
+
+</div>
+
+<a
+href="#"
+class="details-button"
+onclick="return false;"
+>
+Profile Soon →
+</a>
+
+</div>
+
+</div>
+
+
+<!-- UNITED -->
+
+<div class="airline"
+data-region="north-america"
+data-search="united airlines usa chicago america north america">
+
+<div class="airline-image-wrap">
+
+<div class="airline-image"
+style="font-size:70px;text-align:center;">
+🇺🇸
+</div>
+
+<div class="airline-tag">
+NORTH AMERICA
+</div>
+
+</div>
+
+<div class="airline-content">
+
+<h3>United Airlines</h3>
+
+<div class="airline-country">
+🇺🇸 United States
+</div>
+
+<p>
+A major U.S. airline operating an extensive domestic and international network.
+</p>
+
+<div class="airline-data">
+
+<div>
+<small>Hub</small>
+<strong>Chicago</strong>
+</div>
+
+<div>
+<small>Type</small>
+<strong>Major</strong>
+</div>
+
+<div>
+<small>Network</small>
+<strong>Global</strong>
+</div>
+
+<div>
+<small>Region</small>
+<strong>North America</strong>
+</div>
+
+</div>
+
+<a
+href="#"
+class="details-button"
+onclick="return false;"
+>
+Profile Soon →
+</a>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- NO RESULTS -->
+
+<div class="no-results" id="noResults">
+
+<div class="no-results-icon">
+🔎
+</div>
+
+<h3>
+No Airlines Found
+</h3>
+
+<p>
+Try another airline name or choose a different region.
+</p>
+
+</div>
+
+
+<!-- ================= FEATURED ================= -->
 
 <section class="featured">
 
@@ -1200,8 +1900,8 @@ Explore the history, fleet, network and aviation story of Türkiye's flag carrie
 </div>
 
 <div class="fact">
-<small>Focus</small>
-<strong>Global Network</strong>
+<small>Network</small>
+<strong>Global</strong>
 </div>
 
 </div>
@@ -1218,7 +1918,7 @@ Explore Turkish Airlines →
 </section>
 
 
-<!-- CATEGORIES -->
+<!-- ================= CATEGORIES ================= -->
 
 <section class="categories">
 
@@ -1304,13 +2004,12 @@ Airlines built around some of the world's major aviation hubs.
 
 </div>
 
-
 </div>
 
 </section>
 
 
-<!-- GLOBAL AVIATION -->
+<!-- ================= GLOBAL AVIATION ================= -->
 
 <section class="global-section">
 
@@ -1379,7 +2078,7 @@ Asian airlines operate some of the world's busiest and longest international rou
 </section>
 
 
-<!-- COMPARE -->
+<!-- ================= COMPARE ================= -->
 
 <div class="compare-feature">
 
@@ -1406,7 +2105,7 @@ Open Compare →
 </div>
 
 
-<!-- BACK -->
+<!-- ================= BACK ================= -->
 
 <a
 class="back"
@@ -1419,7 +2118,7 @@ href="index.html"
 </main>
 
 
-<!-- FOOTER -->
+<!-- ================= FOOTER ================= -->
 
 <footer>
 
@@ -1435,7 +2134,7 @@ Aviation • Aircraft • Airlines
 </footer>
 
 
-<!-- SEARCH + FILTER SCRIPT -->
+<!-- ================= SCRIPT ================= -->
 
 <script>
 
@@ -1448,6 +2147,15 @@ document.querySelectorAll(".airline");
 const filters =
 document.querySelectorAll(".filter");
 
+const resultCount =
+document.getElementById("resultCount");
+
+const airlineCount =
+document.getElementById("airlineCount");
+
+const noResults =
+document.getElementById("noResults");
+
 let activeFilter = "all";
 
 
@@ -1458,18 +2166,18 @@ function updateAirlines(){
         .toLowerCase()
         .trim();
 
+    let visibleCount = 0;
+
     airlines.forEach(function(card){
 
-        const name =
-            card.querySelector("h3")
-            .textContent
-            .toLowerCase();
+        const searchData =
+            card.dataset.search.toLowerCase();
 
         const region =
             card.dataset.region;
 
         const matchesSearch =
-            name.includes(searchValue);
+            searchData.includes(searchValue);
 
         const matchesFilter =
             activeFilter === "all" ||
@@ -1482,6 +2190,8 @@ function updateAirlines(){
 
             card.style.display = "";
 
+            visibleCount++;
+
         }else{
 
             card.style.display = "none";
@@ -1489,6 +2199,15 @@ function updateAirlines(){
         }
 
     });
+
+
+    resultCount.textContent =
+        visibleCount;
+
+    noResults.style.display =
+        visibleCount === 0
+        ? "block"
+        : "none";
 
 }
 
@@ -1523,8 +2242,13 @@ filters.forEach(function(button){
 
 });
 
-</script>
 
+airlineCount.textContent =
+    airlines.length;
+
+updateAirlines();
+
+</script>
 
 </body>
 </html>
