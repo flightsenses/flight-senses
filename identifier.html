@@ -1,0 +1,4934 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Aircraft Identifier | Flight Senses</title>
+
+<style>
+
+/* =========================================================
+   RESET
+========================================================= */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:
+        Inter,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        Arial,
+        Helvetica,
+        sans-serif;
+
+    background:#050a14;
+    color:#f5f8fc;
+
+    min-height:100vh;
+    overflow-x:hidden;
+}
+
+
+/* =========================================================
+   PREMIUM BACKGROUND
+========================================================= */
+
+body::before{
+    content:"";
+
+    position:fixed;
+    inset:0;
+
+    pointer-events:none;
+    z-index:-5;
+
+    background:
+        radial-gradient(
+            circle at 12% 0%,
+            rgba(53,142,220,.12),
+            transparent 30%
+        ),
+        radial-gradient(
+            circle at 88% 85%,
+            rgba(193,155,82,.045),
+            transparent 25%
+        ),
+        linear-gradient(
+            180deg,
+            #07101d 0%,
+            #050a14 45%,
+            #030710 100%
+        );
+}
+
+body::after{
+    content:"";
+
+    position:fixed;
+    inset:0;
+
+    pointer-events:none;
+    z-index:-4;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent 49.9%,
+            rgba(255,255,255,.012) 50%,
+            transparent 50.1%
+        );
+
+    opacity:.25;
+}
+
+
+/* =========================================================
+   PARTICLES — VERY SUBTLE
+========================================================= */
+
+.particles{
+    position:fixed;
+    inset:0;
+
+    pointer-events:none;
+    z-index:-2;
+
+    overflow:hidden;
+}
+
+.particle{
+    position:absolute;
+
+    width:2px;
+    height:2px;
+
+    border-radius:50%;
+
+    background:#87c9ee;
+
+    opacity:.12;
+
+    animation:
+        floatParticle linear infinite;
+}
+
+@keyframes floatParticle{
+
+    from{
+        transform:translateY(110vh);
+    }
+
+    to{
+        transform:translateY(-20vh);
+    }
+
+}
+
+
+/* =========================================================
+   NAVIGATION
+========================================================= */
+
+nav{
+    min-height:78px;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    padding:0 5.5%;
+
+    background:
+        rgba(4,10,19,.88);
+
+    border-bottom:
+        1px solid
+        rgba(255,255,255,.075);
+
+    backdrop-filter:
+        blur(20px);
+
+    position:relative;
+    z-index:50;
+}
+
+.logo{
+    text-decoration:none;
+
+    color:#f7f9fc;
+
+    font-size:20px;
+    font-weight:900;
+
+    letter-spacing:2px;
+
+    white-space:nowrap;
+}
+
+.logo span{
+    color:#5bbcf0;
+}
+
+.nav-links{
+    display:flex;
+
+    align-items:center;
+    justify-content:flex-end;
+
+    gap:22px;
+
+    flex-wrap:wrap;
+}
+
+.nav-links a{
+    position:relative;
+
+    text-decoration:none;
+
+    color:#78889b;
+
+    font-size:10px;
+    font-weight:800;
+
+    letter-spacing:1.4px;
+
+    padding:30px 0;
+
+    transition:.25s ease;
+}
+
+.nav-links a::after{
+    content:"";
+
+    position:absolute;
+
+    left:50%;
+    bottom:19px;
+
+    width:0;
+    height:1px;
+
+    transform:translateX(-50%);
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            #d7b66a,
+            transparent
+        );
+
+    transition:.25s ease;
+}
+
+.nav-links a:hover,
+.nav-links a.active{
+    color:#eef6fc;
+}
+
+.nav-links a.active{
+    color:#d9ecf7;
+}
+
+.nav-links a:hover::after,
+.nav-links a.active::after{
+    width:100%;
+}
+
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.hero{
+    position:relative;
+
+    text-align:center;
+
+    padding:
+        68px
+        20px
+        38px;
+
+    overflow:hidden;
+}
+
+.hero::after{
+    content:"";
+
+    position:absolute;
+
+    left:50%;
+    bottom:0;
+
+    width:min(720px,80%);
+
+    height:1px;
+
+    transform:translateX(-50%);
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(211,177,101,.38),
+            rgba(91,188,240,.25),
+            transparent
+        );
+}
+
+.hero-orbit{
+    position:absolute;
+
+    width:420px;
+    height:420px;
+
+    left:50%;
+    top:-110px;
+
+    transform:translateX(-50%);
+
+    border:
+        1px solid
+        rgba(91,188,240,.035);
+
+    border-radius:50%;
+
+    pointer-events:none;
+}
+
+.hero-orbit::before{
+    content:"";
+
+    position:absolute;
+
+    inset:70px;
+
+    border:
+        1px solid
+        rgba(210,176,99,.025);
+
+    border-radius:50%;
+}
+
+.hero-badge{
+    position:relative;
+    z-index:2;
+
+    display:inline-flex;
+
+    align-items:center;
+    justify-content:center;
+
+    gap:8px;
+
+    padding:
+        8px
+        15px;
+
+    border:
+        1px solid
+        rgba(211,177,101,.25);
+
+    background:
+        rgba(211,177,101,.045);
+
+    color:#d8bc7d;
+
+    border-radius:999px;
+
+    font-size:9px;
+    font-weight:900;
+
+    letter-spacing:1.7px;
+
+    margin-bottom:19px;
+}
+
+.hero h1{
+    position:relative;
+    z-index:2;
+
+    font-size:
+        clamp(39px,5.3vw,67px);
+
+    font-weight:900;
+
+    letter-spacing:4px;
+
+    line-height:1.05;
+
+    margin-bottom:15px;
+
+    color:#f7f9fc;
+}
+
+.hero h1 span{
+    color:#66bde9;
+}
+
+.hero p{
+    position:relative;
+    z-index:2;
+
+    max-width:690px;
+
+    margin:auto;
+
+    color:#8191a3;
+
+    line-height:1.75;
+
+    font-size:13px;
+}
+
+
+/* =========================================================
+   MODE SELECTOR
+========================================================= */
+
+.mode-section{
+    width:min(1120px,92%);
+
+    margin:
+        22px
+        auto
+        28px;
+}
+
+.mode-title{
+    display:flex;
+
+    justify-content:space-between;
+    align-items:center;
+
+    margin-bottom:12px;
+
+    color:#6f8194;
+
+    font-size:9px;
+    font-weight:900;
+
+    letter-spacing:1.9px;
+}
+
+.mode-title span:last-child{
+    color:#bca066;
+}
+
+.mode-selector{
+    display:grid;
+
+    grid-template-columns:
+        repeat(3,1fr);
+
+    gap:14px;
+}
+
+.mode-card{
+    position:relative;
+
+    min-height:138px;
+
+    overflow:hidden;
+
+    padding:
+        22px;
+
+    cursor:pointer;
+
+    border:
+        1px solid
+        rgba(255,255,255,.095);
+
+    border-radius:16px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(15,27,42,.94),
+            rgba(7,14,25,.96)
+        );
+
+    box-shadow:
+        0 16px 45px
+        rgba(0,0,0,.18);
+
+    transition:
+        transform .25s ease,
+        border-color .25s ease,
+        box-shadow .25s ease,
+        background .25s ease;
+}
+
+.mode-card::before{
+    content:"";
+
+    position:absolute;
+
+    left:0;
+    top:0;
+
+    width:100%;
+    height:2px;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(91,188,240,.55),
+            transparent
+        );
+
+    opacity:0;
+
+    transition:.3s;
+}
+
+.mode-card:hover{
+    transform:translateY(-3px);
+
+    border-color:
+        rgba(107,188,229,.32);
+
+    box-shadow:
+        0 20px 50px
+        rgba(0,0,0,.25),
+
+        0 0 30px
+        rgba(61,169,255,.035);
+}
+
+.mode-card:hover::before{
+    opacity:1;
+}
+
+.mode-card.active{
+    border-color:
+        rgba(211,177,101,.55);
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(24,37,52,.98),
+            rgba(8,16,28,.98)
+        );
+
+    box-shadow:
+        0 20px 50px
+        rgba(0,0,0,.25),
+
+        0 0 35px
+        rgba(211,177,101,.045);
+}
+
+.mode-card.active::before{
+    opacity:1;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(211,177,101,.8),
+            transparent
+        );
+}
+
+.mode-card.active::after{
+    content:"SELECTED";
+
+    position:absolute;
+
+    right:20px;
+    bottom:18px;
+
+    color:#cdb270;
+
+    font-size:7px;
+    font-weight:900;
+
+    letter-spacing:1.5px;
+}
+
+.mode-status{
+    position:absolute;
+
+    top:20px;
+    right:20px;
+
+    width:7px;
+    height:7px;
+
+    border-radius:50%;
+
+    background:#3b4b5b;
+}
+
+.mode-card.active .mode-status{
+    background:#d2b56e;
+
+    box-shadow:
+        0 0 10px
+        rgba(211,177,101,.55);
+}
+
+.mode-icon{
+    font-size:20px;
+
+    margin-bottom:12px;
+
+    opacity:.9;
+}
+
+.mode-name{
+    color:#e8edf2;
+
+    font-size:12px;
+    font-weight:900;
+
+    letter-spacing:1.3px;
+
+    margin-bottom:7px;
+}
+
+.mode-description{
+    max-width:290px;
+
+    color:#728397;
+
+    font-size:10px;
+
+    line-height:1.55;
+}
+
+
+/* =========================================================
+   GAME WRAPPER
+========================================================= */
+
+.game-wrapper{
+    width:min(1120px,92%);
+
+    margin:
+        0
+        auto
+        90px;
+}
+
+.game-header{
+    display:flex;
+
+    justify-content:space-between;
+    align-items:center;
+
+    margin-bottom:12px;
+
+    padding:
+        0
+        3px;
+
+    color:#6e8094;
+
+    font-size:9px;
+    font-weight:900;
+
+    letter-spacing:1.8px;
+}
+
+.game-header strong{
+    color:#bda36d;
+}
+
+
+/* =========================================================
+   LIVE STATS
+========================================================= */
+
+.live-stats{
+    display:grid;
+
+    grid-template-columns:
+        repeat(5,1fr);
+
+    margin-bottom:15px;
+
+    overflow:hidden;
+
+    border:
+        1px solid
+        rgba(255,255,255,.085);
+
+    border-radius:14px;
+
+    background:
+        rgba(8,16,28,.82);
+
+    box-shadow:
+        0 16px 45px
+        rgba(0,0,0,.18);
+}
+
+.live-stat{
+    position:relative;
+
+    padding:
+        15px
+        17px;
+
+    border-right:
+        1px solid
+        rgba(255,255,255,.06);
+}
+
+.live-stat:last-child{
+    border-right:none;
+}
+
+.live-label{
+    color:#65778b;
+
+    font-size:7px;
+    font-weight:800;
+
+    letter-spacing:1.5px;
+
+    margin-bottom:7px;
+}
+
+.live-value{
+    color:#e1e8ef;
+
+    font-size:15px;
+    font-weight:900;
+
+    font-variant-numeric:
+        tabular-nums;
+}
+
+.live-value.accent{
+    color:#72c5ee;
+}
+
+.live-value.streak{
+    color:#d8b76b;
+}
+
+
+/* =========================================================
+   MAIN GAME PANEL
+========================================================= */
+
+.scanner-panel{
+    position:relative;
+
+    min-height:620px;
+
+    overflow:hidden;
+
+    border:
+        1px solid
+        rgba(255,255,255,.105);
+
+    border-radius:20px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(12,23,37,.97),
+            rgba(5,11,21,.99)
+        );
+
+    box-shadow:
+        0 28px 80px
+        rgba(0,0,0,.28),
+
+        inset 0 1px 0
+        rgba(255,255,255,.035);
+}
+
+.scanner-panel::before{
+    content:"";
+
+    position:absolute;
+
+    inset:9px;
+
+    border:
+        1px solid
+        rgba(211,177,101,.055);
+
+    border-radius:14px;
+
+    pointer-events:none;
+
+    z-index:20;
+}
+
+
+/* =========================================================
+   SUBTLE PANEL LIGHT
+========================================================= */
+
+.scanner-grid{
+    position:absolute;
+
+    inset:0;
+
+    background:
+        radial-gradient(
+            ellipse at 50% 42%,
+            rgba(70,160,215,.07),
+            transparent 52%
+        );
+
+    pointer-events:none;
+}
+
+
+/* =========================================================
+   PREMIUM CORNERS
+========================================================= */
+
+.corner{
+    position:absolute;
+
+    width:26px;
+    height:26px;
+
+    opacity:.7;
+
+    z-index:24;
+}
+
+.corner.tl{
+    top:20px;
+    left:20px;
+
+    border-top:
+        1px solid
+        rgba(211,177,101,.65);
+
+    border-left:
+        1px solid
+        rgba(211,177,101,.65);
+}
+
+.corner.tr{
+    top:20px;
+    right:20px;
+
+    border-top:
+        1px solid
+        rgba(211,177,101,.65);
+
+    border-right:
+        1px solid
+        rgba(211,177,101,.65);
+}
+
+.corner.bl{
+    bottom:20px;
+    left:20px;
+
+    border-bottom:
+        1px solid
+        rgba(211,177,101,.65);
+
+    border-left:
+        1px solid
+        rgba(211,177,101,.65);
+}
+
+.corner.br{
+    bottom:20px;
+    right:20px;
+
+    border-bottom:
+        1px solid
+        rgba(211,177,101,.65);
+
+    border-right:
+        1px solid
+        rgba(211,177,101,.65);
+}
+
+
+/* =========================================================
+   TIMER
+========================================================= */
+
+.timer-box{
+    position:absolute;
+
+    top:27px;
+    left:50%;
+
+    transform:
+        translateX(-50%);
+
+    z-index:26;
+
+    text-align:center;
+
+    min-width:110px;
+}
+
+.timer-label{
+    color:#65788b;
+
+    font-size:7px;
+    font-weight:800;
+
+    letter-spacing:1.8px;
+
+    margin-bottom:5px;
+}
+
+.timer{
+    color:#edf5fa;
+
+    font-size:26px;
+    font-weight:800;
+
+    font-variant-numeric:
+        tabular-nums;
+
+    transition:.2s;
+}
+
+.timer.warning{
+    color:#d9b76a;
+}
+
+.timer.danger{
+    color:#e86e76;
+}
+
+
+/* =========================================================
+   IMAGE DISPLAY
+========================================================= */
+
+.image-viewport{
+    position:absolute;
+
+    left:70px;
+    right:70px;
+
+    top:82px;
+    bottom:122px;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    overflow:hidden;
+
+    z-index:5;
+
+    border:
+        1px solid
+        rgba(211,177,101,.23);
+
+    border-radius:14px;
+
+    background:
+        #050b14;
+
+    box-shadow:
+        0 20px 55px
+        rgba(0,0,0,.22),
+
+        inset 0 0 45px
+        rgba(0,0,0,.25);
+}
+
+
+/* inner premium frame */
+
+.image-viewport::before{
+    content:"";
+
+    position:absolute;
+
+    inset:7px;
+
+    border:
+        1px solid
+        rgba(211,177,101,.10);
+
+    border-radius:9px;
+
+    pointer-events:none;
+
+    z-index:7;
+}
+
+
+/* top label */
+
+.image-viewport::after{
+    content:"AIRCRAFT VISUAL";
+
+    position:absolute;
+
+    top:15px;
+    left:17px;
+
+    padding:
+        6px
+        9px;
+
+    border:
+        1px solid
+        rgba(211,177,101,.20);
+
+    border-radius:6px;
+
+    background:
+        rgba(5,11,20,.86);
+
+    color:#c9ae70;
+
+    font-size:7px;
+    font-weight:900;
+
+    letter-spacing:1.5px;
+
+    z-index:8;
+}
+
+.aircraft-image{
+    display:block;
+
+    width:100%;
+    height:100%;
+
+    object-fit:contain;
+
+    position:relative;
+
+    z-index:5;
+
+    transform:none !important;
+
+    filter:none !important;
+
+    transition:
+        opacity .25s ease;
+}
+
+.aircraft-image.loading{
+    opacity:.18;
+}
+
+
+/* =========================================================
+   IMAGE CORNERS
+========================================================= */
+
+.image-corner{
+    position:absolute;
+
+    width:20px;
+    height:20px;
+
+    z-index:9;
+}
+
+.image-corner.tl{
+    top:10px;
+    left:10px;
+
+    border-top:
+        1px solid
+        rgba(211,177,101,.75);
+
+    border-left:
+        1px solid
+        rgba(211,177,101,.75);
+}
+
+.image-corner.tr{
+    top:10px;
+    right:10px;
+
+    border-top:
+        1px solid
+        rgba(211,177,101,.75);
+
+    border-right:
+        1px solid
+        rgba(211,177,101,.75);
+}
+
+.image-corner.bl{
+    bottom:10px;
+    left:10px;
+
+    border-bottom:
+        1px solid
+        rgba(211,177,101,.75);
+
+    border-left:
+        1px solid
+        rgba(211,177,101,.75);
+}
+
+.image-corner.br{
+    bottom:10px;
+    right:10px;
+
+    border-bottom:
+        1px solid
+        rgba(211,177,101,.75);
+
+    border-right:
+        1px solid
+        rgba(211,177,101,.75);
+}
+
+
+/* =========================================================
+   QUESTION INFO
+========================================================= */
+
+.question-info{
+    position:absolute;
+
+    left:50%;
+    bottom:30px;
+
+    transform:
+        translateX(-50%);
+
+    z-index:26;
+
+    text-align:center;
+
+    width:min(650px,80%);
+}
+
+.question-type{
+    display:inline-block;
+
+    padding:
+        6px
+        10px;
+
+    margin-bottom:7px;
+
+    border:
+        1px solid
+        rgba(211,177,101,.20);
+
+    border-radius:6px;
+
+    background:
+        rgba(211,177,101,.035);
+
+    color:#cdb16f;
+
+    font-size:7px;
+    font-weight:900;
+
+    letter-spacing:1.5px;
+}
+
+.question-hint{
+    color:#8191a2;
+
+    font-size:9px;
+
+    letter-spacing:.5px;
+}
+
+
+/* =========================================================
+   WRITTEN QUESTION — PREMIUM EXAM PAPER
+========================================================= */
+
+.written-question{
+    position:absolute;
+
+    left:50%;
+    top:50%;
+
+    transform:
+        translate(-50%,-50%);
+
+    width:min(820px,82%);
+
+    z-index:15;
+
+    text-align:center;
+
+    padding:
+        50px
+        55px;
+
+    border:
+        1px solid
+        rgba(211,177,101,.28);
+
+    border-radius:14px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(17,28,42,.98),
+            rgba(8,15,26,.98)
+        );
+
+    box-shadow:
+        0 28px 70px
+        rgba(0,0,0,.25),
+
+        inset 0 1px 0
+        rgba(255,255,255,.035);
+}
+
+.written-question::before{
+    content:"";
+
+    position:absolute;
+
+    inset:9px;
+
+    border:
+        1px solid
+        rgba(211,177,101,.075);
+
+    border-radius:9px;
+
+    pointer-events:none;
+}
+
+.written-question::after{
+    content:"FLIGHT SENSES  •  AVIATION EXAMINATION";
+
+    position:absolute;
+
+    top:17px;
+    left:22px;
+
+    color:#a98f57;
+
+    font-size:7px;
+    font-weight:900;
+
+    letter-spacing:1.5px;
+}
+
+.written-category{
+    display:inline-block;
+
+    padding:
+        6px
+        12px;
+
+    margin-bottom:20px;
+
+    border:
+        1px solid
+        rgba(211,177,101,.23);
+
+    border-radius:999px;
+
+    background:
+        rgba(211,177,101,.035);
+
+    color:#d0b574;
+
+    font-size:8px;
+    font-weight:900;
+
+    letter-spacing:1.7px;
+}
+
+.written-question h3{
+    color:#f0f4f7;
+
+    font-size:
+        clamp(19px,2.5vw,28px);
+
+    line-height:1.5;
+
+    font-weight:700;
+
+    letter-spacing:.1px;
+}
+
+
+/* =========================================================
+   MIXED BADGE
+========================================================= */
+
+.mixed-badge{
+    position:absolute;
+
+    left:50%;
+    top:112px;
+
+    transform:
+        translateX(-50%);
+
+    z-index:26;
+
+    padding:
+        7px
+        12px;
+
+    border:
+        1px solid
+        rgba(211,177,101,.20);
+
+    border-radius:999px;
+
+    background:
+        rgba(5,11,20,.9);
+
+    color:#cdb16f;
+
+    font-size:7px;
+    font-weight:900;
+
+    letter-spacing:1.5px;
+}
+
+
+/* =========================================================
+   ANSWERS
+========================================================= */
+
+.answers{
+    display:grid;
+
+    grid-template-columns:
+        repeat(2,1fr);
+
+    gap:14px;
+
+    margin-top:16px;
+}
+
+.answer-btn{
+    position:relative;
+
+    display:flex;
+
+    align-items:center;
+
+    min-height:68px;
+
+    padding:
+        14px
+        19px;
+
+    overflow:hidden;
+
+    border:
+        1px solid
+        rgba(211,177,101,.20);
+
+    border-radius:13px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(16,28,43,.96),
+            rgba(7,15,26,.98)
+        );
+
+    color:#d9e5ed;
+
+    cursor:pointer;
+
+    font-size:11px;
+    font-weight:800;
+
+    letter-spacing:.8px;
+
+    text-align:left;
+
+    box-shadow:
+        0 10px 30px
+        rgba(0,0,0,.14);
+
+    transition:
+        transform .2s ease,
+        border-color .2s ease,
+        background .2s ease,
+        box-shadow .2s ease;
+}
+
+.answer-btn::before{
+    content:"";
+
+    position:absolute;
+
+    left:0;
+    top:0;
+
+    width:2px;
+    height:100%;
+
+    background:
+        rgba(211,177,101,.35);
+
+    transition:.25s ease;
+}
+
+.answer-btn:hover{
+    transform:
+        translateY(-2px);
+
+    border-color:
+        rgba(211,177,101,.62);
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(23,38,55,.98),
+            rgba(9,18,30,.99)
+        );
+
+    box-shadow:
+        0 15px 38px
+        rgba(0,0,0,.22),
+
+        0 0 25px
+        rgba(211,177,101,.045);
+}
+
+.answer-btn:hover::before{
+    background:#d2b36b;
+
+    box-shadow:
+        0 0 12px
+        rgba(211,177,101,.45);
+}
+
+.answer-number{
+    flex:none;
+
+    width:35px;
+    height:35px;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    margin-right:14px;
+
+    border:
+        1px solid
+        rgba(211,177,101,.22);
+
+    border-radius:9px;
+
+    background:
+        rgba(211,177,101,.035);
+
+    color:#c9ad6d;
+
+    font-size:9px;
+    font-weight:900;
+
+    letter-spacing:1px;
+
+    transition:.2s;
+}
+
+.answer-btn:hover .answer-number{
+    border-color:
+        rgba(211,177,101,.55);
+
+    background:
+        rgba(211,177,101,.07);
+
+    color:#e5cc91;
+}
+
+.answer-text{
+    position:relative;
+    z-index:2;
+
+    line-height:1.4;
+}
+
+.answer-btn.correct{
+    border-color:#58cfa3;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(18,87,66,.36),
+            rgba(7,38,31,.95)
+        );
+
+    color:#8af0c5;
+
+    box-shadow:
+        0 0 30px
+        rgba(88,207,163,.09);
+}
+
+.answer-btn.correct::before{
+    background:#62d6a7;
+
+    box-shadow:
+        0 0 12px
+        rgba(88,207,163,.65);
+}
+
+.answer-btn.correct .answer-number{
+    border-color:
+        rgba(88,207,163,.45);
+
+    color:#83eec2;
+}
+
+.answer-btn.wrong{
+    border-color:#e46b78;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(105,27,39,.34),
+            rgba(45,9,18,.94)
+        );
+
+    color:#ff9ca5;
+
+    animation:
+        wrongShake .3s;
+}
+
+.answer-btn.wrong::before{
+    background:#e46b78;
+}
+
+.answer-btn.disabled{
+    pointer-events:none;
+}
+
+@keyframes wrongShake{
+
+    0%,100%{
+        transform:translateX(0);
+    }
+
+    25%{
+        transform:translateX(-4px);
+    }
+
+    75%{
+        transform:translateX(4px);
+    }
+
+}
+
+
+/* =========================================================
+   START / RESULT OVERLAY
+========================================================= */
+
+.overlay-screen{
+    position:absolute;
+
+    inset:0;
+
+    z-index:40;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    padding:20px;
+
+    background:
+        rgba(3,8,16,.82);
+
+    backdrop-filter:
+        blur(12px);
+}
+
+.start-card,
+.result-card{
+    width:min(680px,90%);
+
+    padding:
+        50px
+        45px;
+
+    text-align:center;
+
+    position:relative;
+
+    border:
+        1px solid
+        rgba(211,177,101,.28);
+
+    border-radius:18px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(16,28,43,.99),
+            rgba(7,14,25,.99)
+        );
+
+    box-shadow:
+        0 35px 90px
+        rgba(0,0,0,.38);
+}
+
+.start-card::before,
+.result-card::before{
+    content:"";
+
+    position:absolute;
+
+    inset:9px;
+
+    border:
+        1px solid
+        rgba(211,177,101,.07);
+
+    border-radius:11px;
+
+    pointer-events:none;
+}
+
+.start-card h2,
+.result-card h2{
+    position:relative;
+
+    color:#f2f5f7;
+
+    font-size:29px;
+
+    letter-spacing:2.5px;
+
+    margin-bottom:12px;
+}
+
+.start-card p,
+.result-card p{
+    position:relative;
+
+    color:#8191a2;
+
+    line-height:1.75;
+
+    font-size:12px;
+}
+
+.start-features{
+    display:grid;
+
+    grid-template-columns:
+        repeat(3,1fr);
+
+    gap:10px;
+
+    margin-top:26px;
+}
+
+.start-feature{
+    padding:
+        15px
+        8px;
+
+    border:
+        1px solid
+        rgba(211,177,101,.14);
+
+    border-radius:10px;
+
+    background:
+        rgba(211,177,101,.025);
+}
+
+.start-feature strong{
+    display:block;
+
+    color:#e4edf3;
+
+    font-size:16px;
+
+    margin-bottom:4px;
+}
+
+.start-feature span{
+    color:#7a8a9b;
+
+    font-size:7px;
+
+    letter-spacing:1.2px;
+}
+
+.start-button,
+.restart-button{
+    position:relative;
+
+    margin-top:27px;
+
+    padding:
+        15px
+        34px;
+
+    border:
+        1px solid
+        #c7a961;
+
+    border-radius:9px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(211,177,101,.12),
+            rgba(211,177,101,.035)
+        );
+
+    color:#ddc384;
+
+    cursor:pointer;
+
+    font-size:10px;
+    font-weight:900;
+
+    letter-spacing:1.8px;
+
+    transition:.25s ease;
+}
+
+.start-button:hover,
+.restart-button:hover{
+    color:#11100c;
+
+    background:#d0b16b;
+
+    box-shadow:
+        0 0 28px
+        rgba(211,177,101,.22);
+
+    transform:
+        translateY(-2px);
+}
+
+
+/* =========================================================
+   RESULT
+========================================================= */
+
+.result-stats{
+    display:grid;
+
+    grid-template-columns:
+        repeat(4,1fr);
+
+    gap:9px;
+
+    margin-top:26px;
+}
+
+.result-stat{
+    padding:
+        15px
+        8px;
+
+    border:
+        1px solid
+        rgba(211,177,101,.13);
+
+    border-radius:10px;
+
+    background:
+        rgba(211,177,101,.025);
+}
+
+.result-stat small{
+    display:block;
+
+    color:#718295;
+
+    font-size:7px;
+
+    letter-spacing:1.3px;
+
+    margin-bottom:7px;
+}
+
+.result-stat strong{
+    color:#e1ebf1;
+
+    font-size:19px;
+}
+
+.rank{
+    margin-top:25px;
+
+    color:#d2b36b;
+
+    font-size:17px;
+    font-weight:900;
+
+    letter-spacing:2px;
+}
+
+.result-message{
+    margin-top:8px;
+
+    color:#738598;
+
+    font-size:9px;
+
+    letter-spacing:1px;
+}
+
+
+/* =========================================================
+   FEEDBACK
+========================================================= */
+
+.feedback{
+    position:absolute;
+
+    left:50%;
+    top:55%;
+
+    transform:
+        translate(-50%,-50%);
+
+    z-index:35;
+
+    padding:
+        11px
+        18px;
+
+    border:
+        1px solid
+        rgba(211,177,101,.2);
+
+    border-radius:8px;
+
+    background:
+        rgba(5,11,20,.95);
+
+    color:#d5b86e;
+
+    font-size:9px;
+    font-weight:900;
+
+    letter-spacing:1.5px;
+
+    opacity:0;
+
+    pointer-events:none;
+
+    transition:.25s;
+}
+
+.feedback.show{
+    opacity:1;
+}
+
+.feedback.correct{
+    color:#76e2b5;
+
+    border-color:
+        rgba(88,207,163,.35);
+}
+
+.feedback.wrong{
+    color:#ef7a85;
+
+    border-color:
+        rgba(228,107,120,.35);
+}
+
+
+/* =========================================================
+   SCORE POP
+========================================================= */
+
+.score-pop{
+    position:fixed;
+
+    left:50%;
+    top:42%;
+
+    transform:
+        translate(-50%,-50%);
+
+    z-index:90;
+
+    color:#d6b86e;
+
+    font-size:29px;
+    font-weight:900;
+
+    pointer-events:none;
+
+    opacity:0;
+}
+
+.score-pop.show{
+    animation:
+        scorePop 1s ease forwards;
+}
+
+@keyframes scorePop{
+
+    0%{
+        opacity:0;
+
+        transform:
+            translate(-50%,-25%);
+    }
+
+    20%{
+        opacity:1;
+    }
+
+    100%{
+        opacity:0;
+
+        transform:
+            translate(-50%,-115%);
+    }
+
+}
+
+
+/* =========================================================
+   HIDDEN
+========================================================= */
+
+.hidden{
+    display:none !important;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media(max-width:950px){
+
+    .nav-links{
+        gap:14px;
+    }
+
+    .nav-links a{
+        padding:25px 0;
+    }
+
+    .live-stats{
+        grid-template-columns:
+            repeat(3,1fr);
+    }
+
+    .live-stat:nth-child(3){
+        border-right:none;
+    }
+
+    .live-stat:nth-child(4),
+    .live-stat:nth-child(5){
+        border-top:
+            1px solid
+            rgba(255,255,255,.06);
+    }
+
+    .scanner-panel{
+        min-height:590px;
+    }
+
+}
+
+
+@media(max-width:750px){
+
+    nav{
+        padding:
+            18px 5%;
+
+        flex-direction:column;
+
+        gap:14px;
+    }
+
+    .nav-links{
+        justify-content:center;
+
+        gap:13px;
+    }
+
+    .nav-links a{
+        padding:5px 0;
+    }
+
+    .nav-links a::after{
+        bottom:-5px;
+    }
+
+    .mode-selector{
+        grid-template-columns:1fr;
+    }
+
+    .scanner-panel{
+        min-height:560px;
+    }
+
+    .image-viewport{
+        left:35px;
+        right:35px;
+
+        top:82px;
+        bottom:118px;
+    }
+
+    .answers{
+        grid-template-columns:1fr;
+    }
+
+    .result-stats{
+        grid-template-columns:
+            repeat(2,1fr);
+    }
+
+    .start-features{
+        grid-template-columns:1fr;
+    }
+
+}
+
+
+@media(max-width:500px){
+
+    .hero{
+        padding-top:48px;
+    }
+
+    .hero h1{
+        font-size:34px;
+        letter-spacing:2.5px;
+    }
+
+    .hero p{
+        font-size:12px;
+    }
+
+    .live-stats{
+        grid-template-columns:
+            repeat(2,1fr);
+    }
+
+    .live-stat:nth-child(3){
+        border-right:
+            1px solid
+            rgba(255,255,255,.06);
+    }
+
+    .live-stat:nth-child(5){
+        border-top:
+            1px solid
+            rgba(255,255,255,.06);
+    }
+
+    .scanner-panel{
+        min-height:510px;
+    }
+
+    .image-viewport{
+        left:18px;
+        right:18px;
+
+        top:78px;
+        bottom:112px;
+    }
+
+    .question-info{
+        bottom:20px;
+    }
+
+    .timer{
+        font-size:23px;
+    }
+
+    .answer-btn{
+        min-height:60px;
+
+        padding:
+            12px
+            14px;
+    }
+
+    .answer-number{
+        width:31px;
+        height:31px;
+
+        margin-right:11px;
+    }
+
+    .start-card,
+    .result-card{
+        padding:
+            36px
+            20px;
+    }
+
+    .written-question{
+        width:89%;
+
+        padding:
+            40px
+            22px;
+    }
+
+    .written-question h3{
+        font-size:18px;
+    }
+
+}
+
+
+@media(prefers-reduced-motion:reduce){
+
+    *,
+    *::before,
+    *::after{
+        animation-duration:.001ms !important;
+        animation-iteration-count:1 !important;
+        transition:none !important;
+    }
+
+}
+
+</style>
+</head>
+
+<body>
+
+
+<!-- =========================================================
+     SUBTLE PARTICLES
+========================================================= -->
+
+<div class="particles">
+
+<span class="particle" style="left:5%;animation-duration:22s;"></span>
+<span class="particle" style="left:17%;animation-duration:28s;"></span>
+<span class="particle" style="left:31%;animation-duration:24s;"></span>
+<span class="particle" style="left:46%;animation-duration:30s;"></span>
+<span class="particle" style="left:61%;animation-duration:25s;"></span>
+<span class="particle" style="left:76%;animation-duration:29s;"></span>
+<span class="particle" style="left:91%;animation-duration:23s;"></span>
+
+</div>
+
+
+<!-- =========================================================
+     NAVIGATION
+========================================================= -->
+
+<nav>
+
+<a href="index.html" class="logo">
+    FLIGHT <span>SENSES</span>
+</a>
+
+<div class="nav-links">
+
+    <a href="index.html">HOME</a>
+    <a href="aircraft.html">AIRCRAFT</a>
+    <a href="airlines.html">AIRLINES</a>
+    <a href="top10.html">TOP 10</a>
+    <a href="compare.html">COMPARE</a>
+    <a href="flight-lab.html">FLIGHT LAB</a>
+    <a href="world.html">WORLD</a>
+
+    <a
+        href="identifier.html"
+        class="active"
+    >
+        IDENTIFIER
+    </a>
+
+</div>
+
+</nav>
+
+
+<!-- =========================================================
+     HERO
+========================================================= -->
+
+<section class="hero">
+
+<div class="hero-orbit"></div>
+
+<div class="hero-badge">
+    ✦ FLIGHT SENSES // AIRCRAFT RECOGNITION
+</div>
+
+<h1>
+    AIRCRAFT <span>IDENTIFIER</span>
+</h1>
+
+<p>
+    Identify aircraft, test your aviation knowledge and
+    challenge yourself across multiple mission types.
+    Think carefully. Answer quickly. Fly further.
+</p>
+
+</section>
+
+
+<!-- =========================================================
+     MODE SELECTOR
+========================================================= -->
+
+<section class="mode-section">
+
+<div class="mode-title">
+
+    <span>
+        CHALLENGE SELECTION
+    </span>
+
+    <span>
+        20 QUESTIONS
+    </span>
+
+</div>
+
+
+<div class="mode-selector">
+
+
+<div
+    class="mode-card active"
+    data-mode="visual"
+>
+
+    <div class="mode-status"></div>
+
+    <div class="mode-icon">
+        ✈️
+    </div>
+
+    <div class="mode-name">
+        VISUAL IDENTIFIER
+    </div>
+
+    <div class="mode-description">
+        Identify aircraft from real aircraft
+        photography.
+    </div>
+
+</div>
+
+
+<div
+    class="mode-card"
+    data-mode="quiz"
+>
+
+    <div class="mode-status"></div>
+
+    <div class="mode-icon">
+        🧠
+    </div>
+
+    <div class="mode-name">
+        AVIATION QUIZ
+    </div>
+
+    <div class="mode-description">
+        Test your knowledge of aircraft,
+        engines, aviation and history.
+    </div>
+
+</div>
+
+
+<div
+    class="mode-card"
+    data-mode="mixed"
+>
+
+    <div class="mode-status"></div>
+
+    <div class="mode-icon">
+        ⚡
+    </div>
+
+    <div class="mode-name">
+        MIXED MISSION
+    </div>
+
+    <div class="mode-description">
+        Alternate between visual recognition
+        and written aviation questions.
+    </div>
+
+</div>
+
+
+</div>
+
+</section>
+
+
+<!-- =========================================================
+     GAME
+========================================================= -->
+
+<div class="game-wrapper">
+
+
+<div class="game-header">
+
+    <span>
+        AIRCRAFT IDENTIFIER
+    </span>
+
+    <span>
+        STATUS:
+        <strong id="systemStatus">
+            STANDBY
+        </strong>
+    </span>
+
+</div>
+
+
+<!-- =========================================================
+     LIVE STATS
+========================================================= -->
+
+<div class="live-stats">
+
+
+<div class="live-stat">
+
+    <div class="live-label">
+        SCORE
+    </div>
+
+    <div
+        class="live-value accent"
+        id="scoreDisplay"
+    >
+        0
+    </div>
+
+</div>
+
+
+<div class="live-stat">
+
+    <div class="live-label">
+        QUESTION
+    </div>
+
+    <div
+        class="live-value"
+        id="roundDisplay"
+    >
+        0 / 20
+    </div>
+
+</div>
+
+
+<div class="live-stat">
+
+    <div class="live-label">
+        STREAK
+    </div>
+
+    <div
+        class="live-value streak"
+        id="streakDisplay"
+    >
+        x0
+    </div>
+
+</div>
+
+
+<div class="live-stat">
+
+    <div class="live-label">
+        CORRECT
+    </div>
+
+    <div
+        class="live-value"
+        id="correctDisplay"
+    >
+        0
+    </div>
+
+</div>
+
+
+<div class="live-stat">
+
+    <div class="live-label">
+        BEST SCORE
+    </div>
+
+    <div
+        class="live-value"
+        id="bestDisplay"
+    >
+        0
+    </div>
+
+</div>
+
+
+</div>
+
+
+<!-- =========================================================
+     MAIN PANEL
+========================================================= -->
+
+<div class="scanner-panel">
+
+<div class="scanner-grid"></div>
+
+
+<div class="corner tl"></div>
+<div class="corner tr"></div>
+<div class="corner bl"></div>
+<div class="corner br"></div>
+
+
+<!-- TIMER -->
+
+<div class="timer-box">
+
+    <div class="timer-label">
+        TIME REMAINING
+    </div>
+
+    <div
+        class="timer"
+        id="timer"
+    >
+        30.0
+    </div>
+
+</div>
+
+
+<!-- =========================================================
+     AIRCRAFT IMAGE
+========================================================= -->
+
+<div
+    class="image-viewport"
+    id="imageViewport"
+>
+
+    <div class="image-corner tl"></div>
+    <div class="image-corner tr"></div>
+    <div class="image-corner bl"></div>
+    <div class="image-corner br"></div>
+
+    <img
+        id="aircraftImage"
+        class="aircraft-image"
+        src=""
+        alt="Aircraft"
+    >
+
+</div>
+
+
+<!-- =========================================================
+     WRITTEN QUESTION
+========================================================= -->
+
+<div
+    class="written-question hidden"
+    id="writtenQuestion"
+>
+
+    <div
+        class="written-category"
+        id="writtenCategory"
+    >
+        AVIATION KNOWLEDGE
+    </div>
+
+    <h3 id="writtenQuestionText">
+        Question
+    </h3>
+
+</div>
+
+
+<!-- MIXED -->
+
+<div
+    class="mixed-badge hidden"
+    id="mixedBadge"
+>
+    MIXED MISSION
+</div>
+
+
+<!-- QUESTION INFO -->
+
+<div class="question-info">
+
+    <div
+        class="question-type"
+        id="questionType"
+    >
+        VISUAL IDENTIFICATION
+    </div>
+
+    <div
+        class="question-hint"
+        id="questionHint"
+    >
+        IDENTIFY THE AIRCRAFT
+    </div>
+
+</div>
+
+
+<!-- FEEDBACK -->
+
+<div
+    class="feedback"
+    id="feedback"
+>
+    CORRECT
+</div>
+
+
+<!-- =========================================================
+     START SCREEN
+========================================================= -->
+
+<div
+    class="overlay-screen"
+    id="startScreen"
+>
+
+<div class="start-card">
+
+    <div class="hero-badge">
+        AIRCRAFT IDENTIFIER
+    </div>
+
+    <h2>
+        IDENTIFICATION TEST
+    </h2>
+
+    <p id="startDescription">
+        Identify aircraft from real images.
+        You have 30 seconds per question
+        and 20 questions to build your score.
+    </p>
+
+
+    <div class="start-features">
+
+        <div class="start-feature">
+
+            <strong>
+                20
+            </strong>
+
+            <span>
+                QUESTIONS
+            </span>
+
+        </div>
+
+
+        <div class="start-feature">
+
+            <strong>
+                30s
+            </strong>
+
+            <span>
+                PER QUESTION
+            </span>
+
+        </div>
+
+
+        <div class="start-feature">
+
+            <strong>
+                4
+            </strong>
+
+            <span>
+                ANSWER OPTIONS
+            </span>
+
+        </div>
+
+    </div>
+
+
+    <button
+        class="start-button"
+        id="startButton"
+    >
+        BEGIN TEST
+    </button>
+
+</div>
+
+</div>
+
+
+<!-- =========================================================
+     RESULT SCREEN
+========================================================= -->
+
+<div
+    class="overlay-screen"
+    id="resultScreen"
+    style="display:none;"
+>
+
+<div class="result-card">
+
+    <div class="hero-badge">
+        TEST COMPLETED
+    </div>
+
+    <h2>
+        IDENTIFICATION REPORT
+    </h2>
+
+    <p>
+        Your aviation identification session
+        has been completed.
+    </p>
+
+
+    <div class="result-stats">
+
+
+        <div class="result-stat">
+
+            <small>
+                SCORE
+            </small>
+
+            <strong id="finalScore">
+                0
+            </strong>
+
+        </div>
+
+
+        <div class="result-stat">
+
+            <small>
+                ACCURACY
+            </small>
+
+            <strong id="finalAccuracy">
+                0%
+            </strong>
+
+        </div>
+
+
+        <div class="result-stat">
+
+            <small>
+                CORRECT
+            </small>
+
+            <strong id="finalCorrect">
+                0/20
+            </strong>
+
+        </div>
+
+
+        <div class="result-stat">
+
+            <small>
+                BEST STREAK
+            </small>
+
+            <strong id="finalStreak">
+                x0
+            </strong>
+
+        </div>
+
+
+    </div>
+
+
+    <div
+        class="rank"
+        id="finalRank"
+    >
+        AVIATION ROOKIE
+    </div>
+
+
+    <div
+        class="result-message"
+        id="resultMessage"
+    >
+        KEEP FLYING
+    </div>
+
+
+    <button
+        class="restart-button"
+        id="restartButton"
+    >
+        TRY AGAIN
+    </button>
+
+</div>
+
+</div>
+
+
+</div>
+
+
+<!-- =========================================================
+     ANSWERS
+========================================================= -->
+
+<div
+    class="answers"
+    id="answers"
+>
+
+<button
+    class="answer-btn"
+    data-index="0"
+>
+
+    <span class="answer-number">
+        01
+    </span>
+
+    <span class="answer-text">
+        OPTION A
+    </span>
+
+</button>
+
+
+<button
+    class="answer-btn"
+    data-index="1"
+>
+
+    <span class="answer-number">
+        02
+    </span>
+
+    <span class="answer-text">
+        OPTION B
+    </span>
+
+</button>
+
+
+<button
+    class="answer-btn"
+    data-index="2"
+>
+
+    <span class="answer-number">
+        03
+    </span>
+
+    <span class="answer-text">
+        OPTION C
+    </span>
+
+</button>
+
+
+<button
+    class="answer-btn"
+    data-index="3"
+>
+
+    <span class="answer-number">
+        04
+    </span>
+
+    <span class="answer-text">
+        OPTION D
+    </span>
+
+</button>
+
+</div>
+
+
+</div>
+
+
+<!-- SCORE POP -->
+
+<div
+    class="score-pop"
+    id="scorePop"
+>
+    +100
+</div>
+
+
+<script>
+
+/* =========================================================
+   AIRCRAFT DATABASE
+========================================================= */
+
+const aircraftDatabase = [
+
+    {
+        name:"Boeing 737-800",
+        image:"737-800.jpg"
+    },
+
+    {
+        name:"Boeing 737 MAX 8",
+        image:"737-max-8.jpg"
+    },
+
+    {
+        name:"Boeing 737 MAX 10",
+        image:"737-max-10.jpg"
+    },
+
+    {
+        name:"Boeing 747-400",
+        image:"747-400.jpg"
+    },
+
+    {
+        name:"Boeing 747-8",
+        image:"747-8.jpg"
+    },
+
+    {
+        name:"Boeing 747",
+        image:"747.jpg"
+    },
+
+    {
+        name:"Boeing 777-300ER",
+        image:"777-300er.jpg"
+    },
+
+    {
+        name:"Boeing 777-9",
+        image:"777-9.jpg"
+    },
+
+    {
+        name:"Boeing 777",
+        image:"777.jpg"
+    },
+
+    {
+        name:"Boeing 787-10",
+        image:"787-10.jpg"
+    },
+
+    {
+        name:"Boeing 787-9",
+        image:"787-9.jpg"
+    },
+
+    {
+        name:"Boeing 787",
+        image:"787.jpg"
+    },
+
+    {
+        name:"Airbus A220-300",
+        image:"a220-300.jpg"
+    },
+
+    {
+        name:"Airbus A320neo",
+        image:"a320neo.jpg"
+    },
+
+    {
+        name:"Airbus A321neo",
+        image:"a321neo.jpg"
+    },
+
+    {
+        name:"Airbus A330-900",
+        image:"a330-900.jpg"
+    },
+
+    {
+        name:"Airbus A350-1000",
+        image:"a350-1000.jpg"
+    },
+
+    {
+        name:"Airbus A350-900",
+        image:"a350-900.jpg"
+    },
+
+    {
+        name:"Airbus A350",
+        image:"a350.jpg"
+    },
+
+    {
+        name:"Airbus A380-800",
+        image:"a380-800.jpg"
+    },
+
+    {
+        name:"Airbus A380",
+        image:"a380.jpg"
+    },
+
+    {
+        name:"Antonov An-225",
+        image:"an225.jpg"
+    },
+
+    {
+        name:"ATR 42-600",
+        image:"atr42-600.jpg"
+    },
+
+    {
+        name:"ATR 72-600",
+        image:"atr72-600.jpg"
+    },
+
+    {
+        name:"Boeing B-52",
+        image:"b52.jpg"
+    },
+
+    {
+        name:"Lockheed C-5M Super Galaxy",
+        image:"c5m.jpg"
+    },
+
+    {
+        name:"CRJ700",
+        image:"crj700.jpg"
+    },
+
+    {
+        name:"CRJ900",
+        image:"crj900.jpg"
+    },
+
+    {
+        name:"CRJ1000",
+        image:"crj1000.jpg"
+    },
+
+    {
+        name:"Embraer E175",
+        image:"e175.jpg"
+    },
+
+    {
+        name:"Embraer E175-E2",
+        image:"e175-e2.jpg"
+    },
+
+    {
+        name:"Embraer E190",
+        image:"e190.jpg"
+    },
+
+    {
+        name:"Embraer E190-E2",
+        image:"e190-e2.jpg"
+    },
+
+    {
+        name:"Embraer E195",
+        image:"e195.jpg"
+    },
+
+    {
+        name:"Embraer E195-E2",
+        image:"e195-e2.jpg"
+    },
+
+    {
+        name:"McDonnell Douglas MD-11",
+        image:"md-11.jpg"
+    },
+
+    {
+        name:"McDonnell Douglas MD-80",
+        image:"md-80.jpg"
+    },
+
+    {
+        name:"McDonnell Douglas MD-90",
+        image:"md-90.jpg"
+    },
+
+    {
+        name:"Stratolaunch",
+        image:"stratolaunch.jpg"
+    }
+
+];
+
+
+/* =========================================================
+   WRITTEN QUIZ DATABASE
+========================================================= */
+
+const quizQuestions = [
+
+{
+category:"AIRCRAFT",
+question:"Which aircraft is the largest production passenger airliner?",
+answers:[
+"Airbus A320neo",
+"Boeing 777-300ER",
+"Airbus A380-800",
+"Boeing 787-10"
+],
+correct:2
+},
+
+{
+category:"AIRCRAFT",
+question:"Which aircraft family is famous for its distinctive upper deck?",
+answers:[
+"Boeing 747",
+"Airbus A330",
+"Boeing 787",
+"Airbus A320"
+],
+correct:0
+},
+
+{
+category:"ENGINES",
+question:"Which company manufactures the GE9X?",
+answers:[
+"Rolls-Royce",
+"GE Aerospace",
+"Pratt & Whitney",
+"CFM International"
+],
+correct:1
+},
+
+{
+category:"ENGINES",
+question:"The Trent XWB is primarily associated with which aircraft family?",
+answers:[
+"Boeing 737",
+"Airbus A350",
+"Boeing 747",
+"Airbus A220"
+],
+correct:1
+},
+
+{
+category:"AIRCRAFT",
+question:"How many engines does the Boeing 747 have?",
+answers:[
+"Two",
+"Three",
+"Four",
+"Six"
+],
+correct:2
+},
+
+{
+category:"AIRCRAFT",
+question:"How many engines does the Antonov An-225 have?",
+answers:[
+"Four",
+"Six",
+"Eight",
+"Ten"
+],
+correct:1
+},
+
+{
+category:"HISTORY",
+question:"Which aircraft was famous for commercial supersonic passenger service?",
+answers:[
+"Concorde",
+"MD-11",
+"A340",
+"747-400"
+],
+correct:0
+},
+
+{
+category:"AIRCRAFT",
+question:"Which aircraft is a trijet?",
+answers:[
+"Airbus A350",
+"Boeing 787",
+"McDonnell Douglas MD-11",
+"Boeing 777"
+],
+correct:2
+},
+
+{
+category:"AIRCRAFT",
+question:"Which aircraft is powered by turboprop engines?",
+answers:[
+"ATR 72-600",
+"A350-1000",
+"777-300ER",
+"787-10"
+],
+correct:0
+},
+
+{
+category:"MANUFACTURERS",
+question:"Which company manufactures the 737 family?",
+answers:[
+"Airbus",
+"Boeing",
+"Embraer",
+"Bombardier"
+],
+correct:1
+},
+
+{
+category:"MANUFACTURERS",
+question:"Which company manufactures the A350?",
+answers:[
+"Boeing",
+"Airbus",
+"Embraer",
+"Lockheed Martin"
+],
+correct:1
+},
+
+{
+category:"AIRCRAFT",
+question:"Which aircraft belongs to the Dreamliner family?",
+answers:[
+"787",
+"777",
+"747",
+"767"
+],
+correct:0
+},
+
+{
+category:"AIRCRAFT",
+question:"Which Boeing aircraft is the newest large twin-engine member of the 777 family?",
+answers:[
+"787-10",
+"777-9",
+"737 MAX 10",
+"747-400"
+],
+correct:1
+},
+
+{
+category:"ENGINES",
+question:"Which engine is associated with the Boeing 777-300ER?",
+answers:[
+"GE90-115B",
+"GE9X",
+"Trent XWB-97",
+"LEAP-1B"
+],
+correct:0
+},
+
+{
+category:"ENGINES",
+question:"Which engine family powers the Airbus A350?",
+answers:[
+"GE90",
+"Trent XWB",
+"GE9X",
+"CFM56"
+],
+correct:1
+},
+
+{
+category:"AIRCRAFT",
+question:"Which aircraft has three engines?",
+answers:[
+"Boeing 777",
+"Airbus A380",
+"MD-11",
+"Boeing 787"
+],
+correct:2
+},
+
+{
+category:"AIRCRAFT",
+question:"Which aircraft is a regional jet manufactured by Embraer?",
+answers:[
+"E195-E2",
+"A380",
+"777-9",
+"747-8"
+],
+correct:0
+},
+
+{
+category:"AIRCRAFT",
+question:"Which aircraft is a wide-body twin-engine jet?",
+answers:[
+"A350",
+"747",
+"MD-11",
+"An-225"
+],
+correct:0
+},
+
+{
+category:"AIRCRAFT",
+question:"Which aircraft is designed with four engines?",
+answers:[
+"A220-300",
+"A320neo",
+"A380",
+"787-9"
+],
+correct:2
+},
+
+{
+category:"AVIATION",
+question:"What does Mach 1 approximately represent?",
+answers:[
+"Speed of sound",
+"Speed of light",
+"Escape velocity",
+"Stall speed"
+],
+correct:0
+},
+
+{
+category:"AVIATION",
+question:"What is the primary purpose of winglets?",
+answers:[
+"Increase cabin space",
+"Reduce aerodynamic drag",
+"Increase engine temperature",
+"Reduce fuel capacity"
+],
+correct:1
+},
+
+{
+category:"AVIATION",
+question:"What is the main purpose of flaps during takeoff and landing?",
+answers:[
+"Increase lift",
+"Reduce aircraft weight",
+"Increase fuel flow",
+"Control cabin pressure"
+],
+correct:0
+},
+
+{
+category:"AVIATION",
+question:"Which instrument displays altitude?",
+answers:[
+"Airspeed indicator",
+"Altimeter",
+"Heading indicator",
+"Variometer"
+],
+correct:1
+},
+
+{
+category:"AVIATION",
+question:"Which control surface primarily controls roll?",
+answers:[
+"Rudder",
+"Elevator",
+"Aileron",
+"Flap"
+],
+correct:2
+},
+
+{
+category:"AVIATION",
+question:"Which control surface primarily controls yaw?",
+answers:[
+"Rudder",
+"Aileron",
+"Elevator",
+"Spoiler"
+],
+correct:0
+},
+
+{
+category:"AVIATION",
+question:"Which control surface primarily controls pitch?",
+answers:[
+"Rudder",
+"Elevator",
+"Aileron",
+"Spoiler"
+],
+correct:1
+},
+
+{
+category:"AIRCRAFT",
+question:"Which aircraft is known for its enormous six-engine configuration?",
+answers:[
+"C-5M",
+"An-225",
+"B-52",
+"747"
+],
+correct:1
+},
+
+{
+category:"AIRCRAFT",
+question:"Which aircraft is designed with eight engines?",
+answers:[
+"Stratolaunch",
+"B-52",
+"An-225",
+"A380"
+],
+correct:0
+},
+
+{
+category:"MILITARY",
+question:"The B-52 is primarily a:",
+answers:[
+"Fighter",
+"Bomber",
+"Transport aircraft",
+"Trainer"
+],
+correct:1
+},
+
+{
+category:"MILITARY",
+question:"The C-5M Super Galaxy is primarily a:",
+answers:[
+"Strategic airlift aircraft",
+"Fighter",
+"Bomber",
+"Trainer"
+],
+correct:0
+},
+
+{
+category:"AIRCRAFT",
+question:"Which aircraft family includes the A321neo?",
+answers:[
+"A320 family",
+"A350 family",
+"A330 family",
+"A380 family"
+],
+correct:0
+},
+
+{
+category:"AIRCRAFT",
+question:"Which aircraft is larger: A350-900 or A350-1000?",
+answers:[
+"A350-900",
+"A350-1000",
+"They are identical",
+"Neither"
+],
+correct:1
+},
+
+{
+category:"AIRCRAFT",
+question:"Which aircraft is a regional turboprop?",
+answers:[
+"ATR 42-600",
+"777-9",
+"A350-900",
+"787-10"
+],
+correct:0
+},
+
+{
+category:"MANUFACTURERS",
+question:"CRJ aircraft were originally developed by which company?",
+answers:[
+"Bombardier",
+"Airbus",
+"Boeing",
+"Dassault"
+],
+correct:0
+},
+
+{
+category:"AIRCRAFT",
+question:"Which aircraft belongs to the CRJ family?",
+answers:[
+"CRJ900",
+"E195",
+"A220",
+"737 MAX"
+],
+correct:0
+},
+
+{
+category:"AIRCRAFT",
+question:"Which aircraft is part of the 747 family?",
+answers:[
+"747-8",
+"787-10",
+"777-9",
+"737 MAX 8"
+],
+correct:0
+},
+
+{
+category:"AIRCRAFT",
+question:"Which aircraft is part of the 777 family?",
+answers:[
+"777-9",
+"787-9",
+"747-8",
+"737-800"
+],
+correct:0
+},
+
+{
+category:"AIRCRAFT",
+question:"Which aircraft is part of the A350 family?",
+answers:[
+"A350-1000",
+"A330-900",
+"A320neo",
+"A380"
+],
+correct:0
+},
+
+{
+category:"ENGINES",
+question:"Which engine has the largest fan diameter among these?",
+answers:[
+"GE9X",
+"LEAP-1B",
+"Trent XWB",
+"GE90-115B"
+],
+correct:0
+},
+
+{
+category:"AVIATION",
+question:"What does ILS help an aircraft perform?",
+answers:[
+"Precision approach and landing",
+"Engine maintenance",
+"Fuel balancing",
+"Cabin entertainment"
+],
+correct:0
+},
+
+{
+category:"AVIATION",
+question:"What does ATC stand for?",
+answers:[
+"Aircraft Technical Control",
+"Air Traffic Control",
+"Air Transport Command",
+"Aviation Tracking Computer"
+],
+correct:1
+},
+
+{
+category:"AVIATION",
+question:"What does VFR stand for?",
+answers:[
+"Visual Flight Rules",
+"Vertical Flight Radar",
+"Variable Flight Range",
+"Visual Fuel Regulation"
+],
+correct:0
+},
+
+{
+category:"AVIATION",
+question:"What does IFR stand for?",
+answers:[
+"International Flight Route",
+"Instrument Flight Rules",
+"Integrated Fuel Regulation",
+"Internal Flight Radar"
+],
+correct:1
+},
+
+{
+category:"HISTORY",
+question:"Which aircraft was known for supersonic commercial flights between Europe and North America?",
+answers:[
+"Concorde",
+"A380",
+"747-8",
+"MD-11"
+],
+correct:0
+},
+
+{
+category:"AIRCRAFT",
+question:"Which aircraft has a very distinctive double-deck full-length design?",
+answers:[
+"A380",
+"747",
+"A350",
+"777"
+],
+correct:0
+},
+
+{
+category:"AIRCRAFT",
+question:"Which aircraft is known as the Dreamliner?",
+answers:[
+"Boeing 787",
+"Boeing 777",
+"Airbus A350",
+"Airbus A330"
+],
+correct:0
+},
+
+{
+category:"ENGINES",
+question:"Which company produces the LEAP engine family?",
+answers:[
+"CFM International",
+"GE Aerospace alone",
+"Rolls-Royce",
+"Pratt & Whitney"
+],
+correct:0
+},
+
+{
+category:"AIRCRAFT",
+question:"Which aircraft is a twin-engine narrow-body jet?",
+answers:[
+"A320neo",
+"747-8",
+"A380",
+"MD-11"
+],
+correct:0
+},
+
+{
+category:"AIRCRAFT",
+question:"Which aircraft belongs to the E2 generation?",
+answers:[
+"E195-E2",
+"CRJ900",
+"737-800",
+"A321neo"
+],
+correct:0
+},
+
+{
+category:"AVIATION",
+question:"What is an aircraft's fuselage?",
+answers:[
+"Main body of the aircraft",
+"Vertical tail",
+"Landing gear",
+"Engine fan"
+],
+correct:0
+},
+
+{
+category:"AVIATION",
+question:"What is the vertical stabilizer commonly called?",
+answers:[
+"Tail fin",
+"Winglet",
+"Flap",
+"Spoiler"
+],
+correct:0
+},
+
+{
+category:"AVIATION",
+question:"What is the horizontal stabilizer mainly associated with?",
+answers:[
+"Pitch stability",
+"Engine thrust",
+"Cabin pressure",
+"Fuel storage"
+],
+correct:0
+},
+
+{
+category:"AIRCRAFT",
+question:"Which aircraft has the designation MD-11?",
+answers:[
+"McDonnell Douglas",
+"Boeing",
+"Airbus",
+"Embraer"
+],
+correct:0
+}
+
+];
+
+
+/* =========================================================
+   GAME STATE
+========================================================= */
+
+let gameMode = "visual";
+
+let currentRound = 0;
+
+let score = 0;
+
+let correctAnswers = 0;
+
+let streak = 0;
+
+let bestStreak = 0;
+
+let fastestAnswer = null;
+
+let currentAircraft = null;
+
+let currentQuizQuestion = null;
+
+let currentOptions = [];
+
+let timerInterval = null;
+
+let timeLeft = 30;
+
+let answered = false;
+
+let usedVisualQuestions = [];
+
+let usedQuizQuestions = [];
+
+
+/* =========================================================
+   DOM
+========================================================= */
+
+const aircraftImage =
+    document.getElementById("aircraftImage");
+
+const imageViewport =
+    document.getElementById("imageViewport");
+
+const writtenQuestion =
+    document.getElementById("writtenQuestion");
+
+const writtenCategory =
+    document.getElementById("writtenCategory");
+
+const writtenQuestionText =
+    document.getElementById("writtenQuestionText");
+
+const mixedBadge =
+    document.getElementById("mixedBadge");
+
+const timerElement =
+    document.getElementById("timer");
+
+const scoreDisplay =
+    document.getElementById("scoreDisplay");
+
+const roundDisplay =
+    document.getElementById("roundDisplay");
+
+const streakDisplay =
+    document.getElementById("streakDisplay");
+
+const correctDisplay =
+    document.getElementById("correctDisplay");
+
+const bestDisplay =
+    document.getElementById("bestDisplay");
+
+const systemStatus =
+    document.getElementById("systemStatus");
+
+const questionType =
+    document.getElementById("questionType");
+
+const questionHint =
+    document.getElementById("questionHint");
+
+const feedback =
+    document.getElementById("feedback");
+
+const answersContainer =
+    document.getElementById("answers");
+
+const answerButtons =
+    document.querySelectorAll(".answer-btn");
+
+const startScreen =
+    document.getElementById("startScreen");
+
+const resultScreen =
+    document.getElementById("resultScreen");
+
+const startButton =
+    document.getElementById("startButton");
+
+const restartButton =
+    document.getElementById("restartButton");
+
+const scorePop =
+    document.getElementById("scorePop");
+
+const finalScore =
+    document.getElementById("finalScore");
+
+const finalAccuracy =
+    document.getElementById("finalAccuracy");
+
+const finalCorrect =
+    document.getElementById("finalCorrect");
+
+const finalStreak =
+    document.getElementById("finalStreak");
+
+const finalRank =
+    document.getElementById("finalRank");
+
+const resultMessage =
+    document.getElementById("resultMessage");
+
+const modeCards =
+    document.querySelectorAll(".mode-card");
+
+
+/* =========================================================
+   BEST SCORE
+========================================================= */
+
+function getBestScore(){
+
+    return Number(
+        localStorage.getItem(
+            "flightSensesIdentifierBest"
+        ) || 0
+    );
+
+}
+
+
+function saveBestScore(){
+
+    const currentBest =
+        getBestScore();
+
+    if(score > currentBest){
+
+        localStorage.setItem(
+            "flightSensesIdentifierBest",
+            score
+        );
+
+    }
+
+    bestDisplay.textContent =
+        Math.max(
+            score,
+            currentBest
+        );
+
+}
+
+
+/* =========================================================
+   SHUFFLE
+========================================================= */
+
+function shuffle(array){
+
+    return [...array].sort(
+        () => Math.random() - .5
+    );
+
+}
+
+
+/* =========================================================
+   MODE SELECTION
+========================================================= */
+
+modeCards.forEach(card => {
+
+    card.addEventListener(
+        "click",
+        () => {
+
+            if(
+                systemStatus.textContent ===
+                "ACTIVE"
+            ){
+
+                return;
+
+            }
+
+            modeCards.forEach(
+                item =>
+                    item.classList.remove(
+                        "active"
+                    )
+            );
+
+            card.classList.add("active");
+
+            gameMode =
+                card.dataset.mode;
+
+            updateStartDescription();
+
+        }
+    );
+
+});
+
+
+function updateStartDescription(){
+
+    const description =
+        document.getElementById(
+            "startDescription"
+        );
+
+
+    if(gameMode === "visual"){
+
+        description.textContent =
+            "Identify aircraft from real images. You have 30 seconds per question and 20 questions to build your score.";
+
+        questionType.textContent =
+            "VISUAL IDENTIFICATION";
+
+        questionHint.textContent =
+            "IDENTIFY THE AIRCRAFT";
+
+    }
+
+
+    if(gameMode === "quiz"){
+
+        description.textContent =
+            "Test your aviation knowledge with aircraft, engines, technology and aviation history questions.";
+
+        questionType.textContent =
+            "AVIATION QUIZ";
+
+        questionHint.textContent =
+            "SELECT THE CORRECT ANSWER";
+
+    }
+
+
+    if(gameMode === "mixed"){
+
+        description.textContent =
+            "A complete aviation challenge combining aircraft identification and written aviation questions.";
+
+        questionType.textContent =
+            "MIXED MISSION";
+
+        questionHint.textContent =
+            "ALTERNATING VISUAL & KNOWLEDGE";
+
+    }
+
+}
+
+
+/* =========================================================
+   START GAME
+========================================================= */
+
+function startGame(){
+
+    clearInterval(
+        timerInterval
+    );
+
+    currentRound = 0;
+
+    score = 0;
+
+    correctAnswers = 0;
+
+    streak = 0;
+
+    bestStreak = 0;
+
+    fastestAnswer = null;
+
+    usedVisualQuestions = [];
+
+    usedQuizQuestions = [];
+
+    scoreDisplay.textContent = "0";
+
+    roundDisplay.textContent = "0 / 20";
+
+    streakDisplay.textContent = "x0";
+
+    correctDisplay.textContent = "0";
+
+    bestDisplay.textContent =
+        getBestScore();
+
+    systemStatus.textContent =
+        "ACTIVE";
+
+    startScreen.style.display =
+        "none";
+
+    resultScreen.style.display =
+        "none";
+
+    answersContainer.style.visibility =
+        "visible";
+
+    nextRound();
+
+}
+
+
+/* =========================================================
+   NEXT ROUND
+========================================================= */
+
+function nextRound(){
+
+    clearInterval(
+        timerInterval
+    );
+
+    currentRound++;
+
+    if(currentRound > 20){
+
+        endGame();
+
+        return;
+
+    }
+
+    answered = false;
+
+    timeLeft = 30;
+
+    timerElement.textContent =
+        "30.0";
+
+    timerElement.classList.remove(
+        "warning",
+        "danger"
+    );
+
+    feedback.classList.remove(
+        "show",
+        "correct",
+        "wrong"
+    );
+
+    roundDisplay.textContent =
+        currentRound +
+        " / 20";
+
+    let questionMode =
+        gameMode;
+
+    if(gameMode === "mixed"){
+
+        questionMode =
+            currentRound % 2 === 1
+                ? "visual"
+                : "quiz";
+
+    }
+
+    if(questionMode === "visual"){
+
+        setupVisualQuestion();
+
+    }else{
+
+        setupWrittenQuestion();
+
+    }
+
+    startTimer();
+
+}
+
+
+/* =========================================================
+   VISUAL QUESTION
+========================================================= */
+
+function setupVisualQuestion(){
+
+    imageViewport.classList.remove(
+        "hidden"
+    );
+
+    aircraftImage.classList.add(
+        "loading"
+    );
+
+    writtenQuestion.classList.add(
+        "hidden"
+    );
+
+    mixedBadge.classList.toggle(
+        "hidden",
+        gameMode !== "mixed"
+    );
+
+    questionType.textContent =
+        gameMode === "mixed"
+            ? "MIXED // VISUAL"
+            : "VISUAL IDENTIFICATION";
+
+    questionHint.textContent =
+        "IDENTIFY THE AIRCRAFT";
+
+    let available =
+        aircraftDatabase.filter(
+            (_,index) =>
+                !usedVisualQuestions.includes(
+                    index
+                )
+        );
+
+    if(available.length === 0){
+
+        usedVisualQuestions = [];
+
+        available =
+            aircraftDatabase;
+
+    }
+
+    const selected =
+        available[
+            Math.floor(
+                Math.random() *
+                available.length
+            )
+        ];
+
+    const selectedIndex =
+        aircraftDatabase.indexOf(
+            selected
+        );
+
+    usedVisualQuestions.push(
+        selectedIndex
+    );
+
+    currentAircraft =
+        selected;
+
+    aircraftImage.src = "";
+
+    requestAnimationFrame(
+        () => {
+
+            aircraftImage.src =
+                currentAircraft.image;
+
+        }
+    );
+
+    aircraftImage.alt =
+        currentAircraft.name;
+
+    generateVisualAnswers();
+
+}
+
+
+/* =========================================================
+   VISUAL ANSWERS
+========================================================= */
+
+function generateVisualAnswers(){
+
+    const wrongAnswers =
+        shuffle(
+            aircraftDatabase.filter(
+                aircraft =>
+                    aircraft.name !==
+                    currentAircraft.name
+            )
+        ).slice(0,3);
+
+    currentOptions =
+        shuffle([
+            currentAircraft,
+            ...wrongAnswers
+        ]);
+
+    updateAnswerButtons(
+        currentOptions
+    );
+
+}
+
+
+/* =========================================================
+   WRITTEN QUESTION
+========================================================= */
+
+function setupWrittenQuestion(){
+
+    imageViewport.classList.add(
+        "hidden"
+    );
+
+    writtenQuestion.classList.remove(
+        "hidden"
+    );
+
+    mixedBadge.classList.add(
+        "hidden"
+    );
+
+    questionType.textContent =
+        gameMode === "mixed"
+            ? "MIXED // KNOWLEDGE"
+            : "AVIATION QUIZ";
+
+    questionHint.textContent =
+        "SELECT THE CORRECT ANSWER";
+
+    let available =
+        quizQuestions.filter(
+            (_,index) =>
+                !usedQuizQuestions.includes(
+                    index
+                )
+        );
+
+    if(available.length === 0){
+
+        usedQuizQuestions = [];
+
+        available =
+            quizQuestions;
+
+    }
+
+    const selected =
+        available[
+            Math.floor(
+                Math.random() *
+                available.length
+            )
+        ];
+
+    const selectedIndex =
+        quizQuestions.indexOf(
+            selected
+        );
+
+    usedQuizQuestions.push(
+        selectedIndex
+    );
+
+    currentQuizQuestion =
+        selected;
+
+    writtenCategory.textContent =
+        selected.category;
+
+    writtenQuestionText.textContent =
+        selected.question;
+
+    currentOptions =
+        selected.answers.map(
+            (answer,index) => ({
+                name:answer,
+                correct:
+                    index ===
+                    selected.correct
+            })
+        );
+
+    currentOptions =
+        shuffle(
+            currentOptions
+        );
+
+    updateAnswerButtons(
+        currentOptions
+    );
+
+}
+
+
+/* =========================================================
+   ANSWER BUTTONS
+========================================================= */
+
+function updateAnswerButtons(options){
+
+    answerButtons.forEach(
+        (button,index) => {
+
+            const number =
+                String(
+                    index + 1
+                ).padStart(
+                    2,
+                    "0"
+                );
+
+            button.innerHTML = `
+                <span class="answer-number">
+                    ${number}
+                </span>
+
+                <span class="answer-text">
+                    ${options[index].name}
+                </span>
+            `;
+
+            button.classList.remove(
+                "correct",
+                "wrong",
+                "disabled"
+            );
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+   TIMER
+========================================================= */
+
+function startTimer(){
+
+    clearInterval(
+        timerInterval
+    );
+
+    timerInterval =
+        setInterval(
+            () => {
+
+                timeLeft -= .1;
+
+                if(timeLeft < 0){
+
+                    timeLeft = 0;
+
+                }
+
+                timerElement.textContent =
+                    timeLeft.toFixed(1);
+
+                if(timeLeft <= 10){
+
+                    timerElement.classList.add(
+                        "warning"
+                    );
+
+                }
+
+                if(timeLeft <= 5){
+
+                    timerElement.classList.remove(
+                        "warning"
+                    );
+
+                    timerElement.classList.add(
+                        "danger"
+                    );
+
+                }
+
+                if(timeLeft <= 0){
+
+                    clearInterval(
+                        timerInterval
+                    );
+
+                    timeExpired();
+
+                }
+
+            },
+            100
+        );
+
+}
+
+
+/* =========================================================
+   ANSWER SELECT
+========================================================= */
+
+function selectAnswer(index){
+
+    if(answered){
+
+        return;
+
+    }
+
+    answered = true;
+
+    clearInterval(
+        timerInterval
+    );
+
+    const selected =
+        currentOptions[index];
+
+    let isCorrect = false;
+
+    const isVisual =
+        gameMode === "visual" ||
+        (
+            gameMode === "mixed" &&
+            currentRound % 2 === 1
+        );
+
+    if(isVisual){
+
+        isCorrect =
+            selected.name ===
+            currentAircraft.name;
+
+    }else{
+
+        isCorrect =
+            selected.correct === true;
+
+    }
+
+    answerButtons.forEach(
+        (button,buttonIndex) => {
+
+            button.classList.add(
+                "disabled"
+            );
+
+            let buttonCorrect =
+                false;
+
+            if(isVisual){
+
+                buttonCorrect =
+                    currentOptions[
+                        buttonIndex
+                    ].name ===
+                    currentAircraft.name;
+
+            }else{
+
+                buttonCorrect =
+                    currentOptions[
+                        buttonIndex
+                    ].correct === true;
+
+            }
+
+            if(buttonCorrect){
+
+                button.classList.add(
+                    "correct"
+                );
+
+            }
+
+        }
+    );
+
+    if(isCorrect){
+
+        handleCorrect();
+
+    }else{
+
+        handleWrong();
+
+    }
+
+    setTimeout(
+        nextRound,
+        1050
+    );
+
+}
+
+
+/* =========================================================
+   CORRECT
+========================================================= */
+
+function handleCorrect(){
+
+    correctAnswers++;
+
+    streak++;
+
+    if(streak > bestStreak){
+
+        bestStreak =
+            streak;
+
+    }
+
+    if(
+        fastestAnswer === null ||
+        timeLeft < fastestAnswer
+    ){
+
+        fastestAnswer =
+            timeLeft;
+
+    }
+
+    const baseScore = 100;
+
+    const speedBonus =
+        Math.round(
+            timeLeft * 5
+        );
+
+    const streakBonus =
+        streak * 25;
+
+    let multiplier = 1;
+
+    if(streak >= 10){
+
+        multiplier = 1.5;
+
+    }else if(streak >= 7){
+
+        multiplier = 1.35;
+
+    }else if(streak >= 5){
+
+        multiplier = 1.2;
+
+    }else if(streak >= 3){
+
+        multiplier = 1.1;
+
+    }
+
+    const earned =
+        Math.round(
+            (
+                baseScore +
+                speedBonus +
+                streakBonus
+            ) *
+            multiplier
+        );
+
+    score += earned;
+
+    scoreDisplay.textContent =
+        score;
+
+    streakDisplay.textContent =
+        "x" + streak;
+
+    correctDisplay.textContent =
+        correctAnswers;
+
+    showFeedback(
+        streak >= 3
+            ? "CORRECT  •  STREAK x" + streak
+            : "CORRECT",
+        true
+    );
+
+    showScorePop(
+        "+" + earned
+    );
+
+    saveBestScore();
+
+}
+
+
+/* =========================================================
+   WRONG
+========================================================= */
+
+function handleWrong(){
+
+    streak = 0;
+
+    streakDisplay.textContent =
+        "x0";
+
+    showFeedback(
+        "INCORRECT",
+        false
+    );
+
+}
+
+
+/* =========================================================
+   TIME EXPIRED
+========================================================= */
+
+function timeExpired(){
+
+    if(answered){
+
+        return;
+
+    }
+
+    answered = true;
+
+    clearInterval(
+        timerInterval
+    );
+
+    streak = 0;
+
+    streakDisplay.textContent =
+        "x0";
+
+    const isVisual =
+        gameMode === "visual" ||
+        (
+            gameMode === "mixed" &&
+            currentRound % 2 === 1
+        );
+
+    answerButtons.forEach(
+        (button,buttonIndex) => {
+
+            button.classList.add(
+                "disabled"
+            );
+
+            let buttonCorrect = false;
+
+            if(isVisual){
+
+                buttonCorrect =
+                    currentOptions[
+                        buttonIndex
+                    ].name ===
+                    currentAircraft.name;
+
+            }else{
+
+                buttonCorrect =
+                    currentOptions[
+                        buttonIndex
+                    ].correct === true;
+
+            }
+
+            if(buttonCorrect){
+
+                button.classList.add(
+                    "correct"
+                );
+
+            }
+
+        }
+    );
+
+    showFeedback(
+        "TIME EXPIRED",
+        false
+    );
+
+    setTimeout(
+        nextRound,
+        1050
+    );
+
+}
+
+
+/* =========================================================
+   FEEDBACK
+========================================================= */
+
+function showFeedback(
+    text,
+    correct
+){
+
+    feedback.textContent =
+        text;
+
+    feedback.classList.remove(
+        "show",
+        "correct",
+        "wrong"
+    );
+
+    feedback.classList.add(
+        correct
+            ? "correct"
+            : "wrong"
+    );
+
+    void feedback.offsetWidth;
+
+    feedback.classList.add(
+        "show"
+    );
+
+}
+
+
+/* =========================================================
+   SCORE POP
+========================================================= */
+
+function showScorePop(value){
+
+    scorePop.textContent =
+        value;
+
+    scorePop.classList.remove(
+        "show"
+    );
+
+    void scorePop.offsetWidth;
+
+    scorePop.classList.add(
+        "show"
+    );
+
+}
+
+
+/* =========================================================
+   END GAME
+========================================================= */
+
+function endGame(){
+
+    clearInterval(
+        timerInterval
+    );
+
+    systemStatus.textContent =
+        "COMPLETE";
+
+    answersContainer.style.visibility =
+        "hidden";
+
+    const accuracy =
+        Math.round(
+            (
+                correctAnswers / 20
+            ) * 100
+        );
+
+    finalScore.textContent =
+        score;
+
+    finalAccuracy.textContent =
+        accuracy + "%";
+
+    finalCorrect.textContent =
+        correctAnswers +
+        "/20";
+
+    finalStreak.textContent =
+        "x" + bestStreak;
+
+    let rank;
+
+    if(accuracy === 100){
+
+        rank =
+            "AVIATION MASTER";
+
+    }else if(accuracy >= 90){
+
+        rank =
+            "AIRCRAFT SPECIALIST";
+
+    }else if(accuracy >= 75){
+
+        rank =
+            "AVIATION EXPERT";
+
+    }else if(accuracy >= 60){
+
+        rank =
+            "AVIATION ENTHUSIAST";
+
+    }else if(accuracy >= 40){
+
+        rank =
+            "TRAINEE";
+
+    }else{
+
+        rank =
+            "AVIATION ROOKIE";
+
+    }
+
+    finalRank.textContent =
+        rank;
+
+    if(
+        fastestAnswer !== null
+    ){
+
+        resultMessage.textContent =
+            "FASTEST RESPONSE: " +
+            fastestAnswer.toFixed(1) +
+            " SECONDS";
+
+    }else{
+
+        resultMessage.textContent =
+            "KEEP FLYING";
+
+    }
+
+    saveBestScore();
+
+    resultScreen.style.display =
+        "flex";
+
+}
+
+
+/* =========================================================
+   IMAGE HANDLING
+========================================================= */
+
+aircraftImage.addEventListener(
+    "load",
+    () => {
+
+        aircraftImage.classList.remove(
+            "loading"
+        );
+
+    }
+);
+
+
+aircraftImage.addEventListener(
+    "error",
+    () => {
+
+        aircraftImage.classList.remove(
+            "loading"
+        );
+
+        aircraftImage.alt =
+            "Aircraft image unavailable";
+
+        console.warn(
+            "Aircraft image could not be loaded:",
+            aircraftImage.src
+        );
+
+    }
+);
+
+
+/* =========================================================
+   START
+========================================================= */
+
+startButton.addEventListener(
+    "click",
+    () => {
+
+        startGame();
+
+    }
+);
+
+
+/* =========================================================
+   RESTART
+========================================================= */
+
+restartButton.addEventListener(
+    "click",
+    () => {
+
+        resultScreen.style.display =
+            "none";
+
+        answersContainer.style.visibility =
+            "visible";
+
+        startGame();
+
+    }
+);
+
+
+/* =========================================================
+   ANSWER EVENTS
+========================================================= */
+
+answerButtons.forEach(
+    (button,index) => {
+
+        button.addEventListener(
+            "click",
+            () => {
+
+                selectAnswer(index);
+
+            }
+        );
+
+    }
+);
+
+
+/* =========================================================
+   INITIAL STATE
+========================================================= */
+
+bestDisplay.textContent =
+    getBestScore();
+
+updateStartDescription();
+
+
+/* =========================================================
+   PARTICLE POSITIONS
+========================================================= */
+
+document
+    .querySelectorAll(".particle")
+    .forEach(
+        particle => {
+
+            particle.style.top =
+                Math.random() * 100 +
+                "%";
+
+        }
+    );
+
+</script>
+
+</body>
+</html>
