@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -55,7 +56,6 @@ header{
 
 header::before{
     content:"";
-
     position:absolute;
     inset:0;
 
@@ -112,6 +112,7 @@ header::after{
 .brand-icon{
     width:55px;
     height:55px;
+
     display:flex;
     align-items:center;
     justify-content:center;
@@ -2003,17 +2004,35 @@ footer p{
 
 
 /* =========================
-   MOBILE
+   TABLET
 ========================= */
 
 @media(max-width:900px){
+
+    .nav-container{
+        overflow-x:auto;
+        justify-content:flex-start;
+        scrollbar-width:none;
+    }
+
+    .nav-container::-webkit-scrollbar{
+        display:none;
+    }
 
     .cards{
         grid-template-columns:repeat(2,1fr);
     }
 
+    .hero{
+        min-height:650px;
+    }
+
     .hero h2{
         font-size:52px;
+    }
+
+    .hero-content{
+        max-width:760px;
     }
 
     .stats{
@@ -2050,6 +2069,7 @@ footer p{
 
     .quick-compare{
         grid-template-columns:1fr;
+        max-width:650px;
     }
 
     .vs{
@@ -2064,14 +2084,39 @@ footer p{
 
 }
 
+
+/* =========================
+   MOBILE
+========================= */
+
 @media(max-width:600px){
+
+    body{
+        width:100%;
+    }
+
+    header{
+        padding:18px 15px;
+    }
 
     .header-inner{
         justify-content:center;
     }
 
+    .brand{
+        gap:11px;
+    }
+
+    .brand-icon{
+        width:46px;
+        height:46px;
+        font-size:24px;
+        border-radius:13px;
+    }
+
     .brand h1{
         font-size:22px;
+        letter-spacing:1.5px;
     }
 
     .brand p{
@@ -2079,145 +2124,609 @@ footer p{
         letter-spacing:2px;
     }
 
-    .brand-icon{
-        width:46px;
-        height:46px;
-        font-size:24px;
+
+    /* NAV */
+
+    nav{
+        overflow:hidden;
     }
 
     .nav-container{
-        overflow-x:auto;
         justify-content:flex-start;
+
+        gap:5px;
+
+        padding:8px 12px;
+
+        overflow-x:auto;
+        overflow-y:hidden;
+
+        -webkit-overflow-scrolling:touch;
+
+        scrollbar-width:none;
+    }
+
+    .nav-container::-webkit-scrollbar{
+        display:none;
     }
 
     nav a{
+        flex:0 0 auto;
+
         white-space:nowrap;
 
         padding:10px 13px;
 
         font-size:13px;
+
+        border-radius:8px;
     }
+
+    nav a:hover{
+        transform:none;
+    }
+
+
+    /* HERO */
 
     .hero{
         min-height:620px;
 
-        padding:80px 20px;
+        padding:75px 18px 85px;
+
+        background-position:center;
     }
 
-    .hero h2{
-        font-size:39px;
-    }
-
-    .hero p{
-        font-size:17px;
-    }
-
-    .hero-info{
-        gap:8px;
-
-        font-size:11px;
+    .hero-grid{
+        background-size:55px 55px;
+        opacity:.09;
     }
 
     .hero-radar{
         width:300px;
         height:300px;
+
         right:-150px;
+
+        opacity:.7;
     }
 
-    .cards{
-        grid-template-columns:1fr;
+    .hero::before{
+        width:450px;
+        height:450px;
+
+        top:-250px;
+        left:-230px;
+
+        filter:blur(110px);
     }
+
+    .hero::after{
+        width:400px;
+        height:400px;
+
+        bottom:-240px;
+        right:-220px;
+
+        filter:blur(110px);
+    }
+
+    .flying-plane{
+        top:15%;
+        font-size:25px;
+        opacity:.38;
+    }
+
+    .hero-content{
+        width:100%;
+        max-width:100%;
+    }
+
+    .hero-badge{
+        max-width:100%;
+
+        padding:8px 12px;
+
+        font-size:10px;
+        letter-spacing:.7px;
+
+        margin-bottom:18px;
+    }
+
+    .hero h2{
+        font-size:39px;
+        line-height:1.08;
+        letter-spacing:-1px;
+    }
+
+    .hero p{
+        margin-top:19px;
+
+        max-width:390px;
+
+        font-size:16px;
+        line-height:1.55;
+    }
+
+    .hero-buttons{
+        width:100%;
+
+        margin-top:27px;
+
+        gap:10px;
+    }
+
+    .hero-buttons .button{
+        width:100%;
+        max-width:290px;
+
+        padding:14px 20px;
+    }
+
+    .hero-info{
+        margin-top:25px;
+
+        gap:7px;
+
+        font-size:10px;
+    }
+
+    .hero-scroll{
+        bottom:18px;
+
+        font-size:9px;
+        letter-spacing:1.5px;
+    }
+
+    .hero-scroll::after{
+        margin-top:5px;
+        font-size:16px;
+    }
+
+
+    /* STATS */
 
     .stats-section{
+        padding:0 14px;
+
         margin-top:-30px;
+    }
+
+    .stats{
+        grid-template-columns:1fr 1fr;
+
+        border-radius:15px;
+    }
+
+    .stat{
+        padding:21px 10px;
     }
 
     .stat strong{
         font-size:25px;
+        margin-bottom:5px;
     }
 
+    .stat span{
+        font-size:11px;
+    }
+
+
+    /* COMMAND */
+
     .command-section{
-        padding-top:50px;
+        padding:48px 14px 20px;
+    }
+
+    .command-strip{
+        gap:10px;
     }
 
     .command-card{
-        padding:16px;
+        padding:15px 14px;
+
+        gap:12px;
+
+        border-radius:13px;
     }
 
+    .command-icon{
+        width:43px;
+        height:43px;
+
+        font-size:20px;
+    }
+
+    .command-content small{
+        font-size:8px;
+        letter-spacing:1.2px;
+    }
+
+    .command-content strong{
+        font-size:15px;
+    }
+
+    .command-content span{
+        font-size:10px;
+    }
+
+    .command-arrow{
+        font-size:20px;
+    }
+
+
+    /* GENERAL */
+
     .section{
-        padding:65px 20px;
+        padding:65px 14px;
+    }
+
+    .section-title{
+        margin-bottom:35px;
     }
 
     .section-title h2{
-        font-size:30px;
+        font-size:29px;
+        line-height:1.15;
     }
 
+    .section-title p{
+        font-size:14px;
+        line-height:1.55;
+    }
+
+
+    /* EXPLORE CARDS */
+
+    .cards{
+        grid-template-columns:1fr;
+
+        gap:13px;
+    }
+
+    .card{
+        min-height:185px;
+
+        padding:25px 21px;
+
+        border-radius:14px;
+    }
+
+    .card:hover{
+        transform:translateY(-4px);
+    }
+
+    .card-icon{
+        font-size:31px;
+        margin-bottom:14px;
+    }
+
+    .card h3{
+        font-size:20px;
+    }
+
+    .card p{
+        font-size:13px;
+        line-height:1.5;
+
+        max-width:90%;
+    }
+
+    .card-arrow{
+        right:17px;
+        bottom:15px;
+    }
+
+
+    /* FEATURED AIRCRAFT */
+
     .aircraft-showcase{
-        border-radius:18px;
+        min-height:0;
+
+        border-radius:17px;
     }
 
     .showcase-image{
-        min-height:230px;
+        min-height:235px;
+    }
+
+    .showcase-image-label{
+        left:15px;
+        bottom:15px;
+
+        padding:7px 10px;
+
+        font-size:9px;
     }
 
     .showcase-content{
         min-height:auto;
 
-        padding:28px;
+        padding:27px 22px 30px;
+    }
+
+    .showcase-label{
+        font-size:10px;
+        letter-spacing:1.6px;
     }
 
     .showcase-content h3{
         font-size:27px;
+        line-height:1.15;
     }
 
     .showcase-content p{
-        font-size:14px;
+        font-size:13px;
+        line-height:1.55;
+
+        margin-bottom:20px;
     }
 
     .showcase-specs{
         grid-template-columns:1fr 1fr;
+
+        gap:8px;
+
+        margin-bottom:20px;
+    }
+
+    .showcase-spec{
+        padding:10px;
+    }
+
+    .showcase-spec span{
+        font-size:9px;
+    }
+
+    .showcase-spec strong{
+        font-size:12px;
+    }
+
+    .showcase-content .button{
+        width:100%;
+        text-align:center;
+
+        padding:13px 15px;
     }
 
     .showcase-arrow{
-        width:40px;
-        height:40px;
-        font-size:27px;
+        width:39px;
+        height:39px;
+
+        font-size:25px;
     }
 
     .showcase-arrow.prev{
-        left:10px;
+        left:9px;
     }
 
     .showcase-arrow.next{
-        right:10px;
+        right:9px;
+    }
+
+    .showcase-dots{
+        margin-top:15px;
+    }
+
+
+    /* NUMBERS */
+
+    .numbers-section{
+        padding:10px 14px 65px;
     }
 
     .numbers{
         grid-template-columns:1fr 1fr;
+
+        gap:10px;
     }
 
     .number-box{
-        padding:25px 12px;
+        padding:22px 10px;
+
+        border-radius:13px;
     }
 
     .number-box strong{
-        font-size:25px;
+        font-size:23px;
+        margin-bottom:6px;
     }
 
+    .number-box span{
+        font-size:10px;
+        line-height:1.4;
+    }
+
+
+    /* DID YOU KNOW */
+
     .didyouknow{
-        padding:30px;
+        padding:28px 22px;
+
+        border-radius:17px;
+    }
+
+    .didyouknow::before{
+        right:15px;
+        top:-20px;
+
+        font-size:130px;
+    }
+
+    .did-label{
+        font-size:10px;
     }
 
     .didyouknow h3{
-        font-size:25px;
+        font-size:23px;
+        line-height:1.25;
+    }
+
+    .didyouknow p{
+        font-size:14px;
+        line-height:1.6;
+    }
+
+
+    /* QUICK COMPARISON */
+
+    .quick-compare{
+        gap:12px;
+    }
+
+    .aircraft-mini{
+        padding:25px 15px;
+
+        border-radius:15px;
+    }
+
+    .aircraft-mini .emoji{
+        font-size:34px;
+        margin-bottom:11px;
+    }
+
+    .aircraft-mini h3{
+        font-size:20px;
+    }
+
+    .aircraft-mini p{
+        font-size:11px;
+    }
+
+    .vs{
+        width:58px;
+        height:58px;
+
+        font-size:16px;
+    }
+
+    .quick-compare + div{
+        margin-top:23px !important;
+    }
+
+
+    /* FINAL CTA */
+
+    .feature-section{
+        padding:10px 14px 65px;
     }
 
     .feature-box{
-        padding:30px;
+        padding:28px 22px;
+
+        gap:22px;
+
+        border-radius:16px;
     }
 
-    .flying-plane{
-        font-size:25px;
+    .feature-box::before{
+        right:-20px;
+        top:-35px;
+
+        font-size:130px;
+    }
+
+    .feature-box h3{
+        font-size:21px;
+        line-height:1.3;
+    }
+
+    .feature-box p{
+        font-size:13px;
+        line-height:1.55;
+    }
+
+    .feature-box .button{
+        width:100%;
+        text-align:center;
+    }
+
+
+    /* FOOTER */
+
+    footer{
+        padding:28px 15px;
+    }
+
+    footer strong{
+        font-size:14px;
+    }
+
+    footer p{
+        font-size:10px;
+        line-height:1.5;
+    }
+
+}
+
+
+/* =========================
+   VERY SMALL PHONES
+========================= */
+
+@media(max-width:380px){
+
+    .brand h1{
+        font-size:19px;
+    }
+
+    .brand p{
+        font-size:7px;
+    }
+
+    .hero{
+        min-height:600px;
+
+        padding-left:14px;
+        padding-right:14px;
+    }
+
+    .hero h2{
+        font-size:35px;
+    }
+
+    .hero p{
+        font-size:15px;
+    }
+
+    .hero-badge{
+        font-size:9px;
+    }
+
+    .hero-info{
+        font-size:9px;
+    }
+
+    .stat{
+        padding:18px 7px;
+    }
+
+    .stat strong{
+        font-size:22px;
+    }
+
+    .stat span{
+        font-size:10px;
+    }
+
+    .showcase-content{
+        padding:24px 18px 27px;
+    }
+
+    .showcase-content h3{
+        font-size:24px;
+    }
+
+    .showcase-spec strong{
+        font-size:11px;
+    }
+
+    .number-box strong{
+        font-size:20px;
+    }
+
+    .number-box span{
+        font-size:9px;
     }
 
 }
@@ -2413,7 +2922,6 @@ footer p{
 
 <div class="command-strip">
 
-
 <a href="world.html" class="command-card">
 
 <div class="command-icon">
@@ -2482,7 +2990,6 @@ footer p{
 
 </a>
 
-
 </div>
 
 </section>
@@ -2507,7 +3014,6 @@ footer p{
 
 
 <div class="cards">
-
 
 <a href="aircraft.html" class="card">
 
@@ -2628,7 +3134,6 @@ footer p{
 
 </a>
 
-
 </div>
 
 </section>
@@ -2653,7 +3158,6 @@ footer p{
 
 
 <div class="aircraft-showcase" id="aircraftShowcase">
-
 
 <button
     class="showcase-arrow prev"
@@ -2692,7 +3196,6 @@ footer p{
 
 
 <div class="showcase-specs">
-
 
 <div class="showcase-spec">
 
@@ -2737,7 +3240,6 @@ footer p{
 
 </div>
 
-
 </div>
 
 
@@ -2771,7 +3273,6 @@ footer p{
 </div>
 
 </div>
-
 
 </div>
 
@@ -2813,7 +3314,6 @@ footer p{
 
 
 <div class="numbers">
-
 
 <div class="number-box">
 
@@ -2857,7 +3357,6 @@ footer p{
 </span>
 
 </div>
-
 
 </div>
 
@@ -2923,7 +3422,6 @@ footer p{
 
 <div class="quick-compare">
 
-
 <div class="aircraft-mini">
 
 <div class="emoji">
@@ -2961,7 +3459,6 @@ footer p{
 </p>
 
 </div>
-
 
 </div>
 
@@ -3214,7 +3711,6 @@ function changeAircraft(direction){
 
     restartAutoSlide();
 
-
 }
 
 
@@ -3279,6 +3775,17 @@ showcase.addEventListener(
 );
 
 
+/* Restart timer */
+
+function restartAutoSlide(){
+
+    clearInterval(autoSlide);
+
+    startAutoSlide();
+
+}
+
+
 /* Start */
 
 updateAircraft();
@@ -3290,3 +3797,4 @@ startAutoSlide();
 
 </body>
 </html>
+```
